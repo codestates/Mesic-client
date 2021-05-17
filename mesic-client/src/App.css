@@ -1,0 +1,15 @@
+.modal {
+  display: none;
+  height: 500px;
+  width: 500px;
+  border: solid black 1px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.show {
+  display: block;
+}

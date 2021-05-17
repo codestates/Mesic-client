@@ -1,7 +1,12 @@
 import React from "react";
 
-function DetailModal() {
-  return <div className="App">Detail Modal</div>;
+type ModalProps = {
+  open: boolean;
+};
+
+function DetailModal(props: ModalProps) {
+  const {open} = props;
+  return <div className={`modal ${open ? "show" : ""}`}>Detail Modal</div>;
 }
 
 export default DetailModal;
