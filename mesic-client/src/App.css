@@ -1,4 +1,5 @@
 .modal {
+  z-index: 2;
   display: none;
   height: 500px;
   width: 500px;
@@ -11,5 +12,11 @@
 }
 
 .show {
-  display: block;
+  display: flex;
+}
+
+#map {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
 }
