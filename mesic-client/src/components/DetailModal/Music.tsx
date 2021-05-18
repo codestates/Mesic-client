@@ -1,12 +1,11 @@
 import React from "react";
 
-type ModalProps = {
-  open: boolean;
-};
-
-function Music(props: ModalProps) {
-  const {open} = props;
-  return <div>Music</div>;
+function Music() {
+  return (
+    <div className="border">
+      Music
+    </div>
+  );
 }
 
 export default Music;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import DetailModal from "../components/DetailModal/DetailModal";
 
 declare global {
@@ -10,7 +10,10 @@ declare global {
 function MainPage() {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const handleOpenModal = () => {
-    setOpenModal(!openModal);
+    setOpenModal(true);
+  };
+  const handleHideModal = () => {
+    setOpenModal(false);
   };
 
   useEffect(() => {
@@ -29,6 +32,7 @@ function MainPage() {
       <DetailModal open={openModal} />
       MainPage
       <button onClick={handleOpenModal}>PIN</button>
+      <button onClick={handleHideModal}>HIDE</button>
       <div id="map" />
     </div>
   );
