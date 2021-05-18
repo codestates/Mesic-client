@@ -1,10 +1,21 @@
 import React from "react";
 
-function Photo() {
+type ModalProps = {
+  fileSelectedHandler: any;
+  previewImg: any;
+};
+
+function Photo(props: ModalProps) {
+  const {previewImg} = props;
   return (
     <div className="border">
       photo
-      <button></button>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={props.fileSelectedHandler}
+      />
+      <img className="img" src={previewImg} />
     </div>
   );
 }
