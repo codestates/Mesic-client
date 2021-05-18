@@ -1,11 +1,6 @@
 import React from "react";
 
-type ModalProps = {
-  open: boolean;
-};
-
-function EditMusic(props: ModalProps) {
-  const {open} = props;
+function EditMusic() {
   return <div>EditMusic</div>;
 }
 

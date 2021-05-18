@@ -1,12 +1,12 @@
 import React from "react";
 
-type ModalProps = {
-  open: boolean;
-};
-
-function Photo(props: ModalProps) {
-  const {open} = props;
-  return <div>photo</div>;
+function Photo() {
+  return (
+    <div className="border">
+      photo
+      <button></button>
+    </div>
+  );
 }
 
 export default Photo;
