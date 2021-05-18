@@ -22,6 +22,10 @@
   background-color: gray;
 }
 
+.img {
+  height: 250px;
+}
+
 #map {
   z-index: 1;
   width: 100vw;

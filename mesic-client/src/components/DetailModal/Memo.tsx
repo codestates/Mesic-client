@@ -1,7 +1,16 @@
 import React from "react";
 
-function Memo() {
-  return <div className="border">Memo</div>;
+type ModalProps = {
+  memoHandler: any;
+};
+
+function Memo(props: ModalProps) {
+  const {memoHandler} = props;
+  return (
+    <div className="border">
+      <textarea onChange={memoHandler}></textarea>
+    </div>
+  );
 }
 
 export default Memo;
