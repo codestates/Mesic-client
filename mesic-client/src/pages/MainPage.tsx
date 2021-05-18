@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DetailModal from "../components/DetailModal";
+import DetailModal from "../components/DetailModal/DetailModal";
 
 declare global {
   interface Window {

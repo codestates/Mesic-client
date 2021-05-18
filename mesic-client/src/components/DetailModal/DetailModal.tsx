@@ -10,3 +10,7 @@ function DetailModal(props: ModalProps) {
 }
 
 export default DetailModal;
+
+/*
+  
+*/
