@@ -16,8 +16,8 @@ function MainPage() {
 
   return (
     <div className="App">
-      <Map handleOpenModal={handleOpenModal}></Map>
       <SearchLocation></SearchLocation>
+      <Map handleOpenModal={handleOpenModal}></Map>
       <DetailModal open={openModal} />
       MainPage
       <button onClick={handleOpenModal}>PIN</button>
