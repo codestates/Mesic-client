@@ -19,7 +19,7 @@ function DetailModal({open}: any) {
   };
 
   return (
-    <div className={`modal ${open ? "show" : ""}`}>
+    <div className={`modal ${open ? "show1" : ""}`}>
       <Music />
       <Photo
         previewImg={previewImg}

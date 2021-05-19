@@ -3,6 +3,8 @@ import { RootState } from "../../reducers";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from "../../actions/index";
 
+
+
 declare global {
   interface Window {
     kakao: any;
@@ -14,6 +16,7 @@ type MapProps = {
 
 function Map(props: MapProps) {
   const state = useSelector((state: RootState) => state.userReducer);
+
   const dispatch = useDispatch();
   const { isLogin } = state.user;
   const { handleOpenModal } = props;
