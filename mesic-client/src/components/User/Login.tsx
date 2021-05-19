@@ -13,7 +13,7 @@ function Login(props: LoginProps) {
   };
 
   return (
-    <div className={`background ${openLogin ? "show1" : ""}`}>
+    <div className={`background ${openLogin ? "show" : ""}`}>
       <div className="login-signup-modal-outsider" onClick={clickCloseLogin} />
       <div className="login-signup-modal">
         <span className="login-close" onClick={clickCloseLogin}>
