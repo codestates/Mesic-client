@@ -3,12 +3,7 @@ import Music from "./Music";
 import Photo from "./Photo";
 import Memo from "./Memo";
 
-type ModalProps = {
-  open: boolean;
-};
-
-function DetailModal(props: ModalProps) {
-  const {open} = props;
+function DetailModal({open}: any) {
   const [music, setMusic] = useState("");
   const [previewImg, setPreviewImg] = useState("");
   const [uploadImg, setUploadImg] = useState(null);

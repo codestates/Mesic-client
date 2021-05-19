@@ -1,21 +1,9 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {onOff} from "../actions/index";
-import {RootState} from "../reducers";
 import {Link} from "react-router-dom";
 
 function IntroPage() {
-  const state = useSelector((state: RootState) => state.userReducer);
-  const dispatch = useDispatch();
-  const {show} = state;
-  const handleClick = (e: any) => {
-    dispatch(onOff(e.target.value));
-  };
   return (
     <>
-      <button onClick={handleClick} value={show}>
-        {show}
-      </button>
       <Link to="/mainpage">
         <button>시작하기</button>
       </Link>

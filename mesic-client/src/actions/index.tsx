@@ -1,13 +1,12 @@
 import {Dispatch} from "redux";
 
-export const ON_OFF = "ON_OFF" as const;
+export const SWITCH_MODE = "SWITCH_MODE" as const;
 
-export type Action = 
-    | ReturnType<typeof onOff>
+export type Action = ReturnType<typeof switchMode>;
 
-export const onOff = (data: string) => {
+export const switchMode = (data: "READ" | "POST" | "UPDATE"): any => {
   return {
-    type: ON_OFF,
+    type: SWITCH_MODE,
     payload: {
       data,
     },
