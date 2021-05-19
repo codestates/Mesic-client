@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { RootState } from "../../reducers";
-import { useDispatch, useSelector } from "react-redux";
-import { switchMode } from "../../actions/index";
-
-
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {switchMode} from "../../actions/index";
+import {RootState} from "../../reducers";
 
 declare global {
   interface Window {
@@ -16,10 +14,9 @@ type MapProps = {
 
 function Map(props: MapProps) {
   const state = useSelector((state: RootState) => state.userReducer);
-
+  const {isLogin} = state.user;
+  const {handleOpenModal} = props;
   const dispatch = useDispatch();
-  const { isLogin } = state.user;
-  const { handleOpenModal } = props;
 
   useEffect(() => {
     let mapContainer = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
@@ -48,7 +45,6 @@ function Map(props: MapProps) {
           console.log("로그인 후 나만의 로그를 만들어보세요!");
           setTimeout(() => marker.setMap(null), 2000);
         } else {
-          //Todo: Mypage 상태를 post로 변경하기
           dispatch(switchMode("POST"));
           handleOpenModal();
         }
