@@ -1,6 +1,6 @@
 export const initialState = {
   user: {
-    isLogin: false,
+    isLogin: true,
     mode: "READ",
     token: "",
     email: "",
