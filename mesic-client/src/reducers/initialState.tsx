@@ -1,9 +1,7 @@
-import { idText } from "typescript";
-
 export const initialState = {
-  show: "off",
   user: {
     isLogin: false,
+    mode: "READ",
     token: "",
     email: "",
     name: "",
