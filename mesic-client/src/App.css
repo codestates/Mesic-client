@@ -27,6 +27,7 @@
   background-color: gray;
 }
 
+
 .background {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -72,4 +73,13 @@
 }
 .show1 {
   display: block;
+
+.img {
+  height: 250px;
+}
+
+#map {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
 }

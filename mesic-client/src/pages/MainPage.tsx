@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import DetailModal from "../components/DetailModal/DetailModal";
-import Nav from "../components/UI/Nav";
 
 declare global {
   interface Window {
@@ -31,7 +30,6 @@ function MainPage() {
 
   return (
     <div className="App">
-      <Nav></Nav>
       <DetailModal open={openModal} />
       MainPage
       <button onClick={handleOpenModal}>PIN</button>
