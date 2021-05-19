@@ -3,7 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {switchMode} from "../../actions/index";
 import {RootState} from "../../reducers";
 
-function Memo({memoHandler}: any) {
+
+function Memo({ memoHandler }: any) {
   const memoInput = useRef<any>();
   const memoValue = useRef<any>();
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function Memo({memoHandler}: any) {
       <textarea
         ref={memoInput}
         defaultValue={memoValue.current?.textContent}
-        style={{display: "block"}}
+        style={{ display: "block" }}
         onChange={memoHandler}
       />
       <button
