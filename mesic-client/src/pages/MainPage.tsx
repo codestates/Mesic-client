@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import DetailModal from "../components/DetailModal/DetailModal";
 
 declare global {
@@ -9,6 +9,7 @@ declare global {
 
 function MainPage() {
   const [openModal, setOpenModal] = useState<boolean>(false);
+
   const handleOpenModal = () => {
     setOpenModal(true);
   };
