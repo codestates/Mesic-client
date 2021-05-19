@@ -16,7 +16,7 @@
   transform: translate(-50%, -50%);
 }
 
-.show {
+.show1 {
   display: grid;
   row-gap: 5vh;
   grid-template-rows: 10vh 25vh 35vh;
@@ -78,8 +78,12 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-.show1 {
+.show {
   display: block;
+}
+
+.hide {
+  display: none;
 }
 
 .img {

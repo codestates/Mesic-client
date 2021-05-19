@@ -13,7 +13,7 @@ function Signup(props: SignupProps) {
   };
 
   return (
-    <div className={`background ${openSignup ? "show1" : ""}`}>
+    <div className={`background ${openSignup ? "show" : ""}`}>
       <div className="login-signup-modal-outsider" onClick={clickCloseSignup} />
       <div className="login-signup-modal">
         <span className="signup-close" onClick={clickCloseSignup}>
