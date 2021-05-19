@@ -9,15 +9,23 @@ function Memo({memoHandler}: any) {
   const dispatch = useDispatch();
   const {mode} = useSelector((state: RootState) => state.userReducer).user;
 
-
   return (
     <div className="border">
-      <div ref={memoValue} >READ MODE</div>
+      <div ref={memoValue} className={`${mode === "READ" ? "show" : "hide"}`}>
+        READ MODE
+      </div>
       <textarea
         ref={memoInput}
-        defaultValue={memoValue.current?.textContent}
-        style={{display: "block"}}
+        defaultValue={`${
+          mode === "POST"
+            ? ""
+            : mode === "UPDATE"
+            ? memoValue.current?.textContent
+            : ""
+        }`}
+        placeholder={`${mode === "POST" ? "POST 모드 입니다." : ""}`}
         onChange={memoHandler}
+        className={`${mode !== "READ" ? "show" : "hide"}`}
       />
       <button
         onClick={() => {
@@ -26,7 +34,12 @@ function Memo({memoHandler}: any) {
       >
         UPDATE
       </button>
-      <button onClick={() => (memoInput.current.value = "")}>RESET</button>
+      <button
+        onClick={() => (memoInput.current.value = "")}
+        className={`${mode !== "READ" ? "show" : "hide"}`}
+      >
+        RESET
+      </button>
     </div>
   );
 }

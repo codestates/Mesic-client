@@ -1,19 +1,17 @@
-import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {switchMode} from "../../actions/index";
+import {RootState} from "../../reducers";
 
-type ModalProps = {
-  fileSelectedHandler: any;
-  previewImg: any;
-};
-
-function Photo(props: ModalProps) {
-  const {previewImg} = props;
+function Photo({previewImg, fileSelectedHandler}: any) {
+  const dispatch = useDispatch();
   return (
     <div className="border">
       photo
       <input
         type="file"
         accept="image/*"
-        onChange={props.fileSelectedHandler}
+        onChange={fileSelectedHandler}
+        onClick={() => dispatch(switchMode("UPDATE"))}
       />
       <img className="img" src={previewImg} />
     </div>
