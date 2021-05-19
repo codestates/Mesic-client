@@ -6,21 +6,19 @@ type LoginProps = {
 };
 
 function Login(props: LoginProps) {
-  const { openLogin, closeLogin } = props;
+  const {openLogin, closeLogin} = props;
 
   const clickCloseLogin = () => {
     closeLogin();
   };
 
   return (
-    <div
-      className={`background ${openLogin ? "show1" : ""}`}
-      onClick={clickCloseLogin}
-    >
+    <div className={`background ${openLogin ? "show1" : ""}`}>
+      <div className="login-signup-modal-outsider" onClick={clickCloseLogin} />
       <div className="login-signup-modal">
-        <div className="login-close" onClick={clickCloseLogin}>
+        <span className="login-close" onClick={clickCloseLogin}>
           X
-        </div>
+        </span>
         <div className="login-content">
           <div className="login-title">LOGIN</div>
           <div>

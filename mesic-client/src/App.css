@@ -27,9 +27,11 @@
   background-color: gray;
 }
 
-
 .background {
   display: none; /* Hidden by default */
+}
+
+.login-signup-modal-outsider {
   position: fixed; /* Stay in place */
   z-index: 2; /* Sit on top */
   left: 0;
@@ -43,10 +45,15 @@
 
 .login-signup-modal {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  position: absolute;
+  z-index: 3; /* Sit on top */
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .mypage-background {
@@ -73,6 +80,7 @@
 }
 .show1 {
   display: block;
+}
 
 .img {
   height: 250px;
