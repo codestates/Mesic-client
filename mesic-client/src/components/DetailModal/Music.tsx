@@ -16,6 +16,7 @@ function Music(props: MusicProps) {
 
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+  const [showUpdateBtn, setShowUpdateBtn] = useState<boolean>(false);
 
   //삭제 확인 모달
   const handleOpenConfirm = () => {
@@ -27,6 +28,7 @@ function Music(props: MusicProps) {
   const handleResetMusic = () => {
     resetMusic();
     handleCloseConfirm();
+    setShowUpdateBtn(true);
   };
 
   //음악 선택 모달
@@ -37,9 +39,12 @@ function Music(props: MusicProps) {
     setOpenEditMusic(false);
   };
   const handleSelectMusic = (e: any) => {
-    console.log(e.target.value);
     musicHandler(e.target.value);
     handleCloseEditMusic();
+  };
+  const handleUpdateMusic = () => {
+    setOpenEditMusic(true);
+    setShowUpdateBtn(true);
   };
 
   // const widgetUrl =
@@ -76,10 +81,13 @@ function Music(props: MusicProps) {
           )
         ) : mode === "READ" ? (
           music.length === 0 ? (
-            <button onClick={handleOpenEditMusic}>+</button>
+            <>
+              <button onClick={handleUpdateMusic}>+</button>
+              {showUpdateBtn ? <button>UPDATE</button> : <></>}
+            </>
           ) : (
             <div className="ifram-outsider">
-              <button onClick={handleOpenEditMusic}>음악 바꾸기</button>
+              <button onClick={handleUpdateMusic}>음악 바꾸기</button>
               <button onClick={handleOpenConfirm}>RESET</button>
               <iframe
                 onClick={handleOpenEditMusic}
@@ -89,6 +97,7 @@ function Music(props: MusicProps) {
                 allow="autoplay"
                 src={music}
               ></iframe>
+              {showUpdateBtn ? <button>UPDATE</button> : <></>}
             </div>
           )
         ) : (
