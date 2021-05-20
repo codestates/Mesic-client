@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Music from "./Music";
 import Photo from "./Photo";
 import Memo from "./Memo";
-import { useDispatch, useSelector } from "react-redux";
-import { switchMode } from "../../actions/index";
-import { RootState } from "../../reducers";
+import {useDispatch, useSelector} from "react-redux";
+import {switchMode} from "../../actions/index";
+import {RootState} from "../../reducers";
 
 type detailProps = {
   open: boolean;
@@ -16,10 +16,10 @@ function DetailModal(props: detailProps) {
   const [uploadImg, setUploadImg] = useState(null);
   const [memo, setMemo] = useState("");
 
-  const { open } = props;
+  const {open} = props;
 
   const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const {mode} = useSelector((state: RootState) => state.userReducer).user;
 
   const fileSelectedHandler = (e: any) => {
     setPreviewImg(URL.createObjectURL(e.target.files[0]));
@@ -45,6 +45,8 @@ function DetailModal(props: detailProps) {
       />
       <Photo
         previewImg={previewImg}
+        setPreviewImg={setPreviewImg}
+        setUploadImg={setUploadImg}
         fileSelectedHandler={fileSelectedHandler}
       />
       <Memo memoHandler={memoHandler} />
