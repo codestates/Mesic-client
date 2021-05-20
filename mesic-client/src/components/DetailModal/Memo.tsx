@@ -6,12 +6,15 @@ import {RootState} from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
 
 function Memo({memoHandler}: any) {
+
   const memoInput = useRef<any>();
   const memoValue = useRef<any>();
 
   const dispatch = useDispatch();
 
-  const {mode} = useSelector((state: RootState) => state.userReducer).user;
+
+  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openMemoInput, setOpenMemoInput] = useState<boolean>(false);
