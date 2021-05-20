@@ -15,19 +15,11 @@ function DetailModal(props: detailProps) {
   const [previewImg, setPreviewImg] = useState("");
   const [uploadImg, setUploadImg] = useState(null);
   const [memo, setMemo] = useState("");
-  const [openConfirm, setOpenConfirm] = useState<boolean>(false);
 
   const { open } = props;
 
   const dispatch = useDispatch();
   const { mode } = useSelector((state: RootState) => state.userReducer).user;
-
-  const handleOpenConfirm = () => {
-    setOpenConfirm(true);
-  };
-  const handleCloseConfirm = () => {
-    setOpenConfirm(false);
-  };
 
   const fileSelectedHandler = (e: any) => {
     setPreviewImg(URL.createObjectURL(e.target.files[0]));
@@ -37,28 +29,35 @@ function DetailModal(props: detailProps) {
   const memoHandler = (e: any) => {
     setMemo(e.target.value);
   };
+  const musicHandler = (song: string) => {
+    setMusic(song);
+  };
+  const resetMusic = () => {
+    setMusic("");
+  };
 
   return (
     <div className={`modal ${open ? "show1" : ""}`}>
-      <Music />
+      <Music
+        music={music}
+        musicHandler={musicHandler}
+        resetMusic={resetMusic}
+      />
       <Photo
         previewImg={previewImg}
         fileSelectedHandler={fileSelectedHandler}
       />
-      <Memo
-        memoHandler={memoHandler}
-        openConfirm={openConfirm}
-        handleOpenConfirm={handleOpenConfirm}
-        handleCloseConfirm={handleCloseConfirm}
-      />
-      <button
-        className={`${mode !== "READ" ? "show" : "hide"}`}
-        onClick={() => {
-          dispatch(switchMode("READ"));
-        }}
-      >
-        PIN IT
-      </button>
+      <Memo memoHandler={memoHandler} />
+      <div>
+        <button
+          className={`${mode !== "READ" ? "show" : "hide"}`}
+          onClick={() => {
+            dispatch(switchMode("READ"));
+          }}
+        >
+          PIN IT
+        </button>
+      </div>
     </div>
   );
 }

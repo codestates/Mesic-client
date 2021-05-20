@@ -7,18 +7,24 @@ import ConfirmModal from "..//UI/ConfirmModal";
 
 type memoProps = {
   memoHandler: (e: any) => void;
-  openConfirm: boolean;
-  handleOpenConfirm: () => void;
-  handleCloseConfirm: () => void;
 };
 
 function Memo(props: memoProps) {
   const memoInput = useRef<any>();
   const memoValue = useRef<any>();
+
   const dispatch = useDispatch();
   const { mode } = useSelector((state: RootState) => state.userReducer).user;
-  const { memoHandler, openConfirm, handleOpenConfirm, handleCloseConfirm } =
-    props;
+  const { memoHandler } = props;
+
+  const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+
+  const handleOpenConfirm = () => {
+    setOpenConfirm(true);
+  };
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
+  };
 
   const resetMemo = () => {
     memoInput.current.value = "";
@@ -28,6 +34,7 @@ function Memo(props: memoProps) {
   return (
     <>
       <ConfirmModal
+        confirmType="memo"
         openConfirm={openConfirm}
         handleCloseConfirm={handleCloseConfirm}
         resetMemo={resetMemo}
