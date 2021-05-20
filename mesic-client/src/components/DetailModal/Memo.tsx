@@ -1,17 +1,17 @@
-import React, {memo, useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {BinaryOperatorToken} from "typescript";
-import {switchMode} from "../../actions/index";
-import {RootState} from "../../reducers";
+import React, { memo, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BinaryOperatorToken } from "typescript";
+import { switchMode } from "../../actions/index";
+import { RootState } from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
 
-function Memo({memoHandler}: any) {
+function Memo({ memoHandler }: any) {
   const memoInput = useRef<any>();
   const memoValue = useRef<any>();
 
   const dispatch = useDispatch();
 
-  const {mode} = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.userReducer).user;
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openMemoInput, setOpenMemoInput] = useState<boolean>(false);
