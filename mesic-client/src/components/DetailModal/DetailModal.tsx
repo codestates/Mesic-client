@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Music from "./Music";
 import Photo from "./Photo";
 import Memo from "./Memo";
-import { useDispatch, useSelector } from "react-redux";
-import { switchMode } from "../../actions/index";
-import { RootState } from "../../reducers";
+import {useDispatch, useSelector} from "react-redux";
+import {switchMode} from "../../actions/index";
+import {RootState} from "../../reducers";
 
 type detailProps = {
   open: boolean;
@@ -17,10 +17,10 @@ function DetailModal(props: detailProps) {
   const [memo, setMemo] = useState("");
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
 
-  const { open } = props;
+  const {open} = props;
 
   const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const {mode} = useSelector((state: RootState) => state.userReducer).user;
 
   const handleOpenConfirm = () => {
     setOpenConfirm(true);
@@ -43,6 +43,8 @@ function DetailModal(props: detailProps) {
       <Music />
       <Photo
         previewImg={previewImg}
+        setPreviewImg={setPreviewImg}
+        setUploadImg={setUploadImg}
         fileSelectedHandler={fileSelectedHandler}
       />
       <Memo
