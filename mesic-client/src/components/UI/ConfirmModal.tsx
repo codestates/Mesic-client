@@ -6,6 +6,7 @@ type confirmProps = {
   handleCloseConfirm: () => void;
   resetMemo?: () => void;
   handleResetMusic?: () => void;
+  resetPhoto?: () => void;
 };
 
 function ConfirmModal(props: confirmProps) {
@@ -15,6 +16,7 @@ function ConfirmModal(props: confirmProps) {
     handleCloseConfirm,
     resetMemo,
     handleResetMusic,
+    resetPhoto,
   } = props;
 
   return (
@@ -26,7 +28,7 @@ function ConfirmModal(props: confirmProps) {
           {confirmType === "memo" ? (
             <button onClick={resetMemo}> 예</button>
           ) : confirmType === "photo" ? (
-            <button>예-photo</button>
+            <button onClick={resetPhoto}>예-photo</button>
           ) : confirmType === "music" ? (
             <button onClick={handleResetMusic}>예-music</button>
           ) : (
