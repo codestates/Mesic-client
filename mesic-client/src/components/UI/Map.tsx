@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {switchMode} from "../../actions/index";
-import {RootState} from "../../reducers";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { switchMode } from "../../actions/index";
+import { RootState } from "../../reducers";
 
 declare global {
   interface Window {
@@ -14,8 +14,8 @@ type MapProps = {
 
 function Map(props: MapProps) {
   const state = useSelector((state: RootState) => state.userReducer);
-  const {isLogin} = state.user;
-  const {handleOpenModal} = props;
+  const { isLogin } = state.user;
+  const { handleOpenModal } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {

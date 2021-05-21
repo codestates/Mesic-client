@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 
-function SearchLocation() {
-  const [searchInput, setSearchInput] = useState<string>("");
-
-  const handleSearchInput = (e: any) => {
-    setSearchInput(e.target.value);
-  };
-
+function SearchLocation({ handleChangeKeywordInput, searchKeyword }: any) {
   return (
     <div className="search-location">
       <input
         type="text"
         placeholder="장소를 검색하세요"
-        value={searchInput}
-        onChange={handleSearchInput}
+        onChange={handleChangeKeywordInput}
+        onKeyUp={searchKeyword}
       ></input>
-      <button>검색</button>
+      <button onClick={searchKeyword}>검색</button>
     </div>
   );
 }
