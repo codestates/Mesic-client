@@ -5,7 +5,9 @@ import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
 
-function Memo({ memoHandler }: any) {
+
+function Memo({memoHandler}: any) {
+  
   const memoInput = useRef<any>();
   const memoValue = useRef<any>();
 
