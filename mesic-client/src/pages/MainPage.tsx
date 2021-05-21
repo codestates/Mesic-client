@@ -21,6 +21,7 @@ function MainPage() {
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [keywordInput, setKeywordInput] = useState<string>("");
+  const [keywordSearchData, setKeywordSearchData] = useState<string[]>([]);
 
   const [map, setMap] = useState<any>({});
   const [LatLng, setLatLng] = useState<number[]>([
@@ -34,6 +35,10 @@ function MainPage() {
       loadKakaoMap();
     });
   }, []);
+
+  useEffect(() => {
+    searchKeyword();
+  }, [keywordInput]);
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -104,29 +109,55 @@ function MainPage() {
     [keywordInput]
   );
 
-  const searchKeyword = (e: any) => {
-    if (e.keyCode === 13 || e.type === "click") {
-      axios
-        .get(
-          `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keywordInput}`,
-          {
-            headers: {
-              authorization: "KakaoAK 61dc9e8de327371dcac3d79909281b7d",
-            },
-          }
-        )
-        .then((res) => res.data.documents[0])
-        .then((target) => {
-          // setSearchLatlng([target.y, target.x]);
-          console.log(target);
-          moveKakaoMap(target.y, target.x);
-          let marker = new window.kakao.maps.Marker({
-            position: new window.kakao.maps.LatLng(target.y, target.x),
-          });
-          console.log(marker);
-          marker.setMap(map);
-        });
+  const searchKeyword = () => {
+    if (keywordInput === "") {
+      setKeywordSearchData([]);
+      return;
     }
+    axios
+      .get(
+        `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keywordInput}`,
+        {
+          headers: {
+            authorization: "KakaoAK 61dc9e8de327371dcac3d79909281b7d",
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.documents.length === 0) {
+          return;
+        }
+        let slicedData = res.data.documents.slice(0, 4);
+        setKeywordSearchData(slicedData);
+      });
+
+    const keywordSearchPress = (e: any) => {
+      if (e.keyCode === 13 || e.type === "click") {}
+      
+    };
+
+    // if (e.keyCode === 13 || e.type === "click") {
+    //   axios
+    //     .get(
+    //       `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keywordInput}`,
+    //       {
+    //         headers: {
+    //           authorization: "KakaoAK 61dc9e8de327371dcac3d79909281b7d",
+    //         },
+    //       }
+    //     )
+    //     .then((res) => res.data.documents[0])
+    //     .then((target) => {
+    //       // setSearchLatlng([target.y, target.x]);
+    //       console.log(target);
+    //       moveKakaoMap(target.y, target.x);
+    //       let marker = new window.kakao.maps.Marker({
+    //         position: new window.kakao.maps.LatLng(target.y, target.x),
+    //       });
+    //       console.log(marker);
+    //       marker.setMap(map);
+    //     });
+    // }
   };
 
   return (
@@ -134,11 +165,12 @@ function MainPage() {
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
         searchKeyword={searchKeyword}
+        keywordSearchData={keywordSearchData}
       />
       <DetailModal open={openModal} />
-      MainPage
+      {/* MainPage
       <button onClick={handleOpenModal}>PIN</button>
-      <button onClick={handleHideModal}>HIDE</button>
+      <button onClick={handleHideModal}>HIDE</button> */}
       <div id="kakao-map" />
     </div>
   );
