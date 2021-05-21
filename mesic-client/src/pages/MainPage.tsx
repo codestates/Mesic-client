@@ -34,6 +34,11 @@ function MainPage() {
   const [searchMode, setSearchMode] = useState<boolean>(false);
   const [searchMarkers, setSearchMarkers] = useState<any[]>([]);
 
+  const [postLatLng, setPostLatLng] = useState<number[]>([
+    37.5139795454969, 127.048963363388,
+  ]);
+  const [postMarkers, setPostMarkers] = useState<any[]>([]);
+
   useEffect(() => {
     window.kakao.maps.load(() => {
       loadKakaoMap();
@@ -50,10 +55,16 @@ function MainPage() {
     }
   }, [searchLatLng]);
 
+  useEffect(() => {
+    if (Object.keys(map).length > 0) {
+      postMarkerControl();
+    }
+  }, [postLatLng]);
+
   // 키워드 검색 마커
   const searchMarkerControl = () => {
     if (searchMarkers.length > 0) {
-      deleteMarkers();
+      deleteSearchMarkers();
     }
 
     const markers = [];
@@ -62,17 +73,47 @@ function MainPage() {
       searchLatLng[1]
     );
 
+    const image = new window.kakao.maps.MarkerImage(
+      `/images/marker/search-marker.gif`,
+      new window.kakao.maps.Size(40, 70),
+      { offset: new window.kakao.maps.Point(22, 70) }
+    );
+
     const marker = new window.kakao.maps.Marker({
+      image,
       position,
     });
     marker.setMap(map);
     markers.push(marker);
     setSearchMarkers(markers);
+  };
 
-    function deleteMarkers() {
-      for (let i = 0; i < searchMarkers.length; i++) {
-        searchMarkers[i].setMap(null);
-      }
+  const deleteSearchMarkers = () => {
+    for (let i = 0; i < searchMarkers.length; i++) {
+      searchMarkers[i].setMap(null);
+    }
+  };
+
+  // (POST MODE) 지도 클릭 마커
+  const postMarkerControl = () => {
+    if (postMarkers.length > 0) {
+      deletePostMarkers();
+    }
+    deleteSearchMarkers();
+    const markers = [];
+    const position = new window.kakao.maps.LatLng(postLatLng[0], postLatLng[1]);
+
+    const marker = new window.kakao.maps.Marker({
+      position,
+    });
+    marker.setMap(map);
+    markers.push(marker);
+    setPostMarkers(markers);
+  };
+
+  const deletePostMarkers = () => {
+    for (let i = 0; i < postMarkers.length; i++) {
+      postMarkers[i].setMap(null);
     }
   };
 
@@ -84,55 +125,32 @@ function MainPage() {
   };
 
   const loadKakaoMap = () => {
-    let container = document.getElementById("kakao-map");
-    let options = {
+    const container = document.getElementById("kakao-map");
+    const options = {
       center: new window.kakao.maps.LatLng(LatLng[0], LatLng[1]),
       level: mapLevel,
     };
 
-    let map = new window.kakao.maps.Map(container, options);
+    const map = new window.kakao.maps.Map(container, options);
     setMap(map);
+
+    window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
+      const clickPosition = mouseEvent.latLng;
+      setPostLatLng([clickPosition.Ma, clickPosition.La]);
+      if (!isLogin) {
+        alert("로그인 후 나만의 로그를 만들어보세요!");
+      } else {
+        dispatch(switchMode("POST"));
+        handleOpenModal();
+      }
+    });
   };
 
   const moveKakaoMap = (lat: number, lng: number) => {
-    var moveLatLon = new window.kakao.maps.LatLng(lat, lng);
+    const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
     setLatLng([lat, lng]);
   };
-
-  // useEffect(() => {
-  //   let mapContainer = document.getElementById("kakao-map"); //지도를 담을 영역의 DOM 레퍼런스
-  //   let options = {
-  //     center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-  //     level: 3, //지도의 레벨(확대, 축소 정도)
-  //   };
-  //   let map = new window.kakao.maps.Map(mapContainer, options); //지도 생성 및 객체 리턴
-
-  //   //지도에 클릭이벤트 등록해서 좌표 클릭된 곳 좌표 가져오기
-  //   window.kakao.maps.event.addListener(
-  //     map,
-  //     "click",
-  //     function (mouseEvent: any) {
-  //       var markerPosition = mouseEvent.latLng;
-  //       console.log(markerPosition);
-  //       // 마커를 생성
-  //       let marker = new window.kakao.maps.Marker({
-  //         position: markerPosition,
-  //       });
-  //       /*isLogin이 true이면 마커를 지도위에 표시 후 mode를 post로 변경
-  //       false이면 마커를 지도 위에 표시 후 로그인하라는 알림 띄우고, 알림꺼지면 마커도 지우기
-  //       마커를 지도 위에 표시*/
-  //       marker.setMap(map);
-  //       if (!isLogin) {
-  //         console.log("로그인 후 나만의 로그를 만들어보세요!");
-  //         setTimeout(() => marker.setMap(null), 2000);
-  //       } else {
-  //         dispatch(switchMode("POST"));
-  //         handleOpenModal();
-  //       }
-  //     }
-  //   );
-  // }, []);
 
   const handleChangeKeywordInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -161,7 +179,7 @@ function MainPage() {
         if (res.data.documents.length === 0) {
           return;
         }
-        let slicedData = res.data.documents.slice(0, 4);
+        const slicedData = res.data.documents.slice(0, 4);
         setKeywordSearchData(slicedData);
       });
   };
@@ -170,12 +188,11 @@ function MainPage() {
     if (keywordInput.length === 0 || keywordSearchData.length === 0) {
       return;
     } else if (e.keyCode === 13 || e.type === "click") {
-      let y = keywordSearchData[0].y;
-      let x = keywordSearchData[0].x;
+      const y = keywordSearchData[0].y;
+      const x = keywordSearchData[0].x;
       moveKakaoMap(y, x);
       setSearchMode(false);
       setSearchLatlng([y, x]);
-      console.log(searchLatLng);
     }
   };
 
