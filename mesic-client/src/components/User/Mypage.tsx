@@ -19,6 +19,15 @@ function Mypage(props: MypageProps) {
           X
         </div>
         <div className="mypage-content">
+          <div className="profileImg">
+            <figure className="profileImg-outsider">
+              <img
+                className="profileImg-basic"
+                src="https://pbs.twimg.com/media/EhIO_LyVoAA2szZ?format=jpg&name=small"
+              ></img>
+              {/* <img className="user-profile" src={userdata.profileImage}></img> */}
+            </figure>
+          </div>
           <div className="mypage-title">MYPAGE</div>
           <div>아이디: port757</div>
           <div>닉네임: secret</div>

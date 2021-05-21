@@ -14,6 +14,10 @@ function Nav() {
   const [openLogin, setOpenLogin] = useState<boolean>(false);
   const [openSignup, setOpenSignup] = useState<boolean>(false);
   const [openMypage, setOpenMypage] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [nickName, setNickname] = useState<string>("");
+  const [openEditMapage, setOpenEditMypage] = useState<boolean>(false);
 
   const clickLogin = () => {
     setOpenLogin(true);
@@ -39,7 +43,13 @@ function Nav() {
 
   return (
     <div>
-      <Login openLogin={openLogin} closeLogin={closeLogin}></Login>
+      <Login
+        openLogin={openLogin}
+        closeLogin={closeLogin}
+        email={email}
+        name={name}
+        nickName={nickName}
+      ></Login>
       <Signup openSignup={openSignup} closeSignup={closeSignup}></Signup>
       <Mypage openMypage={openMypage} closeMypage={closeMypage}></Mypage>
       <div className="nav">

@@ -101,3 +101,15 @@
   z-index: 2;
   position: fixed;
 }
+.profileImg-outsider {
+  border: none #c0c0c0 solid;
+  padding: 5px;
+  max-width: 110px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+.profileImg-basic {
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
+}
