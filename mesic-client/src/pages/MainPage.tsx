@@ -21,14 +21,18 @@ function MainPage() {
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [keywordInput, setKeywordInput] = useState<string>("");
-  const [keywordSearchData, setKeywordSearchData] = useState<string[]>([]);
+  const [keywordSearchData, setKeywordSearchData] = useState<any>([]);
 
   const [map, setMap] = useState<any>({});
   const [LatLng, setLatLng] = useState<number[]>([
     37.5139795454969, 127.048963363388,
   ]);
   const [mapLevel, setMapLevel] = useState<number>(5);
-  const [searchLatLng, setSearchLatlng] = useState<number[]>([]);
+  const [searchLatLng, setSearchLatlng] = useState<number[]>([
+    37.5139795454969, 127.048963363388,
+  ]);
+  const [searchMode, setSearchMode] = useState<boolean>(false);
+  const [searchMarkers, setSearchMarkers] = useState<any[]>([]);
 
   useEffect(() => {
     window.kakao.maps.load(() => {
@@ -39,6 +43,38 @@ function MainPage() {
   useEffect(() => {
     searchKeyword();
   }, [keywordInput]);
+
+  useEffect(() => {
+    if (Object.keys(map).length > 0) {
+      searchMarkerControl();
+    }
+  }, [searchLatLng]);
+
+  // 키워드 검색 마커
+  const searchMarkerControl = () => {
+    if (searchMarkers.length > 0) {
+      deleteMarkers();
+    }
+
+    const markers = [];
+    const position = new window.kakao.maps.LatLng(
+      searchLatLng[0],
+      searchLatLng[1]
+    );
+
+    const marker = new window.kakao.maps.Marker({
+      position,
+    });
+    marker.setMap(map);
+    markers.push(marker);
+    setSearchMarkers(markers);
+
+    function deleteMarkers() {
+      for (let i = 0; i < searchMarkers.length; i++) {
+        searchMarkers[i].setMap(null);
+      }
+    }
+  };
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -62,10 +98,6 @@ function MainPage() {
     var moveLatLon = new window.kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
     setLatLng([lat, lng]);
-  };
-
-  const handleSearchKeyword = (): void => {
-    moveKakaoMap(searchLatLng[0], searchLatLng[1]);
   };
 
   // useEffect(() => {
@@ -112,8 +144,10 @@ function MainPage() {
   const searchKeyword = () => {
     if (keywordInput === "") {
       setKeywordSearchData([]);
+      setSearchMode(false);
       return;
     }
+    setSearchMode(true);
     axios
       .get(
         `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keywordInput}`,
@@ -130,47 +164,47 @@ function MainPage() {
         let slicedData = res.data.documents.slice(0, 4);
         setKeywordSearchData(slicedData);
       });
-
-    const keywordSearchPress = (e: any) => {
-      if (e.keyCode === 13 || e.type === "click") {}
-      
-    };
-
-    // if (e.keyCode === 13 || e.type === "click") {
-    //   axios
-    //     .get(
-    //       `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keywordInput}`,
-    //       {
-    //         headers: {
-    //           authorization: "KakaoAK 61dc9e8de327371dcac3d79909281b7d",
-    //         },
-    //       }
-    //     )
-    //     .then((res) => res.data.documents[0])
-    //     .then((target) => {
-    //       // setSearchLatlng([target.y, target.x]);
-    //       console.log(target);
-    //       moveKakaoMap(target.y, target.x);
-    //       let marker = new window.kakao.maps.Marker({
-    //         position: new window.kakao.maps.LatLng(target.y, target.x),
-    //       });
-    //       console.log(marker);
-    //       marker.setMap(map);
-    //     });
-    // }
   };
+
+  const keywordSearchEvent = (e: any) => {
+    if (keywordInput.length === 0 || keywordSearchData.length === 0) {
+      return;
+    } else if (e.keyCode === 13 || e.type === "click") {
+      let y = keywordSearchData[0].y;
+      let x = keywordSearchData[0].x;
+      moveKakaoMap(y, x);
+      setSearchMode(false);
+      setSearchLatlng([y, x]);
+      console.log(searchLatLng);
+    }
+  };
+
+  const keywordSearchSelect = (y: number, x: number) => {
+    moveKakaoMap(y, x);
+    setSearchMode(false);
+    setSearchLatlng([y, x]);
+  };
+
+  // const setMarker = (y: number, x: number) => {
+  //   let marker = new window.kakao.maps.Marker({
+  //     position: new window.kakao.maps.LatLng(y, x),
+  //   });
+  //   marker.setMap(map);
+  // };
 
   return (
     <div className="App">
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
-        searchKeyword={searchKeyword}
+        keywordSearchEvent={keywordSearchEvent}
         keywordSearchData={keywordSearchData}
+        searchMode={searchMode}
+        keywordSearchSelect={keywordSearchSelect}
       />
       <DetailModal open={openModal} />
-      {/* MainPage
+      MainPage
       <button onClick={handleOpenModal}>PIN</button>
-      <button onClick={handleHideModal}>HIDE</button> */}
+      <button onClick={handleHideModal}>HIDE</button>
       <div id="kakao-map" />
     </div>
   );
