@@ -1,7 +1,7 @@
 export const initialState = {
   openConfirm: false,
   user: {
-    isLogin: true,
+    isLogin: false,
     mode: "READ",
     token: "",
     email: "",
