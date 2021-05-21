@@ -103,7 +103,7 @@ function MainPage() {
     },
     [keywordInput]
   );
-  
+
   const searchKeyword = (e: any) => {
     if (e.keyCode === 13 || e.type === "click") {
       axios
