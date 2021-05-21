@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 function SearchLocation({
   handleChangeKeywordInput,
-  searchKeyword,
+  keywordSearchEvent,
   keywordSearchData,
+  searchMode,
+  keywordSearchSelect,
 }: any) {
-  console.log(keywordSearchData);
   return (
     <>
       <div className="search-location">
@@ -13,17 +14,24 @@ function SearchLocation({
           type="text"
           placeholder="장소를 검색하세요"
           onChange={handleChangeKeywordInput}
-          onKeyUp={searchKeyword}
+          onKeyUp={keywordSearchEvent}
         ></input>
-        <button onClick={searchKeyword}>검색</button>
-        <ul style={{ backgroundColor: "white" }}>
-          {keywordSearchData.map((data: any) => (
-            <li style={{ listStyleType: "none" }}>
-              <div>{data.place_name}</div>
-              <div style={{ fontSize: "x-small" }}>{data.address_name}</div>
-            </li>
-          ))}
-        </ul>
+        <button onClick={keywordSearchEvent}>검색</button>
+        {searchMode ? (
+          <ul style={{ backgroundColor: "white" }}>
+            {keywordSearchData.map((data: any) => (
+              <li
+                onClick={() => keywordSearchSelect(data.y, data.x)}
+                style={{ listStyleType: "none" }}
+              >
+                <div>{data.place_name}</div>
+                <div style={{ fontSize: "x-small" }}>{data.address_name}</div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
