@@ -3,6 +3,9 @@ import React, { useCallback, useState } from "react";
 type LoginProps = {
   openLogin: boolean;
   closeLogin: () => void;
+  email: string;
+  name: string;
+  nickName: string;
 };
 
 function Login(props: LoginProps) {
