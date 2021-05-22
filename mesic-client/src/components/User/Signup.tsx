@@ -3,6 +3,9 @@ import React, { useCallback, useState } from "react";
 type SignupProps = {
   openSignup: boolean;
   closeSignup: () => void;
+  email: string;
+  name: string;
+  nickname: string;
 };
 
 function Signup(props: SignupProps) {

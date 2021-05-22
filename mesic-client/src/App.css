@@ -56,7 +56,7 @@
   transform: translate(-50%, -50%);
 }
 
-.mypage-background {
+.mypage-edit-background {
   display: none;
   position: fixed;
   z-index: 2;
@@ -66,7 +66,7 @@
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
 }
-.mypage-modal {
+.mypage-edit-modal {
   background-color: #fefefe;
   position: absolute;
   margin: 15% auto; /* 15% from the top and centered */
@@ -108,7 +108,7 @@
   margin-top: 5px;
   margin-bottom: 0px;
 }
-.profileImg-basic {
+.profileImg-content {
   border-radius: 50%;
   width: 100%;
   height: auto;
