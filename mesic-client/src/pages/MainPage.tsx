@@ -38,6 +38,12 @@ function MainPage() {
     37.5139795454969, 127.048963363388,
   ]);
   const [postMarkers, setPostMarkers] = useState<any[]>([]);
+  const [readMarkerData, setReadMarkerData] = useState<any>({});
+
+  // 로그인 시, 모든 데이터를 다 받아와서 store에 저장
+  // store에서 핀을 다 받아와서, 화면에 마커를 렌더
+  // 마커를 클릭 했을 때, 그 마커에 해당되는 데이터를 어떻게 연결 시킬건가?
+  //
 
   useEffect(() => {
     window.kakao.maps.load(() => {
@@ -118,10 +124,58 @@ function MainPage() {
     setPostMarkers(markers);
   };
 
+  // (READ MODE) 유저의 마커 생성
+  const [myMarkers, setMyMarkers] = useState<any[]>([]);
+  const viewMyMarkers = () => {
+    deleteMyMarkers();
+    const markers = [];
+    for (let i = 0; i < state.pins.length; i += 1) {
+      const position = new window.kakao.maps.LatLng(
+        state.pins[i].y,
+        state.pins[i].x
+      );
+      const marker = new window.kakao.maps.Marker({
+        map,
+        position,
+      });
+      marker.id = state.pins[i].id;
+      window.kakao.maps.event.addListener(marker, "click", () => {
+        // 마커 클릭 시
+        handleMyMarkerClick(marker.id);
+      });
+      marker.setMap(map);
+      markers.push(marker);
+    }
+    setMyMarkers(markers);
+  };
+
+  useEffect(() => {
+    if (Object.keys(map).length > 0) {
+      viewMyMarkers();
+    }
+  }, [map]);
+
+  const deleteMyMarkers = () => {
+    for (let i = 0; i < myMarkers.length; i++) {
+      myMarkers[i].setMap(null);
+    }
+  };
+
   const deletePostMarkers = () => {
     for (let i = 0; i < postMarkers.length; i++) {
       postMarkers[i].setMap(null);
     }
+  };
+
+  const handleMyMarkerClick = (id: number) => {
+    for (let i = 0; i < state.pins.length; i += 1) {
+      if (state.pins[i].id === id) {
+        setReadMarkerData(state.pins[i]);
+        break;
+      }
+    }
+    dispatch(switchMode("READ"));
+    handleOpenModal();
   };
 
   const handleOpenModal = () => {
@@ -143,6 +197,8 @@ function MainPage() {
 
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
       const clickPosition = mouseEvent.latLng;
+      // 클릭한 위치 표시
+      console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
         alert("로그인 후 나만의 로그를 만들어보세요!");
@@ -208,13 +264,6 @@ function MainPage() {
     setSearchMode(false);
     setSearchLatlng([y, x]);
   };
-
-  // const setMarker = (y: number, x: number) => {
-  //   let marker = new window.kakao.maps.Marker({
-  //     position: new window.kakao.maps.LatLng(y, x),
-  //   });
-  //   marker.setMap(map);
-  // };
 
   return (
     <div className="App">
