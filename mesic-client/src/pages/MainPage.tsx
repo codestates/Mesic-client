@@ -103,7 +103,14 @@ function MainPage() {
     const markers = [];
     const position = new window.kakao.maps.LatLng(postLatLng[0], postLatLng[1]);
 
+    const image = new window.kakao.maps.MarkerImage(
+      `/images/marker/post-marker.png`,
+      new window.kakao.maps.Size(45, 45),
+      { offset: new window.kakao.maps.Point(8, 50) }
+    );
+
     const marker = new window.kakao.maps.Marker({
+      image,
       position,
     });
     marker.setMap(map);
