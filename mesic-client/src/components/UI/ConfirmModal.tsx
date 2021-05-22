@@ -1,23 +1,16 @@
 import React from "react";
 
-type confirmProps = {
-  confirmType: string;
-  openConfirm: boolean;
-  handleCloseConfirm: () => void;
-  resetMemo?: () => void;
-  handleResetMusic?: () => void;
-  resetPhoto?: () => void;
-};
-
-function ConfirmModal(props: confirmProps) {
-  const {
-    confirmType,
-    openConfirm,
-    handleCloseConfirm,
-    resetMemo,
-    handleResetMusic,
-    resetPhoto,
-  } = props;
+function ConfirmModal({
+  confirmType,
+  openConfirm,
+  setOpenConfirm,
+  setReadImg,
+}: any) {
+  const deleteReadImg = () => {
+    //서버요청
+    setReadImg(null);
+    setOpenConfirm(false);
+  };
 
   return (
     <div className={`background ${openConfirm ? "show" : ""}`}>
@@ -26,15 +19,15 @@ function ConfirmModal(props: confirmProps) {
         <div>삭제하시겠습니까?</div>
         <div>
           {confirmType === "memo" ? (
-            <button onClick={resetMemo}> 예</button>
+            <button> 예</button>
           ) : confirmType === "photo" ? (
-            <button onClick={resetPhoto}>예-photo</button>
+            <button onClick={deleteReadImg}>예-photo</button>
           ) : confirmType === "music" ? (
-            <button onClick={handleResetMusic}>예-music</button>
+            <button>예-music</button>
           ) : (
             <></>
           )}
-          <button onClick={handleCloseConfirm}>아니오</button>
+          <button onClick={() => setOpenConfirm(false)}>아니오</button>
         </div>
       </div>
     </div>
