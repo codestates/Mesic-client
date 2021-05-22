@@ -1,61 +1,73 @@
 import React, { useEffect, useState } from "react";
-import Music from "./Music";
-import Photo from "./Photo";
-import Memo from "./Memo";
+import PostMusic from "./PostMusic";
+import PostPhoto from "./PostPhoto";
+import PostMemo from "./PostMemo";
+import ReadMusic from "./ReadMusic";
+import ReadPhoto from "./ReadPhoto";
+import ReadMemo from "./ReadMemo";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
+//import { read } from "fs";
 
 type detailProps = {
   open: boolean;
 };
 
 function DetailModal(props: detailProps) {
-  const [music, setMusic] = useState("");
-  const [previewImg, setPreviewImg] = useState("");
-  const [uploadImg, setUploadImg] = useState(null);
-  const [memo, setMemo] = useState("");
+  const [postMusic, setPostMusic] = useState<any>(null);
+  const [postImg, setPostImg] = useState<any>(null);
+  const [postMemo, setPostMemo] = useState<string>("");
+  const [readMusic, setReadMusic] = useState<any>(null);
+  const [readImg, setReadImg] = useState<any>(null);
+  const [readMemo, setReadMemo] = useState<string>("");
 
   const { open } = props;
 
   const dispatch = useDispatch();
   const { mode } = useSelector((state: RootState) => state.userReducer).user;
 
-  const fileSelectedHandler = (e: any) => {
-    setPreviewImg(URL.createObjectURL(e.target.files[0]));
-    setUploadImg(e.target.files[0]);
+  const postRes = {
+    music: null,
+    image:
+      "https://pbs.twimg.com/media/EnKtx1NXEAEoIC4?format=jpg&name=900x900",
+    memo: "posted!",
   };
 
-  const memoHandler = (e: any) => {
-    setMemo(e.target.value);
-  };
-  const musicHandler = (song: string) => {
-    setMusic(song);
-  };
-  const resetMusic = () => {
-    setMusic("");
+  const { music, image, memo } = postRes;
+
+  const postPinData = () => {
+    //서버요청 postImg 전달
+    setReadImg(image);
+    setPostImg(null);
+    setReadMemo(memo);
+    setPostMemo("");
+    dispatch(switchMode("READ"));
   };
 
   return (
     <div className={`modal ${open ? "show1" : ""}`}>
-      <Music
-        music={music}
-        musicHandler={musicHandler}
-        resetMusic={resetMusic}
-      />
-      <Photo
-        previewImg={previewImg}
-        setPreviewImg={setPreviewImg}
-        setUploadImg={setUploadImg}
-        fileSelectedHandler={fileSelectedHandler}
-      />
-      <Memo memoHandler={memoHandler} />
+      {mode === "POST" ? (
+        <>
+          <PostMusic />
+          <PostPhoto
+            postImg={postImg}
+            setPostImg={setPostImg}
+            setReadImg={setReadImg}
+          />
+          <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
+        </>
+      ) : (
+        <>
+          <ReadMusic />
+          <ReadPhoto readImg={readImg} setReadImg={setReadImg} />
+          <ReadMemo readMemo={readMemo} setReadMemo={setReadMemo} />
+        </>
+      )}
       <div>
         <button
           className={`${mode !== "READ" ? "show" : "hide"}`}
-          onClick={() => {
-            dispatch(switchMode("READ"));
-          }}
+          onClick={postPinData}
         >
           PIN IT
         </button>
