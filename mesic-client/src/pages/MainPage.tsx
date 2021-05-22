@@ -226,8 +226,9 @@ function MainPage() {
         keywordSearchSelect={keywordSearchSelect}
       />
       <DetailModal open={openModal} />
-      MainPage
-      <button onClick={handleOpenModal}>PIN</button>
+      <div>
+        <button onClick={handleOpenModal}>PIN</button>
+      </div>
       <button onClick={handleHideModal}>HIDE</button>
       <div id="kakao-map" />
     </div>
