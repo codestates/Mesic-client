@@ -7,7 +7,6 @@ import ConfirmModal from "../UI/ConfirmModal";
 
 function Memo({ postMemo, setPostMemo }: any) {
   const memoInput = useRef<any>();
-  const memoValue = useRef<any>();
 
   const dispatch = useDispatch();
   const { mode } = useSelector((state: RootState) => state.userReducer).user;
@@ -18,7 +17,6 @@ function Memo({ postMemo, setPostMemo }: any) {
 
   return (
     <>
-      <ConfirmModal confirmType="memo"></ConfirmModal>
       <div className="border">
         <textarea
           ref={memoInput}

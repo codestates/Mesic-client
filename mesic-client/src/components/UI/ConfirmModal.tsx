@@ -5,10 +5,16 @@ function ConfirmModal({
   openConfirm,
   setOpenConfirm,
   setReadImg,
+  setReadMemo,
 }: any) {
   const deleteReadImg = () => {
     //서버요청
     setReadImg(null);
+    setOpenConfirm(false);
+  };
+  const deletedReadMemo = () => {
+    //서버요청
+    setReadMemo("");
     setOpenConfirm(false);
   };
 
@@ -19,7 +25,7 @@ function ConfirmModal({
         <div>삭제하시겠습니까?</div>
         <div>
           {confirmType === "memo" ? (
-            <button> 예</button>
+            <button onClick={deletedReadMemo}>예-memo</button>
           ) : confirmType === "photo" ? (
             <button onClick={deleteReadImg}>예-photo</button>
           ) : confirmType === "music" ? (
