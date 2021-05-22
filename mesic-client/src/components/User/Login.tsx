@@ -3,9 +3,6 @@ import React, { useCallback, useState } from "react";
 type LoginProps = {
   openLogin: boolean;
   closeLogin: () => void;
-  email: string;
-  name: string;
-  nickName: string;
 };
 
 function Login(props: LoginProps) {
@@ -47,7 +44,11 @@ function Login(props: LoginProps) {
           </div>
           <div>
             <span>password</span>
-            <input onChange={handlePwInput} type="password" name="password"></input>
+            <input
+              onChange={handlePwInput}
+              type="password"
+              name="password"
+            ></input>
           </div>
           <div>
             <button>Login</button>

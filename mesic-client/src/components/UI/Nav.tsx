@@ -5,18 +5,22 @@ import { RootState } from "../../reducers";
 import Login from "../User/Login";
 import Signup from "../User/Signup";
 import Mypage from "../User/Mypage";
+import EditMypage from "../User/EditMypage";
 
 function Nav() {
   //const {open} = props;
   const state = useSelector((state: RootState) => state.userReducer);
+  const basicImg =
+    "https://pbs.twimg.com/media/EhIO_LyVoAA2szZ?format=jpg&name=small";
   const { isLogin } = state.user;
 
   const [openLogin, setOpenLogin] = useState<boolean>(false);
   const [openSignup, setOpenSignup] = useState<boolean>(false);
   const [openMypage, setOpenMypage] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [nickName, setNickname] = useState<string>("");
+  const [profileImg, setProfileImg] = useState<any>(null);
+  const [email, setEmail] = useState<string>("port757@codestates.com");
+  const [name, setName] = useState<string>("secret");
+  const [nickname, setNickname] = useState<string>("secret");
   const [openEditMapage, setOpenEditMypage] = useState<boolean>(false);
 
   const clickLogin = () => {
@@ -43,15 +47,36 @@ function Nav() {
 
   return (
     <div>
-      <Login
-        openLogin={openLogin}
-        closeLogin={closeLogin}
+      <Login openLogin={openLogin} closeLogin={closeLogin}></Login>
+      <Signup
+        openSignup={openSignup}
+        closeSignup={closeSignup}
         email={email}
         name={name}
-        nickName={nickName}
-      ></Login>
-      <Signup openSignup={openSignup} closeSignup={closeSignup}></Signup>
-      <Mypage openMypage={openMypage} closeMypage={closeMypage}></Mypage>
+        nickname={nickname}
+      ></Signup>
+      <Mypage
+        openMypage={openMypage}
+        closeMypage={closeMypage}
+        profileImg={profileImg}
+        basicImg={basicImg}
+        email={email}
+        name={name}
+        nickname={nickname}
+        openEditMypage={openEditMapage}
+        setOpenEditMypage={setOpenEditMypage}
+      ></Mypage>
+      <EditMypage
+        setOpenMypage={setOpenMypage}
+        profileImg={profileImg}
+        basicImg={basicImg}
+        email={email}
+        name={name}
+        nickname={nickname}
+        openEditMypage={openEditMapage}
+        setOpenEditMypage={setOpenEditMypage}
+        setProfileImg={setProfileImg}
+      ></EditMypage>
       <div className="nav">
         <Link to="/">
           <button className="logo-btn">Logo</button>
