@@ -4,8 +4,8 @@ import { RootState } from "../../reducers";
 import EditMusic from "./EditMusic";
 import ConfirmModal from "../UI/ConfirmModal";
 
-function Music() {
+function PostMusic() {
   return <div>PostMusic</div>;
 }
 
-export default Music;
+export default PostMusic;

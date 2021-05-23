@@ -11,7 +11,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
 
   // const widgetUrl =
-  //   "https://w.soundcloud.com/player/?url=https://soundcloud.com/blackstarmot/justin-bieber-peaches-feat-daniel-caesar-giveon&amp;";
+  // https://w.soundcloud.com/player/?url=https://soundcloud.com/blackstarmot/justin-bieber-peaches-feat-daniel-caesar-giveon&amp;";
   return (
     <>
       <ConfirmModal
