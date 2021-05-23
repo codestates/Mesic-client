@@ -1,14 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 const KEY = "AIzaSyC77gm8pbkNvv_BYkvD45foo9m19j9jOKs";
 
 function EditMusic({
   openEditMusic,
   setOpenEditMusic,
-  handleSelectMusic,
+  setUpdateMode,
+  setUpdateMusic,
+  setPostMusic,
 }: any) {
   // 서버로 PATCH 요청을 보내주는 함수 필요
   // AIzaSyC77gm8pbkNvv_BYkvD45foo9m19j9jOKs
+  const { mode } = useSelector((state: RootState) => state.userReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
 
@@ -47,6 +52,16 @@ function EditMusic({
     }
   };
 
+  const selectUpdateMusic = (each: any) => {
+    setOpenEditMusic(false);
+    setUpdateMode(true);
+    setUpdateMusic(each);
+  };
+  const selectPostMusic = (each: any) => {
+    setOpenEditMusic(false);
+    setPostMusic(each);
+  };
+
   return (
     <div className={`border background ${openEditMusic ? "show" : ""}`}>
       <input
@@ -58,7 +73,10 @@ function EditMusic({
       <div>
         <ul>
           {searchedMusic.map((each) => (
-            <li style={{ listStyleType: "none" }} onClick={handleSelectMusic}>
+            <li
+              style={{ listStyleType: "none" }}
+              onClick={mode === "POST" ? selectPostMusic : selectUpdateMusic}
+            >
               <img
                 style={{ width: "100px" }}
                 src={each.snippet.thumbnails.medium.url}
@@ -68,7 +86,7 @@ function EditMusic({
           ))}
         </ul>
       </div>
-      <button onClick={() => setOpenEditMusic(false)}>Cancel</button>
+      <button onClick={() => setOpenEditMusic(false)}>닫기</button>
     </div>
   );
 }
