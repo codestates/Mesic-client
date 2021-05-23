@@ -5,7 +5,7 @@ import EditMusic from "./EditMusic";
 import ConfirmModal from "../UI/ConfirmModal";
 
 function PostMusic() {
-  return <div></div>;
+  return <div>PostMusic</div>;
 }
 
 export default PostMusic;
