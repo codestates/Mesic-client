@@ -4,15 +4,23 @@ function ConfirmModal({
   confirmType,
   openConfirm,
   setOpenConfirm,
+  setPostImg,
   setReadImg,
   setReadMemo,
-  //setPostMusic
+  setPostMusic,
   setReadMusic,
   setUpdateMode,
+  updateMode,
+  setUpdateMusic,
+
 }: any) {
   const deleteReadImg = () => {
     //서버요청
     setReadImg(null);
+    setOpenConfirm(false);
+  };
+  const deletePostImg = () => {
+    setPostImg(null);
     setOpenConfirm(false);
   };
   const deleteReadMemo = () => {
@@ -29,6 +37,10 @@ function ConfirmModal({
     setReadMusic(null);
     setOpenConfirm(false);
   };
+  const deleteUpdateMusic = () => {
+    setUpdateMusic(null);
+    setOpenConfirm(false);
+  };
 
   return (
     <div className={`background ${openConfirm ? "show" : ""}`}>
@@ -38,12 +50,16 @@ function ConfirmModal({
         <div>
           {confirmType === "memo" ? (
             <button onClick={deleteReadMemo}>예-memo</button>
-          ) : confirmType === "photo" ? (
-            <button onClick={deleteReadImg}>예-photo</button>
+          ) : confirmType === "postPhoto" ? (
+            <button onClick={deletePostImg}>예-postPhoto</button>
+          ) : confirmType === "readPhoto" ? (
+            <button onClick={deleteReadImg}>예-readPhoto</button>
           ) : confirmType === "postMusic" ? (
             <button onClick={deletePostMusic}>예-postMusic</button>
-          ) : confirmType === "readMusic" ? (
-            <button onClick={deleteReadMusic}>예-readMusic</button>
+          ) : confirmType === "readMusic" && updateMode === false ? (
+            <button onClick={deleteReadMusic}>예-readeMusic</button>
+          ) : confirmType === "readMusic" && updateMode ? (
+            <button onClick={deleteUpdateMusic}>예-updateMusic</button>
           ) : (
             <></>
           )}

@@ -25,6 +25,8 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
         setReadMusic={setReadMusic}
+        updateMode={updateMode}
+        setUpdateMusic={setUpdateMusic}
       />
       <EditMusic
         openEditMusic={openEditMusic}
