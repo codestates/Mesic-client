@@ -9,8 +9,10 @@ function ConfirmModal({
   setReadMemo,
   setPostMusic,
   setReadMusic,
+  setUpdateMode,
   updateMode,
   setUpdateMusic,
+
 }: any) {
   const deleteReadImg = () => {
     //서버요청
@@ -28,6 +30,7 @@ function ConfirmModal({
   };
   const deletePostMusic = () => {
     //setPostMusic(null);
+    setUpdateMode(false); // PostMusic 위젯을 비활성화
     setOpenConfirm(false);
   };
   const deleteReadMusic = () => {

@@ -18,10 +18,16 @@ function DetailModal(props: detailProps) {
   const [postMusic, setPostMusic] = useState<any>(null);
   const [postImg, setPostImg] = useState<any>(null);
   const [postMemo, setPostMemo] = useState<string>("");
-  const [readMusic, setReadMusic] = useState<any>("");
+  const [readMusic, setReadMusic] = useState<any>({
+    video_Id: "Uz0PppyT7Cc",
+    title: "BTS (방탄소년단) - Butter (Official Audio)",
+    thumbnail: "https://i.ytimg.com/vi/Uz0PppyT7Cc/mqdefault.jpg",
+  });
   const [readImg, setReadImg] = useState<any>(null);
   const [readMemo, setReadMemo] = useState<string>("");
   const [updateMusic, setUpdateMusic] = useState<any>("");
+
+  console.log(postMusic);
 
   const { open } = props;
 
