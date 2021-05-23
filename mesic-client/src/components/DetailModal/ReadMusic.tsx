@@ -11,11 +11,6 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [updateMusic, setUpdateMusic] = useState<any>(null);
 
-  //const readWidget = "readWidget";
-  //`https://www.youtube.com/embed/${readMusic.id.videoId}`;
-  //const updateWidget = "updateWidget";
-  //`https://www.youtube.com/embed/${updateMusic.id.videoId}`;
-
   const updateReadMusic = () => {
     //서버 요청 updateMusic 전달
     //setReadMusic()
@@ -50,7 +45,13 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
             </button>
             <button onClick={() => setOpenConfirm(true)}>삭제</button>
             <div>
-              <iframe style={{ width: "100px" }}></iframe>
+              <iframe
+                src={
+                  updateMusic.video_Id
+                    ? `https://www.youtube.com/embed/${updateMusic.video_Id}`
+                    : "https://www.youtube.com/embed/"
+                }
+              ></iframe>
             </div>
             <button onClick={updateReadMusic}>저장</button>
             <button
@@ -74,7 +75,13 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
               <button onClick={() => setOpenEditMusic(true)}>수정</button>
               <button onClick={() => setOpenConfirm(true)}>삭제</button>
               <div>
-                <iframe style={{ width: "100px" }}></iframe>
+                <iframe
+                  src={
+                    readMusic.video_Id
+                      ? `https://www.youtube.com/embed/${readMusic.video_Id}`
+                      : "https://www.youtube.com/embed/"
+                  }
+                ></iframe>
               </div>
             </div>
           )}

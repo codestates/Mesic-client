@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 const KEY = "AIzaSyC77gm8pbkNvv_BYkvD45foo9m19j9jOKs";
 
 function EditMusic({
   openEditMusic,
+  updateMode,
   setOpenEditMusic,
   setUpdateMode,
   setUpdateMusic,
@@ -16,6 +17,12 @@ function EditMusic({
   const { mode } = useSelector((state: RootState) => state.userReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
+  const [selectedMusic, setSelectedMusic] = useState<{
+    video_Id: string;
+    title: string;
+    thumbnail: string;
+  }>({ video_Id: "", title: "", thumbnail: "" });
+  const searchInput = useRef<any>();
 
   const handleSearchMusicInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,14 +40,33 @@ function EditMusic({
     },
   });
 
-  const handleSubmit = async () => {
+  const handleSearch = async () => {
     const res = await youtube.get("/search", {
       params: {
         q: `${searchMusicInput} audio`,
       },
     });
-    console.log("검색 결과 : ", res);
     setSearchedMusic(res.data.items);
+  };
+
+  useEffect(() => {
+    if (openEditMusic) {
+      if (mode === "POST") {
+        selectPostMusic(selectedMusic);
+      } else {
+        selectUpdateMusic(selectedMusic);
+      }
+    }
+  }, [selectedMusic]);
+
+  const handleSelect = (video_Id: string, title: string, thumbnail: string) => {
+    setSelectedMusic({
+      video_Id,
+      title,
+      thumbnail,
+    });
+    setSearchedMusic([]);
+    searchInput.current.value = "";
   };
 
   const searchMusicEvent = (e: any) => {
@@ -48,18 +74,20 @@ function EditMusic({
       // 업데이트 모드??
       return;
     } else if (e.keyCode === 13 || e.type === "click") {
-      handleSubmit();
+      handleSearch();
     }
   };
 
-  const selectUpdateMusic = (each: any) => {
-    setOpenEditMusic(false);
+  const selectUpdateMusic = (refinedData: any) => {
+    setUpdateMusic(refinedData);
     setUpdateMode(true);
-    setUpdateMusic(each);
-  };
-  const selectPostMusic = (each: any) => {
     setOpenEditMusic(false);
-    setPostMusic(each);
+  };
+
+  const selectPostMusic = (refinedData: any) => {
+    setPostMusic(refinedData);
+    setUpdateMode(true); // PostMusic 위젯을 활성화
+    setOpenEditMusic(false);
   };
 
   return (
@@ -68,6 +96,7 @@ function EditMusic({
         placeholder="노래 제목을 검색해주세요"
         onChange={handleSearchMusicInput}
         onKeyUp={searchMusicEvent}
+        ref={searchInput}
       />
       <button onClick={searchMusicEvent}>검색</button>
       <div>
@@ -75,7 +104,13 @@ function EditMusic({
           {searchedMusic.map((each) => (
             <li
               style={{ listStyleType: "none" }}
-              onClick={mode === "POST" ? selectPostMusic : selectUpdateMusic}
+              onClick={() =>
+                handleSelect(
+                  each.id.videoId,
+                  each.snippet.title,
+                  each.snippet.thumbnails.medium.url
+                )
+              }
             >
               <img
                 style={{ width: "100px" }}
@@ -86,7 +121,15 @@ function EditMusic({
           ))}
         </ul>
       </div>
-      <button onClick={() => setOpenEditMusic(false)}>닫기</button>
+      <button
+        onClick={() => {
+          setSearchedMusic([]);
+          searchInput.current.value = "";
+          setOpenEditMusic(false);
+        }}
+      >
+        닫기
+      </button>
     </div>
   );
 }

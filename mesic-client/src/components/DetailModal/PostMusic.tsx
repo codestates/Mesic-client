@@ -16,18 +16,23 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
         setPostMusic={setPostMusic}
-        // setUpdateMode => false로 변경해야지 처음 상태로 돌아감
+        setUpdateMode={setUpdateMode}
       />
       <EditMusic
         openEditMusic={openEditMusic}
         setOpenEditMusic={setOpenEditMusic}
+        updateMode={updateMode}
         setUpdateMode={setUpdateMode}
         setPostMusic={setPostMusic}
       />
       {updateMode ? (
         <div>
           <iframe
-            src={`https://www.youtube.com/embed/${postMusic.id.videoId}`}
+            src={
+              postMusic.video_Id
+                ? `https://www.youtube.com/embed/${postMusic.video_Id}`
+                : "https://www.youtube.com/embed/"
+            }
           />
           <button onClick={() => setOpenEditMusic(true)}>수정</button>
           <button onClick={() => setOpenConfirm(true)}>삭제</button>
