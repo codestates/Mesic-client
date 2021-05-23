@@ -9,7 +9,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const [resetMode, setResetMode] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
-
+  const [updateMode, setUpdateMode] = useState<boolean>(false);
   // const widgetUrl =
   //   "https://w.soundcloud.com/player/?url=https://soundcloud.com/blackstarmot/justin-bieber-peaches-feat-daniel-caesar-giveon&amp;";
   return (
@@ -25,13 +25,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
         setOpenEditMusic={setOpenEditMusic}
         setResetMode={setResetMode}
       />
-      {resetMode ? (
-        <div className="border">
-          <div className="ifram-outsider">
-            <button onClick={() => setOpenEditMusic(true)}>+</button>
-          </div>
-        </div>
-      ) : (
+      {updateMode ? (
         <div className="border">
           <div className="ifram-outsider">
             <button
@@ -49,6 +43,12 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
               allow="autoplay"
               src={`https://w.soundcloud.com/player/?url=${readMusic}&amp;`}
             ></iframe>
+          </div>
+        </div>
+      ) : (
+        <div className="border">
+          <div className="ifram-outsider">
+            <button onClick={() => setOpenEditMusic(true)}>+</button>
           </div>
         </div>
       )}
