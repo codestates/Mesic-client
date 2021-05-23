@@ -14,6 +14,8 @@ function PostPhoto({ postImg, setPostImg, setReadImg }: any) {
   const imageInput = useRef<any>();
   const { mode } = useSelector((state: RootState) => state.userReducer).user;
 
+  const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+
   // Photo 업데이트 버튼
   const handlePostImg = (e: any) => {
     setPostImg(URL.createObjectURL(e.target.files[0]));
@@ -22,14 +24,27 @@ function PostPhoto({ postImg, setPostImg, setReadImg }: any) {
 
   return (
     <>
+      <ConfirmModal
+        confirmType="postPhoto"
+        openConfirm={openConfirm}
+        setOpenConfirm={setOpenConfirm}
+        setPostImg={setPostImg}
+        // setUpdateMode => false로 변경해야지 처음 상태로 돌아감
+      />
       <div className="border">
-        photo
         <input
           ref={imageInput}
           type="file"
           accept="image/*"
           onChange={handlePostImg}
         />
+        {postImg === null ? (
+          <div>사진 추가하기</div>
+        ) : (
+          <>
+            <button onClick={() => setOpenConfirm(true)}>삭제</button>
+          </>
+        )}
         <img className="img" src={postImg} />
       </div>
     </>

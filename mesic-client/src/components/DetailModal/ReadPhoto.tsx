@@ -35,7 +35,7 @@ function ReadPhoto({ readImg, setReadImg }: any) {
   return (
     <>
       <ConfirmModal
-        confirmType="photo"
+        confirmType="readPhoto"
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
         setReadImg={setReadImg}
