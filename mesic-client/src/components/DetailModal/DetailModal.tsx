@@ -50,7 +50,7 @@ function DetailModal(props: detailProps) {
     <div className={`modal ${open ? "show1" : ""}`}>
       {mode === "POST" ? (
         <>
-          <PostMusic />
+          <PostMusic postMusic={postMusic} setPostMusic={setPostMusic} />
           <PostPhoto
             postImg={postImg}
             setPostImg={setPostImg}
