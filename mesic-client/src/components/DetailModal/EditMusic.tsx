@@ -1,14 +1,9 @@
-import React from "react";
-
-type EditMusicProps = {
-  openEditMusic: boolean;
-  handleCloseEditMusic: () => void;
-  handleSelectMusic: (e: any) => void;
-};
-
-function EditMusic(props: EditMusicProps) {
-  const { openEditMusic, handleCloseEditMusic, handleSelectMusic } = props;
-
+function EditMusic({
+  openEditMusic,
+  setOpenEditMusic,
+  handleSelectMusic,
+}: any) {
+  // 서버로 PATCH 요청을 보내주는 함수 필요
   return (
     <div className={`background ${openEditMusic ? "show" : ""}`}>
       <div>검색된 음악 리스트</div>
@@ -18,9 +13,11 @@ function EditMusic(props: EditMusicProps) {
       >
         any song
       </button>
-      <button onClick={handleCloseEditMusic}>Cancel</button>
+      <button onClick={() => setOpenEditMusic(false)}>Cancel</button>
     </div>
   );
 }
+
+
 
 export default EditMusic;

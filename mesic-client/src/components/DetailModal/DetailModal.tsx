@@ -18,7 +18,7 @@ function DetailModal(props: detailProps) {
   const [postMusic, setPostMusic] = useState<any>(null);
   const [postImg, setPostImg] = useState<any>(null);
   const [postMemo, setPostMemo] = useState<string>("");
-  const [readMusic, setReadMusic] = useState<any>(null);
+  const [readMusic, setReadMusic] = useState<any>("https://soundcloud.com/blackstarmot/justin-bieber-peaches-feat-daniel-caesar-giveon");
   const [readImg, setReadImg] = useState<any>(null);
   const [readMemo, setReadMemo] = useState<string>("");
 
@@ -59,7 +59,7 @@ function DetailModal(props: detailProps) {
         </>
       ) : (
         <>
-          <ReadMusic />
+          <ReadMusic readMusic={readMusic} setReadMusic={setReadMusic} />
           <ReadPhoto readImg={readImg} setReadImg={setReadImg} />
           <ReadMemo readMemo={readMemo} setReadMemo={setReadMemo} />
         </>
