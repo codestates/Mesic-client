@@ -1,10 +1,11 @@
-import {combineReducers} from "redux";
-import {persistReducer} from "redux-persist";
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import modeReducer from "./modeReducer";
 import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
-  userReducer
+  modeReducer,
 });
 
 export default rootReducer;

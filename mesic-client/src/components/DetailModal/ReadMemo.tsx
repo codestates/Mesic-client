@@ -7,7 +7,7 @@ import ConfirmModal from "..//UI/ConfirmModal";
 type ReadMemoProps = {};
 
 function ReadMemo({ readMemo, setReadMemo }: any) {
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);

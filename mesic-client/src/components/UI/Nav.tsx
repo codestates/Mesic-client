@@ -9,18 +9,19 @@ import EditMypage from "../User/EditMypage";
 
 function Nav() {
   //const {open} = props;
-  const state = useSelector((state: RootState) => state.userReducer);
+  const state = useSelector((state: RootState) => state.modeReducer);
   const basicImg =
     "https://pbs.twimg.com/media/EhIO_LyVoAA2szZ?format=jpg&name=small";
   const { isLogin } = state.user;
+  const { email, name, nickname, profileImg } = state.user;
 
   const [openLogin, setOpenLogin] = useState<boolean>(false);
   const [openSignup, setOpenSignup] = useState<boolean>(false);
   const [openMypage, setOpenMypage] = useState<boolean>(false);
-  const [profileImg, setProfileImg] = useState<any>(null);
-  const [email, setEmail] = useState<string>("port757@codestates.com");
-  const [name, setName] = useState<string>("secret");
-  const [nickname, setNickname] = useState<string>("secret");
+  //const [profileImg, setProfileImg] = useState<any>(null);
+  // const [email, setEmail] = useState<string>("");
+  // const [name, setName] = useState<string>("");
+  // const [nickname, setNickname] = useState<string>("");
   const [openEditMapage, setOpenEditMypage] = useState<boolean>(false);
 
   const clickLogin = () => {
@@ -75,7 +76,6 @@ function Nav() {
         nickname={nickname}
         openEditMypage={openEditMapage}
         setOpenEditMypage={setOpenEditMypage}
-        setProfileImg={setProfileImg}
       ></EditMypage>
       <div className="nav">
         <Link to="/">
