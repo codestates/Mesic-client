@@ -54,6 +54,9 @@ function MainPage() {
   // 선택한 READ 마커의 데이터
   const [readMarkerData, setReadMarkerData] = useState<any>(null);
 
+  // POST 마커 입력 확인 (초기화 방지)
+  const [postCheck, setPostCheck] = useState<boolean>(false);
+
   // 지도 동적 렌더링
   useEffect(() => {
     window.kakao.maps.load(() => {
@@ -222,7 +225,6 @@ function MainPage() {
 
     // 지도 클릭 핸들러
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
-      // 이전에 열려있던 모달을 닫고 READ 마커 데이터를 초기화
       closeDetailModal();
       setReadMarkerData(null);
 
@@ -317,7 +319,7 @@ function MainPage() {
       {openReadModal ? (
         <ReadModal readMarkerData={readMarkerData} />
       ) : openPostModal ? (
-        <PostModal />
+        <PostModal setPostCheck={setPostCheck} postCheck={postCheck} />
       ) : (
         <></>
       )}
