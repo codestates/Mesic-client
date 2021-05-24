@@ -12,7 +12,7 @@ import { RootState } from "../../reducers";
 
 function DetailModal({ open, readMarkerData }: any) {
   const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const { video_Id, title, thumbnail } = readMarkerData.music;
   const { photo, memo } = readMarkerData;

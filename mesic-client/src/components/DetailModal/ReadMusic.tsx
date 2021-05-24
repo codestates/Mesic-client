@@ -5,7 +5,7 @@ import ConfirmModal from "../UI/ConfirmModal";
 import EditMusic from "../DetailModal/EditMusic";
 
 function ReadMusic({ readMusic, setReadMusic }: any) {
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);

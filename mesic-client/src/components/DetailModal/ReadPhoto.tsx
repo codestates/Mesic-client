@@ -7,7 +7,7 @@ type ReadPhotoProps = {};
 
 function ReadPhoto({ readImg, setReadImg }: any) {
   const editedImageInput = useRef<any>();
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [editedImg, setEditedImg] = useState<any>(null);

@@ -1,18 +1,20 @@
-import {SWITCH_MODE} from "../actions/index";
-import {initialState} from "./initialState";
-import {Action} from "../actions/index";
+import { SWITCH_MODE } from "../actions/index";
+import { initialState } from "./initialState";
+import { Action } from "../actions/index";
 
 const userReducer = (state = initialState, action: Action) => {
-  switch (action.type) {
-    case SWITCH_MODE:
-      return Object.assign({}, state, {
-        user: {
-          ...state.user,
-          mode: action.payload.data,
-        },
-      });
-    default:
-      return state;
+  switch (
+    action.type
+    // case EDIT_USERINFO:
+    //   return Object.assign({}, state, {
+    //     user: {
+    //       ...state.user,
+    //       mode: action.payload.data,
+    //     },
+    //   });
+    // default:
+    //   return state;
+  ) {
   }
 };
 

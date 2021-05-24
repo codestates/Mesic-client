@@ -1,4 +1,4 @@
-import {Dispatch} from "redux";
+import { Dispatch } from "redux";
 
 export const SWITCH_MODE = "SWITCH_MODE" as const;
 
@@ -12,3 +12,5 @@ export const switchMode = (data: "READ" | "POST" | "NONE"): any => {
     },
   };
 };
+
+// export const editUserInfo= ()

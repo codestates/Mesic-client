@@ -18,7 +18,7 @@ declare global {
 
 function MainPage() {
   const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state.userReducer);
+  const state = useSelector((state: RootState) => state.modeReducer);
   const { isLogin } = state.user;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
@@ -208,7 +208,7 @@ function MainPage() {
     dispatch(switchMode("READ"));
     setOpenReadModal(true);
   };
-  
+
   // 카카오맵 로드
   const loadKakaoMap = () => {
     const container = document.getElementById("kakao-map");
@@ -244,7 +244,7 @@ function MainPage() {
     setLatLng([lat, lng]);
   };
 
-  // 키워드 검색 인풋 
+  // 키워드 검색 인풋
   const handleChangeKeywordInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setKeywordInput(e.target?.value);

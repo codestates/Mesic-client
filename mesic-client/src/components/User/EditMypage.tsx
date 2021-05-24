@@ -10,7 +10,6 @@ type EditMypageProps = {
   nickname: string;
   openEditMypage: boolean;
   setOpenEditMypage: (state: boolean) => void;
-  setProfileImg: (state: string) => void;
 };
 
 function EditMypage(props: EditMypageProps) {
@@ -23,7 +22,6 @@ function EditMypage(props: EditMypageProps) {
     nickname,
     openEditMypage,
     setOpenEditMypage,
-    setProfileImg,
   } = props;
 
   const editProfileInput = useRef<any>();
@@ -90,8 +88,8 @@ function EditMypage(props: EditMypageProps) {
             ></input>
           </div>
           <div>
-            <button>Edit</button>
-            <button onClick={handleReturnMypage}>Cancel</button>
+            <button>저장</button>
+            <button onClick={handleReturnMypage}>취소</button>
           </div>
         </div>
       </div>

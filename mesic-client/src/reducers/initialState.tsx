@@ -6,7 +6,7 @@ export const initialState = {
     token: "aoejwo223",
     email: "test@test.com",
     name: "test",
-    profileImage:
+    profileImg:
       "https://pbs.twimg.com/profile_images/1325699371304771586/WRDhh8rG_400x400.jpg",
     nickname: "test user",
   },
@@ -47,8 +47,7 @@ export const initialState = {
         title: "BTS (빵탄소년딴) - Butter (Official Audio)",
         thumbnail: "https://i.ytimg.com/vi/Uz0PppyT7Cc/mqdefault.jpg",
       },
-      photo:
-        "https://i.insider.com/5acd01546898757c378b4e02?width=700",
+      photo: "https://i.insider.com/5acd01546898757c378b4e02?width=700",
       memo: "다이너마이트~~~",
     },
   ],

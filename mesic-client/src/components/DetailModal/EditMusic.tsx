@@ -14,7 +14,7 @@ function EditMusic({
 }: any) {
   // 서버로 PATCH 요청을 보내주는 함수 필요
   // AIzaSyC77gm8pbkNvv_BYkvD45foo9m19j9jOKs
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
   const [selectedMusic, setSelectedMusic] = useState<{

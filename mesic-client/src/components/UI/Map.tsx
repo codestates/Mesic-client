@@ -13,7 +13,7 @@ type MapProps = {
 };
 
 function Map(props: MapProps) {
-  const state = useSelector((state: RootState) => state.userReducer);
+  const state = useSelector((state: RootState) => state.modeReducer);
   const { isLogin } = state.user;
   const { handleOpenModal } = props;
   const dispatch = useDispatch();

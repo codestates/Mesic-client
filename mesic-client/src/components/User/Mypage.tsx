@@ -1,5 +1,7 @@
 import { profile } from "console";
 import React from "react";
+import { RootState } from "../../reducers";
+import { useDispatch, useSelector } from "react-redux";
 
 type MypageProps = {
   openMypage: boolean;
@@ -14,6 +16,8 @@ type MypageProps = {
 };
 
 function Mypage(props: MypageProps) {
+  const state = useSelector((state: RootState) => state.modeReducer);
+
   const {
     openMypage,
     closeMypage,
@@ -55,7 +59,7 @@ function Mypage(props: MypageProps) {
           <div>이름: {name}</div>
           <div>닉네임: {nickname}</div>
           <div>
-            <button onClick={handleOpenEditMypage}>Edit</button>
+            <button onClick={handleOpenEditMypage}>수정</button>
           </div>
         </div>
       </div>

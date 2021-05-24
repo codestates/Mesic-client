@@ -7,7 +7,7 @@ import ConfirmModal from "../UI/ConfirmModal";
 function PostPhoto({ postImg, setPostImg }: any) {
   const dispatch = useDispatch();
   const imageInput = useRef<any>();
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
 

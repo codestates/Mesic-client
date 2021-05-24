@@ -9,7 +9,7 @@ function Memo({ postMemo, setPostMemo }: any) {
   const memoInput = useRef<any>();
 
   const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
+  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const handlePostMemo = (e: any) => {
     setPostMemo(e.target.value);
