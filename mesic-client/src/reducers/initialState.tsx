@@ -16,28 +16,40 @@ export const initialState = {
       id: 1,
       y: 37.5139795454969,
       x: 127.048963363388,
-      music: "https://soundcloud.com/bangtan/thankyouarmy2020",
+      music: {
+        video_Id: "Uz0PppyT7Cc",
+        title: "BTS (방탄소년단) - Butter (Official Audio)",
+        thumbnail: "https://i.ytimg.com/vi/Uz0PppyT7Cc/mqdefault.jpg",
+      },
       photo:
         "https://www.tripsavvy.com/thmb/J8K1vZSr_wwvWxARsYXPMtP295Q=/2000x3008/filters:fill(auto,1)/Eiffel-Tower-4c710a32fca4406c81f49815312339c7.jpg",
-      memo: "국내인데 에펠탑 사진은 뭐지1",
+      memo: "뻐터뻐터~~",
     },
     {
       id: 2,
       y: 37.51042505155147,
       x: 127.0420299463025,
-      music: "https://soundcloud.com/bangtan/thankyouarmy2020",
+      music: {
+        video_Id: "7C2z4GqqS5E",
+        title: "옛사랑 커버",
+        thumbnail: "https://i.ytimg.com/vi/Uz0PppyT7Cc/mqdefault.jpg",
+      },
       photo:
-        "https://www.tripsavvy.com/thmb/J8K1vZSr_wwvWxARsYXPMtP295Q=/2000x3008/filters:fill(auto,1)/Eiffel-Tower-4c710a32fca4406c81f49815312339c7.jpg",
-      memo: "국내인데 에펠탑 사진은 뭐지2",
+        "https://www.expatica.com/app/uploads/sites/10/2014/05/best-place-to-live-in-uk.jpg",
+      memo: "페이크 러브~",
     },
     {
       id: 3,
       y: 37.51669558042181,
       x: 127.0433003486247,
-      music: "https://soundcloud.com/bangtan/thankyouarmy2020",
+      music: {
+        video_Id: "OiMWFojB9Ok",
+        title: "BTS (빵탄소년딴) - Butter (Official Audio)",
+        thumbnail: "https://i.ytimg.com/vi/Uz0PppyT7Cc/mqdefault.jpg",
+      },
       photo:
-        "https://www.tripsavvy.com/thmb/J8K1vZSr_wwvWxARsYXPMtP295Q=/2000x3008/filters:fill(auto,1)/Eiffel-Tower-4c710a32fca4406c81f49815312339c7.jpg",
-      memo: "국내인데 에펠탑 사진은 뭐지3",
+        "https://i.insider.com/5acd01546898757c378b4e02?width=700",
+      memo: "다이너마이트~~~",
     },
   ],
   follow: [

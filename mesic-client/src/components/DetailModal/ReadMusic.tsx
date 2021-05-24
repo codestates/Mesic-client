@@ -45,7 +45,6 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
             >
               수정
             </button>
-            <button onClick={() => setOpenConfirm(true)}>삭제</button>
             <div>
               <iframe
                 src={

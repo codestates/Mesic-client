@@ -10,44 +10,40 @@ import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
 //import { read } from "fs";
 
-type detailProps = {
-  open: boolean;
-};
+function DetailModal({ open, readMarkerData }: any) {
+  const dispatch = useDispatch();
+  const { mode } = useSelector((state: RootState) => state.userReducer).user;
 
-function DetailModal(props: detailProps) {
+  const { video_Id, title, thumbnail } = readMarkerData.music;
+  const { photo, memo } = readMarkerData;
+  const [readMusic, setReadMusic] = useState<any>({
+    video_Id: video_Id,
+    title: title,
+    thumbnail: thumbnail,
+  });
+  const [readImg, setReadImg] = useState<any>(photo);
+  const [readMemo, setReadMemo] = useState<string>(memo);
+
   const [postMusic, setPostMusic] = useState<any>(null);
   const [postImg, setPostImg] = useState<any>(null);
   const [postMemo, setPostMemo] = useState<string>("");
-  const [readMusic, setReadMusic] = useState<any>({
-    video_Id: "Uz0PppyT7Cc",
-    title: "BTS (방탄소년단) - Butter (Official Audio)",
-    thumbnail: "https://i.ytimg.com/vi/Uz0PppyT7Cc/mqdefault.jpg",
-  });
-  const [readImg, setReadImg] = useState<any>(null);
-  const [readMemo, setReadMemo] = useState<string>("");
+
   const [updateMusic, setUpdateMusic] = useState<any>("");
-
-  console.log(postMusic);
-
-  const { open } = props;
-
-  const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.userReducer).user;
 
   const postRes = {
     music: null,
     image:
       "https://pbs.twimg.com/media/EnKtx1NXEAEoIC4?format=jpg&name=900x900",
-    memo: "posted!",
+    memo2: "posted!",
   };
 
-  const { music, image, memo } = postRes;
+  const { music, image, memo2 } = postRes;
 
   const postPinData = () => {
     //서버요청 postImg 전달
     setReadImg(image);
     setPostImg(null);
-    setReadMemo(memo);
+    setReadMemo(memo2);
     setPostMemo("");
     dispatch(switchMode("READ"));
   };
