@@ -7,6 +7,8 @@ import SearchLocation from "../components/UI/SearchLocation";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from ".././actions/index";
 import { RootState } from ".././reducers";
+import PostModal from "../components/DetailModal/PostModal";
+import ReadModal from "../components/DetailModal/ReadModal";
 
 declare global {
   interface Window {
@@ -19,53 +21,78 @@ function MainPage() {
   const state = useSelector((state: RootState) => state.userReducer);
   const { isLogin } = state.user;
 
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  // const [openModal, setOpenModal] = useState<boolean>(false);
+
+  // DetailModal 열림
+  const [openReadModal, setOpenReadModal] = useState<boolean>(false);
+  const [openPostModal, setOpenPostModal] = useState<boolean>(false);
+
+  // 키워드 검색
   const [keywordInput, setKeywordInput] = useState<string>("");
   const [keywordSearchData, setKeywordSearchData] = useState<any>([]);
+  const [searchMode, setSearchMode] = useState<boolean>(false);
 
+  // 지도 생성
   const [map, setMap] = useState<any>({});
   const [LatLng, setLatLng] = useState<number[]>([
     37.5139795454969, 127.048963363388,
   ]);
   const [mapLevel, setMapLevel] = useState<number>(5);
+
+  // 검색,포스트 위치
   const [searchLatLng, setSearchLatlng] = useState<number[]>([
     37.5139795454969, 127.048963363388,
   ]);
-  const [searchMode, setSearchMode] = useState<boolean>(false);
-  const [searchMarkers, setSearchMarkers] = useState<any[]>([]);
-
   const [postLatLng, setPostLatLng] = useState<number[]>([
     37.5139795454969, 127.048963363388,
   ]);
+
+  // 검색,포스트 마커
+  const [searchMarkers, setSearchMarkers] = useState<any[]>([]);
   const [postMarkers, setPostMarkers] = useState<any[]>([]);
-  const [readMarkerData, setReadMarkerData] = useState<any>({});
 
-  // 로그인 시, 모든 데이터를 다 받아와서 store에 저장
-  // store에서 핀을 다 받아와서, 화면에 마커를 렌더
-  // 마커를 클릭 했을 때, 그 마커에 해당되는 데이터를 어떻게 연결 시킬건가?
-  //
+  // 선택한 READ 마커의 데이터
+  const [readMarkerData, setReadMarkerData] = useState<any>(null);
 
+  // 지도 동적 렌더링
   useEffect(() => {
     window.kakao.maps.load(() => {
       loadKakaoMap();
     });
   }, []);
 
+  // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
     searchKeyword();
   }, [keywordInput]);
 
+  // 검색 위치가 바뀌면, 해당 위치에 마커 생성
   useEffect(() => {
     if (Object.keys(map).length > 0) {
       searchMarkerControl();
     }
   }, [searchLatLng]);
 
+  // POST 위치가 바뀌면, 해당 위치에 마커 생성
   useEffect(() => {
     if (Object.keys(map).length > 0) {
       postMarkerControl();
     }
   }, [postLatLng]);
+
+  // READ 마커를 클릭하면, POST 마커 사라짐
+  useEffect(() => {
+    if (Object.keys(map).length > 0) {
+      deletePostMarkers();
+    }
+  }, [readMarkerData]);
+
+  // POST, READ 모달이 켜지거나 꺼지면, 검색 마커가 사라짐
+  useEffect(() => {
+    if (Object.keys(map).length > 0) {
+      deleteSearchMarkers();
+    }
+  }, [openPostModal, openReadModal]);
 
   // 키워드 검색 마커
   const searchMarkerControl = () => {
@@ -92,12 +119,6 @@ function MainPage() {
     marker.setMap(map);
     markers.push(marker);
     setSearchMarkers(markers);
-  };
-
-  const deleteSearchMarkers = () => {
-    for (let i = 0; i < searchMarkers.length; i++) {
-      searchMarkers[i].setMap(null);
-    }
   };
 
   // (POST MODE) 지도 클릭 마커
@@ -149,12 +170,14 @@ function MainPage() {
     setMyMarkers(markers);
   };
 
+  // 맵이 렌더링 되면, 유저의 READ 마커가 생성
   useEffect(() => {
     if (Object.keys(map).length > 0) {
       viewMyMarkers();
     }
   }, [map]);
 
+  // 마커 제거 함수들
   const deleteMyMarkers = () => {
     for (let i = 0; i < myMarkers.length; i++) {
       myMarkers[i].setMap(null);
@@ -167,7 +190,15 @@ function MainPage() {
     }
   };
 
+  const deleteSearchMarkers = () => {
+    for (let i = 0; i < searchMarkers.length; i++) {
+      searchMarkers[i].setMap(null);
+    }
+  };
+
+  // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: number) => {
+    closeDetailModal();
     for (let i = 0; i < state.pins.length; i += 1) {
       if (state.pins[i].id === id) {
         setReadMarkerData(state.pins[i]);
@@ -175,16 +206,10 @@ function MainPage() {
       }
     }
     dispatch(switchMode("READ"));
-    handleOpenModal();
+    setOpenReadModal(true);
   };
-
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
-  const handleHideModal = () => {
-    setOpenModal(false);
-  };
-
+  
+  // 카카오맵 로드
   const loadKakaoMap = () => {
     const container = document.getElementById("kakao-map");
     const options = {
@@ -195,26 +220,31 @@ function MainPage() {
     const map = new window.kakao.maps.Map(container, options);
     setMap(map);
 
+    // 지도 클릭 핸들러
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
+      // 이전에 열려있던 모달을 닫고 READ 마커 데이터를 초기화
+      closeDetailModal();
+      setReadMarkerData(null);
+
       const clickPosition = mouseEvent.latLng;
-      // 클릭한 위치 표시
-      console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
         alert("로그인 후 나만의 로그를 만들어보세요!");
       } else {
         dispatch(switchMode("POST"));
-        handleOpenModal();
+        setOpenPostModal(true);
       }
     });
   };
 
+  // 맵 이동
   const moveKakaoMap = (lat: number, lng: number) => {
     const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
     map.panTo(moveLatLon);
     setLatLng([lat, lng]);
   };
 
+  // 키워드 검색 인풋 
   const handleChangeKeywordInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setKeywordInput(e.target?.value);
@@ -222,6 +252,7 @@ function MainPage() {
     [keywordInput]
   );
 
+  // 키워드 검색 자동완성
   const searchKeyword = () => {
     if (keywordInput === "") {
       setKeywordSearchData([]);
@@ -247,6 +278,7 @@ function MainPage() {
       });
   };
 
+  // 키워드 검색 버튼 + 엔터키 검색
   const keywordSearchEvent = (e: any) => {
     if (keywordInput.length === 0 || keywordSearchData.length === 0) {
       return;
@@ -259,14 +291,22 @@ function MainPage() {
     }
   };
 
+  // 자동완성 목록 클릭 시 이동
   const keywordSearchSelect = (y: number, x: number) => {
     moveKakaoMap(y, x);
     setSearchMode(false);
     setSearchLatlng([y, x]);
   };
 
+  // 모달 모두 끄기
+  const closeDetailModal = () => {
+    setOpenPostModal(false);
+    setOpenReadModal(false);
+  };
+
   return (
     <div className="App">
+      <button onClick={closeDetailModal}>HIDE</button>
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
         keywordSearchEvent={keywordSearchEvent}
@@ -274,11 +314,13 @@ function MainPage() {
         searchMode={searchMode}
         keywordSearchSelect={keywordSearchSelect}
       />
-      <DetailModal open={openModal} />
-      <div>
-        <button onClick={handleOpenModal}>PIN</button>
-      </div>
-      <button onClick={handleHideModal}>HIDE</button>
+      {openReadModal ? (
+        <ReadModal readMarkerData={readMarkerData} />
+      ) : openPostModal ? (
+        <PostModal />
+      ) : (
+        <></>
+      )}
       <div id="kakao-map" />
     </div>
   );

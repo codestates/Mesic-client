@@ -69,7 +69,11 @@ function ReadPhoto({ readImg, setReadImg }: any) {
             accept="image/*"
             onChange={handleEditedImg}
           />
-          <button onClick={() => setOpenConfirm(true)}>삭제</button>
+          {readImg !== null ? (
+            <button onClick={() => setOpenConfirm(true)}>삭제</button>
+          ) : (
+            <></>
+          )}
           <div>
             <img className="img" src={readImg} />
           </div>

@@ -4,12 +4,7 @@ import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
 
-// type PostPhotoProps = {
-//   postImg: any;
-//   setPostImg: (state: any) => void;
-// };
-
-function PostPhoto({ postImg, setPostImg, setReadImg }: any) {
+function PostPhoto({ postImg, setPostImg }: any) {
   const dispatch = useDispatch();
   const imageInput = useRef<any>();
   const { mode } = useSelector((state: RootState) => state.userReducer).user;
@@ -19,12 +14,12 @@ function PostPhoto({ postImg, setPostImg, setReadImg }: any) {
   // Photo 업데이트 버튼
   const handlePostImg = (e: any) => {
     setPostImg(URL.createObjectURL(e.target.files[0]));
-    imageInput.current.value = "";
   };
 
   return (
     <>
       <ConfirmModal
+        imageInput={imageInput}
         confirmType="postPhoto"
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}

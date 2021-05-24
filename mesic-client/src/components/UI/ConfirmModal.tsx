@@ -10,9 +10,7 @@ function ConfirmModal({
   setPostMusic,
   setReadMusic,
   setUpdateMode,
-  updateMode,
-  setUpdateMusic,
-
+  imageInput,
 }: any) {
   const deleteReadImg = () => {
     //서버요청
@@ -21,6 +19,7 @@ function ConfirmModal({
   };
   const deletePostImg = () => {
     setPostImg(null);
+    imageInput.current.value = "";
     setOpenConfirm(false);
   };
   const deleteReadMemo = () => {
@@ -29,16 +28,12 @@ function ConfirmModal({
     setOpenConfirm(false);
   };
   const deletePostMusic = () => {
-    //setPostMusic(null);
+    setPostMusic(null);
     setUpdateMode(false); // PostMusic 위젯을 비활성화
     setOpenConfirm(false);
   };
   const deleteReadMusic = () => {
     setReadMusic(null);
-    setOpenConfirm(false);
-  };
-  const deleteUpdateMusic = () => {
-    setUpdateMusic(null);
     setOpenConfirm(false);
   };
 
@@ -56,10 +51,8 @@ function ConfirmModal({
             <button onClick={deleteReadImg}>예-readPhoto</button>
           ) : confirmType === "postMusic" ? (
             <button onClick={deletePostMusic}>예-postMusic</button>
-          ) : confirmType === "readMusic" && updateMode === false ? (
+          ) : confirmType === "readMusic" ? (
             <button onClick={deleteReadMusic}>예-readeMusic</button>
-          ) : confirmType === "readMusic" && updateMode ? (
-            <button onClick={deleteUpdateMusic}>예-updateMusic</button>
           ) : (
             <></>
           )}
