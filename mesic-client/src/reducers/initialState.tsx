@@ -12,10 +12,12 @@ export const initialState = {
     user_id: "60abb5e1473efa33250b3e5f",
   },
   googleToken: "",
-  follow: [ 
-    // 60ab5e1473efa33250b3, 41241afwa5e1473efa3325, 23awefawef5e1473efa33250, 60abb5e1473efawefwa
+  follow: [
+    "60abb65f473efa33250b3e60",
+    "60abb703473efa33250b3e63",
+    "60abb709473efa33250b3e64",
   ],
   checkedFollow: [
     // 60ab5e1473efa33250b3, 41241afwa5e1473efa3325
-  ]
+  ],
 };
