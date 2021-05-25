@@ -9,6 +9,7 @@ import { switchMode } from ".././actions/index";
 import { RootState } from ".././reducers";
 import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
+import FollowList from "../components/UI/FollowList";
 
 declare global {
   interface Window {
@@ -314,6 +315,7 @@ function MainPage() {
         searchMode={searchMode}
         keywordSearchSelect={keywordSearchSelect}
       />
+      <FollowList />
       {openReadModal ? (
         <ReadModal readMarkerData={readMarkerData} />
       ) : openPostModal ? (
