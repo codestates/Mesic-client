@@ -156,14 +156,14 @@ function MainPage() {
     const markers = [];
     for (let i = 0; i < state.pins.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        state.pins[i].y,
-        state.pins[i].x
+        state.pins[i].location.longitude,
+        state.pins[i].location.latitude
       );
       const marker = new window.kakao.maps.Marker({
         map,
         position,
       });
-      marker.id = state.pins[i].id;
+      marker.id = state.pins[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         handleMyMarkerClick(marker.id);
@@ -204,7 +204,7 @@ function MainPage() {
   const handleMyMarkerClick = (id: number) => {
     setOpenReadModal(false);
     for (let i = 0; i < state.pins.length; i += 1) {
-      if (state.pins[i].id === id) {
+      if (state.pins[i]._id === id) {
         setReadMarkerData(state.pins[i]);
         break;
       }
