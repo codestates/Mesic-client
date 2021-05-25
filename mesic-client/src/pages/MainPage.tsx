@@ -1,8 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { setSourceMapRange } from "typescript";
-import DetailModal from "../components/DetailModal/DetailModal";
-import Map from "../components/UI/Map";
 import SearchLocation from "../components/UI/SearchLocation";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from ".././actions/index";
@@ -20,7 +17,7 @@ declare global {
 function MainPage() {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.modeReducer);
-  const { isLogin } = state.user;
+  const { isLogin, user_id } = state.user;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -59,12 +56,23 @@ function MainPage() {
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const detailModal = useRef<any>();
 
+  // 로그인 유저의 핀 데이터
+  const [myPinData, setMypinData] = useState<any[]>([]);
+
   // 지도 동적 렌더링
   useEffect(() => {
     window.kakao.maps.load(() => {
       loadKakaoMap();
     });
   }, []);
+
+  // 로그인 후 유저의 핀 가져오기
+  useEffect(() => {
+    if (isLogin) {
+      getMyPins();
+    }
+    return;
+  }, [map]);
 
   // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
@@ -98,6 +106,18 @@ function MainPage() {
       deleteSearchMarkers();
     }
   }, [openPostModal, openReadModal]);
+
+  // 로그인 유저 핀 가져오기
+  const getMyPins = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${user_id}`)
+      .then((res) => res.data)
+      .then((data) => {
+        console.log(data);
+        setMypinData(data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   // 키워드 검색 마커
   const searchMarkerControl = () => {
@@ -155,18 +175,19 @@ function MainPage() {
   const viewMyMarkers = () => {
     deleteMyMarkers();
     const markers = [];
-    for (let i = 0; i < state.pins.length; i += 1) {
+    for (let i = 0; i < myPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        state.pins[i].location.longitude,
-        state.pins[i].location.latitude
+        parseFloat(myPinData[i].location.longitude),
+        parseFloat(myPinData[i].location.latitude)
       );
       const marker = new window.kakao.maps.Marker({
         map,
         position,
       });
-      marker.id = state.pins[i]._id;
+      marker.id = myPinData[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
+        console.log(marker.id);
         handleMyMarkerClick(marker.id);
       });
       marker.setMap(map);
@@ -207,7 +228,7 @@ function MainPage() {
         viewMyMarkers();
       }
     }
-  }, [map]);
+  }, [myPinData, map]);
 
   // 마커 제거 함수들
   const deleteMyMarkers = () => {
@@ -239,9 +260,9 @@ function MainPage() {
         }
       }
     }
-    for (let i = 0; i < state.pins.length; i += 1) {
-      if (state.pins[i]._id === id) {
-        setReadMarkerData(state.pins[i]);
+    for (let i = 0; i < myPinData.length; i += 1) {
+      if (myPinData[i]._id === id) {
+        setReadMarkerData(myPinData[i]);
         break;
       }
     }
