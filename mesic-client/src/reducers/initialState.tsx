@@ -26,7 +26,7 @@ export const initialState = {
       photo:
         "https://www.tripsavvy.com/thmb/J8K1vZSr_wwvWxARsYXPMtP295Q=/2000x3008/filters:fill(auto,1)/Eiffel-Tower-4c710a32fca4406c81f49815312339c7.jpg",
       memo: "뻐터뻐터~~",
-      user_id : 1
+      user_id: 1,
     },
     {
       _id: 2,
@@ -42,7 +42,7 @@ export const initialState = {
       photo:
         "https://www.expatica.com/app/uploads/sites/10/2014/05/best-place-to-live-in-uk.jpg",
       memo: "페이크 러브~",
-      user_id : 1
+      user_id: 1,
     },
     {
       _id: 3,
@@ -57,7 +57,7 @@ export const initialState = {
       },
       photo: "https://i.insider.com/5acd01546898757c378b4e02?width=700",
       memo: "다이너마이트~~~",
-      user_id : 1
+      user_id: 1,
     },
   ],
   follow: [

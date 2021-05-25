@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
 
-type ReadPhotoProps = {};
-
 function ReadPhoto({ readImg, setReadImg }: any) {
+  const state = useSelector((state: RootState) => state.modeReducer);
+  const { isLogin } = state.user;
+
   const editedImageInput = useRef<any>();
-  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [editedImg, setEditedImg] = useState<any>(null);
@@ -63,14 +63,16 @@ function ReadPhoto({ readImg, setReadImg }: any) {
         </div>
       ) : (
         <div className="border">
-          <input
-            ref={editedImageInput}
-            type="file"
-            accept="image/*"
-            onChange={handleEditedImg}
-          />
-          {readImg !== null ? (
-            <button onClick={() => setOpenConfirm(true)}>삭제</button>
+          {isLogin ? (
+            <>
+              <input
+                ref={editedImageInput}
+                type="file"
+                accept="image/*"
+                onChange={handleEditedImg}
+              />
+              <button onClick={() => setOpenConfirm(true)}>삭제</button>
+            </>
           ) : (
             <></>
           )}
