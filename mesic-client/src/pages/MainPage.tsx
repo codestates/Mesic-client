@@ -192,6 +192,30 @@ function MainPage() {
       });
       marker.setMap(map);
       markers.push(marker);
+
+      const content = document.createElement("span");
+      content.textContent = "X";
+      content.className = "deleteBtn";
+      content.style.cssText = "color:red"; // CSS 지우세요
+      content.setAttribute("data-id", myPinData[i]._id);
+
+      // 핀 삭제
+      content.onclick = (e: any) => {
+        console.log(e.target.dataset.id);
+      };
+
+      const delPosition = new window.kakao.maps.LatLng(
+        parseFloat(myPinData[i].location.longitude),
+        parseFloat(myPinData[i].location.latitude)
+      );
+      const customOverlay = new window.kakao.maps.CustomOverlay({
+        map: map,
+        position: delPosition,
+        content: content,
+        yAnchor: 2.7,
+        xAnchor: 2.5,
+        clickable: true,
+      });
     }
     setMyMarkers(markers);
   };
