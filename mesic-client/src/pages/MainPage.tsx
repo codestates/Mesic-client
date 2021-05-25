@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { setSourceMapRange } from "typescript";
 import DetailModal from "../components/DetailModal/DetailModal";
 import Map from "../components/UI/Map";
@@ -53,6 +53,10 @@ function MainPage() {
 
   // 선택한 READ 마커의 데이터
   const [readMarkerData, setReadMarkerData] = useState<any>(null);
+
+  // 모달 숨기기
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
+  const detailModal = useRef<any>();
 
   // 지도 동적 렌더링
   useEffect(() => {
@@ -152,14 +156,14 @@ function MainPage() {
     const markers = [];
     for (let i = 0; i < state.pins.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        state.pins[i].y,
-        state.pins[i].x
+        state.pins[i].location.longitude,
+        state.pins[i].location.latitude
       );
       const marker = new window.kakao.maps.Marker({
         map,
         position,
       });
-      marker.id = state.pins[i].id;
+      marker.id = state.pins[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         handleMyMarkerClick(marker.id);
@@ -198,9 +202,9 @@ function MainPage() {
 
   // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: number) => {
-    closeDetailModal();
+    setOpenReadModal(false);
     for (let i = 0; i < state.pins.length; i += 1) {
-      if (state.pins[i].id === id) {
+      if (state.pins[i]._id === id) {
         setReadMarkerData(state.pins[i]);
         break;
       }
@@ -302,9 +306,42 @@ function MainPage() {
     setOpenReadModal(false);
   };
 
+  const showHideDetailModal = () => {
+    if (detailModal.current.style.display === "none") {
+      detailModal.current.style.display = "block";
+    } else {
+      detailModal.current.style.display = "none";
+    }
+  };
+
   return (
     <div className="App">
-      <button onClick={closeDetailModal}>HIDE</button>
+      {openPostModal || openReadModal ? (
+        <>
+          <button onClick={closeDetailModal}>Close</button>
+          {showDetailModal ? (
+            <button
+              onClick={() => {
+                showHideDetailModal();
+                setShowDetailModal(false);
+              }}
+            >
+              Show
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                showHideDetailModal();
+                setShowDetailModal(true);
+              }}
+            >
+              Hide
+            </button>
+          )}{" "}
+        </>
+      ) : (
+        <> </>
+      )}
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
         keywordSearchEvent={keywordSearchEvent}
@@ -312,13 +349,15 @@ function MainPage() {
         searchMode={searchMode}
         keywordSearchSelect={keywordSearchSelect}
       />
-      {openReadModal ? (
-        <ReadModal readMarkerData={readMarkerData} />
-      ) : openPostModal ? (
-        <PostModal />
-      ) : (
-        <></>
-      )}
+      <div ref={detailModal}>
+        {openReadModal ? (
+          <ReadModal readMarkerData={readMarkerData} />
+        ) : openPostModal ? (
+          <PostModal />
+        ) : (
+          <></>
+        )}
+      </div>
       <div id="kakao-map" />
     </div>
   );
