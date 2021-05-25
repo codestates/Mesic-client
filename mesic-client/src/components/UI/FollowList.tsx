@@ -4,6 +4,8 @@ import { RootState } from "../../reducers";
 import EachFollow from "./EachFollow";
 import SearchUser from "./SearchUser";
 
+//accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYWJiNWIxNDczZWZhMzMyNTBiM2U1ZSIsIm5hbWUiOiLtmJzsm5Ag7KeEIiwiaWF0IjoxNjIxOTQ4MjI5LCJleHAiOjE2MjE5NTU0Mjl9.buZef3czKTM9q7mjPLKowWcJNIrleuwAFIVU5AoNIbc"
+
 function FollowList() {
   const state = useSelector((state: RootState) => state.modeReducer).user;
 

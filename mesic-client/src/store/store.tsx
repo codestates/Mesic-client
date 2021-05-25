@@ -1,7 +1,7 @@
-import {compose, createStore, applyMiddleware} from "redux";
+import { compose, createStore, applyMiddleware } from "redux";
 import rootReducer from "../reducers/index";
 import thunk from "redux-thunk";
-import {persistStore} from "redux-persist";
+import { persistStore } from "redux-persist";
 
 declare global {
   interface Window {

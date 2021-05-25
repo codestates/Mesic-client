@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
 //import { read } from "fs";
-
 function DetailModal({ open, readMarkerData }: any) {
   const dispatch = useDispatch();
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
