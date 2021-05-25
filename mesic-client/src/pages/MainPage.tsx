@@ -6,6 +6,7 @@ import { switchMode } from ".././actions/index";
 import { RootState } from ".././reducers";
 import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
+import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 
 declare global {
@@ -431,6 +432,14 @@ function MainPage() {
         searchMode={searchMode}
         keywordSearchSelect={keywordSearchSelect}
       />
+      <FollowList />
+      {openReadModal ? (
+        <ReadModal readMarkerData={readMarkerData} />
+      ) : openPostModal ? (
+        <PostModal />
+      ) : (
+        <></>
+      )}
       <div ref={detailModal}>
         {openReadModal ? (
           <ReadModal readMarkerData={readMarkerData} />

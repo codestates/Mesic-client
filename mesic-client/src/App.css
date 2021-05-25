@@ -113,3 +113,15 @@
   width: 100%;
   height: auto;
 }
+.followlist {
+  background-color: #fefefe;
+  position: absolute;
+  z-index: 3; /* Sit on top */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 20%;
+  left: 15%;
+  top: 30%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
