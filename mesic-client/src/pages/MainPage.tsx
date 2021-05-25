@@ -9,6 +9,7 @@ import { switchMode } from ".././actions/index";
 import { RootState } from ".././reducers";
 import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
+import { Dummies } from "../components/Guest/Dummies";
 
 declare global {
   interface Window {
@@ -174,10 +175,37 @@ function MainPage() {
     setMyMarkers(markers);
   };
 
+  const viewDummies = () => {
+    deleteMyMarkers();
+    const markers = [];
+    for (let i = 0; i < Dummies.length; i += 1) {
+      const position = new window.kakao.maps.LatLng(
+        Dummies[i].location.longitude,
+        Dummies[i].location.latitude
+      );
+      const marker = new window.kakao.maps.Marker({
+        map,
+        position,
+      });
+      marker.id = Dummies[i]._id;
+      window.kakao.maps.event.addListener(marker, "click", () => {
+        // 마커 클릭 시
+        handleMyMarkerClick(marker.id);
+      });
+      marker.setMap(map);
+      markers.push(marker);
+    }
+    setMyMarkers(markers);
+  };
+
   // 맵이 렌더링 되면, 유저의 READ 마커가 생성
   useEffect(() => {
     if (Object.keys(map).length > 0) {
-      viewMyMarkers();
+      if (!isLogin) {
+        viewDummies();
+      } else {
+        viewMyMarkers();
+      }
     }
   }, [map]);
 
@@ -203,6 +231,14 @@ function MainPage() {
   // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: number) => {
     setOpenReadModal(false);
+    if (!isLogin) {
+      for (let i = 0; i < Dummies.length; i += 1) {
+        if (Dummies[i]._id === id) {
+          setReadMarkerData(Dummies[i]);
+          break;
+        }
+      }
+    }
     for (let i = 0; i < state.pins.length; i += 1) {
       if (state.pins[i]._id === id) {
         setReadMarkerData(state.pins[i]);
@@ -229,6 +265,7 @@ function MainPage() {
       setOpenReadModal(false);
       setReadMarkerData(null);
       const clickPosition = mouseEvent.latLng;
+      console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
         alert("로그인 후 나만의 로그를 만들어보세요!");

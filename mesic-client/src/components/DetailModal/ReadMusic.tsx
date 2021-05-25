@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
 import EditMusic from "../DetailModal/EditMusic";
@@ -10,6 +10,9 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [updateMusic, setUpdateMusic] = useState<any>(null);
+
+  const state = useSelector((state: RootState) => state.modeReducer);
+  const { isLogin } = state.user;
 
   const updateReadMusic = () => {
     //서버 요청 updateMusic 전달
@@ -73,8 +76,14 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
             </div>
           ) : (
             <div>
-              <button onClick={() => setOpenEditMusic(true)}>수정</button>
-              <button onClick={() => setOpenConfirm(true)}>삭제</button>
+              {isLogin ? (
+                <>
+                  <button onClick={() => setOpenEditMusic(true)}>수정</button>
+                  <button onClick={() => setOpenConfirm(true)}>삭제</button>
+                </>
+              ) : (
+                <></>
+              )}
               <div>
                 <iframe
                   src={
