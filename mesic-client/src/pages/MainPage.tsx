@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { setSourceMapRange } from "typescript";
 import DetailModal from "../components/DetailModal/DetailModal";
 import Map from "../components/UI/Map";
@@ -10,6 +10,7 @@ import { RootState } from ".././reducers";
 import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
+import { Dummies } from "../components/Guest/Dummies";
 
 declare global {
   interface Window {
@@ -54,6 +55,10 @@ function MainPage() {
 
   // 선택한 READ 마커의 데이터
   const [readMarkerData, setReadMarkerData] = useState<any>(null);
+
+  // 모달 숨기기
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
+  const detailModal = useRef<any>();
 
   // 지도 동적 렌더링
   useEffect(() => {
@@ -153,14 +158,37 @@ function MainPage() {
     const markers = [];
     for (let i = 0; i < state.pins.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        state.pins[i].y,
-        state.pins[i].x
+        state.pins[i].location.longitude,
+        state.pins[i].location.latitude
       );
       const marker = new window.kakao.maps.Marker({
         map,
         position,
       });
-      marker.id = state.pins[i].id;
+      marker.id = state.pins[i]._id;
+      window.kakao.maps.event.addListener(marker, "click", () => {
+        // 마커 클릭 시
+        handleMyMarkerClick(marker.id);
+      });
+      marker.setMap(map);
+      markers.push(marker);
+    }
+    setMyMarkers(markers);
+  };
+
+  const viewDummies = () => {
+    deleteMyMarkers();
+    const markers = [];
+    for (let i = 0; i < Dummies.length; i += 1) {
+      const position = new window.kakao.maps.LatLng(
+        Dummies[i].location.longitude,
+        Dummies[i].location.latitude
+      );
+      const marker = new window.kakao.maps.Marker({
+        map,
+        position,
+      });
+      marker.id = Dummies[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         handleMyMarkerClick(marker.id);
@@ -174,7 +202,11 @@ function MainPage() {
   // 맵이 렌더링 되면, 유저의 READ 마커가 생성
   useEffect(() => {
     if (Object.keys(map).length > 0) {
-      viewMyMarkers();
+      if (!isLogin) {
+        viewDummies();
+      } else {
+        viewMyMarkers();
+      }
     }
   }, [map]);
 
@@ -199,9 +231,17 @@ function MainPage() {
 
   // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: number) => {
-    closeDetailModal();
+    setOpenReadModal(false);
+    if (!isLogin) {
+      for (let i = 0; i < Dummies.length; i += 1) {
+        if (Dummies[i]._id === id) {
+          setReadMarkerData(Dummies[i]);
+          break;
+        }
+      }
+    }
     for (let i = 0; i < state.pins.length; i += 1) {
-      if (state.pins[i].id === id) {
+      if (state.pins[i]._id === id) {
         setReadMarkerData(state.pins[i]);
         break;
       }
@@ -223,11 +263,10 @@ function MainPage() {
 
     // 지도 클릭 핸들러
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
-      // 이전에 열려있던 모달을 닫고 READ 마커 데이터를 초기화
-      closeDetailModal();
+      setOpenReadModal(false);
       setReadMarkerData(null);
-
       const clickPosition = mouseEvent.latLng;
+      console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
         alert("로그인 후 나만의 로그를 만들어보세요!");
@@ -305,9 +344,42 @@ function MainPage() {
     setOpenReadModal(false);
   };
 
+  const showHideDetailModal = () => {
+    if (detailModal.current.style.display === "none") {
+      detailModal.current.style.display = "block";
+    } else {
+      detailModal.current.style.display = "none";
+    }
+  };
+
   return (
     <div className="App">
-      <button onClick={closeDetailModal}>HIDE</button>
+      {openPostModal || openReadModal ? (
+        <>
+          <button onClick={closeDetailModal}>Close</button>
+          {showDetailModal ? (
+            <button
+              onClick={() => {
+                showHideDetailModal();
+                setShowDetailModal(false);
+              }}
+            >
+              Show
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                showHideDetailModal();
+                setShowDetailModal(true);
+              }}
+            >
+              Hide
+            </button>
+          )}{" "}
+        </>
+      ) : (
+        <> </>
+      )}
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
         keywordSearchEvent={keywordSearchEvent}
@@ -323,6 +395,15 @@ function MainPage() {
       ) : (
         <></>
       )}
+      <div ref={detailModal}>
+        {openReadModal ? (
+          <ReadModal readMarkerData={readMarkerData} />
+        ) : openPostModal ? (
+          <PostModal />
+        ) : (
+          <></>
+        )}
+      </div>
       <div id="kakao-map" />
     </div>
   );

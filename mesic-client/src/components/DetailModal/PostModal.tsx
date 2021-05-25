@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PostMusic from "./PostMusic";
 import PostPhoto from "./PostPhoto";
 import PostMemo from "./PostMemo";
@@ -6,7 +6,7 @@ import PostMemo from "./PostMemo";
 
 function PostModal() {
   const [postMusic, setPostMusic] = useState<any>(null);
-  const [postImg, setPostImg] = useState<any>(null);
+  const [postImg, setPostImg] = useState<any>("");
   const [postMemo, setPostMemo] = useState<string>("");
 
   //   const postPinData = () => {
