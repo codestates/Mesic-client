@@ -390,7 +390,7 @@ function MainPage() {
         {openReadModal ? (
           <ReadModal readMarkerData={readMarkerData} />
         ) : openPostModal ? (
-          <PostModal />
+          <PostModal postLatLng={postLatLng} />
         ) : (
           <></>
         )}

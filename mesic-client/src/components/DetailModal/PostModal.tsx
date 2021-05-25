@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 import PostMusic from "./PostMusic";
 import PostPhoto from "./PostPhoto";
 import PostMemo from "./PostMemo";
+import axios from "axios";
 //import { read } from "fs";
 
-function PostModal() {
+function PostModal({ postLatLng }: any) {
   const [postMusic, setPostMusic] = useState<any>(null);
   const [postImg, setPostImg] = useState<any>("");
   const [postMemo, setPostMemo] = useState<string>("");
 
-  //   const postPinData = () => {
-  //     //서버요청 postImg 전달
-  //     setReadImg(image);
-  //     setPostImg(null);
-  //     setReadMemo(memo2);
-  //     setPostMemo("");
-  //     dispatch(switchMode("READ"));
-  //   };
+  const state = useSelector((state: RootState) => state.modeReducer);
+  const { user_id } = state.user;
+
+  const postPinData = async () => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/pins/users/%${user_id}`, {
+        user_id,
+        location: {
+          latitude: postLatLng[1],
+          logitude: postLatLng[0],
+        },
+        music: postMusic,
+        photo: postImg,
+        memo: postMemo,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="modal show1">
@@ -24,11 +37,7 @@ function PostModal() {
       <PostPhoto postImg={postImg} setPostImg={setPostImg} />
       <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
       <div>
-        <button
-        //   onClick={postPinData}
-        >
-          PIN IT
-        </button>
+        <button onClick={postPinData}>PIN IT</button>
       </div>
     </div>
   );
