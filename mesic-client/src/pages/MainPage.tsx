@@ -17,7 +17,7 @@ declare global {
 
 function MainPage() {
   const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state.modeReducer);
+  const state = useSelector((state: RootState) => state.userReducer);
   const { isLogin, user_id, mode, token } = state.user;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
@@ -76,7 +76,7 @@ function MainPage() {
       getMyPins();
     }
     return;
-  }, [map, mode]);
+  }, [map, mode, isLogin]);
 
   // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
@@ -119,7 +119,16 @@ function MainPage() {
     return;
   }, [mode]);
 
-  // READ 마커 생성 시 해당 데이터 보여주기
+  // 맵이 렌더링 되면, 유저의 READ 마커가 생성
+  useEffect(() => {
+    if (Object.keys(map).length > 0) {
+      if (!isLogin) {
+        viewDummies();
+      } else {
+        viewMyMarkers();
+      }
+    }
+  }, [myPinData, map]);
 
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
@@ -284,17 +293,6 @@ function MainPage() {
     setMyMarkers(markers);
   };
 
-  // 맵이 렌더링 되면, 유저의 READ 마커가 생성
-  useEffect(() => {
-    if (Object.keys(map).length > 0) {
-      if (!isLogin) {
-        viewDummies();
-      } else {
-        viewMyMarkers();
-      }
-    }
-  }, [myPinData, map]);
-
   // 마커 제거 함수들
   const deleteMyMarkers = () => {
     for (let i = 0; i < myMarkers.length; i++) {
@@ -327,7 +325,6 @@ function MainPage() {
           break;
         }
       }
-      return;
     }
     for (let i = 0; i < myPinData.length; i += 1) {
       if (myPinData[i]._id === id) {
