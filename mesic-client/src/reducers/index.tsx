@@ -6,6 +6,7 @@ import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
   modeReducer,
+  userReducer,
 });
 
 export default rootReducer;

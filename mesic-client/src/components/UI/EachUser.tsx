@@ -3,13 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
 function EachUser({ searchedEachUser, alluser }: any) {
-  const state = useSelector((state: RootState) => state.modeReducer);
-  const { user_id } = state.user;
-  const { follow } = state;
+  const state = useSelector((state: RootState) => state.userReducer);
+  const { user_id, follow, token } = state.user;
 
-  let accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYWJiNWUxNDczZWZhMzMyNTBiM2U1ZiIsIm5hbWUiOiLqtIDsmrAg7KCVIiwiaWF0IjoxNjIxOTYyNDk2LCJleHAiOjE2MjE5Njk2OTZ9.DXPpu0hJeZfExwESvqV_lZeXeyjyll-wa_t_SHiwmsA";
-  const searchedUserId: string = searchedEachUser._id;
+  const searchedUserId: any = searchedEachUser._id;
 
   const patchFollow = () => {
     //const userId: string = "60abb5b1473efa33250b3e5e";
@@ -21,25 +18,25 @@ function EachUser({ searchedEachUser, alluser }: any) {
         },
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       )
       .then((res) => {
-        console.log(res.data);
+        console.log("res.data ===", res.data);
       });
   };
 
   return (
     <div className="eachUser">
       <div>
-        {follow.includes(searchedEachUser._id) ? (
+        {/* {follow.includes(searchedUserId) ? (
           <button onClick={patchFollow}>팔로우 취소</button>
         ) : (
-          <>
-            <button onClick={patchFollow}>팔로우</button>
-          </>
-        )}
+          <> */}
+        <button onClick={patchFollow}>팔로우</button>
+        {/* </>
+        )} */}
         <span>{searchedEachUser.nickname}</span>
       </div>
     </div>

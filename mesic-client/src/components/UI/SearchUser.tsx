@@ -8,7 +8,7 @@ function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
   const inputSearchUser = useRef<any>();
   const [searchUserInput, setSearchUserInput] = useState<string>("");
   const [alluser, setAlluser] = useState<any>([]);
-  const [searchedUser, setSearchedUser] = useState<any>([]);
+  const [searchedUser, setSearchedUser] = useState<string[]>([]);
 
   useEffect(() => {
     if (openSearchUser) {
@@ -18,7 +18,7 @@ function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
         )
         .then((res) => {
           setAlluser(res.data);
-          console.log("alluser ===", alluser);
+          //console.log("alluser ===", alluser);
         });
     }
   }, [openSearchUser]);
@@ -27,7 +27,7 @@ function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
     const filteredUser = alluser.filter((user: any) => {
       return user.nickname === searchUserInput;
     });
-    console.log("filteredUser === ", filteredUser);
+    //console.log("filteredUser === ", filteredUser);
     setSearchedUser(filteredUser);
   };
 
