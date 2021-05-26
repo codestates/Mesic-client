@@ -1,54 +1,64 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import EachUser from "./EachUser";
 
-function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
+function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
   const inputSearchUser = useRef<any>();
   const [searchUserInput, setSearchUserInput] = useState<string>("");
-  const [alluser, setAlluser] = useState<any>([]);
-  const [searchedUser, setSearchedUser] = useState<string[]>([]);
+  const [searchedUsers, setsearchedUsers] = useState<string[]>([]);
+  const [nonFollowList, setNonFollowList] = useState<any[]>([]);
 
+  // 팔로우 하지 않은 유저만 필터링
   useEffect(() => {
     if (openSearchUser) {
       axios
-        .get(
-          "http://ec2-52-79-241-131.ap-northeast-2.compute.amazonaws.com/users"
-        )
-        .then((res) => {
-          setAlluser(res.data);
-          //console.log("alluser ===", alluser);
-        });
+        .get(`${process.env.REACT_APP_SERVER_URL}/users`)
+        .then((res) => res.data)
+        .then((allUser) => {
+          return allUser.filter((user: any) => {
+            for (let follow of followList) {
+              return follow._id !== user._id;
+            }
+          });
+        })
+        .then((res: any) => setNonFollowList(res));
     }
   }, [openSearchUser]);
 
   const handleSearchUser = () => {
-    const filteredUser = alluser.filter((user: any) => {
-      return user.nickname === searchUserInput;
+    console.log("works");
+    const filteredUser = nonFollowList.filter((nonFollow: any) => {
+      if (nonFollow.email) {
+        return nonFollow.email.toLowerCase().includes(searchUserInput);
+      }
     });
-    //console.log("filteredUser === ", filteredUser);
-    setSearchedUser(filteredUser);
+    setsearchedUsers(filteredUser);
   };
 
-  const handleSearchUserInput = (e: any) => {
-    setSearchUserInput(e.target.value);
-  };
+  const handleSearchUserInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchUserInput(e.target?.value);
+    },
+    [searchUserInput]
+  );
+
   return (
     <div className={`background ${openSearchUser ? "show" : ""}`}>
       <div>
         <input
           type="text"
           onChange={handleSearchUserInput}
-          placeholder="닉네임을 검색해보세요"
+          placeholder="이메일을 검색해주세요"
           ref={inputSearchUser}
         ></input>
         <button onClick={handleSearchUser}>검색</button>
       </div>
-      {searchedUser.length === 0 ? (
+      {searchedUsers.length === 0 ? (
         <div>새로운 유저를 찾아보세요</div>
       ) : (
-        <EachUser searchedEachUser={searchedUser[0]} alluser={alluser} />
+        searchedUsers.map((each) => <EachUser searchedUsers={each} />)
       )}
     </div>
   );

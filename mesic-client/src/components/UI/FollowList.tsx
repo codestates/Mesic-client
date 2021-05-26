@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import EachFollow from "./EachFollow";
@@ -11,18 +11,35 @@ function FollowList() {
 
   const inputFollow = useRef<any>();
   const [followInput, setFollowInput] = useState<string>("");
-  const [followList, setFollowList] = useState<any>([]);
-  const [followIdList, setFollowIdList] = useState<any>([]);
-  const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
-  const tempFollowList: any = [];
+  const [followList, setFollowList] = useState<string[]>([]);
 
-  useEffect(() => {}, [follow]);
+  const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
+  const [tempFollowList, setTempFollowList] = useState<string[]>([]);
+
+  // 유저 팔로워의 정보를 가져오기
+  useEffect(() => {
+    if (follow.length > 0) {
+      let tempArr: string[] = [];
+      for (let eachId of follow) {
+        axios
+          .get(`${process.env.REACT_APP_SERVER_URL}/users/${eachId}`)
+          .then((res) => {
+            tempArr.push(res.data);
+          });
+      }
+      setFollowList(tempArr);
+    }
+  }, [follow]);
+
 
   const handleSearchFollow = () => {};
 
-  const handleFollowInput = (e: any) => {
-    setFollowInput(e.target.string);
-  };
+  const handleFollowInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFollowInput(e.target?.value);
+    },
+    [followInput]
+  );
 
   return (
     <>
@@ -48,6 +65,7 @@ function FollowList() {
         <SearchUser
           openSearchUser={openSearchUser}
           setOpenSearchUser={setOpenSearchUser}
+          followList={followList}
         />
       </div>
     </>
