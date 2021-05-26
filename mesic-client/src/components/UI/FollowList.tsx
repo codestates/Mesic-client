@@ -7,11 +7,12 @@ import SearchUser from "./SearchUser";
 
 function FollowList() {
   const state = useSelector((state: RootState) => state.userReducer);
-  const { follow, user_id, token } = state.user;
+  const { follow, user_id, token, isLogin } = state.user;
 
   const inputFollow = useRef<any>();
   const [followInput, setFollowInput] = useState<string>("");
   const [followList, setFollowList] = useState<string[]>([]);
+
   const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
   const [tempFollowList, setTempFollowList] = useState<string[]>([]);
 
@@ -29,6 +30,7 @@ function FollowList() {
       setFollowList(tempArr);
     }
   }, [follow]);
+
 
   const handleSearchFollow = () => {};
 
@@ -52,13 +54,10 @@ function FollowList() {
           <button onClick={handleSearchFollow}>검색</button>
         </div>
         <div className="follow">
-          {followList.length === 0 ? (
-            <div>다른 유저를 찾아보고 팔로우하세요</div>
-          ) : (
-            followList.map((follow: any, index: any) => {
-              return <EachFollow eachFollow={follow} key={index} />;
-            })
-          )}
+          <div>다른 유저를 찾아 팔로우하세요</div>
+          {followList.map((each: any) => {
+            <EachFollow eachfollow={each} key={each.nickname} />;
+          })}
         </div>
         <button onClick={() => setOpenSearchUser(true)}>
           새로운 유저 찾아보기

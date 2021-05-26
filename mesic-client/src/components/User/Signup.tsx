@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useCallback, useState } from "react";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 type SignupProps = {
   openSignup: boolean;
@@ -10,6 +12,57 @@ type SignupProps = {
 
 function Signup(props: SignupProps) {
   const { openSignup, closeSignup } = props;
+
+  const SIGNUP_URL = "http://localhost:4000/users/signup";
+ 
+  const validateEmail = (email:string) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+  const validatePassword = (pwInput: string, pwCheckInput: string) => {  
+    // 확인 비밀번호와 같은지 비교
+    if(pwInput !== pwCheckInput){
+      return false;
+    }
+    const minNumberofChars = 6;
+    const maxNumberofChars = 16;
+    // 정규표현식
+    const regularExpression  = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/; 
+
+    // 글자수가 6자 이상 16자 이하인지 확인
+    if(pwInput.length < minNumberofChars || pwInput.length > maxNumberofChars){
+      return false;
+    }
+
+    // 정규표현식에 들어가는지 확인
+    if(!regularExpression.test(pwInput)) {
+      alert("password should contain atleast one number and one special character");
+      return false;
+    }
+    return true;
+  }
+
+  const responseSignup = () => {
+
+    console.log(pwInput)
+    const email = validateEmail(idInput)? idInput: console.error("invalid")
+    const password = validatePassword(pwInput, pwCheckInput)? pwInput: console.error("invalid");
+    const signupData = {
+      "profile": "jennie.jpg", // 회원가입할때 사진넣는 거 추가해야함.
+      "email": email,
+      "password": password,
+      "name": nameInput,
+      "nickname": nicknameInput,
+      "follow":[],
+      "refreshToken":""
+
+    }
+    console.log(signupData)
+    axios.post(SIGNUP_URL, signupData)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+  }
 
   const clickCloseSignup = () => {
     closeSignup();
@@ -98,7 +151,7 @@ function Signup(props: SignupProps) {
             ></input>
           </div>
           <div>
-            <button>Signup</button>
+            <button onClick={responseSignup}>Signup</button>
           </div>
         </div>
       </div>

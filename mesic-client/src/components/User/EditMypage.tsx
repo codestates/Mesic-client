@@ -1,3 +1,4 @@
+import axios from "axios";
 import { profile } from "console";
 import React, { useState, useCallback, useRef } from "react";
 
@@ -24,9 +25,24 @@ function EditMypage(props: EditMypageProps) {
     setOpenEditMypage,
   } = props;
 
+  const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYWExMTMwYzgzMDBlYzIxZjRkYzExMSIsIm5hbWUiOiJnbGtqZ2xraiIsImlhdCI6MTYyMjAxNDI5OSwiZXhwIjoxNjIyMDIxNDk5fQ.wO6vTAKxgCKUuamAM-rppuDutmUAvhXU1yutdbfMQl8";
+  const userId = "60aa1130c8300ec21f4dc111";
+  const UPDATE_USER_URL = `http://localhost:4000/users/${userId}`;
+
   const editProfileInput = useRef<any>();
-  const [editNicknameInput, setEditNicknameInput] = useState<string>(nickname);
-  const [editProfileImg, setEditProfileImg] = useState<any>(null);
+  const [ editNicknameInput, setEditNicknameInput ] = useState<string>(nickname);
+  const [ editProfileImg, setEditProfileImg ] = useState<any>(null);
+
+  const sendModifiedData = () => {
+
+    const data = { nickname : editNicknameInput, profile: editProfileImg}
+    console.log(data)
+    axios.patch(UPDATE_USER_URL, data, {
+      headers: { 'Authorization': `Bearer ${accessToken}` },
+    })
+    .then((res)=> console.log(res))
+    .catch((err)=> console.log(err))
+  }
 
   const handleEditNicknameInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,11 +50,13 @@ function EditMypage(props: EditMypageProps) {
     },
     [editNicknameInput]
   );
+
   const handleEditProfile = (e: any) => {
     const blobData = [];
     blobData.push(e.target.files[0]);
     setEditProfileImg(window.URL.createObjectURL(new Blob(blobData)));
   };
+
   const handleReturnMypage = () => {
     setOpenEditMypage(false);
     setOpenMypage(true);
@@ -88,7 +106,7 @@ function EditMypage(props: EditMypageProps) {
             ></input>
           </div>
           <div>
-            <button>저장</button>
+            <button onClick={sendModifiedData}>저장</button>
             <button onClick={handleReturnMypage}>취소</button>
           </div>
         </div>
