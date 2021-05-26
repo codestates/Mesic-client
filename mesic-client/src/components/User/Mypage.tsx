@@ -16,7 +16,7 @@ type MypageProps = {
 };
 
 function Mypage(props: MypageProps) {
-  const state = useSelector((state: RootState) => state.modeReducer);
+  const state = useSelector((state: RootState) => state.userReducer);
 
   const {
     openMypage,
