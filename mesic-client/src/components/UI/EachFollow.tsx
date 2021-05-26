@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
 function EachFollow({ eachFollow }: any) {
-  const { nickname } = eachFollow;
+  const state = useSelector((state: RootState) => state);
+  const { user_id, token } = state.userReducer.user;
 
   const deleteFollow = () => {
     axios

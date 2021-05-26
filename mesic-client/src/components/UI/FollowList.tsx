@@ -7,14 +7,12 @@ import SearchUser from "./SearchUser";
 
 function FollowList() {
   const state = useSelector((state: RootState) => state.userReducer);
-  const { follow, user_id, token, isLogin } = state.user;
+  const { follow } = state.user;
 
   const inputFollow = useRef<any>();
   const [followInput, setFollowInput] = useState<string>("");
   const [followList, setFollowList] = useState<string[]>([]);
-
   const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
-  const [tempFollowList, setTempFollowList] = useState<string[]>([]);
 
   // 유저 팔로워의 정보를 가져오기
   useEffect(() => {
@@ -24,13 +22,13 @@ function FollowList() {
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/users/${eachId}`)
           .then((res) => {
+            console.log(res);
             tempArr.push(res.data);
           });
       }
       setFollowList(tempArr);
     }
   }, [follow]);
-
 
   const handleSearchFollow = () => {};
 
@@ -55,8 +53,8 @@ function FollowList() {
         </div>
         <div className="follow">
           <div>다른 유저를 찾아 팔로우하세요</div>
-          {followList.map((each: any) => {
-            <EachFollow eachfollow={each} key={each.nickname} />;
+          {followList.map((follow: any, index: any) => {
+            return <EachFollow eachFollow={follow} key={index} />;
           })}
         </div>
         <button onClick={() => setOpenSearchUser(true)}>
