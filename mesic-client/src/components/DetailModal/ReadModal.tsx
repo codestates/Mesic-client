@@ -5,6 +5,7 @@ import ReadMemo from "./ReadMemo";
 //import { read } from "fs";
 
 function ReadModal({ readMarkerData }: any) {
+  console.log(readMarkerData);
   const { video_Id, title, thumbnail } = readMarkerData.music;
   const { photo, memo } = readMarkerData;
   const [readMusic, setReadMusic] = useState<any>({

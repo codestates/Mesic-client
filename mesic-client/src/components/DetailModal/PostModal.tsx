@@ -21,7 +21,7 @@ function PostModal({ postLatLng }: any) {
   const [postImg, setPostImg] = useState<any>("");
   const [postMemo, setPostMemo] = useState<string>("");
 
-  const state = useSelector((state: RootState) => state.modeReducer);
+  const state = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
   const { user_id, token } = state.user;
 

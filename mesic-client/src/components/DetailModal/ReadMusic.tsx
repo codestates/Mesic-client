@@ -33,6 +33,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
     //setUpdateMusic(null)
     //setUpdateMode(false)
   };
+  console.log(readMusic.video_Id)
 
   return (
     <>

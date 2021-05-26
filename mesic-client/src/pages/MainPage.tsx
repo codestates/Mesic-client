@@ -17,8 +17,9 @@ declare global {
 
 function MainPage() {
   const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state.userReducer);
-  const { isLogin, user_id, mode, token } = state.user;
+  const state = useSelector((state: RootState) => state);
+  const { isLogin, user_id, token } = state.userReducer.user;
+  const { mode } = state.modeReducer.user;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -68,7 +69,7 @@ function MainPage() {
     window.kakao.maps.load(() => {
       loadKakaoMap();
     });
-  }, []);
+  }, [isLogin]);
 
   // 로그인 후 유저의 핀 가져오기
   useEffect(() => {

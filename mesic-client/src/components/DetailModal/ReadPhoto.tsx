@@ -4,7 +4,7 @@ import { RootState } from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
 
 function ReadPhoto({ readImg, setReadImg }: any) {
-  const state = useSelector((state: RootState) => state.modeReducer);
+  const state = useSelector((state: RootState) => state.userReducer);
   const { isLogin } = state.user;
 
   const editedImageInput = useRef<any>();
