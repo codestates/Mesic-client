@@ -38,8 +38,8 @@ function Login(props: LoginProps) {
         //console.log(res)
         const { email, follow, name, nickname, _id } = res.data;
         dispatch(editUserinfo(_id, email, name, nickname, follow));
+        closeLogin();
       })
-
       .catch((err) => console.log(err));
   };
 
