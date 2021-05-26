@@ -3,13 +3,12 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import EachUser from "./EachUser";
-import EachFollow from "./EachFollow";
 
 function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
   const inputSearchUser = useRef<any>();
   const [searchUserInput, setSearchUserInput] = useState<string>("");
   const [alluser, setAlluser] = useState<any>([]);
-  const [searchedUser, setSearchedUser] = useState<any>([]);
+  const [searchedUser, setSearchedUser] = useState<string[]>([]);
 
   useEffect(() => {
     if (openSearchUser) {
@@ -18,9 +17,8 @@ function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
           "http://ec2-52-79-241-131.ap-northeast-2.compute.amazonaws.com/users"
         )
         .then((res) => {
-          console.log("res.data === ", res.data);
           setAlluser(res.data);
-          console.log("alluser ===", alluser); //[{user1}, {user2} ...]
+          //console.log("alluser ===", alluser);
         });
     }
   }, [openSearchUser]);
@@ -29,7 +27,7 @@ function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
     const filteredUser = alluser.filter((user: any) => {
       return user.nickname === searchUserInput;
     });
-    console.log("filteredUser === ", filteredUser);
+    //console.log("filteredUser === ", filteredUser);
     setSearchedUser(filteredUser);
   };
 
@@ -50,7 +48,7 @@ function SearchUser({ openSearchUser, setOpenSearchUser }: any) {
       {searchedUser.length === 0 ? (
         <div>새로운 유저를 찾아보세요</div>
       ) : (
-        <EachUser searchedEachUser={searchedUser[0]} />
+        <EachUser searchedEachUser={searchedUser[0]} alluser={alluser} />
       )}
     </div>
   );

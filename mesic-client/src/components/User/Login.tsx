@@ -1,12 +1,67 @@
+import axios from "axios";
 import React, { useCallback, useState } from "react";
+import { GoogleLogin } from "react-google-login";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../reducers";
+import { editUserinfo, getAccessToken } from "../../actions/index";
 
 type LoginProps = {
+  //interface
   openLogin: boolean;
   closeLogin: () => void;
 };
 
 function Login(props: LoginProps) {
   const { openLogin, closeLogin } = props;
+
+  const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state.userReducer);
+
+  const GOOGLE_LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/google/login`;
+  const LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/login`;
+
+  const responseLogin = () => {
+    const loginData = { email: idInput, password: pwInput };
+    axios
+      .post(LOGIN_URL, loginData)
+      .then((res) => {
+        console.log("login === ", res);
+        dispatch(getAccessToken(res.data.accessToken));
+        getUserInfo(res.data.id);
+      })
+      .catch((err) => console.log(err));
+  };
+  const getUserInfo = (user_id: string) => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/${user_id}`)
+      .then((res) => {
+        //console.log(res)
+        const { email, follow, name, nickname, _id } = res.data;
+        dispatch(editUserinfo(_id, email, name, nickname, follow));
+      })
+
+      .catch((err) => console.log(err));
+  };
+
+  const responseGoogle = (response: any) => {
+    const { accessToken, profileObj } = response;
+    const userinfo = {
+      accessToken,
+      email: profileObj.email,
+      profile: profileObj.imageUrl,
+      name: profileObj.name,
+    };
+    sendData(userinfo); //accessToken 이거 받아서 사용해주세요
+  };
+
+  const sendData = (data: Object) => {
+    axios
+      .post(GOOGLE_LOGIN_URL, data)
+      .then((res) => {
+        console.log("googleLogin === ", res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const clickCloseLogin = () => {
     closeLogin();
@@ -51,9 +106,16 @@ function Login(props: LoginProps) {
             ></input>
           </div>
           <div>
-            <button>Login</button>
+            <button onClick={responseLogin}>Login</button>
           </div>
         </div>
+        <GoogleLogin
+          clientId="350695188416-sc4m6nro89c4sii03qm9qaeltqivnie3.apps.googleusercontent.com"
+          buttonText="Google Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
       </div>
     </div>
   );
