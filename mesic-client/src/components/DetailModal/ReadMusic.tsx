@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
@@ -12,10 +13,22 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const [updateMusic, setUpdateMusic] = useState<any>(null);
 
   const state = useSelector((state: RootState) => state.userReducer);
-  const { isLogin } = state.user;
+  const { isLogin, token } = state.user;
 
   const updateReadMusic = () => {
-    //서버 요청 updateMusic 전달
+    axios
+      .patch(
+        `${process.env.REACT_APP_SERVER_URL}/music/`,
+        {
+          music: updateMusic,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => console.log(res));
     //setReadMusic()
     //setUpdateMusic(null)
     //setUpdateMode(false)

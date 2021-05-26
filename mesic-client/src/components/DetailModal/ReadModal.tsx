@@ -16,6 +16,7 @@ function ReadModal({ readMarkerData }: any) {
   const [readImg, setReadImg] = useState<any>(photo);
   const [readMemo, setReadMemo] = useState<string>(memo);
 
+  console.log(readMarkerData);
   return (
     <div className="modal show1">
       <ReadMusic readMusic={readMusic} setReadMusic={setReadMusic} />
