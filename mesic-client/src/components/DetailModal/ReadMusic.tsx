@@ -11,7 +11,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [updateMusic, setUpdateMusic] = useState<any>(null);
 
-  const state = useSelector((state: RootState) => state.modeReducer);
+  const state = useSelector((state: RootState) => state.userReducer);
   const { isLogin } = state.user;
 
   const updateReadMusic = () => {
@@ -20,6 +20,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
     //setUpdateMusic(null)
     //setUpdateMode(false)
   };
+  console.log(readMusic.video_Id)
 
   return (
     <>
