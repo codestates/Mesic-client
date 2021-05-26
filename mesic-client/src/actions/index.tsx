@@ -9,7 +9,7 @@ export type Action =
   | ReturnType<typeof editUserinfo>
   | ReturnType<typeof getAccessToken>;
 
-export const switchMode = (data: "READ" | "POST" | "NONE"): any => {
+export const switchMode = (data: "READ" | "POST" | "CREATED" | "NONE"): any => {
   return {
     type: SWITCH_MODE,
     payload: {

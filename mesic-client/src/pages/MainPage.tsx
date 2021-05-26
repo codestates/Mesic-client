@@ -18,7 +18,7 @@ declare global {
 function MainPage() {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.modeReducer);
-  const { isLogin, user_id } = state.user;
+  const { isLogin, user_id, mode, token } = state.user;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -60,6 +60,9 @@ function MainPage() {
   // 로그인 유저의 핀 데이터
   const [myPinData, setMypinData] = useState<any[]>([]);
 
+  // 삭제 버튼 제거
+  const [delPinBtn, setDelPinBtn] = useState<any>(null);
+
   // 지도 동적 렌더링
   useEffect(() => {
     window.kakao.maps.load(() => {
@@ -73,7 +76,7 @@ function MainPage() {
       getMyPins();
     }
     return;
-  }, [map]);
+  }, [map, mode]);
 
   // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
@@ -107,6 +110,16 @@ function MainPage() {
       deleteSearchMarkers();
     }
   }, [openPostModal, openReadModal]);
+
+  // READ 마커 생성 시 POST 마커 삭제
+  useEffect(() => {
+    if (mode !== "POST") {
+      deletePostMarkers();
+    }
+    return;
+  }, [mode]);
+
+  // READ 마커 생성 시 해당 데이터 보여주기
 
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
@@ -172,9 +185,15 @@ function MainPage() {
   };
 
   // (READ MODE) 유저의 마커 생성
+
   const [myMarkers, setMyMarkers] = useState<any[]>([]);
   const viewMyMarkers = () => {
     deleteMyMarkers();
+    // CREATED 모드일 때 방금 만들어진 데이터를 띄움
+    if (mode === "CREATED") {
+      handleMyMarkerClick(myPinData[myPinData.length - 1]._id);
+    }
+
     const markers = [];
     for (let i = 0; i < myPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
@@ -193,6 +212,51 @@ function MainPage() {
       });
       marker.setMap(map);
       markers.push(marker);
+
+      // 만든 마커를 즉시 READ 모달에 띄움
+
+      const content = document.createElement("span");
+      content.textContent = "X";
+      content.className = "deleteBtn";
+      content.id = myPinData[i]._id;
+      content.style.cssText = "color:red;"; // CSS 지우세요
+      content.setAttribute("data-id", myPinData[i]._id);
+
+      const delPosition = new window.kakao.maps.LatLng(
+        parseFloat(myPinData[i].location.longitude),
+        parseFloat(myPinData[i].location.latitude)
+      );
+
+      const customOverlay = new window.kakao.maps.CustomOverlay({
+        map: map,
+        position: delPosition,
+        content: content,
+        yAnchor: 2.7,
+        xAnchor: 2.8,
+        clickable: true,
+      });
+
+      // 핀 삭제
+      content.addEventListener("click", (e: any) => {
+        //! 삭제 버튼이 핀 삭제 시 바로 사라지지 않는 버그..
+        //TODO : 확인 절차 필요
+        customOverlay.setMap(null);
+
+        axios
+          .delete(
+            `${process.env.REACT_APP_SERVER_URL}/pins/${e.target.dataset.id}`,
+            {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            dispatch(switchMode("NONE"));
+          })
+          .catch((err) => console.log(err));
+      });
     }
     setMyMarkers(markers);
   };
@@ -251,7 +315,10 @@ function MainPage() {
   };
 
   // READ 마커 클릭 핸들러
-  const handleMyMarkerClick = (id: number) => {
+  const handleMyMarkerClick = (id: string | number) => {
+    if (openPostModal) {
+      setOpenPostModal(false);
+    }
     setOpenReadModal(false);
     if (!isLogin) {
       for (let i = 0; i < Dummies.length; i += 1) {
@@ -260,6 +327,7 @@ function MainPage() {
           break;
         }
       }
+      return;
     }
     for (let i = 0; i < myPinData.length; i += 1) {
       if (myPinData[i]._id === id) {
@@ -326,7 +394,7 @@ function MainPage() {
         `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keywordInput}`,
         {
           headers: {
-            authorization: "KakaoAK 61dc9e8de327371dcac3d79909281b7d",
+            authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_MAP_RESTAPI_KEY}`,
           },
         }
       )
@@ -359,12 +427,6 @@ function MainPage() {
     setSearchLatlng([y, x]);
   };
 
-  // 모달 모두 끄기
-  const closeDetailModal = () => {
-    setOpenPostModal(false);
-    setOpenReadModal(false);
-  };
-
   const showHideDetailModal = () => {
     if (detailModal.current.style.display === "none") {
       detailModal.current.style.display = "block";
@@ -377,7 +439,14 @@ function MainPage() {
     <div className="App">
       {openPostModal || openReadModal ? (
         <>
-          <button onClick={closeDetailModal}>Close</button>
+          <button
+            onClick={() => {
+              setOpenPostModal(false);
+              setOpenReadModal(false);
+            }}
+          >
+            Close
+          </button>
           {showDetailModal ? (
             <button
               onClick={() => {
