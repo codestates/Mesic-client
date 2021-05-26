@@ -2,19 +2,15 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
-function EachUser({ searchedEachUser, alluser }: any) {
+function EachUser({ searchedUsers }: any) {
   const state = useSelector((state: RootState) => state.userReducer);
-  const { user_id, follow, token } = state.user;
-
-  const searchedUserId: any = searchedEachUser._id;
-
-  const patchFollow = () => {
-    //const userId: string = "60abb5b1473efa33250b3e5e";
+  const { user_id, token } = state.user;
+  const patchFollow = (targetId: string) => {
     axios
       .patch(
-        `http://ec2-52-79-241-131.ap-northeast-2.compute.amazonaws.com/users/follow/${user_id}`,
+        `${process.env.REACT_APP_SERVER_URL}/users/follow/${user_id}`,
         {
-          id: searchedUserId,
+          id: targetId,
         },
         {
           headers: {
@@ -23,21 +19,26 @@ function EachUser({ searchedEachUser, alluser }: any) {
         }
       )
       .then((res) => {
-        console.log("res.data ===", res.data);
-      });
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="eachUser">
       <div>
-        {/* {follow.includes(searchedUserId) ? (
-          <button onClick={patchFollow}>팔로우 취소</button>
+        {searchedUsers ? (
+          <div>
+            <span>{searchedUsers.name}</span>
+            <br />
+            <span>{searchedUsers.email}</span>
+            <button onClick={() => patchFollow(searchedUsers._id)}>
+              팔로우
+            </button>
+          </div>
         ) : (
-          <> */}
-        <button onClick={patchFollow}>팔로우</button>
-        {/* </>
-        )} */}
-        <span>{searchedEachUser.nickname}</span>
+          <div>검색 결과가 없습니다.</div>
+        )}
       </div>
     </div>
   );
