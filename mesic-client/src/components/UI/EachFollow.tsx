@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
 function EachFollow({ eachFollow }: any) {
-  const state = useSelector((state: RootState) => state.userReducer);
   const { nickname } = eachFollow;
 
   return (
