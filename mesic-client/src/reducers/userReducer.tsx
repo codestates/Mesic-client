@@ -2,8 +2,8 @@ import {
   EDIT_USERINFO,
   GET_ACCESSTOKEN,
   REFRESH_FOLLOW,
+  LOGOUT,
 } from "../actions/index";
-import { EDIT_USERINFO, GET_ACCESSTOKEN, LOGOUT } from "../actions/index";
 import { initialState } from "./initialState";
 import { Action } from "../actions/index";
 
@@ -22,7 +22,7 @@ const userReducer = (state = initialState, action: Action) => {
           follow,
         },
       });
-      
+
     case GET_ACCESSTOKEN:
       return Object.assign({}, state, {
         user: {
@@ -49,8 +49,7 @@ const userReducer = (state = initialState, action: Action) => {
           email: "",
           name: "",
           nickname: "",
-          profileImg:
-            "",
+          profileImg: "",
           follow: [],
         },
       });
