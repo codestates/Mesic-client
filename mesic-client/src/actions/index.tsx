@@ -3,11 +3,13 @@ import { Dispatch } from "redux";
 export const SWITCH_MODE = "SWITCH_MODE" as const;
 export const EDIT_USERINFO = "EDIT_USERINFO" as const;
 export const GET_ACCESSTOKEN = "GET_ACCESSTOKEN" as const;
+export const REFRESH_FOLLOW = "REFRESH_FOLLOW" as const;
 
 export type Action =
   | ReturnType<typeof switchMode>
   | ReturnType<typeof editUserinfo>
-  | ReturnType<typeof getAccessToken>;
+  | ReturnType<typeof getAccessToken>
+  | ReturnType<typeof refreshFollow>
 
 export const switchMode = (data: "READ" | "POST" | "CREATED" | "NONE"): any => {
   return {
@@ -46,4 +48,11 @@ export const getAccessToken = (token: string): any => {
   };
 };
 
-// export const editUserInfo= ()
+export const refreshFollow = (follow: string[]): any => {
+  return {
+    type: REFRESH_FOLLOW,
+    payload: {
+      follow,
+    },
+  };
+};

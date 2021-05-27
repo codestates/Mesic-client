@@ -2,9 +2,11 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
-function EachUser({ searchedUsers }: any) {
+function EachUser({ searchedUsers, updateFollow }: any) {
   const state = useSelector((state: RootState) => state.userReducer);
   const { user_id, token } = state.user;
+
+  // 팔로우 추가
   const patchFollow = (targetId: string) => {
     axios
       .patch(
@@ -19,7 +21,8 @@ function EachUser({ searchedUsers }: any) {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        console.log("add Follow : ", res);
+        updateFollow();
       })
       .catch((err) => console.log(err));
   };

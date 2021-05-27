@@ -1,4 +1,8 @@
-import { EDIT_USERINFO, GET_ACCESSTOKEN } from "../actions/index";
+import {
+  EDIT_USERINFO,
+  GET_ACCESSTOKEN,
+  REFRESH_FOLLOW,
+} from "../actions/index";
 import { initialState } from "./initialState";
 import { Action } from "../actions/index";
 
@@ -22,6 +26,13 @@ const userReducer = (state = initialState, action: Action) => {
         user: {
           ...state.user,
           token: action.payload.token,
+        },
+      });
+    case REFRESH_FOLLOW:
+      return Object.assign({}, state, {
+        user: {
+          ...state.user,
+          follow: action.payload.follow,
         },
       });
     default:

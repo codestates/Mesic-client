@@ -2,38 +2,45 @@ import axios from "axios";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { refreshFollow } from "../../actions/index";
 import EachFollow from "./EachFollow";
 import SearchUser from "./SearchUser";
 
 function FollowList() {
   const state = useSelector((state: RootState) => state.userReducer);
-  const { follow } = state.user;
+  const dispatch = useDispatch();
+  const { follow, user_id } = state.user;
 
   const inputFollow = useRef<any>();
   const [followInput, setFollowInput] = useState<string>("");
   const [followList, setFollowList] = useState<any[]>([]);
-  const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
   const [searchedFollow, setSearchedFollow] = useState<string[]>([]);
+  const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
 
   // 유저 팔로워의 정보를 가져오기
   useEffect(() => {
     if (follow.length > 0) {
-      let tempArr: string[] = [];
+      const tempArr: string[] = [];
       for (let eachId of follow) {
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/users/${eachId}`)
           .then((res) => {
+            console.log("getting follow userinfo : ", res);
             tempArr.push(res.data);
           });
       }
-      setFollowList(tempArr);
+      setTimeout(() => {
+        setFollowList(tempArr);
+      }, 500);
     }
   }, [follow]);
 
+  // 입력 시 자동완성
   useEffect(() => {
     handleSearchFollow();
-  }, [followInput]);
+  }, [followInput, followList]);
 
+  // 입력 값으로 유저 찾기
   const handleSearchFollow = () => {
     setSearchedFollow(
       followList.filter((follow) =>
@@ -42,12 +49,24 @@ function FollowList() {
     );
   };
 
+  // 키보드 입력 핸들러
   const handleFollowInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setFollowInput(e.target?.value.toLowerCase());
     },
     [followInput]
   );
+
+  // 서버에서 업데이트 된 팔로우 불러오기
+  const updateFollow = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/${user_id}`)
+      .then((res) => {
+        console.log("update follow : ", res);
+        dispatch(refreshFollow(res.data.follow));
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -63,16 +82,26 @@ function FollowList() {
         </div>
         <div className="follow">
           {followInput.length === 0 ? (
-            followList.length > 0 ? (
-              followList.map((follow: any, index: any) => {
-                return <EachFollow eachFollow={follow} key={index} />;
+            follow.length > 0 ? (
+              followList.map((follow: any) => {
+                return (
+                  <EachFollow
+                    eachFollow={follow}
+                    updateFollow={updateFollow}
+                    key={follow.email}
+                  />
+                );
               })
             ) : (
               <div>다른 유저를 찾아 팔로우하세요</div>
             )
           ) : searchedFollow.length > 0 ? (
-            searchedFollow.map((searched: any, index: any) => (
-              <EachFollow eachFollow={searched} index={index} />
+            searchedFollow.map((searched: any) => (
+              <EachFollow
+                eachFollow={searched}
+                updateFollow={updateFollow}
+                index={searched.email}
+              />
             ))
           ) : (
             <div>검색 결과가 없습니다</div>
@@ -85,6 +114,7 @@ function FollowList() {
           openSearchUser={openSearchUser}
           setOpenSearchUser={setOpenSearchUser}
           followList={followList}
+          updateFollow={updateFollow}
         />
       </div>
     </>

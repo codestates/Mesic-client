@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
-function EachFollow({ eachFollow }: any) {
+function EachFollow({ eachFollow, updateFollow }: any) {
   const state = useSelector((state: RootState) => state);
   const { user_id, token } = state.userReducer.user;
 
@@ -20,11 +20,14 @@ function EachFollow({ eachFollow }: any) {
           },
         }
       )
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log("delete follow : ", res);
+        updateFollow();
+      })
       .then((err) => console.log(err));
   };
   return (
-    <div className="eachfollow">
+    <div className="eachfollow" key={eachFollow.email}>
       <input type="checkbox" className="follow-checkbox"></input>
       <span>{eachFollow.name}</span>
       <br />
