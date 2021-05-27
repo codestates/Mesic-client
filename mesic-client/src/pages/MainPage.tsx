@@ -433,6 +433,11 @@ function MainPage() {
     }
   };
 
+  useEffect(() => {
+    setOpenReadModal(false);
+    setOpenPostModal(false);
+  }, [isLogin]);
+
   return (
     <div className="App">
       {openPostModal || openReadModal ? (
