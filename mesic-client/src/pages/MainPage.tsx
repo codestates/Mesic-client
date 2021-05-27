@@ -349,6 +349,7 @@ function MainPage() {
     setMap(map);
 
     // 지도 클릭 핸들러
+
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
       setOpenReadModal(false);
       setReadMarkerData(null);
@@ -446,6 +447,7 @@ function MainPage() {
             onClick={() => {
               setOpenPostModal(false);
               setOpenReadModal(false);
+              deletePostMarkers();
             }}
           >
             Close
