@@ -10,7 +10,15 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
-  const [updateMusic, setUpdateMusic] = useState<any>(null);
+  const [updateMusic, setUpdateMusic] = useState<{
+    video_Id: string;
+    title: string;
+    thumbnail: string;
+  }>({
+    video_Id: "",
+    title: "",
+    thumbnail: "",
+  });
 
   const state = useSelector((state: RootState) => state.userReducer);
   const { isLogin, token } = state.user;
@@ -33,7 +41,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
     //setUpdateMusic(null)
     //setUpdateMode(false)
   };
-  console.log(readMusic.video_Id)
+  console.log(readMusic.video_Id);
 
   return (
     <>
@@ -75,7 +83,11 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
             <button
               onClick={() => {
                 setUpdateMode(false);
-                setUpdateMusic(null);
+                setUpdateMusic({
+                  video_Id: "",
+                  title: "",
+                  thumbnail: "",
+                });
               }}
             >
               취소
@@ -84,7 +96,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
         </div>
       ) : (
         <div className="border">
-          {readMusic === null ? (
+          {readMusic.video_Id.length === 0 ? (
             <div className="ifram-outsider">
               <button onClick={() => setOpenEditMusic(true)}>+</button>
             </div>

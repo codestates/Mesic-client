@@ -28,12 +28,20 @@ function ConfirmModal({
     setOpenConfirm(false);
   };
   const deletePostMusic = () => {
-    setPostMusic(null);
+    setPostMusic({
+      video_Id: "",
+      title: "",
+      thumbnail: "",
+    });
     setUpdateMode(false); // PostMusic 위젯을 비활성화
     setOpenConfirm(false);
   };
   const deleteReadMusic = () => {
-    setReadMusic(null);
+    setReadMusic({
+      video_Id: "",
+      title: "",
+      thumbnail: "",
+    });
     setOpenConfirm(false);
   };
 

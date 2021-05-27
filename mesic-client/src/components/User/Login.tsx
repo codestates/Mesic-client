@@ -5,7 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { editUserinfo, getAccessToken } from "../../actions/index";
 
-function Login({ openLogin, setOpenLogin, getUserInfo }: any) {
+function Login({
+  openLogin,
+  setOpenLogin,
+  getUserInfo,
+  setLoginController,
+  deletePostMarkers,
+}: any) {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.userReducer);
 
@@ -64,6 +70,8 @@ function Login({ openLogin, setOpenLogin, getUserInfo }: any) {
     inputPw.current.value = "";
     setIdInput("");
     setPwInput("");
+    setLoginController(false);
+    deletePostMarkers();
   };
 
   const [idInput, setIdInput] = useState<string>("");

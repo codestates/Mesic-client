@@ -25,7 +25,6 @@ function PostModal({ postLatLng }: any) {
   const dispatch = useDispatch();
   const { user_id, token } = state.user;
 
-
   const postPinData = async () => {
     console.log("sending : ", {
       user_id,

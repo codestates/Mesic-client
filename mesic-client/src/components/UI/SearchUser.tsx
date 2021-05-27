@@ -4,7 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import EachUser from "./EachUser";
 
-function SearchUser({ openSearchUser, followList, updateFollow }: any) {
+function SearchUser({
+  openSearchUser,
+  setOpenSearchUser,
+  followList,
+  updateFollow,
+  setLoginController,
+}: any) {
   const state = useSelector((state: RootState) => state.userReducer);
   const { follow } = state.user;
 
@@ -54,6 +60,16 @@ function SearchUser({ openSearchUser, followList, updateFollow }: any) {
 
   return (
     <div className={`background ${openSearchUser ? "show" : ""}`}>
+      <div
+        className="searchuser-close"
+        onClick={() => {
+          setOpenSearchUser(false);
+          inputSearchUser.current.value = "";
+          setSearchUserInput("");
+        }}
+      >
+        X
+      </div>
       <div>
         <input
           type="text"
@@ -70,6 +86,7 @@ function SearchUser({ openSearchUser, followList, updateFollow }: any) {
             searchedUsers={each}
             updateFollow={updateFollow}
             key={each.email}
+            setLoginController={setLoginController}
           />
         ))
       ) : (
