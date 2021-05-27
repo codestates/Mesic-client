@@ -1,71 +1,119 @@
 import axios from "axios";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../reducers";
+import { editUserinfo, getAccessToken } from "../../actions/index";
 
-type SignupProps = {
-  openSignup: boolean;
-  closeSignup: () => void;
-  email: string;
-  name: string;
-  nickname: string;
-};
+function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
+  const SIGNUP_URL = `${process.env.REACT_APP_SERVER_URL}/users/signup`;
+  const LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/login`;
+  const dispatch = useDispatch();
 
-function Signup(props: SignupProps) {
-  const { openSignup, closeSignup } = props;
+  const validateEmail = (email: string) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const isValid = re.test(String(email).toLowerCase());
+    if (!isValid) {
+      setEmailError("이메일을 다시 확인해주세요");
+      return false;
+    } else {
+      setEmailError("");
+      return true;
+    }
+  };
 
-  const SIGNUP_URL = "http://localhost:4000/users/signup";
- 
-  const validateEmail = (email:string) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
-  const validatePassword = (pwInput: string, pwCheckInput: string) => {  
+  const validatePassword = (pwInput: string, pwCheckInput: string) => {
     // 확인 비밀번호와 같은지 비교
-    if(pwInput !== pwCheckInput){
+    if (pwInput !== pwCheckInput) {
+      setPwError("비밀번호를 다시 확인해주세요");
       return false;
     }
     const minNumberofChars = 6;
     const maxNumberofChars = 16;
     // 정규표현식
-    const regularExpression  = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/; 
+    const regularExpression =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
     // 글자수가 6자 이상 16자 이하인지 확인
-    if(pwInput.length < minNumberofChars || pwInput.length > maxNumberofChars){
+    if (
+      pwInput.length < minNumberofChars ||
+      pwInput.length > maxNumberofChars
+    ) {
+      setPwError("비밀번호는 6자 이상 16자 이하입니다.");
       return false;
     }
 
     // 정규표현식에 들어가는지 확인
-    if(!regularExpression.test(pwInput)) {
-      alert("password should contain atleast one number and one special character");
+    if (!regularExpression.test(pwInput)) {
+      setPwError("하나 이상의 숫자와 특수문자가 포함되어야 합니다");
       return false;
+    } else {
+      setPwError("");
+      return true;
     }
-    return true;
-  }
+  };
 
   const responseSignup = () => {
-
-    console.log(pwInput)
-    const email = validateEmail(idInput)? idInput: console.error("invalid")
-    const password = validatePassword(pwInput, pwCheckInput)? pwInput: console.error("invalid");
+    // const email = validateEmail(idInput) ? idInput : emailError;
+    // const password = validatePassword(pwInput, pwCheckInput)
+    //   ? pwInput
+    //   : pwError;
     const signupData = {
-      "profile": "jennie.jpg", // 회원가입할때 사진넣는 거 추가해야함.
-      "email": email,
-      "password": password,
-      "name": nameInput,
-      "nickname": nicknameInput,
-      "follow":[],
-      "refreshToken":""
-
+      email: idInput,
+      password: pwInput,
+      name: nameInput,
+      nickname: nicknameInput,
+      profile: "",
+      follow: [],
+      refreshToken: "",
+    };
+    //console.log(signupData);
+    const validEmail = validateEmail(idInput);
+    const validPw = validatePassword(pwInput, pwCheckInput);
+    if (validEmail && validPw) {
+      axios
+        .post(SIGNUP_URL, signupData)
+        .then((res) => {
+          console.log("signup  ===", res);
+          if (res.status === 201) {
+            //closeSignup();
+            axios
+              .post(LOGIN_URL, {
+                email: res.data.email,
+                password: res.data.password,
+              })
+              .then((res) => {
+                console.log("login after signup === ", res);
+                if (res.data.accessToken) {
+                  dispatch(getAccessToken(res.data.accessToken));
+                  getUserInfo(res.data.id);
+                  closeSignup();
+                }
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log("signup요청 실패");
     }
-    console.log(signupData)
-    axios.post(SIGNUP_URL, signupData)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err))
-  }
+  };
 
-  const clickCloseSignup = () => {
-    closeSignup();
+  const closeSignup = () => {
+    setOpenSignup(false);
+    inputEmail.current.value = "";
+    inputName.current.value = "";
+    inputNickname.current.value = "";
+    inputPw.current.value = "";
+    inputPwCheck.current.value = "";
+    setIdInput("");
+    setPwInput("");
+    setPwCheckInput("");
+    setNameInput("");
+    setNicknameInput("");
+    setEmailError("");
+    setPwError("");
   };
 
   const [idInput, setIdInput] = useState<string>("");
@@ -73,6 +121,14 @@ function Signup(props: SignupProps) {
   const [pwCheckInput, setPwCheckInput] = useState<string>("");
   const [nameInput, setNameInput] = useState<string>("");
   const [nicknameInput, setNicknameInput] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [pwError, setPwError] = useState<string>("");
+
+  const inputEmail = useRef<any>();
+  const inputName = useRef<any>();
+  const inputNickname = useRef<any>();
+  const inputPw = useRef<any>();
+  const inputPwCheck = useRef<any>();
 
   const handleIdInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,20 +167,31 @@ function Signup(props: SignupProps) {
 
   return (
     <div className={`background ${openSignup ? "show" : ""}`}>
-      <div className="login-signup-modal-outsider" onClick={clickCloseSignup} />
+      <div className="login-signup-modal-outsider" onClick={closeSignup} />
       <div className="login-signup-modal">
-        <span className="signup-close" onClick={clickCloseSignup}>
+        <span className="signup-close" onClick={closeSignup}>
           X
         </span>
         <div className="signup-content">
           <div className="signup-title">SIGNUP</div>
           <div>
             <span>e-mail</span>
-            <input onChange={handleIdInput} type="text" name="email"></input>
+            <input
+              onChange={handleIdInput}
+              type="text"
+              name="email"
+              ref={inputEmail}
+            ></input>
+            <div className="error-message">{emailError}</div>
           </div>
           <div>
             <span>name</span>
-            <input onChange={handleNameInput} type="text" name="name"></input>
+            <input
+              onChange={handleNameInput}
+              type="text"
+              name="name"
+              ref={inputName}
+            ></input>
           </div>
           <div>
             <span>nickname</span>
@@ -132,6 +199,7 @@ function Signup(props: SignupProps) {
               onChange={handleNicknameInput}
               type="text"
               name="nickname"
+              ref={inputNickname}
             ></input>
           </div>
           <div>
@@ -140,6 +208,7 @@ function Signup(props: SignupProps) {
               onChange={handlePwInput}
               type="password"
               name="password"
+              ref={inputPw}
             ></input>
           </div>
           <div>
@@ -148,7 +217,11 @@ function Signup(props: SignupProps) {
               onChange={handlePwCheckInput}
               type="password"
               name="check_password"
+              ref={inputPwCheck}
             ></input>
+            <div className="error-message">
+              {emailError.length === 0 ? <>{pwError}</> : <></>}
+            </div>
           </div>
           <div>
             <button onClick={responseSignup}>Signup</button>
