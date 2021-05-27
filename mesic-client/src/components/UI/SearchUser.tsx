@@ -26,11 +26,18 @@ function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
     }
   }, [openSearchUser]);
 
+  useEffect(() => {
+    if (searchUserInput.length === 0) {
+      return;
+    }
+    handleSearchUser();
+  }, [searchUserInput]);
+
   const handleSearchUser = () => {
     console.log("works");
     const filteredUser = nonFollowList.filter((nonFollow: any) => {
-      if (nonFollow.email) {
-        return nonFollow.email.toLowerCase().includes(searchUserInput);
+      if (nonFollow.name) {
+        return nonFollow.name.toLowerCase().includes(searchUserInput);
       }
     });
     setsearchedUsers(filteredUser);
@@ -38,7 +45,7 @@ function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
 
   const handleSearchUserInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchUserInput(e.target?.value);
+      setSearchUserInput(e.target?.value.toLowerCase());
     },
     [searchUserInput]
   );
@@ -49,15 +56,17 @@ function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
         <input
           type="text"
           onChange={handleSearchUserInput}
-          placeholder="이메일을 검색해주세요"
+          placeholder="이름을 검색해주세요"
           ref={inputSearchUser}
         ></input>
         <button onClick={handleSearchUser}>검색</button>
       </div>
-      {searchedUsers.length === 0 ? (
+      {searchUserInput.length === 0 ? (
         <div>새로운 유저를 찾아보세요</div>
-      ) : (
+      ) : searchedUsers.length > 0 ? (
         searchedUsers.map((each) => <EachUser searchedUsers={each} />)
+      ) : (
+        <div>검색 결과가 없습니다</div>
       )}
     </div>
   );

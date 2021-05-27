@@ -11,8 +11,9 @@ function FollowList() {
 
   const inputFollow = useRef<any>();
   const [followInput, setFollowInput] = useState<string>("");
-  const [followList, setFollowList] = useState<string[]>([]);
+  const [followList, setFollowList] = useState<any[]>([]);
   const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
+  const [searchedFollow, setSearchedFollow] = useState<string[]>([]);
 
   // 유저 팔로워의 정보를 가져오기
   useEffect(() => {
@@ -22,7 +23,6 @@ function FollowList() {
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/users/${eachId}`)
           .then((res) => {
-            console.log(res);
             tempArr.push(res.data);
           });
       }
@@ -30,11 +30,21 @@ function FollowList() {
     }
   }, [follow]);
 
-  const handleSearchFollow = () => {};
+  useEffect(() => {
+    handleSearchFollow();
+  }, [followInput]);
+
+  const handleSearchFollow = () => {
+    setSearchedFollow(
+      followList.filter((follow) =>
+        follow.name.toLowerCase().includes(followInput)
+      )
+    );
+  };
 
   const handleFollowInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFollowInput(e.target?.value);
+      setFollowInput(e.target?.value.toLowerCase());
     },
     [followInput]
   );
@@ -48,14 +58,25 @@ function FollowList() {
             type="text"
             onChange={handleFollowInput}
             ref={inputFollow}
+            placeholder="이름을 검색해주세요"
           ></input>
-          <button onClick={handleSearchFollow}>검색</button>
         </div>
         <div className="follow">
-          <div>다른 유저를 찾아 팔로우하세요</div>
-          {followList.map((follow: any, index: any) => {
-            return <EachFollow eachFollow={follow} key={index} />;
-          })}
+          {followInput.length === 0 ? (
+            followList.length > 0 ? (
+              followList.map((follow: any, index: any) => {
+                return <EachFollow eachFollow={follow} key={index} />;
+              })
+            ) : (
+              <div>다른 유저를 찾아 팔로우하세요</div>
+            )
+          ) : searchedFollow.length > 0 ? (
+            searchedFollow.map((searched: any, index: any) => (
+              <EachFollow eachFollow={searched} index={index} />
+            ))
+          ) : (
+            <div>검색 결과가 없습니다</div>
+          )}
         </div>
         <button onClick={() => setOpenSearchUser(true)}>
           새로운 유저 찾아보기
