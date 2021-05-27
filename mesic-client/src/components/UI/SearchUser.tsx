@@ -17,11 +17,10 @@ function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
         .get(`${process.env.REACT_APP_SERVER_URL}/users`)
         .then((res) => res.data)
         .then((allUser) => {
-          return allUser.filter((user: any) => {
-            for (let follow of followList) {
-              return follow._id !== user._id;
-            }
-          });
+          return allUser.filter(
+            (user: any) =>
+              !followList.map((follow: any) => follow._id).includes(user._id)
+          );
         })
         .then((res: any) => setNonFollowList(res));
     }
