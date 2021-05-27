@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import EachUser from "./EachUser";
 
-function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
+function SearchUser({ openSearchUser, followList, updateFollow }: any) {
+  const state = useSelector((state: RootState) => state.userReducer);
+  const { follow } = state.user;
+
   const inputSearchUser = useRef<any>();
   const [searchUserInput, setSearchUserInput] = useState<string>("");
-  const [searchedUsers, setsearchedUsers] = useState<string[]>([]);
+  const [searchedUsers, setsearchedUsers] = useState<any[]>([]);
   const [nonFollowList, setNonFollowList] = useState<any[]>([]);
 
   // 팔로우 하지 않은 유저만 필터링
@@ -24,13 +27,19 @@ function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
         })
         .then((res: any) => setNonFollowList(res));
     }
-  }, [openSearchUser]);
+  }, [openSearchUser, followList]);
+
+  useEffect(() => {
+    if (searchUserInput.length === 0) {
+      return;
+    }
+    handleSearchUser();
+  }, [searchUserInput, nonFollowList]);
 
   const handleSearchUser = () => {
-    console.log("works");
     const filteredUser = nonFollowList.filter((nonFollow: any) => {
-      if (nonFollow.email) {
-        return nonFollow.email.toLowerCase().includes(searchUserInput);
+      if (nonFollow.name) {
+        return nonFollow.name.toLowerCase().includes(searchUserInput);
       }
     });
     setsearchedUsers(filteredUser);
@@ -38,7 +47,7 @@ function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
 
   const handleSearchUserInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchUserInput(e.target?.value);
+      setSearchUserInput(e.target?.value.toLowerCase());
     },
     [searchUserInput]
   );
@@ -49,15 +58,22 @@ function SearchUser({ openSearchUser, followList, setOpenSearchUser }: any) {
         <input
           type="text"
           onChange={handleSearchUserInput}
-          placeholder="이메일을 검색해주세요"
+          placeholder="이름을 검색해주세요"
           ref={inputSearchUser}
         ></input>
-        <button onClick={handleSearchUser}>검색</button>
       </div>
-      {searchedUsers.length === 0 ? (
+      {searchUserInput.length === 0 ? (
         <div>새로운 유저를 찾아보세요</div>
+      ) : searchedUsers.length > 0 ? (
+        searchedUsers.map((each) => (
+          <EachUser
+            searchedUsers={each}
+            updateFollow={updateFollow}
+            key={each.email}
+          />
+        ))
       ) : (
-        searchedUsers.map((each) => <EachUser searchedUsers={each} />)
+        <div>검색 결과가 없습니다</div>
       )}
     </div>
   );

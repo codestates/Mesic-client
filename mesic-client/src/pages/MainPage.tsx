@@ -137,7 +137,7 @@ function MainPage() {
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${user_id}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log(data);
+        console.log("my pin data : ", data);
         setMypinData(data);
       })
       .catch((err) => console.log(err));
