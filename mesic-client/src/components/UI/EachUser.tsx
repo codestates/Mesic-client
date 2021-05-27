@@ -2,12 +2,16 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
-function EachUser({ searchedUsers, updateFollow }: any) {
+function EachUser({ searchedUsers, updateFollow, setLoginController }: any) {
   const state = useSelector((state: RootState) => state.userReducer);
-  const { user_id, token } = state.user;
+  const { user_id, token, isLogin } = state.user;
 
   // 팔로우 추가
   const patchFollow = (targetId: string) => {
+    if (!isLogin) {
+      setLoginController(true);
+      return;
+    }
     axios
       .patch(
         `${process.env.REACT_APP_SERVER_URL}/users/follow/${user_id}`,
@@ -35,7 +39,11 @@ function EachUser({ searchedUsers, updateFollow }: any) {
             <span>{searchedUsers.name}</span>
             <br />
             <span>{searchedUsers.email}</span>
-            <button onClick={() => patchFollow(searchedUsers._id)}>
+            <button
+              onClick={() => {
+                patchFollow(searchedUsers._id);
+              }}
+            >
               팔로우
             </button>
           </div>

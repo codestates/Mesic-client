@@ -9,6 +9,7 @@ function SearchUser({
   setOpenSearchUser,
   followList,
   updateFollow,
+  setLoginController,
 }: any) {
   const state = useSelector((state: RootState) => state.userReducer);
   const { follow } = state.user;
@@ -85,6 +86,7 @@ function SearchUser({
             searchedUsers={each}
             updateFollow={updateFollow}
             key={each.email}
+            setLoginController={setLoginController}
           />
         ))
       ) : (

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
@@ -9,7 +9,7 @@ import Mypage from "../User/Mypage";
 import EditMypage from "../User/EditMypage";
 import { logout, editUserinfo, getAccessToken } from "../../actions/index";
 
-function Nav() {
+function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   //const {open} = props;
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
@@ -67,6 +67,12 @@ function Nav() {
       })
       .catch((err) => console.log(err));
   };
+  useEffect(() => {
+    if (loginController) {
+      setOpenLogin(true);
+    }
+    return;
+  }, [loginController]);
 
   return (
     <div>
@@ -74,6 +80,8 @@ function Nav() {
         openLogin={openLogin}
         setOpenLogin={setOpenLogin}
         getUserInfo={getUserInfo}
+        setLoginController={setLoginController}
+        deletePostMarkers={deletePostMarkers}
       ></Login>
       <Signup
         openSignup={openSignup}

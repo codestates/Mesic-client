@@ -6,7 +6,7 @@ import { refreshFollow } from "../../actions/index";
 import EachFollow from "./EachFollow";
 import SearchUser from "./SearchUser";
 
-function FollowList() {
+function FollowList({ setLoginController }: any) {
   const state = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
   const { follow, user_id } = state.user;
@@ -115,6 +115,7 @@ function FollowList() {
           setOpenSearchUser={setOpenSearchUser}
           followList={followList}
           updateFollow={updateFollow}
+          setLoginController={setLoginController}
         />
       </div>
     </>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import SearchLocation from "../components/UI/SearchLocation";
+import Nav from "../components/UI/Nav";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from ".././actions/index";
 import { RootState } from ".././reducers";
@@ -22,6 +23,8 @@ function MainPage() {
   const { mode } = state.modeReducer.user;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
+  //로그인 컨트롤러
+  const [loginController, setLoginController] = useState<boolean>(false);
 
   // DetailModal 열림
   const [openReadModal, setOpenReadModal] = useState<boolean>(false);
@@ -171,6 +174,7 @@ function MainPage() {
   };
 
   // (POST MODE) 지도 클릭 마커
+
   const postMarkerControl = () => {
     if (postMarkers.length > 0) {
       deletePostMarkers();
@@ -357,7 +361,8 @@ function MainPage() {
       console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
-        alert("로그인 후 나만의 로그를 만들어보세요!");
+        //alert("로그인 후 나만의 로그를 만들어보세요!");
+        setLoginController(true);
       } else {
         dispatch(switchMode("POST"));
         setOpenPostModal(true);
@@ -376,6 +381,7 @@ function MainPage() {
   const handleChangeKeywordInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setKeywordInput(e.target?.value);
+      console.log(keywordInput);
     },
     [keywordInput]
   );
@@ -441,6 +447,11 @@ function MainPage() {
 
   return (
     <div className="App">
+      <Nav
+        loginController={loginController}
+        setLoginController={setLoginController}
+        deletePostMarkers={deletePostMarkers}
+      />
       {openPostModal || openReadModal ? (
         <>
           <button
@@ -482,14 +493,14 @@ function MainPage() {
         searchMode={searchMode}
         keywordSearchSelect={keywordSearchSelect}
       />
-      <FollowList />
-      {openReadModal ? (
+      <FollowList setLoginController={setLoginController} />
+      {/* {openReadModal ? (
         <ReadModal readMarkerData={readMarkerData} />
       ) : openPostModal ? (
         <PostModal />
       ) : (
         <></>
-      )}
+      )} */}
       <div ref={detailModal}>
         {openReadModal ? (
           <ReadModal readMarkerData={readMarkerData} />

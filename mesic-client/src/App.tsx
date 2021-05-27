@@ -7,7 +7,6 @@ import Nav from "./components/UI/Nav";
 function App() {
   return (
     <Router>
-      <Nav />
       <Switch>
         <Route exact path="/" component={IntroPage} />
         <Route path="/mainpage" component={MainPage} />
