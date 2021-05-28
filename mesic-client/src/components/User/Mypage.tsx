@@ -7,7 +7,6 @@ type MypageProps = {
   openMypage: boolean;
   closeMypage: () => void;
   profileImg: any;
-  basicImg: string;
   email: string;
   name: string;
   nickname: string;
@@ -22,7 +21,6 @@ function Mypage(props: MypageProps) {
     openMypage,
     closeMypage,
     profileImg,
-    basicImg,
     email,
     name,
     nickname,
@@ -48,11 +46,7 @@ function Mypage(props: MypageProps) {
         <div className="mypage-edit-content">
           <div className="profileImg">
             <figure className="profileImg-outsider">
-              {profileImg !== null ? (
-                <img className="profileImg-content" src={profileImg}></img>
-              ) : (
-                <img className="profileImg-content" src={basicImg}></img>
-              )}
+              <img className="profileImg-content" src={profileImg}></img>
             </figure>
           </div>
           <div>이메일: {email}</div>

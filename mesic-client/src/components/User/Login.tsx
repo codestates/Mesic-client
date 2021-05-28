@@ -95,7 +95,7 @@ function Login({
   const handlePwInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setPwInput(e.target?.value);
-      if (setPwInput.length > 0) {
+      if (pwInput.length > 0) {
         setPwError("");
       }
     },

@@ -1,52 +1,59 @@
 import axios from "axios";
 import { profile } from "console";
 import React, { useState, useCallback, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 
-type EditMypageProps = {
-  setOpenMypage: (state: boolean) => void;
-  profileImg: any;
-  basicImg: string;
-  email: string;
-  name: string;
-  nickname: string;
-  openEditMypage: boolean;
-  setOpenEditMypage: (state: boolean) => void;
-};
+function EditMypage({
+  setOpenMypage,
+  profileImg,
+  email,
+  name,
+  nickname,
+  openEditMypage,
+  setOpenEditMypage,
+  getUserInfo,
+}: any) {
+  const state = useSelector((state: RootState) => state);
+  const { user_id, token } = state.userReducer.user;
 
-function EditMypage(props: EditMypageProps) {
-  const {
-    setOpenMypage,
-    profileImg,
-    basicImg,
-    email,
-    name,
-    nickname,
-    openEditMypage,
-    setOpenEditMypage,
-  } = props;
-
-  const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYWExMTMwYzgzMDBlYzIxZjRkYzExMSIsIm5hbWUiOiJnbGtqZ2xraiIsImlhdCI6MTYyMjAxNDI5OSwiZXhwIjoxNjIyMDIxNDk5fQ.wO6vTAKxgCKUuamAM-rppuDutmUAvhXU1yutdbfMQl8";
-  const userId = "60aa1130c8300ec21f4dc111";
-  const UPDATE_USER_URL = `http://localhost:4000/users/${userId}`;
+  const UPDATE_USER_URL = `${process.env.REACT_APP_SERVER_URL}/users/${user_id}`;
 
   const editProfileInput = useRef<any>();
-  const [ editNicknameInput, setEditNicknameInput ] = useState<string>(nickname);
-  const [ editProfileImg, setEditProfileImg ] = useState<any>(null);
+  const [editNicknameInput, setEditNicknameInput] = useState<string>(nickname);
+  const [editProfileImg, setEditProfileImg] = useState<any>(null);
+  const [nicknameError, setNicknameErrorr] = useState<string>("");
 
   const sendModifiedData = () => {
-
-    const data = { nickname : editNicknameInput, profile: editProfileImg}
-    console.log(data)
-    axios.patch(UPDATE_USER_URL, data, {
-      headers: { 'Authorization': `Bearer ${accessToken}` },
-    })
-    .then((res)=> console.log(res))
-    .catch((err)=> console.log(err))
-  }
+    const data = { nickname: editNicknameInput, profile: editProfileImg };
+    console.log(data);
+    if (editNicknameInput.length === 0) {
+      setNicknameErrorr("닉네임을 입력해주세요");
+      return;
+    }
+    axios
+      .patch(UPDATE_USER_URL, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log("patchuser === ", res);
+        if (res.status === 200) {
+          getUserInfo(user_id);
+          setOpenEditMypage(false);
+          setOpenMypage(true);
+          editProfileInput.current.value = "";
+          setEditProfileImg(null);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleEditNicknameInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setEditNicknameInput(e.target?.value);
+      if (editNicknameInput.length > 0) {
+        setNicknameErrorr("");
+      }
     },
     [editNicknameInput]
   );
@@ -80,10 +87,8 @@ function EditMypage(props: EditMypageProps) {
             <figure className="profileImg-outsider">
               {editProfileImg !== null ? (
                 <img className="profileImg-content" src={editProfileImg}></img>
-              ) : profileImg !== null ? (
-                <img className="profileImg-content" src={profileImg}></img>
               ) : (
-                <img className="profileImg-content" src={basicImg}></img>
+                <img className="profileImg-content" src={profileImg}></img>
               )}
             </figure>
             <div>
@@ -104,6 +109,7 @@ function EditMypage(props: EditMypageProps) {
               value={editNicknameInput}
               onChange={handleEditNicknameInput}
             ></input>
+            <div>{nicknameError}</div>
           </div>
           <div>
             <button onClick={sendModifiedData}>저장</button>
