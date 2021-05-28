@@ -12,7 +12,16 @@ export const initialState = {
     user_id: "",
     follow: [],
   },
-  googleToken: "",
-  follows: [],
+  checkRemoved: "",
+  checkAdded: "",
   checkedFollow: [],
+  currentMarker: 0,
+  markerSet: [
+    ["pin1.png", "color1.png"],
+    ["pin2.png", "color2.png"],
+    ["pin3.png", "color3.png"],
+    ["pin4.png", "color4.png"],
+    ["pin5.png", "color5.png"],
+    ["pin6.png", "color6.png"],
+  ],
 };
