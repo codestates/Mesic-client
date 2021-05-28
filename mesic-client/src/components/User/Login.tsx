@@ -1,19 +1,17 @@
 import axios from "axios";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { editUserinfo, getAccessToken } from "../../actions/index";
 
-type LoginProps = {
-  //interface
-  openLogin: boolean;
-  closeLogin: () => void;
-};
-
-function Login(props: LoginProps) {
-  const { openLogin, closeLogin } = props;
-
+function Login({
+  openLogin,
+  setOpenLogin,
+  getUserInfo,
+  setLoginController,
+  deletePostMarkers,
+}: any) {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.userReducer);
 
@@ -22,25 +20,28 @@ function Login(props: LoginProps) {
 
   const responseLogin = () => {
     const loginData = { email: idInput, password: pwInput };
-    axios
-      .post(LOGIN_URL, loginData)
-      .then((res) => {
-        console.log("login === ", res);
-        dispatch(getAccessToken(res.data.accessToken));
-        getUserInfo(res.data.id);
-      })
-      .catch((err) => console.log(err));
-  };
-  const getUserInfo = (user_id: string) => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/users/${user_id}`)
-      .then((res) => {
-        //console.log(res)
-        const { email, follow, name, nickname, _id } = res.data;
-        dispatch(editUserinfo(_id, email, name, nickname, follow));
-        closeLogin();
-      })
-      .catch((err) => console.log(err));
+    setErrorMsg("");
+    if (idInput.length === 0) {
+      setPwError("");
+      setEmailError("이메일을 입력하세요");
+    } else if (pwInput.length === 0) {
+      setPwError("비밀번호를 입력하세요");
+    } else {
+      axios
+        .post(LOGIN_URL, loginData)
+        .then((res) => {
+          if (res.data.accessToken) {
+            dispatch(getAccessToken(res.data.accessToken));
+            getUserInfo(res.data.id);
+            closeLogin();
+          }
+          return;
+        })
+        .catch((err) => {
+          setErrorMsg("존재하지 않는 아이디이거나, 잘못된 비밀번호입니다");
+          console.log(err);
+        });
+    }
   };
 
   const responseGoogle = (response: any) => {
@@ -63,16 +64,30 @@ function Login(props: LoginProps) {
       .catch((err) => console.log(err));
   };
 
-  const clickCloseLogin = () => {
-    closeLogin();
+  const closeLogin = () => {
+    setOpenLogin(false);
+    inputEmail.current.value = "";
+    inputPw.current.value = "";
+    setIdInput("");
+    setPwInput("");
+    setLoginController(false);
+    deletePostMarkers();
   };
 
   const [idInput, setIdInput] = useState<string>("");
   const [pwInput, setPwInput] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [pwError, setPwError] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const inputEmail = useRef<any>();
+  const inputPw = useRef<any>();
 
   const handleIdInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setIdInput(e.target?.value);
+      if (idInput.length > 0) {
+        setEmailError("");
+      }
     },
     [idInput]
   );
@@ -80,22 +95,31 @@ function Login(props: LoginProps) {
   const handlePwInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setPwInput(e.target?.value);
+      if (pwInput.length > 0) {
+        setPwError("");
+      }
     },
     [pwInput]
   );
 
   return (
     <div className={`background ${openLogin ? "show" : ""}`}>
-      <div className="login-signup-modal-outsider" onClick={clickCloseLogin} />
+      <div className="login-signup-modal-outsider" onClick={closeLogin} />
       <div className="login-signup-modal">
-        <span className="login-close" onClick={clickCloseLogin}>
+        <span className="login-close" onClick={closeLogin}>
           X
         </span>
         <div className="login-content">
           <div className="login-title">LOGIN</div>
           <div>
             <span>e-mail</span>
-            <input onChange={handleIdInput} type="text" name="email"></input>
+            <input
+              onChange={handleIdInput}
+              type="text"
+              name="email"
+              ref={inputEmail}
+            ></input>
+            <div className="error-message">{emailError}</div>
           </div>
           <div>
             <span>password</span>
@@ -103,7 +127,16 @@ function Login(props: LoginProps) {
               onChange={handlePwInput}
               type="password"
               name="password"
+              ref={inputPw}
             ></input>
+            <div className="error-message">
+              {emailError.length === 0 ? <>{pwError}</> : <></>}
+            </div>
+            {emailError.length === 0 && pwError.length === 0 ? (
+              <>{errorMsg}</>
+            ) : (
+              <></>
+            )}
           </div>
           <div>
             <button onClick={responseLogin}>Login</button>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import SearchLocation from "../components/UI/SearchLocation";
+import Nav from "../components/UI/Nav";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from ".././actions/index";
 import { RootState } from ".././reducers";
@@ -22,6 +23,8 @@ function MainPage() {
   const { mode } = state.modeReducer.user;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
+  //로그인 컨트롤러
+  const [loginController, setLoginController] = useState<boolean>(false);
 
   // DetailModal 열림
   const [openReadModal, setOpenReadModal] = useState<boolean>(false);
@@ -137,7 +140,7 @@ function MainPage() {
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${user_id}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log(data);
+        console.log("my pin data : ", data);
         setMypinData(data);
       })
       .catch((err) => console.log(err));
@@ -171,6 +174,7 @@ function MainPage() {
   };
 
   // (POST MODE) 지도 클릭 마커
+
   const postMarkerControl = () => {
     if (postMarkers.length > 0) {
       deletePostMarkers();
@@ -349,6 +353,7 @@ function MainPage() {
     setMap(map);
 
     // 지도 클릭 핸들러
+
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
       setOpenReadModal(false);
       setReadMarkerData(null);
@@ -356,7 +361,8 @@ function MainPage() {
       console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
-        alert("로그인 후 나만의 로그를 만들어보세요!");
+        //alert("로그인 후 나만의 로그를 만들어보세요!");
+        setLoginController(true);
       } else {
         dispatch(switchMode("POST"));
         setOpenPostModal(true);
@@ -375,6 +381,7 @@ function MainPage() {
   const handleChangeKeywordInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setKeywordInput(e.target?.value);
+      console.log(keywordInput);
     },
     [keywordInput]
   );
@@ -433,14 +440,25 @@ function MainPage() {
     }
   };
 
+  useEffect(() => {
+    setOpenReadModal(false);
+    setOpenPostModal(false);
+  }, [isLogin]);
+
   return (
     <div className="App">
+      <Nav
+        loginController={loginController}
+        setLoginController={setLoginController}
+        deletePostMarkers={deletePostMarkers}
+      />
       {openPostModal || openReadModal ? (
         <>
           <button
             onClick={() => {
               setOpenPostModal(false);
               setOpenReadModal(false);
+              deletePostMarkers();
             }}
           >
             Close
@@ -475,14 +493,14 @@ function MainPage() {
         searchMode={searchMode}
         keywordSearchSelect={keywordSearchSelect}
       />
-      <FollowList />
-      {openReadModal ? (
+      <FollowList setLoginController={setLoginController} />
+      {/* {openReadModal ? (
         <ReadModal readMarkerData={readMarkerData} />
       ) : openPostModal ? (
         <PostModal />
       ) : (
         <></>
-      )}
+      )} */}
       <div ref={detailModal}>
         {openReadModal ? (
           <ReadModal readMarkerData={readMarkerData} />

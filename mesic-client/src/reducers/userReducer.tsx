@@ -1,4 +1,9 @@
-import { EDIT_USERINFO, GET_ACCESSTOKEN } from "../actions/index";
+import {
+  EDIT_USERINFO,
+  GET_ACCESSTOKEN,
+  REFRESH_FOLLOW,
+  LOGOUT,
+} from "../actions/index";
 import { initialState } from "./initialState";
 import { Action } from "../actions/index";
 
@@ -17,11 +22,35 @@ const userReducer = (state = initialState, action: Action) => {
           follow,
         },
       });
+
     case GET_ACCESSTOKEN:
       return Object.assign({}, state, {
         user: {
           ...state.user,
           token: action.payload.token,
+        },
+      });
+
+    case REFRESH_FOLLOW:
+      return Object.assign({}, state, {
+        user: {
+          ...state.user,
+          follow: action.payload.follow,
+        },
+      });
+
+    case LOGOUT:
+      return Object.assign({}, state, {
+        user: {
+          ...state.user,
+          token: "",
+          isLogin: false,
+          user_id: "",
+          email: "",
+          name: "",
+          nickname: "",
+          profileImg: "",
+          follow: [],
         },
       });
     default:

@@ -1,9 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import Nav from "../components/UI/Nav";
 
 function IntroPage() {
   return (
     <>
+      <Nav />
       <Link to="/mainpage">
         <button>시작하기</button>
       </Link>
