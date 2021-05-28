@@ -3,7 +3,10 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import SearchLocation from "../components/UI/SearchLocation";
 import Nav from "../components/UI/Nav";
 import { useDispatch, useSelector } from "react-redux";
-import { switchMode } from ".././actions/index";
+import {
+  clearCheckedRemove,
+  switchMode,
+} from ".././actions/index";
 import { RootState } from ".././reducers";
 import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
@@ -21,6 +24,13 @@ function MainPage() {
   const state = useSelector((state: RootState) => state);
   const { isLogin, user_id, token } = state.userReducer.user;
   const { mode } = state.modeReducer.user;
+  const {
+    checkAdded,
+    checkRemoved,
+    checkedFollow,
+    markerSet,
+    currentMarker,
+  }: any = state.modeReducer;
 
   // const [openModal, setOpenModal] = useState<boolean>(false);
   //로그인 컨트롤러
@@ -297,6 +307,83 @@ function MainPage() {
     }
     setMyMarkers(markers);
   };
+
+  // 체크 된 팔로우 핀 가져오기 (마커 만들기 위한 데이터)
+  const [followPinData, setFollowPinData] = useState<any[]>([]);
+  const getFollowMarker = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${checkAdded}`)
+      .then((res) => res.data)
+      .then((data) => {
+        console.log("follow pin data : ", data);
+        setFollowPinData(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // 체크 된 팔로우 마커 생성
+  const [followMarkers, setFollowMarkers] = useState<any[]>([]);
+  const viewFollowMarkers = () => {
+    const markers = [];
+    for (let i = 0; i < followPinData.length; i += 1) {
+      const position = new window.kakao.maps.LatLng(
+        parseFloat(followPinData[i].location.longitude),
+        parseFloat(followPinData[i].location.latitude)
+      );
+
+      const image = new window.kakao.maps.MarkerImage(
+        `/images/FollowMarker/${markerSet[currentMarker][0]}`,
+        new window.kakao.maps.Size(80, 65)
+      );
+
+      const marker = new window.kakao.maps.Marker({
+        image,
+        map,
+        position,
+      });
+      marker.id = [followPinData[i]._id, followPinData[i].user_id];
+
+      window.kakao.maps.event.addListener(marker, "click", () => {
+        // 마커 클릭 시
+        console.log(marker.id);
+        // handleMyMarkerClick(marker.id);
+      });
+      marker.setMap(map);
+      markers.push(marker);
+    }
+    setFollowMarkers([...followMarkers, markers]);
+  };
+
+  // 체크박스 체크 시 마커 생성
+  useEffect(() => {
+    if (checkAdded.length === 0) {
+      return;
+    }
+    getFollowMarker();
+  }, [currentMarker]);
+
+  useEffect(() => {
+    if (followPinData.length === 0) {
+      return;
+    }
+    viewFollowMarkers();
+  }, [followPinData]);
+
+  // 체크박스 해제 시 마커 제거
+  const deleteFollowMarkers = () => {
+    for (let i = 0; i < followMarkers.length; i += 1) {
+      for (let j = 0; j < followMarkers[i].length; j += 1) {
+        if (followMarkers[i][j].id[1] === checkRemoved) {
+          followMarkers[i][j].setMap(null);
+        }
+      }
+    }
+    dispatch(clearCheckedRemove());
+  };
+
+  useEffect(() => {
+    deleteFollowMarkers();
+  }, [checkedFollow]);
 
   // 마커 제거 함수들
   const deleteMyMarkers = () => {
