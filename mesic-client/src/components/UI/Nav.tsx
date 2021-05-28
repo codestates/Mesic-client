@@ -14,8 +14,6 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
-  const basicImg =
-    "https://pbs.twimg.com/media/EhIO_LyVoAA2szZ?format=jpg&name=small";
   const { isLogin, email, name, nickname, profileImg, user_id } =
     state.userReducer.user;
   const { mode } = state.modeReducer.user;
@@ -23,10 +21,6 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   const [openLogin, setOpenLogin] = useState<boolean>(false);
   const [openSignup, setOpenSignup] = useState<boolean>(false);
   const [openMypage, setOpenMypage] = useState<boolean>(false);
-  //const [profileImg, setProfileImg] = useState<any>(null);
-  // const [email, setEmail] = useState<string>("");
-  // const [name, setName] = useState<string>("");
-  // const [nickname, setNickname] = useState<string>("");
   const [openEditMapage, setOpenEditMypage] = useState<boolean>(false);
 
   const clickLogin = () => {
@@ -95,7 +89,6 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
         openMypage={openMypage}
         closeMypage={closeMypage}
         profileImg={profileImg}
-        basicImg={basicImg}
         email={email}
         name={name}
         nickname={nickname}
@@ -105,12 +98,12 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
       <EditMypage
         setOpenMypage={setOpenMypage}
         profileImg={profileImg}
-        basicImg={basicImg}
         email={email}
         name={name}
         nickname={nickname}
         openEditMypage={openEditMapage}
         setOpenEditMypage={setOpenEditMypage}
+        getUserInfo={getUserInfo}
       ></EditMypage>
       <div className="nav">
         <Link to="/">
