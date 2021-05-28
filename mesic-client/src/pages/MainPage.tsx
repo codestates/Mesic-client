@@ -63,6 +63,7 @@ function MainPage() {
 
   // 로그인 유저의 핀 데이터
   const [myPinData, setMypinData] = useState<any[]>([]);
+  const [pinUpdate, setPinUpdate] = useState<boolean>(false);
 
   // 삭제 버튼 제거
   const [delPinBtn, setDelPinBtn] = useState<any>(null);
@@ -76,11 +77,11 @@ function MainPage() {
 
   // 로그인 후 유저의 핀 가져오기
   useEffect(() => {
-    if (isLogin) {
+    if (isLogin || pinUpdate) {
       getMyPins();
     }
     return;
-  }, [map, mode, isLogin]);
+  }, [map, mode, isLogin, pinUpdate]);
 
   // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
@@ -142,6 +143,7 @@ function MainPage() {
       .then((data) => {
         console.log("my pin data : ", data);
         setMypinData(data);
+        setPinUpdate(false);
       })
       .catch((err) => console.log(err));
   };
@@ -503,7 +505,10 @@ function MainPage() {
       )} */}
       <div ref={detailModal}>
         {openReadModal ? (
-          <ReadModal readMarkerData={readMarkerData} />
+          <ReadModal
+            readMarkerData={readMarkerData}
+            setPinUpdate={setPinUpdate}
+          />
         ) : openPostModal ? (
           <PostModal postLatLng={postLatLng} />
         ) : (
