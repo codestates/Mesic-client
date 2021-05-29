@@ -8,6 +8,7 @@ export const LOGOUT = "LOGOUT" as const;
 export const ADD_CHECKED_FOLLOW = "ADD_CHECKED_FOLLOW" as const;
 export const DELETE_CHECKED_FOLLOW = "DELETE_CHECKED_FOLLOW" as const;
 export const CLEAR_CHECKED_REMOVE = "CLEAR_CHECKED_REMOVE" as const;
+export const ITERATE_MARKERS = "ITERATE_MARKERS" as const;
 
 export type Action =
   | ReturnType<typeof switchMode>
@@ -17,6 +18,7 @@ export type Action =
   | ReturnType<typeof addCheckedFollow>
   | ReturnType<typeof deleteCheckedFollow>
   | ReturnType<typeof clearCheckedRemove>
+  | ReturnType<typeof iterateMarkers>
   | ReturnType<typeof logout>;
 
 export const switchMode = (data: "READ" | "POST" | "CREATED" | "NONE"): any => {
@@ -86,6 +88,12 @@ export const deleteCheckedFollow = (user_id: string): any => {
     payload: {
       user_id,
     },
+  };
+};
+
+export const iterateMarkers = (): any => {
+  return {
+    type: ITERATE_MARKERS,
   };
 };
 

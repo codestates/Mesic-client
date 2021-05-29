@@ -3,10 +3,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import SearchLocation from "../components/UI/SearchLocation";
 import Nav from "../components/UI/Nav";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  clearCheckedRemove,
-  switchMode,
-} from ".././actions/index";
+import { clearCheckedRemove, switchMode } from ".././actions/index";
 import { RootState } from ".././reducers";
 import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
@@ -226,7 +223,14 @@ function MainPage() {
         parseFloat(myPinData[i].location.longitude),
         parseFloat(myPinData[i].location.latitude)
       );
+
+      const image = new window.kakao.maps.MarkerImage(
+        "/images/marker/userpin.png",
+        new window.kakao.maps.Size(90, 70)
+      );
+
       const marker = new window.kakao.maps.Marker({
+        image,
         map,
         position,
       });
@@ -335,7 +339,7 @@ function MainPage() {
 
       const image = new window.kakao.maps.MarkerImage(
         `/images/FollowMarker/${markerSet[currentMarker][0]}`,
-        new window.kakao.maps.Size(80, 65)
+        new window.kakao.maps.Size(90, 70)
       );
 
       const marker = new window.kakao.maps.Marker({
@@ -583,13 +587,6 @@ function MainPage() {
         keywordSearchSelect={keywordSearchSelect}
       />
       <FollowList setLoginController={setLoginController} />
-      {/* {openReadModal ? (
-        <ReadModal readMarkerData={readMarkerData} />
-      ) : openPostModal ? (
-        <PostModal />
-      ) : (
-        <></>
-      )} */}
       <div ref={detailModal}>
         {openReadModal ? (
           <ReadModal
