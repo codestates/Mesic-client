@@ -11,6 +11,7 @@ function ConfirmModal({
   setReadMusic,
   setUpdateMode,
   imageInput,
+  deleteReadMusic,
 }: any) {
   const deleteReadImg = () => {
     //서버요청
@@ -36,14 +37,6 @@ function ConfirmModal({
     setUpdateMode(false); // PostMusic 위젯을 비활성화
     setOpenConfirm(false);
   };
-  const deleteReadMusic = () => {
-    setReadMusic({
-      video_Id: "",
-      title: "",
-      thumbnail: "",
-    });
-    setOpenConfirm(false);
-  };
 
   return (
     <div className={`background ${openConfirm ? "show" : ""}`}>
@@ -60,7 +53,7 @@ function ConfirmModal({
           ) : confirmType === "postMusic" ? (
             <button onClick={deletePostMusic}>예-postMusic</button>
           ) : confirmType === "readMusic" ? (
-            <button onClick={deleteReadMusic}>예-readeMusic</button>
+            <button onClick={() => deleteReadMusic()}>예-readeMusic</button>
           ) : (
             <></>
           )}

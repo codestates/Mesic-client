@@ -5,7 +5,7 @@ import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
 import EditMusic from "../DetailModal/EditMusic";
 
-function ReadMusic({ readMusic, setReadMusic }: any) {
+function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
@@ -24,24 +24,44 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
   const { isLogin, token } = state.user;
 
   const updateReadMusic = () => {
+    const data = { music: updateMusic };
     axios
-      .patch(
-        `${process.env.REACT_APP_SERVER_URL}/music/`,
-        {
-          music: updateMusic,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => console.log(res));
-    //setReadMusic()
-    //setUpdateMusic(null)
-    //setUpdateMode(false)
+      .patch(`${process.env.REACT_APP_SERVER_URL}/music/${markerId}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        getUpdatedPin();
+      });
   };
-  console.log(readMusic.video_Id);
+
+  const deleteReadMusic = () => {
+    const data = {
+      music: {
+        video_Id: "",
+        title: "",
+        thumbnail: "",
+      },
+    };
+    axios
+      .patch(`${process.env.REACT_APP_SERVER_URL}/music/${markerId}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        getUpdatedPin();
+      });
+  };
+
+  const getUpdatedPin = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${markerId}`)
+      .then((res) => {
+        console.log("deleteMusic: ", res.data.music);
+        setReadMusic(res.data.music);
+        setPinUpdate(true);
+        setUpdateMode(false);
+        setOpenConfirm(false);
+      });
+  };
 
   return (
     <>
@@ -52,6 +72,7 @@ function ReadMusic({ readMusic, setReadMusic }: any) {
         setReadMusic={setReadMusic}
         updateMode={updateMode}
         setUpdateMusic={setUpdateMusic}
+        deleteReadMusic={deleteReadMusic}
       />
       <EditMusic
         openEditMusic={openEditMusic}
