@@ -23,8 +23,8 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        //console.log("patchMemo ===", res);
         getUpdatedPin();
+        setUpdateMode(false);
       })
       .catch((err) => console.log(err));
   };
@@ -33,7 +33,6 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${markerId}`)
       .then((res) => {
-        //console.log("getpins after patch : ", res);
         setReadMemo(res.data.memo);
         setPinUpdate(true);
         setUpdateMode(false);
