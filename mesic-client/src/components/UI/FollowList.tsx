@@ -7,13 +7,14 @@ import EachFollow from "./EachFollow";
 import SearchUser from "./SearchUser";
 
 function FollowList({ setLoginController }: any) {
-  const state = useSelector((state: RootState) => state.userReducer);
+  const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-  const { follow, user_id } = state.user;
+  const { follow, user_id } = state.userReducer.user;
+  const { checkedFollow }: any = state.modeReducer;
 
   const inputFollow = useRef<any>();
   const [followInput, setFollowInput] = useState<string>("");
-  const [followList, setFollowList] = useState<any[]>([]);
+  const [followList, setFollowList] = useState<any>([]);
   const [searchedFollow, setSearchedFollow] = useState<string[]>([]);
   const [openSearchUser, setOpenSearchUser] = useState<boolean>(false);
 
@@ -26,12 +27,13 @@ function FollowList({ setLoginController }: any) {
           .get(`${process.env.REACT_APP_SERVER_URL}/users/${eachId}`)
           .then((res) => {
             console.log("getting follow userinfo : ", res);
+            res.data.marker = "";
             tempArr.push(res.data);
           });
       }
       setTimeout(() => {
         setFollowList(tempArr);
-      }, 500);
+      }, 200);
     }
   }, [follow]);
 
@@ -43,7 +45,7 @@ function FollowList({ setLoginController }: any) {
   // 입력 값으로 유저 찾기
   const handleSearchFollow = () => {
     setSearchedFollow(
-      followList.filter((follow) =>
+      followList.filter((follow: any) =>
         follow.name.toLowerCase().includes(followInput)
       )
     );
@@ -67,6 +69,21 @@ function FollowList({ setLoginController }: any) {
       })
       .catch((err) => console.log(err));
   };
+
+  // 팔로우 체크 시 팔로우 마커 색상 저장
+  useEffect(() => {
+    if (checkedFollow.length === 0) {
+      return;
+    }
+    for (let i = 0; i < followList.length; i += 1) {
+      for (let j = 0; j < checkedFollow.length; j += 1) {
+        if (followList[i]._id === checkedFollow[j].user_id) {
+          followList[i].marker = checkedFollow[j].marker[1];
+          setFollowList([...followList]);
+        }
+      }
+    }
+  }, [checkedFollow]);
 
   return (
     <>
