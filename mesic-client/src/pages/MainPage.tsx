@@ -299,9 +299,14 @@ function MainPage() {
         Dummies[i].location.longitude,
         Dummies[i].location.latitude
       );
+      const image = new window.kakao.maps.MarkerImage(
+        "/images/marker/userpin.png",
+        new window.kakao.maps.Size(90, 70)
+      );
       const marker = new window.kakao.maps.Marker({
         map,
         position,
+        image,
       });
       marker.id = Dummies[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
@@ -352,12 +357,29 @@ function MainPage() {
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         console.log(marker.id);
-        // handleMyMarkerClick(marker.id);
+        handleFollowMarkerClick(marker.id[0]);
       });
       marker.setMap(map);
       markers.push(marker);
     }
     setFollowMarkers([...followMarkers, markers]);
+  };
+
+  // 체크된 마커 데이터 가져와서 저장
+  const handleFollowMarkerClick = (pinId: string) => {
+    if (openPostModal) {
+      setOpenPostModal(false);
+    }
+    setOpenReadModal(false);
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${pinId}`)
+      .then((res) => res.data)
+      .then((data) => setReadMarkerData(data))
+      .then(() => {
+        dispatch(switchMode("WATCH"));
+        setOpenReadModal(true);
+      })
+      .catch((err) => console.log(err));
   };
 
   // 체크박스 체크 시 마커 생성
@@ -446,7 +468,6 @@ function MainPage() {
     setMap(map);
 
     // 지도 클릭 핸들러
-
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
       setOpenReadModal(false);
       setReadMarkerData(null);

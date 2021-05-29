@@ -21,7 +21,9 @@ export type Action =
   | ReturnType<typeof iterateMarkers>
   | ReturnType<typeof logout>;
 
-export const switchMode = (data: "READ" | "POST" | "CREATED" | "NONE"): any => {
+export const switchMode = (
+  data: "READ" | "POST" | "CREATED" | "WATCH" | "NONE"
+): any => {
   return {
     type: SWITCH_MODE,
     payload: {

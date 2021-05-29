@@ -5,8 +5,9 @@ import { RootState } from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
 
 function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
-  const state = useSelector((state: RootState) => state.userReducer);
-  const { isLogin, token } = state.user;
+  const state = useSelector((state: RootState) => state);
+  const { isLogin, token } = state.userReducer.user;
+  const { mode } = state.modeReducer.user;
 
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
@@ -83,7 +84,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
             </>
           ) : (
             <div>
-              {isLogin ? (
+              {isLogin && mode !== "WATCH" ? (
                 <>
                   <button onClick={() => setUpdateMode(true)}>수정</button>
                   <button onClick={() => setOpenConfirm(true)}>삭제</button>

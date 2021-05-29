@@ -117,13 +117,13 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         </div>
       ) : (
         <div className="border">
-          {readMusic.video_Id.length === 0 ? (
+          {readMusic.video_Id.length === 0 && mode !== "WATCH" ? (
             <div className="ifram-outsider">
               <button onClick={() => setOpenEditMusic(true)}>+</button>
             </div>
           ) : (
             <div>
-              {isLogin ? (
+              {isLogin && mode !== "WATCH" ? (
                 <>
                   <button onClick={() => setOpenEditMusic(true)}>수정</button>
                   <button onClick={() => setOpenConfirm(true)}>삭제</button>
