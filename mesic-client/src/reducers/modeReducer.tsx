@@ -3,6 +3,7 @@ import {
   ADD_CHECKED_FOLLOW,
   DELETE_CHECKED_FOLLOW,
   CLEAR_CHECKED_REMOVE,
+  ITERATE_MARKERS,
 } from "../actions/index";
 import { initialState } from "./initialState";
 import { Action } from "../actions/index";
@@ -19,7 +20,6 @@ const modeReducer = (state = initialState, action: Action) => {
     case ADD_CHECKED_FOLLOW:
       return Object.assign({}, state, {
         ...state,
-        currentMarker: (state.currentMarker + 1) % 6,
         checkAdded: action.payload.user_id,
         checkedFollow: [
           ...state.checkedFollow,
@@ -31,6 +31,10 @@ const modeReducer = (state = initialState, action: Action) => {
             ],
           },
         ],
+      });
+    case ITERATE_MARKERS:
+      return Object.assign({}, state, {
+        currentMarker: (state.currentMarker + 1) % 6,
       });
     case DELETE_CHECKED_FOLLOW:
       return Object.assign({}, state, {

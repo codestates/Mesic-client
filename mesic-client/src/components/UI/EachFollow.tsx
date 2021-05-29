@@ -2,13 +2,17 @@ import axios from "axios";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-import { addCheckedFollow, deleteCheckedFollow } from "../../actions";
+import {
+  addCheckedFollow,
+  deleteCheckedFollow,
+  iterateMarkers,
+} from "../../actions";
 
 function EachFollow({ eachFollow, updateFollow }: any) {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const { user_id, token } = state.userReducer.user;
-  const { checkedFollow, currentMarker, markerSet }: any = state.modeReducer;
+  const { checkedFollow, checkAdded }: any = state.modeReducer;
   const followCheckbox = useRef<any>();
 
   const deleteFollow = () => {
@@ -32,12 +36,17 @@ function EachFollow({ eachFollow, updateFollow }: any) {
         console.log("delete follow : ", res);
         updateFollow();
       })
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const checkBoxHandler = () => {
     if (followCheckbox.current.checked) {
-      dispatch(addCheckedFollow(eachFollow._id));
+      if (checkAdded.length === 0) {
+        dispatch(addCheckedFollow(eachFollow._id));
+      } else {
+        dispatch(iterateMarkers());
+        dispatch(addCheckedFollow(eachFollow._id));
+      }
     } else {
       dispatch(deleteCheckedFollow(eachFollow._id));
     }
@@ -65,7 +74,7 @@ function EachFollow({ eachFollow, updateFollow }: any) {
           <span>{eachFollow.name}</span>
           <img
             className="my-pin-color"
-            src={`images/FollowMarker/${markerSet[currentMarker][1]}`}
+            src={`images/FollowMarker/${eachFollow.marker}`}
           />
           <br />
           <span>{eachFollow.email}</span>
