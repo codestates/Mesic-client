@@ -2,7 +2,7 @@ import {
   EDIT_USERINFO,
   GET_ACCESSTOKEN,
   REFRESH_FOLLOW,
-  LOGOUT,
+  CLEAR_USER_INFO,
 } from "../actions/index";
 import { initialState } from "./initialState";
 import { Action } from "../actions/index";
@@ -39,7 +39,7 @@ const userReducer = (state = initialState, action: Action) => {
         },
       });
 
-    case LOGOUT:
+    case CLEAR_USER_INFO:
       return Object.assign({}, state, {
         user: {
           ...state.user,
@@ -53,6 +53,7 @@ const userReducer = (state = initialState, action: Action) => {
           follow: [],
         },
       });
+
     default:
       return state;
   }

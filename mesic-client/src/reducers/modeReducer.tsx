@@ -3,6 +3,7 @@ import {
   ADD_CHECKED_FOLLOW,
   DELETE_CHECKED_FOLLOW,
   CLEAR_CHECKED_REMOVE,
+  CLEAR_MODE_STATE,
   ITERATE_MARKERS,
 } from "../actions/index";
 import { initialState } from "./initialState";
@@ -49,6 +50,15 @@ const modeReducer = (state = initialState, action: Action) => {
         ...state,
         checkRemoved: "",
       });
+      case CLEAR_MODE_STATE:
+      return Object.assign({}, state, {
+        ...state,
+        checkRemoved: "",
+        checkAdded: "",
+        checkedFollow: [],
+        currentMarker: 0,
+      });
+
     default:
       return state;
   }
