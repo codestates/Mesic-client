@@ -72,8 +72,7 @@ function MainPage() {
   const [myPinData, setMypinData] = useState<any[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
 
-  // 삭제 버튼 제거
-  const [delPinBtn, setDelPinBtn] = useState<any>(null);
+  const [saveInfoWindow, setSaveInfoWindow] = useState<any[]>([]);
 
   // 지도 동적 렌더링
   useEffect(() => {
@@ -141,6 +140,10 @@ function MainPage() {
       }
     }
   }, [myPinData, map]);
+
+  useEffect(() => {
+    closeInfoWindows();
+  });
 
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
@@ -234,6 +237,7 @@ function MainPage() {
     }
 
     const markers = [];
+    const infoWindows = [];
     for (let i = 0; i < myPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
         parseFloat(myPinData[i].location.longitude),
@@ -282,7 +286,9 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
+      infoWindows.push(infowindow);
     }
+    setSaveInfoWindow([...saveInfoWindow, ...infoWindows]);
     setMyMarkers(markers);
   };
 
@@ -351,10 +357,10 @@ function MainPage() {
   };
 
   // 체크 된 팔로우 마커 생성
-  const [infowindowData, setInfowindowData] = useState<any>({});
   const [followMarkers, setFollowMarkers] = useState<any[]>([]);
   const viewFollowMarkers = () => {
     const markers = [];
+    const infoWindows = [];
     for (let i = 0; i < followPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
         parseFloat(followPinData[i].location.longitude),
@@ -403,8 +409,16 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
+      infoWindows.push(infowindow);
     }
     setFollowMarkers([...followMarkers, markers]);
+    setSaveInfoWindow([...saveInfoWindow, ...infoWindows]);
+  };
+
+  const closeInfoWindows = () => {
+    for (let i = 0; i < saveInfoWindow.length; i += 1) {
+      saveInfoWindow[i].close();
+    }
   };
 
   // 체크된 마커 데이터 가져와서 저장
