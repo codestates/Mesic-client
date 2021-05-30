@@ -182,6 +182,22 @@ function MainPage() {
     setSearchMarkers(markers);
   };
 
+  // 마커 삭제
+  const deleteMyMarker = (pinId: any) => {
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setOpenReadModal(false);
+        dispatch(switchMode("NONE"));
+      })
+      .catch((err) => console.log(err));
+  };
+
   // (POST MODE) 지도 클릭 마커
 
   const postMarkerControl = () => {
@@ -242,51 +258,6 @@ function MainPage() {
       });
       marker.setMap(map);
       markers.push(marker);
-
-      // 만든 마커를 즉시 READ 모달에 띄움
-
-      const content = document.createElement("span");
-      content.textContent = "X";
-      content.className = "deleteBtn";
-      content.id = myPinData[i]._id;
-      content.style.cssText = "color:red;"; // CSS 지우세요
-      content.setAttribute("data-id", myPinData[i]._id);
-
-      const delPosition = new window.kakao.maps.LatLng(
-        parseFloat(myPinData[i].location.longitude),
-        parseFloat(myPinData[i].location.latitude)
-      );
-
-      const customOverlay = new window.kakao.maps.CustomOverlay({
-        map: map,
-        position: delPosition,
-        content: content,
-        yAnchor: 2.7,
-        xAnchor: 2.8,
-        clickable: true,
-      });
-
-      // 핀 삭제
-      content.addEventListener("click", (e: any) => {
-        //! 삭제 버튼이 핀 삭제 시 바로 사라지지 않는 버그..
-        //TODO : 확인 절차 필요
-        customOverlay.setMap(null);
-
-        axios
-          .delete(
-            `${process.env.REACT_APP_SERVER_URL}/pins/${e.target.dataset.id}`,
-            {
-              headers: {
-                authorization: `Bearer ${token}`,
-              },
-            }
-          )
-          .then((res) => {
-            console.log(res);
-            dispatch(switchMode("NONE"));
-          })
-          .catch((err) => console.log(err));
-      });
     }
     setMyMarkers(markers);
   };
@@ -613,6 +584,7 @@ function MainPage() {
           <ReadModal
             readMarkerData={readMarkerData}
             setPinUpdate={setPinUpdate}
+            deleteMyMarker={deleteMyMarker}
           />
         ) : openPostModal ? (
           <PostModal postLatLng={postLatLng} />
@@ -626,3 +598,7 @@ function MainPage() {
 }
 
 export default MainPage;
+
+/*
+
+          */
