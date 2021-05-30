@@ -39,6 +39,7 @@ export const editUserinfo = (
   email: string,
   name: string,
   nickname: string,
+  profileImg: string,
   follow: string[]
 ): any => {
   return {
@@ -48,6 +49,7 @@ export const editUserinfo = (
       email,
       name,
       nickname,
+      profileImg,
       follow,
     },
   };
