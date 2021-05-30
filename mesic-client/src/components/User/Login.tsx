@@ -83,8 +83,8 @@ function Login({
     inputPw.current.value = "";
     setIdInput("");
     setPwInput("");
-    setLoginController(false);
-    deletePostMarkers();
+    // setLoginController(false);
+    // deletePostMarkers();
   };
 
   const [idInput, setIdInput] = useState<string>("");

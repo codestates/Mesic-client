@@ -531,7 +531,6 @@ function MainPage() {
       console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
-        //alert("로그인 후 나만의 로그를 만들어보세요!");
         setLoginController(true);
       } else {
         dispatch(switchMode("POST"));
