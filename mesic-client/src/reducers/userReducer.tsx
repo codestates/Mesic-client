@@ -10,7 +10,9 @@ import { Action } from "../actions/index";
 const userReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case EDIT_USERINFO:
-      const { id, email, name, nickname, follow } = action.payload;
+      const { id, email, name, nickname, profileImg, follow } = action.payload;
+      const basicImg =
+        "https://pbs.twimg.com/media/EhIO_LyVoAA2szZ?format=jpg&name=small";
       return Object.assign({}, state, {
         user: {
           ...state.user,
@@ -19,6 +21,7 @@ const userReducer = (state = initialState, action: Action) => {
           email,
           name,
           nickname,
+          profileImg: profileImg.length > 0 ? profileImg : basicImg,
           follow,
         },
       });

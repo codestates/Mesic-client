@@ -56,8 +56,9 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/${user_id}`)
       .then((res) => {
-        const { email, follow, name, nickname, _id } = res.data;
-        dispatch(editUserinfo(_id, email, name, nickname, follow));
+        console.log("getUserInfo : ", res.data);
+        const { email, follow, name, nickname, _id, profile } = res.data;
+        dispatch(editUserinfo(_id, email, name, nickname, profile, follow));
       })
       .catch((err) => console.log(err));
   };

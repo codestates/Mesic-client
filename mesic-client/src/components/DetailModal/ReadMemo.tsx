@@ -80,7 +80,6 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
               {isLogin && mode !== "WATCH" ? (
                 <>
                   <button onClick={() => setUpdateMode(true)}>수정</button>
-                  <button onClick={() => setOpenConfirm(true)}>삭제</button>
                 </>
               ) : (
                 <></>
