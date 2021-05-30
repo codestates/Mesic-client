@@ -70,6 +70,8 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   useEffect(() => {
     if (loginController) {
       setOpenLogin(true);
+      setLoginController(false);
+      deletePostMarkers();
     }
     return;
   }, [loginController]);
