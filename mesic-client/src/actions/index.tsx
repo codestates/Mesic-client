@@ -4,11 +4,12 @@ export const SWITCH_MODE = "SWITCH_MODE" as const;
 export const EDIT_USERINFO = "EDIT_USERINFO" as const;
 export const GET_ACCESSTOKEN = "GET_ACCESSTOKEN" as const;
 export const REFRESH_FOLLOW = "REFRESH_FOLLOW" as const;
-export const LOGOUT = "LOGOUT" as const;
+export const CLEAR_USER_INFO = "CLEAR_USERINFO" as const;
 export const ADD_CHECKED_FOLLOW = "ADD_CHECKED_FOLLOW" as const;
 export const DELETE_CHECKED_FOLLOW = "DELETE_CHECKED_FOLLOW" as const;
 export const CLEAR_CHECKED_REMOVE = "CLEAR_CHECKED_REMOVE" as const;
 export const ITERATE_MARKERS = "ITERATE_MARKERS" as const;
+export const CLEAR_MODE_STATE = "CLEAR_MODE_STATE" as const;
 
 export type Action =
   | ReturnType<typeof switchMode>
@@ -19,7 +20,8 @@ export type Action =
   | ReturnType<typeof deleteCheckedFollow>
   | ReturnType<typeof clearCheckedRemove>
   | ReturnType<typeof iterateMarkers>
-  | ReturnType<typeof logout>;
+  | ReturnType<typeof clearModeState>
+  | ReturnType<typeof clearUserInfo>;
 
 export const switchMode = (
   data: "READ" | "POST" | "CREATED" | "WATCH" | "NONE"
@@ -69,9 +71,15 @@ export const refreshFollow = (follow: string[]): any => {
   };
 };
 
-export const logout = () => {
+export const clearUserInfo = () => {
   return {
-    type: LOGOUT,
+    type: CLEAR_USER_INFO,
+  };
+};
+
+export const clearModeState = () => {
+  return {
+    type: CLEAR_MODE_STATE,
   };
 };
 

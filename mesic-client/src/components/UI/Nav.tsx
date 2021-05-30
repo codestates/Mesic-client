@@ -7,7 +7,12 @@ import Login from "../User/Login";
 import Signup from "../User/Signup";
 import Mypage from "../User/Mypage";
 import EditMypage from "../User/EditMypage";
-import { logout, editUserinfo, getAccessToken } from "../../actions/index";
+import {
+  clearUserInfo,
+  clearModeState,
+  editUserinfo,
+  getAccessToken,
+} from "../../actions/index";
 
 function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   //const {open} = props;
@@ -27,13 +32,20 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
     setOpenLogin(true);
   };
 
+  const clearAllCheckBoxes = () => {
+    document
+      .querySelectorAll("follow-checkbox")
+      .forEach((el: any) => (el.checked = false));
+  };
+
   const clickLogout = () => {
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/users/logout/${user_id}`)
       .then((res) => {
         //console.log("logout ===", res);
         if (res.data.message === "seucess") {
-          dispatch(logout());
+          dispatch(clearUserInfo());
+          dispatch(clearModeState());
         } else {
           console.log("failed");
         }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import {
@@ -12,7 +12,7 @@ function EachFollow({ eachFollow, updateFollow }: any) {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const { user_id, token } = state.userReducer.user;
-  const { checkedFollow, checkAdded }: any = state.modeReducer;
+  const { checkedFollow }: any = state.modeReducer;
   const followCheckbox = useRef<any>();
 
   const deleteFollow = () => {
