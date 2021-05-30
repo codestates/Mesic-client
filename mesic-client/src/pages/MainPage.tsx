@@ -182,6 +182,22 @@ function MainPage() {
     setSearchMarkers(markers);
   };
 
+  // 마커 삭제
+  const deleteMyMarker = (pinId: any) => {
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setOpenReadModal(false);
+        dispatch(switchMode("NONE"));
+      })
+      .catch((err) => console.log(err));
+  };
+
   // (POST MODE) 지도 클릭 마커
 
   const postMarkerControl = () => {
@@ -266,51 +282,6 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
-
-      // 만든 마커를 즉시 READ 모달에 띄움
-
-      const content = document.createElement("span");
-      content.textContent = "X";
-      content.className = "deleteBtn";
-      content.id = myPinData[i]._id;
-      content.style.cssText = "color:red;"; // CSS 지우세요
-      content.setAttribute("data-id", myPinData[i]._id);
-
-      const delPosition = new window.kakao.maps.LatLng(
-        parseFloat(myPinData[i].location.longitude),
-        parseFloat(myPinData[i].location.latitude)
-      );
-
-      const customOverlay = new window.kakao.maps.CustomOverlay({
-        map: map,
-        position: delPosition,
-        content: content,
-        yAnchor: 2.7,
-        xAnchor: 2.8,
-        clickable: true,
-      });
-
-      // 핀 삭제
-      content.addEventListener("click", (e: any) => {
-        //! 삭제 버튼이 핀 삭제 시 바로 사라지지 않는 버그..
-        //TODO : 확인 절차 필요
-        customOverlay.setMap(null);
-
-        axios
-          .delete(
-            `${process.env.REACT_APP_SERVER_URL}/pins/${e.target.dataset.id}`,
-            {
-              headers: {
-                authorization: `Bearer ${token}`,
-              },
-            }
-          )
-          .then((res) => {
-            console.log(res);
-            dispatch(switchMode("NONE"));
-          })
-          .catch((err) => console.log(err));
-      });
     }
     setMyMarkers(markers);
   };
@@ -323,9 +294,14 @@ function MainPage() {
         Dummies[i].location.longitude,
         Dummies[i].location.latitude
       );
+      const image = new window.kakao.maps.MarkerImage(
+        "/images/marker/userpin.png",
+        new window.kakao.maps.Size(90, 70)
+      );
       const marker = new window.kakao.maps.Marker({
         map,
         position,
+        image,
       });
       marker.id = Dummies[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
@@ -400,7 +376,7 @@ function MainPage() {
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         console.log(marker.id);
-        // handleMyMarkerClick(marker.id);
+        handleFollowMarkerClick(marker.id[0]);
       });
       //팔로우 마커 호버 적용
       const iwContent = document.createElement("div");
@@ -429,6 +405,23 @@ function MainPage() {
       markers.push(marker);
     }
     setFollowMarkers([...followMarkers, markers]);
+  };
+
+  // 체크된 마커 데이터 가져와서 저장
+  const handleFollowMarkerClick = (pinId: string) => {
+    if (openPostModal) {
+      setOpenPostModal(false);
+    }
+    setOpenReadModal(false);
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${pinId}`)
+      .then((res) => res.data)
+      .then((data) => setReadMarkerData(data))
+      .then(() => {
+        dispatch(switchMode("WATCH"));
+        setOpenReadModal(true);
+      })
+      .catch((err) => console.log(err));
   };
 
   // 체크박스 체크 시 마커 생성
@@ -517,7 +510,6 @@ function MainPage() {
     setMap(map);
 
     // 지도 클릭 핸들러
-
     window.kakao.maps.event.addListener(map, "click", (mouseEvent: any) => {
       setOpenReadModal(false);
       setReadMarkerData(null);
@@ -663,6 +655,7 @@ function MainPage() {
           <ReadModal
             readMarkerData={readMarkerData}
             setPinUpdate={setPinUpdate}
+            deleteMyMarker={deleteMyMarker}
           />
         ) : openPostModal ? (
           <PostModal postLatLng={postLatLng} />
@@ -676,3 +669,7 @@ function MainPage() {
 }
 
 export default MainPage;
+
+/*
+
+          */

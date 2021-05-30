@@ -41,12 +41,8 @@ function EachFollow({ eachFollow, updateFollow }: any) {
 
   const checkBoxHandler = () => {
     if (followCheckbox.current.checked) {
-      if (checkAdded.length === 0) {
-        dispatch(addCheckedFollow(eachFollow._id));
-      } else {
-        dispatch(iterateMarkers());
-        dispatch(addCheckedFollow(eachFollow._id));
-      }
+      dispatch(iterateMarkers());
+      dispatch(addCheckedFollow(eachFollow._id));
     } else {
       dispatch(deleteCheckedFollow(eachFollow._id));
     }
