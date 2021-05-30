@@ -125,6 +125,15 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-.my-pin-color{
-  height:30px
+.my-pin-color {
+  height: 30px;
+}
+.preview {
+  width: 200px;
+}
+.preview-img {
+  width: 100px;
+}
+.preview-title {
+  font-size: small;
 }

@@ -60,7 +60,7 @@ function SearchUser({
 
   return (
     <div className={`background ${openSearchUser ? "show" : ""}`}>
-      <div
+      <span
         className="searchuser-close"
         onClick={() => {
           setOpenSearchUser(false);
@@ -69,7 +69,7 @@ function SearchUser({
         }}
       >
         X
-      </div>
+      </span>
       <div>
         <input
           type="text"

@@ -240,6 +240,30 @@ function MainPage() {
         console.log(marker.id);
         handleMyMarkerClick(marker.id);
       });
+
+      const iwContent = document.createElement("div");
+      iwContent.className = "preview";
+      const thumbnails = document.createElement("img");
+      thumbnails.className = "preview-img";
+      thumbnails.src = myPinData[i].music.thumbnail;
+      const title = document.createElement("span");
+      title.className = "preview-title";
+      title.textContent = myPinData[i].music.title;
+      const memo = document.createElement("div");
+      memo.className = "preview-memo";
+      memo.textContent = myPinData[i].memo;
+
+      iwContent.append(thumbnails, title, memo);
+      const infowindow = new window.kakao.maps.InfoWindow({
+        content: iwContent,
+      });
+      window.kakao.maps.event.addListener(marker, "mouseover", () => {
+        infowindow.open(map, marker);
+      });
+      window.kakao.maps.event.addListener(marker, "mouseout", () => {
+        infowindow.close();
+      });
+
       marker.setMap(map);
       markers.push(marker);
 
@@ -308,6 +332,29 @@ function MainPage() {
         // 마커 클릭 시
         handleMyMarkerClick(marker.id);
       });
+
+      const iwContent = document.createElement("div");
+      iwContent.className = "preview";
+      const thumbnails = document.createElement("img");
+      thumbnails.className = "preview-img";
+      thumbnails.src = Dummies[i].music.thumbnail;
+      const title = document.createElement("span");
+      title.textContent = Dummies[i].music.title;
+      const memo = document.createElement("div");
+      memo.className = "preview-memo";
+      memo.textContent = Dummies[i].memo;
+      iwContent.append(thumbnails, title, memo);
+
+      const infowindow = new window.kakao.maps.InfoWindow({
+        content: iwContent,
+      });
+      window.kakao.maps.event.addListener(marker, "mouseover", () => {
+        infowindow.open(map, marker);
+      });
+      window.kakao.maps.event.addListener(marker, "mouseout", () => {
+        infowindow.close();
+      });
+
       marker.setMap(map);
       markers.push(marker);
     }
@@ -328,6 +375,7 @@ function MainPage() {
   };
 
   // 체크 된 팔로우 마커 생성
+  const [infowindowData, setInfowindowData] = useState<any>({});
   const [followMarkers, setFollowMarkers] = useState<any[]>([]);
   const viewFollowMarkers = () => {
     const markers = [];
@@ -354,6 +402,29 @@ function MainPage() {
         console.log(marker.id);
         // handleMyMarkerClick(marker.id);
       });
+      //팔로우 마커 호버 적용
+      const iwContent = document.createElement("div");
+      iwContent.className = "preview";
+      const thumbnails = document.createElement("img");
+      thumbnails.className = "preview-img";
+      thumbnails.src = followPinData[i].music.thumbnail;
+      const title = document.createElement("span");
+      title.textContent = followPinData[i].music.title;
+      const memo = document.createElement("div");
+      memo.className = "preview-memo";
+      memo.textContent = followPinData[i].memo;
+
+      iwContent.append(thumbnails, title, memo);
+      const infowindow = new window.kakao.maps.InfoWindow({
+        content: iwContent,
+      });
+      window.kakao.maps.event.addListener(marker, "mouseover", () => {
+        infowindow.open(map, marker);
+      });
+      window.kakao.maps.event.addListener(marker, "mouseout", () => {
+        infowindow.close();
+      });
+
       marker.setMap(map);
       markers.push(marker);
     }

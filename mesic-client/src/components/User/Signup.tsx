@@ -94,7 +94,10 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
               .catch((err) => console.log(err));
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setEmailError("이미 존재하는 이메일입니다.");
+        });
     } else {
       console.log("signup요청 실패");
     }
