@@ -71,15 +71,8 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
         </div>
       ) : (
         <div className="border">
-          {readMemo.length === 0 ? (
+          {readMemo.length === 0 && mode !== "WATCH" ? (
             <>
-              {/* <textarea
-                onChange={handleUpdateMemo}
-                placeholder="메모를 입력해주세요!"
-              >
-                {readMemo}
-              </textarea>
-              <button onClick={updateReadMemo}>저장</button> */}
               <button onClick={() => setUpdateMode(true)}>메모 추가하기</button>
             </>
           ) : (
