@@ -6,8 +6,7 @@ export const initialState = {
     token: "",
     email: "",
     name: "",
-    profileImg:
-      "https://pbs.twimg.com/media/EhIO_LyVoAA2szZ?format=jpg&name=small",
+    profileImg: "",
     nickname: "",
     user_id: "",
     follow: [],

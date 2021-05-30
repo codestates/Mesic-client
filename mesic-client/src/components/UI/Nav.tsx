@@ -21,7 +21,6 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
 
   const { isLogin, email, name, nickname, profileImg, user_id } =
     state.userReducer.user;
-  const { mode } = state.modeReducer.user;
 
   const [openLogin, setOpenLogin] = useState<boolean>(false);
   const [openSignup, setOpenSignup] = useState<boolean>(false);
@@ -30,12 +29,6 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
 
   const clickLogin = () => {
     setOpenLogin(true);
-  };
-
-  const clearAllCheckBoxes = () => {
-    document
-      .querySelectorAll("follow-checkbox")
-      .forEach((el: any) => (el.checked = false));
   };
 
   const clickLogout = () => {

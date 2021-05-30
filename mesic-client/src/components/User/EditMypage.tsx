@@ -20,8 +20,8 @@ function EditMypage({
   const UPDATE_USER_URL = `${process.env.REACT_APP_SERVER_URL}/users/${user_id}`;
 
   const editProfileInput = useRef<any>();
-  const [editNicknameInput, setEditNicknameInput] = useState<string>(nickname);
-  const [editProfileImg, setEditProfileImg] = useState<any>(null);
+  const [editNicknameInput, setEditNicknameInput] = useState<string>("");
+  const [editProfileImg, setEditProfileImg] = useState<any>("");
   const [nicknameError, setNicknameErrorr] = useState<string>("");
 
   const sendModifiedData = () => {
@@ -42,7 +42,7 @@ function EditMypage({
           setOpenEditMypage(false);
           setOpenMypage(true);
           editProfileInput.current.value = "";
-          setEditProfileImg(null);
+          setEditProfileImg("");
         }
       })
       .catch((err) => console.log(err));
@@ -85,7 +85,7 @@ function EditMypage({
         <div className="editmypage-content">
           <div className="profileImg">
             <figure className="profileImg-outsider">
-              {editProfileImg !== null ? (
+              {editProfileImg.length > 0 ? (
                 <img className="profileImg-content" src={editProfileImg}></img>
               ) : (
                 <img className="profileImg-content" src={profileImg}></img>
@@ -106,7 +106,9 @@ function EditMypage({
             닉네임:
             <input
               type="text"
-              value={editNicknameInput}
+              defaultValue={
+                editNicknameInput.length > 0 ? editNicknameInput : nickname
+              }
               onChange={handleEditNicknameInput}
             ></input>
             <div>{nicknameError}</div>
