@@ -12,12 +12,14 @@ function SearchUser({
   setLoginController,
 }: any) {
   const state = useSelector((state: RootState) => state.userReducer);
-  const { follow } = state.user;
+  const myId = state.user.user_id;
 
   const inputSearchUser = useRef<any>();
   const [searchUserInput, setSearchUserInput] = useState<string>("");
   const [searchedUsers, setsearchedUsers] = useState<any[]>([]);
   const [nonFollowList, setNonFollowList] = useState<any[]>([]);
+
+  console.log(myId);
 
   // 팔로우 하지 않은 유저만 필터링
   useEffect(() => {
@@ -26,12 +28,17 @@ function SearchUser({
         .get(`${process.env.REACT_APP_SERVER_URL}/users`)
         .then((res) => res.data)
         .then((allUser) => {
-          return allUser.filter(
-            (user: any) =>
-              !followList.map((follow: any) => follow._id).includes(user._id)
-          );
+          return allUser
+            .filter((eachUser: any) => eachUser._id !== myId)
+            .filter(
+              (meExcluded: any) =>
+                !followList
+                  .map((follow: any) => follow._id)
+                  .includes(meExcluded._id)
+            );
         })
-        .then((res: any) => setNonFollowList(res));
+        .then((res) => setNonFollowList(res))
+        .catch((err) => console.log(err));
     }
   }, [openSearchUser, followList]);
 
