@@ -19,8 +19,6 @@ function SearchUser({
   const [searchedUsers, setsearchedUsers] = useState<any[]>([]);
   const [nonFollowList, setNonFollowList] = useState<any[]>([]);
 
-  console.log(myId);
-
   // 팔로우 하지 않은 유저만 필터링
   useEffect(() => {
     if (openSearchUser) {

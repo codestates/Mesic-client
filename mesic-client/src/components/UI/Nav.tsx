@@ -115,7 +115,12 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
       ></EditMypage>
       <div className="nav">
         <Link to="/">
-          <button className="logo-btn">Logo</button>
+          <button
+            className="logo-btn"
+            onClick={() => dispatch(clearModeState())}
+          >
+            Logo
+          </button>
         </Link>
         <div className="nav-btn">
           <button onClick={isLogin ? clickLogout : clickLogin}>

@@ -117,7 +117,7 @@ function FollowList({ setLoginController }: any) {
               <EachFollow
                 eachFollow={searched}
                 updateFollow={updateFollow}
-                index={searched.email}
+                key={searched.email}
               />
             ))
           ) : (
