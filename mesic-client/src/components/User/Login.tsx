@@ -15,9 +15,9 @@ function Login({
 }: any) {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.userReducer);
-
+  const { isLogin } = state.user;
   // const GOOGLE_LOGIN_API_URL = `${process.env.REACT_APP_SERVER_URL}/google/login`;
-  const GOOGLE_LOGIN_API_URL = "http://localhost:4000/google/login"
+  const GOOGLE_LOGIN_API_URL = "http://localhost:4000/google/login";
   const LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/login`;
   const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&
 redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=350695188416-sc4m6nro89c4sii03qm9qaeltqivnie3.apps.googleusercontent.com`;
@@ -49,34 +49,46 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
   };
 
   const googleLoginHandler = () => {
-		window.location.assign(GOOGLE_LOGIN_URL);
-	};
+    window.location.assign(GOOGLE_LOGIN_URL);
+  };
 
+  /*
+  const { accessToken } = res.data
+  const { name, profile, _id } = res.data._doc
+  const data = {accessToken, name, profile, _id}
+  */
   const getAuth = (authorizationCode: string) => {
-		axios
-			.post(GOOGLE_LOGIN_API_URL, { authorizationCode })
-			.then((res) => {
-				// loginHandler({
-				// 	userId: res.data.userId,
-				// 	token: res.data.token,
-				// 	authenticated: true,
-				// });
-				// history.push("/");
-        console.log(res);
-			})
-			.catch(() => {
-				alert("서버오류로 로그인이 불가합니다.");
-			});
-	};
+    axios
+      .post(GOOGLE_LOGIN_API_URL, { authorizationCode })
+      .then((res) => res.data)
+      .then((data) => {
+        dispatch(getAccessToken(data.accessToken));
+        dispatch(
+          editUserinfo(
+            data._doc._id,
+            "google_login",
+            data._doc.name,
+            "google_login",
+            data._doc.profile,
+            data._doc.follow
+          )
+        );
+      })
+      .catch(() => {
+        alert("서버오류로 로그인이 불가합니다.");
+      });
+  };
 
   useEffect(() => {
-		const url = new URL(window.location.href);
-		const authorizationCode = url.searchParams.get("code");
-		const googleCheck = window.location.href.indexOf("google");
-		if (authorizationCode && googleCheck !== -1) {
-      getAuth(authorizationCode);
-		}
-	});
+    if (!isLogin) {
+      const url = new URL(window.location.href);
+      const authorizationCode = url.searchParams.get("code");
+      const googleCheck = window.location.href.indexOf("google");
+      if (authorizationCode && googleCheck !== -1) {
+        getAuth(authorizationCode);
+      }
+    }
+  }, [isLogin]);
 
   const loginAsGuest = () => {
     const loginData = { email: "yatong@hahaha.com", password: "asdf1!" };
@@ -170,8 +182,8 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
           </div>
         </div>
         <div className="loginContainer" onClick={googleLoginHandler}>
-			    <img alt="googlebutton" className="loginBtn" />
-		    </div>
+          <img alt="googlebutton" className="loginBtn" />
+        </div>
       </div>
     </div>
   );
