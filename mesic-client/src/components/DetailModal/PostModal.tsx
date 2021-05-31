@@ -20,41 +20,37 @@ function PostModal({ postLatLng }: any) {
   });
   const [postImg, setPostImg] = useState<any>("");
   const [postMemo, setPostMemo] = useState<string>("");
+  const [errMessage, setErrMessage] = useState<string>("");
 
   const state = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
   const { user_id, token } = state.user;
 
   const postPinData = async () => {
-    console.log("sending : ", {
+    const data = {
       user_id,
       location: {
         latitude: postLatLng[1],
-        logitude: postLatLng[0],
+        longitude: postLatLng[0],
       },
       music: postMusic,
       photo: postImg,
       memo: postMemo,
-    });
+    };
+    console.log("sending : ", data);
+    if (
+      postMusic.title.length === 0 &&
+      postMemo.length === 0 &&
+      postImg.length === 0
+    ) {
+      setErrMessage("내용을 입력해주세요");
+      return;
+    }
+    setErrMessage("");
     axios
-      .post(
-        `${process.env.REACT_APP_SERVER_URL}/pins`,
-        {
-          user_id,
-          location: {
-            latitude: postLatLng[1],
-            longitude: postLatLng[0],
-          },
-          music: postMusic,
-          photo: postImg,
-          memo: postMemo,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .post(`${process.env.REACT_APP_SERVER_URL}/pins`, data, {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log(res);
         dispatch(switchMode("CREATED"));
@@ -68,6 +64,7 @@ function PostModal({ postLatLng }: any) {
       <PostPhoto postImg={postImg} setPostImg={setPostImg} />
       <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
       <div>
+        <div>{errMessage}</div>
         <button onClick={postPinData}>PIN IT</button>
       </div>
     </div>

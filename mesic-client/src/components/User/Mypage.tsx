@@ -53,7 +53,11 @@ function Mypage(props: MypageProps) {
           <div>이름: {name}</div>
           <div>닉네임: {nickname}</div>
           <div>
-            <button onClick={handleOpenEditMypage}>수정</button>
+            {email !== "yatong@hahaha.com" ? (
+              <button onClick={handleOpenEditMypage}>수정</button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

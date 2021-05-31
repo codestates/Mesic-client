@@ -4,6 +4,7 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { editUserinfo, getAccessToken } from "../../actions/index";
+//axios.defaults.withCredentials = true;
 
 function Login({
   openLogin,
@@ -64,14 +65,26 @@ function Login({
       .catch((err) => console.log(err));
   };
 
+  const loginAsGuest = () => {
+    const loginData = { email: "yatong@hahaha.com", password: "asdf1!" };
+    axios.post(LOGIN_URL, loginData).then((res) => {
+      if (res.data.accessToken) {
+        dispatch(getAccessToken(res.data.accessToken));
+        getUserInfo(res.data.id);
+        closeLogin();
+      }
+      return;
+    });
+  };
+
   const closeLogin = () => {
     setOpenLogin(false);
     inputEmail.current.value = "";
     inputPw.current.value = "";
     setIdInput("");
     setPwInput("");
-    setLoginController(false);
-    deletePostMarkers();
+    // setLoginController(false);
+    // deletePostMarkers();
   };
 
   const [idInput, setIdInput] = useState<string>("");
@@ -140,6 +153,7 @@ function Login({
           </div>
           <div>
             <button onClick={responseLogin}>Login</button>
+            <button onClick={loginAsGuest}>Guest로그인</button>
           </div>
         </div>
         <GoogleLogin

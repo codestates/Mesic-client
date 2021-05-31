@@ -7,7 +7,12 @@ import Login from "../User/Login";
 import Signup from "../User/Signup";
 import Mypage from "../User/Mypage";
 import EditMypage from "../User/EditMypage";
-import { logout, editUserinfo, getAccessToken } from "../../actions/index";
+import {
+  clearUserInfo,
+  clearModeState,
+  editUserinfo,
+  getAccessToken,
+} from "../../actions/index";
 
 function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   //const {open} = props;
@@ -16,7 +21,6 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
 
   const { isLogin, email, name, nickname, profileImg, user_id } =
     state.userReducer.user;
-  const { mode } = state.modeReducer.user;
 
   const [openLogin, setOpenLogin] = useState<boolean>(false);
   const [openSignup, setOpenSignup] = useState<boolean>(false);
@@ -33,7 +37,8 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
       .then((res) => {
         //console.log("logout ===", res);
         if (res.data.message === "seucess") {
-          dispatch(logout());
+          dispatch(clearUserInfo());
+          dispatch(clearModeState());
         } else {
           console.log("failed");
         }
@@ -56,14 +61,17 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/${user_id}`)
       .then((res) => {
-        const { email, follow, name, nickname, _id } = res.data;
-        dispatch(editUserinfo(_id, email, name, nickname, follow));
+        console.log("getUserInfo : ", res.data);
+        const { email, follow, name, nickname, _id, profile } = res.data;
+        dispatch(editUserinfo(_id, email, name, nickname, profile, follow));
       })
       .catch((err) => console.log(err));
   };
   useEffect(() => {
     if (loginController) {
       setOpenLogin(true);
+      setLoginController(false);
+      deletePostMarkers();
     }
     return;
   }, [loginController]);
@@ -107,7 +115,12 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
       ></EditMypage>
       <div className="nav">
         <Link to="/">
-          <button className="logo-btn">Logo</button>
+          <button
+            className="logo-btn"
+            onClick={() => dispatch(clearModeState())}
+          >
+            Logo
+          </button>
         </Link>
         <div className="nav-btn">
           <button onClick={isLogin ? clickLogout : clickLogin}>

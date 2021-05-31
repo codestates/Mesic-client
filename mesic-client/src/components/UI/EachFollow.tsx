@@ -1,8 +1,12 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-import { addCheckedFollow, deleteCheckedFollow } from "../../actions";
+import {
+  addCheckedFollow,
+  deleteCheckedFollow,
+  iterateMarkers,
+} from "../../actions";
 
 function EachFollow({ eachFollow, updateFollow }: any) {
   const state = useSelector((state: RootState) => state);
@@ -32,40 +36,61 @@ function EachFollow({ eachFollow, updateFollow }: any) {
         console.log("delete follow : ", res);
         updateFollow();
       })
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const checkBoxHandler = () => {
     if (followCheckbox.current.checked) {
+      dispatch(iterateMarkers());
       dispatch(addCheckedFollow(eachFollow._id));
     } else {
       dispatch(deleteCheckedFollow(eachFollow._id));
     }
   };
 
+  const checkedChecker = () => {
+    for (let i = 0; i < checkedFollow.length; i += 1) {
+      if (checkedFollow[i].user_id === eachFollow._id) {
+        return true;
+      }
+    }
+  };
+
   return (
     <div className="eachfollow" key={eachFollow.email}>
-      {checkedFollow.includes(eachFollow._id) ? (
-        <input
-          ref={followCheckbox}
-          type="checkbox"
-          className="follow-checkbox"
-          onClick={checkBoxHandler}
-          checked={true}
-        ></input>
+      {checkedChecker() ? (
+        <>
+          <input
+            ref={followCheckbox}
+            type="checkbox"
+            className="follow-checkbox"
+            onClick={checkBoxHandler}
+            checked={true}
+          ></input>
+          <span>{eachFollow.name}</span>
+          <img
+            className="my-pin-color"
+            src={`images/FollowMarker/${eachFollow.marker}`}
+          />
+          <br />
+          <span>{eachFollow.email}</span>
+          <button onClick={deleteFollow}>팔로우 취소</button>
+        </>
       ) : (
-        <input
-          ref={followCheckbox}
-          type="checkbox"
-          className="follow-checkbox"
-          onClick={checkBoxHandler}
-          checked={false}
-        ></input>
+        <>
+          <input
+            ref={followCheckbox}
+            type="checkbox"
+            className="follow-checkbox"
+            onClick={checkBoxHandler}
+            checked={false}
+          ></input>
+          <span>{eachFollow.name}</span>
+          <br />
+          <span>{eachFollow.email}</span>
+          <button onClick={deleteFollow}>팔로우 취소</button>
+        </>
       )}
-      <span>{eachFollow.name}</span>
-      <br />
-      <span>{eachFollow.email}</span>
-      <button onClick={deleteFollow}>팔로우 취소</button>
     </div>
   );
 }

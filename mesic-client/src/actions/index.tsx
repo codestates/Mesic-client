@@ -4,9 +4,12 @@ export const SWITCH_MODE = "SWITCH_MODE" as const;
 export const EDIT_USERINFO = "EDIT_USERINFO" as const;
 export const GET_ACCESSTOKEN = "GET_ACCESSTOKEN" as const;
 export const REFRESH_FOLLOW = "REFRESH_FOLLOW" as const;
-export const LOGOUT = "LOGOUT" as const;
+export const CLEAR_USER_INFO = "CLEAR_USERINFO" as const;
 export const ADD_CHECKED_FOLLOW = "ADD_CHECKED_FOLLOW" as const;
 export const DELETE_CHECKED_FOLLOW = "DELETE_CHECKED_FOLLOW" as const;
+export const CLEAR_CHECKED_REMOVE = "CLEAR_CHECKED_REMOVE" as const;
+export const ITERATE_MARKERS = "ITERATE_MARKERS" as const;
+export const CLEAR_MODE_STATE = "CLEAR_MODE_STATE" as const;
 
 export type Action =
   | ReturnType<typeof switchMode>
@@ -15,9 +18,14 @@ export type Action =
   | ReturnType<typeof refreshFollow>
   | ReturnType<typeof addCheckedFollow>
   | ReturnType<typeof deleteCheckedFollow>
-  | ReturnType<typeof logout>;
+  | ReturnType<typeof clearCheckedRemove>
+  | ReturnType<typeof iterateMarkers>
+  | ReturnType<typeof clearModeState>
+  | ReturnType<typeof clearUserInfo>;
 
-export const switchMode = (data: "READ" | "POST" | "CREATED" | "NONE"): any => {
+export const switchMode = (
+  data: "READ" | "POST" | "CREATED" | "WATCH" | "NONE"
+): any => {
   return {
     type: SWITCH_MODE,
     payload: {
@@ -31,6 +39,7 @@ export const editUserinfo = (
   email: string,
   name: string,
   nickname: string,
+  profileImg: string,
   follow: string[]
 ): any => {
   return {
@@ -40,6 +49,7 @@ export const editUserinfo = (
       email,
       name,
       nickname,
+      profileImg,
       follow,
     },
   };
@@ -63,9 +73,15 @@ export const refreshFollow = (follow: string[]): any => {
   };
 };
 
-export const logout = () => {
+export const clearUserInfo = () => {
   return {
-    type: LOGOUT,
+    type: CLEAR_USER_INFO,
+  };
+};
+
+export const clearModeState = () => {
+  return {
+    type: CLEAR_MODE_STATE,
   };
 };
 
@@ -84,5 +100,17 @@ export const deleteCheckedFollow = (user_id: string): any => {
     payload: {
       user_id,
     },
+  };
+};
+
+export const iterateMarkers = (): any => {
+  return {
+    type: ITERATE_MARKERS,
+  };
+};
+
+export const clearCheckedRemove = (): any => {
+  return {
+    type: CLEAR_CHECKED_REMOVE,
   };
 };
