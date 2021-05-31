@@ -12,7 +12,7 @@ function SearchUser({
   setLoginController,
 }: any) {
   const state = useSelector((state: RootState) => state.userReducer);
-  const { follow } = state.user;
+  const myId = state.user.user_id;
 
   const inputSearchUser = useRef<any>();
   const [searchUserInput, setSearchUserInput] = useState<string>("");
@@ -26,12 +26,17 @@ function SearchUser({
         .get(`${process.env.REACT_APP_SERVER_URL}/users`)
         .then((res) => res.data)
         .then((allUser) => {
-          return allUser.filter(
-            (user: any) =>
-              !followList.map((follow: any) => follow._id).includes(user._id)
-          );
+          return allUser
+            .filter((eachUser: any) => eachUser._id !== myId)
+            .filter(
+              (meExcluded: any) =>
+                !followList
+                  .map((follow: any) => follow._id)
+                  .includes(meExcluded._id)
+            );
         })
-        .then((res: any) => setNonFollowList(res));
+        .then((res) => setNonFollowList(res))
+        .catch((err) => console.log(err));
     }
   }, [openSearchUser, followList]);
 
@@ -60,7 +65,7 @@ function SearchUser({
 
   return (
     <div className={`background ${openSearchUser ? "show" : ""}`}>
-      <div
+      <span
         className="searchuser-close"
         onClick={() => {
           setOpenSearchUser(false);
@@ -69,7 +74,7 @@ function SearchUser({
         }}
       >
         X
-      </div>
+      </span>
       <div>
         <input
           type="text"
