@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
@@ -16,8 +16,11 @@ function Login({
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.userReducer);
 
-  const GOOGLE_LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/google/login`;
+  // const GOOGLE_LOGIN_API_URL = `${process.env.REACT_APP_SERVER_URL}/google/login`;
+  const GOOGLE_LOGIN_API_URL = "http://localhost:4000/google/login"
   const LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/login`;
+  const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&
+redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=350695188416-sc4m6nro89c4sii03qm9qaeltqivnie3.apps.googleusercontent.com`;
 
   const responseLogin = () => {
     const loginData = { email: idInput, password: pwInput };
@@ -45,25 +48,35 @@ function Login({
     }
   };
 
-  const responseGoogle = (response: any) => {
-    const { accessToken, profileObj } = response;
-    const userinfo = {
-      accessToken,
-      email: profileObj.email,
-      profile: profileObj.imageUrl,
-      name: profileObj.name,
-    };
-    sendData(userinfo); //accessToken 이거 받아서 사용해주세요
-  };
+  const googleLoginHandler = () => {
+		window.location.assign(GOOGLE_LOGIN_URL);
+	};
 
-  const sendData = (data: Object) => {
-    axios
-      .post(GOOGLE_LOGIN_URL, data)
-      .then((res) => {
-        console.log("googleLogin === ", res);
-      })
-      .catch((err) => console.log(err));
-  };
+  const getAuth = (authorizationCode: string) => {
+		axios
+			.post(GOOGLE_LOGIN_API_URL, { authorizationCode })
+			.then((res) => {
+				// loginHandler({
+				// 	userId: res.data.userId,
+				// 	token: res.data.token,
+				// 	authenticated: true,
+				// });
+				// history.push("/");
+        console.log(res);
+			})
+			.catch(() => {
+				alert("서버오류로 로그인이 불가합니다.");
+			});
+	};
+
+  useEffect(() => {
+		const url = new URL(window.location.href);
+		const authorizationCode = url.searchParams.get("code");
+		const googleCheck = window.location.href.indexOf("google");
+		if (authorizationCode && googleCheck !== -1) {
+      getAuth(authorizationCode);
+		}
+	});
 
   const loginAsGuest = () => {
     const loginData = { email: "yatong@hahaha.com", password: "asdf1!" };
@@ -156,13 +169,9 @@ function Login({
             <button onClick={loginAsGuest}>Guest로그인</button>
           </div>
         </div>
-        <GoogleLogin
-          clientId="350695188416-sc4m6nro89c4sii03qm9qaeltqivnie3.apps.googleusercontent.com"
-          buttonText="Google Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
+        <div className="loginContainer" onClick={googleLoginHandler}>
+			    <img alt="googlebutton" className="loginBtn" />
+		    </div>
       </div>
     </div>
   );
