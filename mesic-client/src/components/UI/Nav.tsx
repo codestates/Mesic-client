@@ -123,10 +123,10 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
           </button>
         </Link>
         <div className="nav-btn">
-          <button onClick={isLogin ? clickLogout : clickLogin}>
+          <button className="loginBtn" onClick={isLogin ? clickLogout : clickLogin}>
             {isLogin ? "Logout" : "Login"}
           </button>
-          <button onClick={isLogin ? clickMypage : clickSignup}>
+          <button className="mypageBtn" onClick={isLogin ? clickMypage : clickSignup}>
             {isLogin ? "Mypage" : "Signup"}
           </button>
         </div>

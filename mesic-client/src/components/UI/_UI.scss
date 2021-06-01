@@ -1,0 +1,15 @@
+
+.nav{
+    .nav-btn{
+        display: flex;
+        flex:column;
+
+        .login-btn{
+            color : red;
+        }
+
+        .mypage-btn{
+            color : blue;
+        }
+    }
+}
