@@ -6,8 +6,8 @@
 .pnp.js
 .env
 .eslintignore
-/src/App.css.map
 /src/App.css
+/src/App.css.map
 
 # testing
 /coverage

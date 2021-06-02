@@ -19,7 +19,7 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
-  const { isLogin, email, name, nickname, profileImg, user_id } =
+  const { isLogin, email, name, nickname, profileImg, user_id }: any =
     state.userReducer.user;
 
   const [openLogin, setOpenLogin] = useState<boolean>(false);
