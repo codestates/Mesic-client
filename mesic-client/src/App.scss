@@ -20,26 +20,6 @@ body {
   width: 100vw;
   height: 100vh;
 }
-
-.modal {
-  z-index: 2;
-  display: none;
-  height: 90vh;
-  width: 400px;
-  // border: solid black 1px;
-  position: absolute;
-  left: 90%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.show1 {
-  display: block;
-  /* row-gap: 5vh; */
-  /* grid-template-rows: 10vh 25vh 35vh; */
-}
-
 .border {
   border: dotted black 2px;
   background-color: gray;

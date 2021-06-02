@@ -25,24 +25,44 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         setUpdateMode={setUpdateMode}
         setPostMusic={setPostMusic}
       />
-      {updateMode ? (
-        <div>
-          <iframe
-            src={
-              postMusic.video_Id
-                ? `https://www.youtube.com/embed/${postMusic.video_Id}`
-                : "https://www.youtube.com/embed/"
-            }
-          />
-          <button onClick={() => setOpenEditMusic(true)}>수정</button>
-          <button onClick={() => setOpenConfirm(true)}>삭제</button>
-        </div>
-      ) : (
-        <div className="border">
-          <div>POST MODE</div>
-          <button onClick={() => setOpenEditMusic(true)}>+</button>
-        </div>
-      )}
+      <div className="postMusic">
+        {updateMode ? (
+          <>
+            <div>
+              <iframe
+                src={
+                  postMusic.video_Id
+                    ? `https://www.youtube.com/embed/${postMusic.video_Id}`
+                    : "https://www.youtube.com/embed/"
+                }
+              />
+              <button
+                className="edit-icon"
+                onClick={() => setOpenEditMusic(true)}
+              >
+                수정
+              </button>
+              <button
+                className="delete-icon"
+                onClick={() => setOpenConfirm(true)}
+              >
+                삭제
+              </button>
+              <hr className="detail-line" />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="detail-line"></div>
+            <button
+              className="add-btn-music"
+              onClick={() => setOpenEditMusic(true)}
+            >
+              +
+            </button>
+          </>
+        )}
+      </div>
     </>
   );
 }
