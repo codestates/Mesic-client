@@ -189,16 +189,12 @@ function MainPage() {
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
     const bucket = "mesic-photo-bucket";
-    const bucketRegion = "ap-northeast-2";
-    const IdentityPoolId =
-      "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca";
+    const accessKeyId = process.env.AWS_ACCESS_KEY
+    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+    const region = process.env.AWS_BUCKET_REGION
 
-    const s3 = new AWS.S3({
-      accessKeyId: `AKIA2XC7TYWAUO3P7L2I`,
-      secretAccessKey: `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`,
-      region: bucketRegion,
-    }); //s3 configuration
-    
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+
     const photoURL = readMarkerData.photo;
     const file = photoURL.split('/');
     console.log(file[file.length - 1])

@@ -3,6 +3,7 @@ import { profile } from "console";
 import React, { useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import AWS from "aws-sdk";
 
 function EditMypage({
   setOpenMypage,
@@ -59,9 +60,30 @@ function EditMypage({
   );
 
   const handleEditProfile = (e: any) => {
-    const blobData = [];
-    blobData.push(e.target.files[0]);
-    setEditProfileImg(window.URL.createObjectURL(new Blob(blobData)));
+    const file = e.target.files[0];
+  
+    const accessKeyId = process.env.AWS_ACCESS_KEY
+    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+    const region = process.env.AWS_BUCKET_REGION
+
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+
+    const param = {
+      Bucket: 'mesic-photo-bucket',
+      Key: `/image/${file.name}`,
+      ACL: "public-read",
+      Body: file,
+      ContentType: "image/jpg",
+    }; //s3 업로드에 필요한 옵션 설정
+
+    s3.upload(param, function (err: any, data: any) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log("data.Location", data.Location);
+      setEditProfileImg(data.Location);
+    })
   };
 
   const handleReturnMypage = () => {

@@ -52,27 +52,14 @@ function PostModal({ postLatLng }: any) {
     }
     setErrMessage("");
 
-    const bucket = "mesic-photo-bucket";
-    const bucketRegion = "ap-northeast-2";
-    const IdentityPoolId =
-      "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca";
+    const accessKeyId = process.env.AWS_ACCESS_KEY
+    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+    const region = process.env.AWS_BUCKET_REGION
 
-    const s3 = new AWS.S3({
-      accessKeyId: `AKIA2XC7TYWAUO3P7L2I`,
-      secretAccessKey: `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`,
-      region: bucketRegion,
-    }); //s3 configuration
-
-    // AWS.config.update({
-    //   // AWS-SDK 설정을 해주는 데 => 내꺼의 S3로 접근이 가능함.
-    //   region: bucketRegion,
-    //   credentials: new AWS.CognitoIdentityCredentials({
-    //     IdentityPoolId: IdentityPoolId,
-    //   }),
-    // });
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: bucket,
+      Bucket: 'mesic-photo-bucket',
       Key: `/image/${postImg.name}`,
       ACL: "public-read",
       Body: postImg,
