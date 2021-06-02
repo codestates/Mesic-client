@@ -32,25 +32,26 @@ function EachUser({ searchedUsers, updateFollow, setLoginController }: any) {
   };
 
   return (
-    <div className="eachUser">
-      <div>
-        {searchedUsers ? (
+    <div className="each-user-flex">
+      {searchedUsers ? (
+        <>
           <div>
-            <span>{searchedUsers.name}</span>
+            <span className="each-user-name">{searchedUsers.name}</span>
             <br />
-            <span>{searchedUsers.email}</span>
-            <button
-              onClick={() => {
-                patchFollow(searchedUsers._id);
-              }}
-            >
-              팔로우
-            </button>
+            <span className="each-user-email">{searchedUsers.email}</span>
           </div>
-        ) : (
-          <div>검색 결과가 없습니다.</div>
-        )}
-      </div>
+          <button
+            className="add-follow-btn"
+            onClick={() => {
+              patchFollow(searchedUsers._id);
+            }}
+          >
+            +
+          </button>
+        </>
+      ) : (
+        <div className="search-not-found">검색 결과가 없습니다.</div>
+      )}
     </div>
   );
 }
