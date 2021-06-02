@@ -26,7 +26,10 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         setPostMusic={setPostMusic}
       />
       <div className="postMusic">
-        <i className="fa fa-headphones" aria-hidden="true"></i>
+        <div className="detail-icon">
+          <i className="fa fa-headphones" aria-hidden="true"></i>
+        </div>
+
         <div className="detail-line"></div>
         {updateMode ? (
           <div>

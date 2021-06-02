@@ -18,7 +18,7 @@ function Memo({ postMemo, setPostMemo }: any) {
   return (
     <>
       <div className="postMemo">
-        <div className="icon">
+        <div className="detail-icon">
           <i className="fa fa-sticky-note" aria-hidden="true"></i>
         </div>
         <div className="detail-line"></div>
