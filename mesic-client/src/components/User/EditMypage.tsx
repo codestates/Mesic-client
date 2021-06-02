@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import AWS from "aws-sdk";
 
+
 function EditMypage({
   setOpenMypage,
   profileImg,
@@ -23,31 +24,56 @@ function EditMypage({
   const editProfileInput = useRef<any>();
   const [editNicknameInput, setEditNicknameInput] = useState<string>("");
   const [editProfileImg, setEditProfileImg] = useState<any>("");
+  const [editPreviewProfileImg, setEditPreviewProfileImg] = useState<any>("");
   const [nicknameError, setNicknameErrorr] = useState<string>("");
 
   const sendModifiedData = () => {
-    const data = { nickname: editNicknameInput, profile: editProfileImg };
-    console.log(data);
-    if (editNicknameInput.length === 0) {
-      setNicknameErrorr("닉네임을 입력해주세요");
-      return;
-    }
-    axios
-      .patch(UPDATE_USER_URL, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        console.log("patchuser === ", res);
-        if (res.status === 200) {
-          getUserInfo(user_id);
-          setOpenEditMypage(false);
-          setOpenMypage(true);
-          editProfileInput.current.value = "";
-          setEditProfileImg("");
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+
+    const accessKeyId = process.env.AWS_ACCESS_KEY
+    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+    const region = process.env.AWS_BUCKET_REGION
+
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+
+    const param = {
+      Bucket: 'mesic-photo-bucket',
+      Key: `/image/${editProfileImg.name}`,
+      ACL: "public-read",
+      Body: editProfileImg,
+      ContentType: "image/jpg"
+    }; //s3 업로드에 필요한 옵션 설정
+
+    s3.upload(param, function (err: any, data: any) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log("data.Location", data.Location);
+      const updateData = { nickname: editNicknameInput, profile: data.Location };
+      console.log(updateData);
+      
+      if (editNicknameInput.length === 0) {
+        setNicknameErrorr("닉네임을 입력해주세요");
+        return;
+      }
+      
+      axios
+        .patch(UPDATE_USER_URL, updateData, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          console.log("patchuser === ", res);
+          if (res.status === 200) {
+            getUserInfo(user_id);
+            setOpenEditMypage(false);
+            setOpenMypage(true);
+            editProfileInput.current.value = "";
+            setEditProfileImg("");
+          }
+        })
+        .catch((err) => console.log(err));
+    })
+  }
 
   const handleEditNicknameInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,29 +87,8 @@ function EditMypage({
 
   const handleEditProfile = (e: any) => {
     const file = e.target.files[0];
-  
-    const accessKeyId = process.env.AWS_ACCESS_KEY
-    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
-    const region = process.env.AWS_BUCKET_REGION
-
-    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
-
-    const param = {
-      Bucket: 'mesic-photo-bucket',
-      Key: `/image/${file.name}`,
-      ACL: "public-read",
-      Body: file,
-      ContentType: "image/jpg",
-    }; //s3 업로드에 필요한 옵션 설정
-
-    s3.upload(param, function (err: any, data: any) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log("data.Location", data.Location);
-      setEditProfileImg(data.Location);
-    })
+    setEditPreviewProfileImg(URL.createObjectURL(file))
+    setEditProfileImg(file);
   };
 
   const handleReturnMypage = () => {
@@ -115,7 +120,7 @@ function EditMypage({
             </figure>
             <div>
               <input
-                ref={editProfileInput}
+                ref={editPreviewProfileImg}
                 type="file"
                 accept="image/*"
                 onChange={handleEditProfile}
@@ -143,6 +148,6 @@ function EditMypage({
       </div>
     </div>
   );
-}
+};
 
 export default EditMypage;
