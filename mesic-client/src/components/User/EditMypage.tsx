@@ -29,10 +29,10 @@ function EditMypage({
 
   const sendModifiedData = () => {
 
-    const accessKeyId = process.env.AWS_ACCESS_KEY
-    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
-    const region = process.env.AWS_BUCKET_REGION
-
+    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
+    const secretAccessKey = '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';
+    const region = 'ap-northeast-2'
+    
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
@@ -113,14 +113,14 @@ function EditMypage({
           <div className="profileImg">
             <figure className="profileImg-outsider">
               {editProfileImg.length > 0 ? (
-                <img className="profileImg-content" src={editProfileImg}></img>
+                <img className="profileImg-content" src={editPreviewProfileImg}></img>
               ) : (
                 <img className="profileImg-content" src={profileImg}></img>
               )}
             </figure>
             <div>
               <input
-                ref={editPreviewProfileImg}
+                ref={editProfileInput}
                 type="file"
                 accept="image/*"
                 onChange={handleEditProfile}

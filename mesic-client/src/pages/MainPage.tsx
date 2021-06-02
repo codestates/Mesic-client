@@ -11,6 +11,7 @@ import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
 
+
 declare global {
   interface Window {
     kakao: any;
@@ -189,9 +190,9 @@ function MainPage() {
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
     const bucket = "mesic-photo-bucket";
-    const accessKeyId = process.env.AWS_ACCESS_KEY
-    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
-    const region = process.env.AWS_BUCKET_REGION
+    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
+    const secretAccessKey = 'rVp+ecaeyz/ZPg5Vu4GIZdLBmHkIzYrPwHteSHo';
+    const region = 'ap-northeast-2';
 
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 

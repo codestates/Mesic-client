@@ -7,20 +7,6 @@ import PostPhoto from "./PostPhoto";
 import PostMemo from "./PostMemo";
 import axios from "axios";
 import AWS from "aws-sdk";
-//import { read } from "fs";
-
-// const bucketRegion = "ap-northeast-2";
-// const bucket = "mesic-photo-bucket";
-
-// AWS.config.update({
-//   accessKeyId: `${process.env.ACCESS_KEY}`,
-//   secretAccessKey: `${process.env.SECRET_ACCESS_KEY}`,
-// });
-
-// const myBucket = new AWS.S3({
-//   params: { Bucket: bucket },
-//   region: bucketRegion,
-// });
 
 function PostModal({ postLatLng }: any) {
   const [postMusic, setPostMusic] = useState<{
@@ -35,7 +21,6 @@ function PostModal({ postLatLng }: any) {
   const [postImg, setPostImg] = useState<any>("");
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
-  const [fileLocation, setFileLocation] = useState<any>("");
 
   const state = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
@@ -52,9 +37,9 @@ function PostModal({ postLatLng }: any) {
     }
     setErrMessage("");
 
-    const accessKeyId = process.env.AWS_ACCESS_KEY
-    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
-    const region = process.env.AWS_BUCKET_REGION
+    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
+    const secretAccessKey = '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';
+    const region = 'ap-northeast-2';
 
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
