@@ -57,39 +57,45 @@ function EachFollow({ eachFollow, updateFollow }: any) {
   };
 
   return (
-    <div className="eachfollow" key={eachFollow.email}>
+    <div className="each-follow" key={eachFollow.email}>
       {checkedChecker() ? (
-        <>
+        <div className="each-follow-flex">
           <input
             ref={followCheckbox}
             type="checkbox"
-            className="follow-checkbox"
             onClick={checkBoxHandler}
             checked={true}
           ></input>
-          <span>{eachFollow.name}</span>
+          <div className="each-follow-info">
+            <span className="each-user-name">{eachFollow.name}</span>
+            <br />
+            <span className="each-user-email">{eachFollow.email}</span>
+          </div>
           <img
             className="my-pin-color"
             src={`images/FollowMarker/${eachFollow.marker}`}
           />
-          <br />
-          <span>{eachFollow.email}</span>
-          <button onClick={deleteFollow}>팔로우 취소</button>
-        </>
+          <button className="delete-follow-btn" onClick={deleteFollow}>
+            -
+          </button>
+        </div>
       ) : (
-        <>
+        <div className="each-follow-flex">
           <input
             ref={followCheckbox}
             type="checkbox"
-            className="follow-checkbox"
             onClick={checkBoxHandler}
             checked={false}
           ></input>
-          <span>{eachFollow.name}</span>
-          <br />
-          <span>{eachFollow.email}</span>
-          <button onClick={deleteFollow}>팔로우 취소</button>
-        </>
+          <div>
+            <span className="each-user-name">{eachFollow.name}</span>
+            <br />
+            <span className="each-user-email">{eachFollow.email}</span>
+          </div>
+          <button className="delete-follow-btn" onClick={deleteFollow}>
+            -
+          </button>
+        </div>
       )}
     </div>
   );

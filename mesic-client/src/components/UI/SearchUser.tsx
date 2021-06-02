@@ -64,9 +64,11 @@ function SearchUser({
   );
 
   return (
-    <div className={`background ${openSearchUser ? "show" : ""}`}>
+    <div
+      className={`search-user-modal background ${openSearchUser ? "show" : ""}`}
+    >
       <span
-        className="searchuser-close"
+        className="search-user-close"
         onClick={() => {
           setOpenSearchUser(false);
           inputSearchUser.current.value = "";
@@ -76,6 +78,7 @@ function SearchUser({
         X
       </span>
       <div>
+        <div className="followlist-title">유저 찾기</div>
         <input
           type="text"
           onChange={handleSearchUserInput}
@@ -83,20 +86,22 @@ function SearchUser({
           ref={inputSearchUser}
         ></input>
       </div>
-      {searchUserInput.length === 0 ? (
-        <div>새로운 유저를 찾아보세요</div>
-      ) : searchedUsers.length > 0 ? (
-        searchedUsers.map((each) => (
-          <EachUser
-            searchedUsers={each}
-            updateFollow={updateFollow}
-            key={each.email}
-            setLoginController={setLoginController}
-          />
-        ))
-      ) : (
-        <div>검색 결과가 없습니다</div>
-      )}
+      <div className="follow">
+        {searchUserInput.length === 0 ? (
+          <div className="search-not-found">새로운 유저를 찾아보세요</div>
+        ) : searchedUsers.length > 0 ? (
+          searchedUsers.map((each) => (
+            <EachUser
+              searchedUsers={each}
+              updateFollow={updateFollow}
+              key={each.email}
+              setLoginController={setLoginController}
+            />
+          ))
+        ) : (
+          <div className="search-not-found">검색 결과가 없습니다</div>
+        )}
+      </div>
     </div>
   );
 }
