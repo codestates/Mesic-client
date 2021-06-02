@@ -10,10 +10,12 @@ function PostPhoto({ postImg, setPostImg }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+  const [previewImg, setPreviewImg] = useState<any>({});
 
   // Photo 업데이트 버튼
   const handlePostImg = (e: any) => {
-    setPostImg(URL.createObjectURL(e.target.files[0]));
+    setPostImg(e.target.files[0]);
+    setPreviewImg(URL.createObjectURL(e.target.files[0]));
   };
 
   return (
@@ -44,7 +46,7 @@ function PostPhoto({ postImg, setPostImg }: any) {
             />
           </>
         ) : (
-          <img className="img" src={postImg} />
+          <img className="img" src={previewImg} />
         )}
         {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
       </div>
