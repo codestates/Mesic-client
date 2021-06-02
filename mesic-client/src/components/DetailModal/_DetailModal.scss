@@ -1,0 +1,114 @@
+$color: #fefefe;
+$main-color: #19c9d4;
+$font-color: rgb(100, 100, 100);
+$box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
+
+@mixin flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 0px;
+}
+@mixin detail-line {
+  display: flex;
+  width: 300px;
+  margin-top: 15px;
+  border-top: 1px solid #e1e1e1;
+}
+.modal-outsider {
+  z-index: 2;
+  display: none;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 800px;
+  width: 400px;
+  right: 0%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(0%, 6%);
+
+  .modal {
+    display: flex;
+    position: relative;
+    padding: 50px 0px 15px 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: $color;
+    border-radius: 20px;
+    height: 760px;
+    width: 350px;
+    box-shadow: 0px 5px 5px 5px rgba(94, 112, 134, 0.3);
+
+    .postMusic {
+      @include flex;
+      @include detail-line;
+      .add-btn-music {
+        cursor: pointer;
+        width: 250px;
+        height: 120px;
+        margin: 10px 0px;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        border: 1px solid #e1e1e1;
+        font-size: 26px;
+        color: #989898;
+      }
+    }
+    .postPhoto {
+      @include flex;
+      @include detail-line;
+      .add-btn-photo {
+        cursor: pointer;
+        width: 250px;
+        height: 200px;
+        margin: 13px 0px 10px 0px;
+        background-color: #f8f8f8;
+        border: 1px solid #e1e1e1;
+        border-radius: 10px;
+        font-size: 26px;
+        color: #989898;
+        padding: 83px 118px;
+      }
+      .input-photo {
+        display: none;
+      }
+    }
+    .postMemo {
+      @include flex;
+      @include detail-line;
+      .textarea-outsider {
+        margin-top: 15px;
+        .input-memo {
+          -webkit-appearance: none;
+          width: 250px;
+          height: 150px;
+          border: 0;
+          padding: 12px 3px;
+          font-family: inherit;
+          font-size: 16px;
+          font-weight: 500;
+          background: none;
+          border-radius: 0;
+          color: black;
+          transition: all 0.15s ease;
+        }
+      }
+    }
+  }
+  .pinit-btn {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+  }
+}
+.show1 {
+  display: flex;
+}
