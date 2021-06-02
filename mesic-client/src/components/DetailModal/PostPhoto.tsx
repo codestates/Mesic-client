@@ -28,8 +28,10 @@ function PostPhoto({ postImg, setPostImg }: any) {
         setPostImg={setPostImg}
         // setUpdateMode => false로 변경해야지 처음 상태로 돌아감
       />
-      <div className="postPhoto">
-        <i className="fa fa-camera"></i>
+      <div className="photo">
+        <div className="detail-icon">
+          <i className="fa fa-camera"></i>
+        </div>
         <div className="detail-line"></div>
         {postImg.length === 0 ? (
           <>

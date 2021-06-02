@@ -48,47 +48,54 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
         setOpenConfirm={setOpenConfirm}
         setReadMemo={setReadMemo}
       />
-      {updateMode ? (
-        <div className="border">
-          <textarea onChange={handleUpdateMemo}>{readMemo}</textarea>
-          <div>
-            {isLogin ? (
-              <>
-                <button onClick={updateReadMemo}>저장</button>
-                <button
-                  onClick={() => {
-                    setUpdateMode(false);
-                    setUpdatedMemo("");
-                  }}
-                >
-                  취소
-                </button>
-              </>
-            ) : (
-              <></>
-            )}
-          </div>
+      <div className="memo">
+        <div className="detail-icon">
+          <i className="fa fa-sticky-note" aria-hidden="true"></i>
         </div>
-      ) : (
-        <div className="border">
-          {readMemo.length === 0 && mode !== "WATCH" ? (
-            <>
-              <button onClick={() => setUpdateMode(true)}>메모 추가하기</button>
-            </>
-          ) : (
+        {updateMode ? (
+          <div className="border">
+            <textarea onChange={handleUpdateMemo}>{readMemo}</textarea>
             <div>
-              {isLogin && mode !== "WATCH" ? (
+              {isLogin ? (
                 <>
-                  <button onClick={() => setUpdateMode(true)}>수정</button>
+                  <button onClick={updateReadMemo}>저장</button>
+                  <button
+                    onClick={() => {
+                      setUpdateMode(false);
+                      setUpdatedMemo("");
+                    }}
+                  >
+                    취소
+                  </button>
                 </>
               ) : (
                 <></>
               )}
-              <div>{readMemo}</div>
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        ) : (
+          <div className="border">
+            {readMemo.length === 0 && mode !== "WATCH" ? (
+              <>
+                <button onClick={() => setUpdateMode(true)}>
+                  메모 추가하기
+                </button>
+              </>
+            ) : (
+              <div>
+                {isLogin && mode !== "WATCH" ? (
+                  <>
+                    <button onClick={() => setUpdateMode(true)}>수정</button>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <div>{readMemo}</div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </>
   );
 }

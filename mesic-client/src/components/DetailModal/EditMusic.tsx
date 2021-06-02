@@ -91,45 +91,50 @@ function EditMusic({
   };
 
   return (
-    <div className={`border background ${openEditMusic ? "show" : ""}`}>
-      <input
-        placeholder="노래 제목을 검색해주세요"
-        onChange={handleSearchMusicInput}
-        onKeyUp={searchMusicEvent}
-        ref={searchInput}
-      />
-      <button onClick={searchMusicEvent}>검색</button>
-      <div>
-        <ul>
-          {searchedMusic.map((each) => (
-            <li
-              style={{ listStyleType: "none" }}
-              onClick={() =>
-                handleSelect(
-                  each.id.videoId,
-                  each.snippet.title,
-                  each.snippet.thumbnails.medium.url
-                )
-              }
-            >
-              <img
-                style={{ width: "100px" }}
-                src={each.snippet.thumbnails.medium.url}
-              />
-              <span>{each.snippet.title}</span>
-            </li>
-          ))}
-        </ul>
+    <div
+      className={`edit-music-modal background ${openEditMusic ? "show" : ""}`}
+    >
+      <div className="edit-music">
+        <input
+          className="search-music"
+          placeholder="노래 제목을 검색해주세요"
+          onChange={handleSearchMusicInput}
+          onKeyUp={searchMusicEvent}
+          ref={searchInput}
+        />
+        <button onClick={searchMusicEvent}>검색</button>
+        <div>
+          <ul>
+            {searchedMusic.map((each) => (
+              <li
+                style={{ listStyleType: "none" }}
+                onClick={() =>
+                  handleSelect(
+                    each.id.videoId,
+                    each.snippet.title,
+                    each.snippet.thumbnails.medium.url
+                  )
+                }
+              >
+                <img
+                  style={{ width: "100px" }}
+                  src={each.snippet.thumbnails.medium.url}
+                />
+                <span>{each.snippet.title}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <button
+          onClick={() => {
+            setSearchedMusic([]);
+            searchInput.current.value = "";
+            setOpenEditMusic(false);
+          }}
+        >
+          닫기
+        </button>
       </div>
-      <button
-        onClick={() => {
-          setSearchedMusic([]);
-          searchInput.current.value = "";
-          setOpenEditMusic(false);
-        }}
-      >
-        닫기
-      </button>
     </div>
   );
 }
