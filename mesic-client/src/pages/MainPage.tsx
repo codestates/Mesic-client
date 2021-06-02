@@ -9,6 +9,7 @@ import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
+import AWS from "aws-sdk";
 
 declare global {
   interface Window {
@@ -187,20 +188,47 @@ function MainPage() {
 
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
-    axios
-      .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setOpenReadModal(false);
-        dispatch(switchMode("NONE"));
-      })
-      .catch((err) => console.log(err));
-  };
+    const bucket = "mesic-photo-bucket";
+    const bucketRegion = "ap-northeast-2";
+    const IdentityPoolId =
+      "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca";
 
+    const s3 = new AWS.S3({
+      accessKeyId: `AKIA2XC7TYWAUO3P7L2I`,
+      secretAccessKey: `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`,
+      region: bucketRegion,
+    }); //s3 configuration
+    
+    const photoURL = readMarkerData.photo;
+    const file = photoURL.split('/');
+    console.log(file[file.length - 1])
+    const fileName = file[file.length - 1];
+    const param = {
+      Bucket: bucket,
+      Key: `/image/${fileName}`,
+    }; //s3 업로드에 필요한 옵션 설정
+    
+    s3.deleteObject(param, function (err: any, data: any) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log("delete complete");
+
+      axios
+        .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setOpenReadModal(false);
+          dispatch(switchMode("NONE"));
+        })
+        .catch((err) => console.log(err));
+    });
+  };
   // (POST MODE) 지도 클릭 마커
 
   const postMarkerControl = () => {
