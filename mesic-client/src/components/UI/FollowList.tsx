@@ -110,7 +110,9 @@ function FollowList({ setLoginController }: any) {
                 );
               })
             ) : (
-              <div>다른 유저를 찾아 팔로우하세요</div>
+              <div className="search-not-found">
+                다른 유저를 찾아 팔로우하세요
+              </div>
             )
           ) : searchedFollow.length > 0 ? (
             searchedFollow.map((searched: any) => (
