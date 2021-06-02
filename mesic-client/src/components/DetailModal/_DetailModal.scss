@@ -37,7 +37,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   height: 760px;
   width: 350px;
   box-shadow: 0px 5px 5px 5px rgba(94, 112, 134, 0.3);
-  $margin: 10px 0px;
+  $margin: 5px 0px;
 
   @mixin detail-line {
     display: flex;
@@ -50,7 +50,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
     align-self: flex-start;
   }
 
-  .postMusic {
+  .music {
     margin: $margin;
     @include flex;
     .detail-icon {
@@ -70,8 +70,12 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       font-size: 26px;
       color: #989898;
     }
+    .music-iframe {
+      margin-top: 5px;
+    }
   }
-  .postPhoto {
+
+  .photo {
     margin: $margin;
     @include flex;
     .detail-icon {
@@ -92,8 +96,21 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       color: #989898;
       padding: 83px 118px;
     }
+    .edit-btn-photo {
+      cursor: pointer;
+    }
     .input-photo {
       display: none;
+    }
+    .photo-img-outsider {
+      display: flex;
+      justify-content: center;
+      .photo-img {
+        border-radius: 8px;
+        height: 200px;
+        width: 200px;
+        margin-top: 5px;
+      }
     }
   }
   .postMemo {
@@ -157,6 +174,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 }
 .edit-music {
   display: flex;
+  flex-direction: column;
 }
 
 .show1 {

@@ -96,6 +96,7 @@ function EditMusic({
     >
       <div className="edit-music">
         <input
+          className="search-music"
           placeholder="노래 제목을 검색해주세요"
           onChange={handleSearchMusicInput}
           onKeyUp={searchMusicEvent}

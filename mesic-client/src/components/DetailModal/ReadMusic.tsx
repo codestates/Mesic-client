@@ -81,69 +81,84 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         setUpdateMusic={setUpdateMusic}
         setReadMusic={setReadMusic}
       />
-      {updateMode ? (
-        <div className="border">
-          <div className="ifram-outsider">
-            <button
-              onClick={() => {
-                setOpenEditMusic(true);
-              }}
-            >
-              수정
-            </button>
-            <div>
-              <iframe
-                src={
-                  updateMusic.video_Id
-                    ? `https://www.youtube.com/embed/${updateMusic.video_Id}`
-                    : "https://www.youtube.com/embed/"
-                }
-              ></iframe>
-            </div>
-            <button onClick={updateReadMusic}>저장</button>
-            <button
-              onClick={() => {
-                setUpdateMode(false);
-                setUpdateMusic({
-                  video_Id: "",
-                  title: "",
-                  thumbnail: "",
-                });
-              }}
-            >
-              취소
-            </button>
-          </div>
+      <div className="music">
+        <div className="detail-icon">
+          <i className="fa fa-headphones" aria-hidden="true"></i>
         </div>
-      ) : (
-        <div className="border">
-          {readMusic.video_Id.length === 0 && mode !== "WATCH" ? (
+        {updateMode ? (
+          <div>
             <div className="ifram-outsider">
-              <button onClick={() => setOpenEditMusic(true)}>+</button>
-            </div>
-          ) : (
-            <div>
-              {isLogin && mode !== "WATCH" ? (
-                <>
-                  <button onClick={() => setOpenEditMusic(true)}>수정</button>
-                  <button onClick={() => setOpenConfirm(true)}>삭제</button>
-                </>
-              ) : (
-                <></>
-              )}
+              <button
+                onClick={() => {
+                  setOpenEditMusic(true);
+                }}
+              >
+                수정
+              </button>
               <div>
+                <div className="detail-line"></div>
                 <iframe
+                  className="music-iframe"
                   src={
-                    readMusic.video_Id
-                      ? `https://www.youtube.com/embed/${readMusic.video_Id}`
+                    updateMusic.video_Id
+                      ? `https://www.youtube.com/embed/${updateMusic.video_Id}`
                       : "https://www.youtube.com/embed/"
                   }
                 ></iframe>
               </div>
+              <button onClick={updateReadMusic}>저장</button>
+              <button
+                onClick={() => {
+                  setUpdateMode(false);
+                  setUpdateMusic({
+                    video_Id: "",
+                    title: "",
+                    thumbnail: "",
+                  });
+                }}
+              >
+                취소
+              </button>
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        ) : (
+          <>
+            {readMusic.video_Id.length === 0 && mode !== "WATCH" ? (
+              <>
+                <div className="detail-line"></div>
+                <button
+                  className="add-btn-music"
+                  onClick={() => setOpenEditMusic(true)}
+                >
+                  +
+                </button>
+              </>
+            ) : (
+              <>
+                {isLogin && mode !== "WATCH" ? (
+                  <>
+                    <button onClick={() => setOpenEditMusic(true)}>수정</button>
+                    <button onClick={() => setOpenConfirm(true)}>삭제</button>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <div>
+                  <div className="detail-line"></div>
+                  <iframe
+                    className="music-iframe"
+                    src={
+                      readMusic.video_Id
+                        ? `https://www.youtube.com/embed/${readMusic.video_Id}`
+                        : "https://www.youtube.com/embed/"
+                    }
+                  ></iframe>
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </div>
     </>
   );
 }
