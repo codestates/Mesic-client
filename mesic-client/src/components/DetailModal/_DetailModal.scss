@@ -8,14 +8,8 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 25px 0px;
 }
-@mixin detail-line {
-  display: flex;
-  width: 300px;
-  margin-top: 15px;
-  border-top: 1px solid #e1e1e1;
-}
+
 .modal-outsider {
   z-index: 2;
   display: none;
@@ -43,9 +37,20 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
     width: 350px;
     box-shadow: 0px 5px 5px 5px rgba(94, 112, 134, 0.3);
 
+    @mixin detail-line {
+      display: flex;
+      width: 300px;
+      margin-top: 5px;
+      border-top: 1px solid #e1e1e1;
+    }
+    $margin: 10px 0px;
+
     .postMusic {
+      margin: $margin;
       @include flex;
-      @include detail-line;
+      .detail-line {
+        @include detail-line;
+      }
       .add-btn-music {
         cursor: pointer;
         width: 250px;
@@ -59,8 +64,11 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       }
     }
     .postPhoto {
+      margin: $margin;
       @include flex;
-      @include detail-line;
+      .detail-line {
+        @include detail-line;
+      }
       .add-btn-photo {
         cursor: pointer;
         width: 250px;
@@ -78,8 +86,11 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       }
     }
     .postMemo {
+      margin: $margin;
       @include flex;
-      @include detail-line;
+      .detail-line {
+        @include detail-line;
+      }
       .textarea-outsider {
         margin-top: 15px;
         .input-memo {
