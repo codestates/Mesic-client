@@ -1,0 +1,410 @@
+
+$mesic-color: #19C9D4;
+$input-color: #9F9999;
+$mypage-modify-unable: #F4F5F4;
+$mypage-modify-able : #3C64B1;
+
+// login, signup modal
+
+.login-signup-modal-outsider {
+    position: fixed;
+    /* Stay in place */
+    z-index: 2;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: black;
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.login-signup-modal{
+    background-color: #fefefe;
+    position: absolute;
+    z-index: 3;
+    /* Sit on top */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 7px;
+
+    .login-close{
+        color : $mesic-color;
+        font-weight: 800;
+    }
+    .signup-close{
+        color : $mesic-color;
+        font-weight: 800;
+    }
+
+    .login-content{
+        text-align: center;
+
+        .login-title{
+            color : $mesic-color;
+            margin-bottom: 25px;
+            font-weight: 800;
+            font-size: 26px;
+        }
+
+        input[type]{
+            background-color: #F4F5F4;
+            border: none;
+            outline: none;
+            height: 25px;
+            margin-left: 10px;
+        }
+
+        .email-input-section{
+            margin: 15px;
+            color : $input-color;
+        }
+
+        .password-input-section{
+            margin: 15px;
+            color : $input-color;
+            // .error-message{
+            //     margin-top: 5px;
+            //     font-size: 13px;
+            // }
+        }
+
+        .loginBtn-1{
+            margin: 10px;
+            padding: 10px;
+            border-radius: 7px;
+    
+            background-color : $mesic-color;
+            color: white;
+    
+            border: none;
+            outline: none;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        .guestLoginBtn{
+            margin: 10px;
+            padding: 10px;
+            border-radius: 7px;
+    
+            background-color : rgb(245, 241, 241);
+            color: $mesic-color;
+    
+            border: none;
+            outline: none;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+
+
+    .signup-content{
+        text-align: center;
+
+        .signup-title{
+            color : $mesic-color;
+            margin-bottom: 25px;
+            font-weight: 800;
+            font-size: 26px;
+        }
+
+        input[type]{
+            background-color: #F4F5F4;
+            border: none;
+            outline: none;
+            height: 22px;
+            margin-left: 10px;
+        }
+
+        .email-input-section{
+            margin: 15px;
+            color : $input-color;
+        }
+
+        .name-input-section{
+            margin: 15px;
+            color : $input-color;
+        }
+
+        .nickname-input-section{
+            margin: 15px;
+            color : $input-color;
+        }
+
+        .password-input-section{
+            margin: 15px;
+            color : $input-color;
+        }
+
+        .password-check-input-section{
+            margin: 15px;
+            color : $input-color;
+        }
+    
+        .loginBtn-2{
+            margin: 15px;
+            padding: 10px;
+            border-radius: 7px;
+    
+            background-color : $mesic-color;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+
+            border: none;
+            outline: none;
+
+        }
+    }
+
+    .loginContainer{
+        margin: 10px;
+        text-align: center;
+        .loginBtn{
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+
+// mypage, mypage-edit modal
+
+.mypage-edit-background {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+}
+
+// mypage modal part
+
+.mypage-edit-modal {
+    background-color: #fefefe;
+    position: absolute;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    width: 30%;
+    left: 90%;
+
+    border: none;
+    border-radius: 7px;
+    
+
+    /* top: 50%; */
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    .mypage-close{
+        color : $mesic-color;
+        font-weight: 800;
+    }
+
+    .mypage-content{
+        text-align:center;
+        
+        .mypage-title{
+            color : $mesic-color;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .profileImg{
+            display: flex;
+            justify-content: center;
+            .profileImg-outsider{
+                .profileImg-content{
+                    padding: auto;
+                }
+            }
+        }
+
+        .mypage-email-section{
+            margin-top: 40px;
+
+            .mypage-email-index{
+                color : $input-color;
+            }
+
+            .mypage-email-content{
+                width: 30px;
+                background-color:$mypage-modify-unable;
+                color : $input-color;
+                padding: 5px;
+            }
+        }
+
+        .mypage-name-section{
+            margin-top: 30px;
+
+            .mypage-name-index{
+                color : $input-color;
+            }
+
+            .mypage-name-content{
+                background-color:$mypage-modify-unable;
+                color : $input-color;
+                padding: 5px;
+            }
+        }
+
+        .mypage-nickname-section{
+            margin-top: 30px;
+
+            .mypage-nickname-index{
+                color : $input-color;
+            }
+
+            .mypage-nickname-content{
+                background-color:$mypage-modify-unable;
+                color : $input-color;
+                padding: 5px;
+            }
+        }
+
+        .mypage-modify-btn-section{
+            .mypage-modify-btn{
+                width: 60px;
+            margin: 50px;
+            padding: 10px;
+            border-radius: 7px;
+    
+            background-color : $mesic-color;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+    
+            border: none;
+            outline: none;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+        }
+    }
+
+    // ediymypage modal part
+
+    .editmypage-close{
+        color : $mesic-color;
+        font-weight: 800;
+    }
+
+    .editmypage-content{
+        text-align:center;
+
+        .mypage-edit-title{
+            color : $mesic-color;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .edit-email{
+            margin-top: 40px;
+
+            .mypage-email-edit-index{
+                color : $input-color;
+            }
+
+            .mypage-email-edit-content{
+                width: 30px;
+                background-color:$mypage-modify-unable;
+                color : $input-color;
+                padding: 5px;
+            }
+        }
+
+        .edit-name{
+            margin-top: 30px;
+
+            .mypage-name-edit-index{
+                color : $input-color;
+            }
+    
+            .mypage-name-edit-content{
+                width: 30px;
+                background-color:$mypage-modify-unable;
+                color : $input-color;
+                padding: 5px;
+            }
+        }
+
+        .edit-nickname{
+            margin-top: 30px;
+
+            .mypage-nickname-edit-index{
+                color : $input-color;
+            }
+    
+            input[type="text"]{
+                background-color: $mypage-modify-able;
+                border: none;
+                outline: none;
+                height: 25px;
+                margin-left: 10px;
+                opacity: 0.1;
+            }
+        }
+
+        .mypage-edit-button-section{
+            margin-top: 50px;
+    
+            .edit-modify-btn{
+                width: 60px;
+                margin: 15px;
+                padding: 10px;
+                border-radius: 7px;
+        
+                background-color : $mesic-color;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+    
+                border: none;
+                outline: none;
+            }
+    
+            .edit-return-btn{
+                width: 60px;
+                margin: 15px;
+                padding: 10px;
+                border-radius: 7px;
+        
+                background-color : $mesic-color;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+    
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+

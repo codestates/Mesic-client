@@ -2,6 +2,7 @@
   "name": "mesic-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -13,8 +14,10 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.7",
+    "aws-sdk": "^2.918.0",
     "axios": "^0.21.1",
     "dotenv": "^9.0.2",
+    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
@@ -24,9 +27,13 @@
     "redux": "^4.1.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
+    "request-promise": "^4.2.6",
     "typescript": "~4.1.5"
   },
   "scripts": {
+    "sass": "node-sass src/App.scss src/App.css",
+    "node-sass": "node-sass",
+    "prestart" : "yarn sass",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

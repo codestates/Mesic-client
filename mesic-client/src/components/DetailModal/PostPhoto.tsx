@@ -10,10 +10,12 @@ function PostPhoto({ postImg, setPostImg }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+  const [previewImg, setPreviewImg] = useState<any>({});
 
   // Photo 업데이트 버튼
   const handlePostImg = (e: any) => {
-    setPostImg(URL.createObjectURL(e.target.files[0]));
+    setPostImg(e.target.files[0]);
+    setPreviewImg(URL.createObjectURL(e.target.files[0]));
   };
 
   return (
@@ -26,21 +28,27 @@ function PostPhoto({ postImg, setPostImg }: any) {
         setPostImg={setPostImg}
         // setUpdateMode => false로 변경해야지 처음 상태로 돌아감
       />
-      <div className="border">
-        <input
-          ref={imageInput}
-          type="file"
-          accept="image/*"
-          onChange={handlePostImg}
-        />
-        {postImg === null ? (
-          <div>사진 추가하기</div>
-        ) : (
+      <div className="postPhoto">
+        <i className="fa fa-camera"></i>
+        <div className="detail-line"></div>
+        {postImg.length === 0 ? (
           <>
-            <button onClick={() => setOpenConfirm(true)}>삭제</button>
+            <label className="add-btn-photo" htmlFor="photo-file">
+              +
+            </label>
+            <input
+              className="input-photo"
+              ref={imageInput}
+              type="file"
+              id="photo-file"
+              accept="image/*"
+              onChange={handlePostImg}
+            />
           </>
+        ) : (
+          <img className="img" src={previewImg} />
         )}
-        <img className="img" src={postImg} />
+        {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
       </div>
     </>
   );

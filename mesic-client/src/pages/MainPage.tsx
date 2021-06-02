@@ -9,6 +9,8 @@ import PostModal from "../components/DetailModal/PostModal";
 import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
+import AWS from "aws-sdk";
+
 
 declare global {
   interface Window {
@@ -71,8 +73,6 @@ function MainPage() {
   // 로그인 유저의 핀 데이터
   const [myPinData, setMypinData] = useState<any[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
-
-  const [saveInfoWindow, setSaveInfoWindow] = useState<any[]>([]);
 
   // 지도 동적 렌더링
   useEffect(() => {
@@ -141,10 +141,6 @@ function MainPage() {
     }
   }, [myPinData, map]);
 
-  useEffect(() => {
-    closeInfoWindows();
-  });
-
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
     axios
@@ -187,20 +183,43 @@ function MainPage() {
 
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
-    axios
-      .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setOpenReadModal(false);
-        dispatch(switchMode("NONE"));
-      })
-      .catch((err) => console.log(err));
-  };
+    const bucket = "mesic-photo-bucket";
+    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
+    const secretAccessKey = 'rVp+ecaeyz/ZPg5Vu4GIZdLBmHkIzYrPwHteSHo';
+    const region = 'ap-northeast-2';
 
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+
+    const photoURL = readMarkerData.photo;
+    const file = photoURL.split('/');
+    console.log(file[file.length - 1])
+    const fileName = file[file.length - 1];
+    const param = {
+      Bucket: bucket,
+      Key: `/image/${fileName}`,
+    }; //s3 업로드에 필요한 옵션 설정
+    
+    s3.deleteObject(param, function (err: any, data: any) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log("delete complete");
+
+      axios
+        .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setOpenReadModal(false);
+          dispatch(switchMode("NONE"));
+        })
+        .catch((err) => console.log(err));
+    });
+  };
   // (POST MODE) 지도 클릭 마커
 
   const postMarkerControl = () => {
@@ -237,7 +256,6 @@ function MainPage() {
     }
 
     const markers = [];
-    const infoWindows = [];
     for (let i = 0; i < myPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
         parseFloat(myPinData[i].location.longitude),
@@ -263,32 +281,59 @@ function MainPage() {
 
       const iwContent = document.createElement("div");
       iwContent.className = "preview";
-      const thumbnails = document.createElement("img");
-      thumbnails.className = "preview-img";
-      thumbnails.src = myPinData[i].music.thumbnail;
-      const title = document.createElement("span");
+      const musicContainer = document.createElement("div");
+      musicContainer.className = "music-flex-box";
+      const thumbnail = document.createElement("img");
+      thumbnail.className = "preview-img";
+
+      if (myPinData[i].music.thumbnail.length > 0) {
+        thumbnail.src = myPinData[i].music.thumbnail;
+      } else {
+        thumbnail.src =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/CD_icon_test.svg/1200px-CD_icon_test.svg.png";
+      }
+      const titleContainer = document.createElement("div");
+      titleContainer.className = "preview-title-container";
+      const hideOverflow = document.createElement("div");
+      hideOverflow.className = "hide-overflow";
+      const title = document.createElement("div");
       title.className = "preview-title";
-      title.textContent = myPinData[i].music.title;
+
+      if (myPinData[i].music.title.length > 0) {
+        title.textContent = myPinData[i].music.title;
+      } else {
+        title.textContent = "저장한 음악이 없습니다.";
+      }
+
       const memo = document.createElement("div");
       memo.className = "preview-memo";
-      memo.textContent = myPinData[i].memo;
+      if (myPinData[i].memo.length > 0) {
+        memo.textContent = myPinData[i].memo;
+      } else {
+        memo.textContent = "저장한 메모가 없습니다.";
+      }
 
-      iwContent.append(thumbnails, title, memo);
-      const infowindow = new window.kakao.maps.InfoWindow({
+      hideOverflow.append(title);
+      titleContainer.append(hideOverflow);
+      musicContainer.append(thumbnail, titleContainer);
+      iwContent.append(musicContainer, memo);
+      const infowindow = new window.kakao.maps.CustomOverlay({
+        position,
         content: iwContent,
+        xAnchor: 0.6,
+        yAnchor: 1.6,
       });
+
       window.kakao.maps.event.addListener(marker, "mouseover", () => {
-        infowindow.open(map, marker);
+        infowindow.setMap(map);
       });
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
-        infowindow.close();
+        infowindow.setMap(null);
       });
 
       marker.setMap(map);
       markers.push(marker);
-      infoWindows.push(infowindow);
     }
-    setSaveInfoWindow([...saveInfoWindow, ...infoWindows]);
     setMyMarkers(markers);
   };
 
@@ -317,24 +362,37 @@ function MainPage() {
 
       const iwContent = document.createElement("div");
       iwContent.className = "preview";
-      const thumbnails = document.createElement("img");
-      thumbnails.className = "preview-img";
-      thumbnails.src = Dummies[i].music.thumbnail;
-      const title = document.createElement("span");
+      const musicContainer = document.createElement("div");
+      musicContainer.className = "music-flex-box";
+      const thumbnail = document.createElement("img");
+      thumbnail.className = "preview-img";
+      thumbnail.src = Dummies[i].music.thumbnail;
+      const titleContainer = document.createElement("div");
+      titleContainer.className = "preview-title-container";
+      const hideOverflow = document.createElement("div");
+      hideOverflow.className = "hide-overflow";
+      const title = document.createElement("div");
+      title.className = "preview-title";
       title.textContent = Dummies[i].music.title;
       const memo = document.createElement("div");
       memo.className = "preview-memo";
       memo.textContent = Dummies[i].memo;
-      iwContent.append(thumbnails, title, memo);
-
-      const infowindow = new window.kakao.maps.InfoWindow({
+      hideOverflow.append(title);
+      titleContainer.append(hideOverflow);
+      musicContainer.append(thumbnail, titleContainer);
+      iwContent.append(musicContainer, memo);
+      const infowindow = new window.kakao.maps.CustomOverlay({
+        position,
         content: iwContent,
+        xAnchor: 0.6,
+        yAnchor: 1.6,
       });
+
       window.kakao.maps.event.addListener(marker, "mouseover", () => {
-        infowindow.open(map, marker);
+        infowindow.setMap(map);
       });
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
-        infowindow.close();
+        infowindow.setMap(null);
       });
 
       marker.setMap(map);
@@ -360,7 +418,7 @@ function MainPage() {
   const [followMarkers, setFollowMarkers] = useState<any[]>([]);
   const viewFollowMarkers = () => {
     const markers = [];
-    const infoWindows = [];
+
     for (let i = 0; i < followPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
         parseFloat(followPinData[i].location.longitude),
@@ -387,38 +445,60 @@ function MainPage() {
       //팔로우 마커 호버 적용
       const iwContent = document.createElement("div");
       iwContent.className = "preview";
-      const thumbnails = document.createElement("img");
-      thumbnails.className = "preview-img";
-      thumbnails.src = followPinData[i].music.thumbnail;
-      const title = document.createElement("span");
-      title.textContent = followPinData[i].music.title;
+      const musicContainer = document.createElement("div");
+      musicContainer.className = "music-flex-box";
+      const thumbnail = document.createElement("img");
+      thumbnail.className = "preview-img";
+      if (followPinData[i].music.thumbnail.length > 0) {
+        thumbnail.src = followPinData[i].music.thumbnail;
+      } else {
+        thumbnail.src =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/CD_icon_test.svg/1200px-CD_icon_test.svg.png";
+      }
+      const titleContainer = document.createElement("div");
+      titleContainer.className = "preview-title-container";
+      const hideOverflow = document.createElement("div");
+      hideOverflow.className = "hide-overflow";
+      const title = document.createElement("div");
+      title.className = "preview-title";
+
+      if (followPinData[i].music.title.length > 0) {
+        title.textContent = followPinData[i].music.title;
+      } else {
+        title.textContent = "저장한 음악이 없습니다.";
+      }
+
       const memo = document.createElement("div");
       memo.className = "preview-memo";
-      memo.textContent = followPinData[i].memo;
+      if (followPinData[i].memo.length > 0) {
+        memo.textContent = followPinData[i].memo;
+      } else {
+        memo.textContent = "저장한 메모가 없습니다.";
+      }
 
-      iwContent.append(thumbnails, title, memo);
-      const infowindow = new window.kakao.maps.InfoWindow({
+      hideOverflow.append(title);
+      titleContainer.append(hideOverflow);
+      musicContainer.append(thumbnail, titleContainer);
+      iwContent.append(musicContainer, memo);
+
+      const infowindow = new window.kakao.maps.CustomOverlay({
+        position,
         content: iwContent,
+        xAnchor: 0.6,
+        yAnchor: 1.6,
       });
+
       window.kakao.maps.event.addListener(marker, "mouseover", () => {
-        infowindow.open(map, marker);
+        infowindow.setMap(map);
       });
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
-        infowindow.close();
+        infowindow.setMap(null);
       });
 
       marker.setMap(map);
       markers.push(marker);
-      infoWindows.push(infowindow);
     }
     setFollowMarkers([...followMarkers, markers]);
-    setSaveInfoWindow([...saveInfoWindow, ...infoWindows]);
-  };
-
-  const closeInfoWindows = () => {
-    for (let i = 0; i < saveInfoWindow.length; i += 1) {
-      saveInfoWindow[i].close();
-    }
   };
 
   // 체크된 마커 데이터 가져와서 저장
@@ -682,7 +762,3 @@ function MainPage() {
 }
 
 export default MainPage;
-
-/*
-
-          */

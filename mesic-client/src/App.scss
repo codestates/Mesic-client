@@ -1,0 +1,192 @@
+@import "./components/DetailModal/DetailModal";
+@import "./components/UI/UI";
+@import "./components/User/User";
+@import "./pages/Page";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100vw;
+}
+
+/* MainPage & IntroPage 여기서 하세요 */
+
+#kakao-map {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+}
+.border {
+  border: dotted black 2px;
+  background-color: gray;
+}
+
+.background {
+  display: none;
+  /* Hidden by default */
+}
+
+.mypage-edit-background {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+}
+
+.mypage-edit-modal {
+  background-color: #fefefe;
+  position: absolute;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid rgb(212, 212, 212);
+  width: 20%;
+  height: 50%;
+  left: 90%;
+  /* top: 50%; */
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.confirm-modal-outsider {
+  position: absolute;
+  z-index: 2;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.img {
+  height: 250px;
+}
+
+.profileImg-outsider {
+  border: none #c0c0c0 solid;
+  padding: 5px;
+  max-width: 110px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.profileImg-content {
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
+}
+
+.my-pin-color {
+  height: 30px;
+}
+
+.preview {
+  width: 200px;
+  height: 140px;
+  padding: 20px 10px;
+  border-radius: 30px;
+  background-color: white;
+  position: relative;
+  box-shadow: $box-shadow;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 55%;
+    width: 0;
+    border-top: 20px solid white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+}
+
+.music-flex-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+@keyframes slide {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+@-webkit-keyframes slide {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+.preview-title-container {
+  flex: 1 1 100px;
+  height: 30px;
+  // display: inline-block;
+  // white-space: nowrap;
+  .hide-overflow {
+    overflow: hidden;
+    position: absolute;
+    right: 15px;
+    height: 30px;
+    width: 95px;
+    .preview-title {
+      text-align: left;
+      position: absolute;
+      // display: inline-block;
+      // text-align: center;
+      font-size: 0.9rem;
+      color: rgb(80, 80, 80);
+      margin: 10px 0px 10px 10px;
+      animation-name: slide;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      -webkit-animation-name: slide;
+      -webkit-animation-duration: 3s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+      white-space: nowrap;
+    }
+  }
+}
+
+.preview-memo {
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 15px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: rgb(150, 150, 150);
+}

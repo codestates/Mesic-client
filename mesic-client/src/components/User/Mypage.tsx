@@ -2,6 +2,7 @@ import { profile } from "console";
 import React from "react";
 import { RootState } from "../../reducers";
 import { useDispatch, useSelector } from "react-redux";
+import profileImage from '../../images/avatar.png';
 
 type MypageProps = {
   openMypage: boolean;
@@ -42,19 +43,28 @@ function Mypage(props: MypageProps) {
         <div className="mypage-close" onClick={clickCloseMypage}>
           X
         </div>
-        <div className="mypage-edit-title">MYPAGE</div>
-        <div className="mypage-edit-content">
+        <div className="mypage-content">
+          <div className="mypage-title">MYPAGE</div>
           <div className="profileImg">
             <figure className="profileImg-outsider">
-              <img className="profileImg-content" src={profileImg}></img>
+              <img className="profileImg-content" src={profileImage}></img>
             </figure>
           </div>
-          <div>이메일: {email}</div>
-          <div>이름: {name}</div>
-          <div>닉네임: {nickname}</div>
-          <div>
+          <div className="mypage-email-section">
+            <span className="mypage-email-index">Email </span> 
+            <span className="mypage-email-content">{email}</span>
+          </div>
+          <div className="mypage-name-section">
+            <span className="mypage-name-index">Name </span> 
+            <span className="mypage-name-content">{name}</span>
+          </div>
+          <div className="mypage-nickname-section">
+            <span className="mypage-nickname-index">Nickname </span> 
+            <span className="mypage-nickname-content">{nickname}</span>
+          </div>
+          <div className="mypage-modify-btn-section">
             {email !== "yatong@hahaha.com" ? (
-              <button onClick={handleOpenEditMypage}>수정</button>
+              <button className="mypage-modify-btn" onClick={handleOpenEditMypage}>수정</button>
             ) : (
               <></>
             )}
