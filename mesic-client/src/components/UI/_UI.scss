@@ -1,0 +1,180 @@
+$main-color: #19c9d4;
+$font-color: rgb(100, 100, 100);
+$box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
+
+@mixin follow-user-modal {
+  background-color: #fefefe;
+  position: absolute;
+  z-index: 3;
+  border-radius: 20px;
+  border: 0;
+  padding: 20px 15px 20px 20px;
+  width: 350px;
+  height: 550px;
+  top: 30%;
+  box-shadow: $box-shadow;
+  input[type="text"] {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgb(222, 222, 222);
+    display: block;
+    position: relative;
+    margin: 20px auto;
+    width: 80%;
+    color: $font-color;
+    font-size: 1rem;
+    padding: 6px;
+  }
+  ::placeholder {
+    opacity: 60%;
+  }
+}
+
+@mixin each-flex-box {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+}
+
+@mixin flex-box-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 340px;
+}
+
+@mixin follow-btn {
+  background-color: white;
+  height: 17px;
+  width: 17px;
+  cursor: pointer;
+  color: $main-color;
+  border: solid 2px $main-color;
+  line-height: 0;
+}
+
+.followlist {
+  @include follow-user-modal;
+  -webkit-transform: translate(10%, 10%);
+  transform: translate(10%, 10%);
+}
+
+.followlist-title {
+  text-align: center;
+  color: $main-color;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -2px;
+  margin: 10px;
+}
+
+.follow {
+  @include flex-box-container;
+}
+
+.search-user-box {
+  position: absolute;
+  bottom: 20px;
+}
+
+.each-follow {
+  padding: 0px 10px;
+  margin-right: 25px;
+}
+
+.each-user-name {
+  font-size: 1.1rem;
+  color: $font-color;
+}
+
+.each-user-email {
+  font-size: 0.8rem;
+  color: rgb(158, 158, 158);
+}
+
+.each-follow-flex {
+  @include each-flex-box;
+  div {
+    flex: 0 1 auto;
+    margin: 10px;
+  }
+  img {
+    flex: 0 1 auto;
+  }
+  input[type="checkbox"] {
+    -ms-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+    padding: 10px;
+    flex: 0 1 auto;
+    margin: 5px;
+    cursor: pointer;
+  }
+  button {
+    position: absolute;
+    right: 0;
+    flex: 0 1 auto;
+  }
+}
+
+.delete-follow-btn {
+  @include follow-btn;
+  font-size: 1.5rem;
+}
+
+.find-user-btn {
+  margin: 0 auto;
+  transform: translateX(33%);
+  padding: 11px 22px;
+  border: 0;
+  background-color: $main-color;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -1px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.search-not-found {
+  text-align: center;
+  color: $font-color;
+  margin-top: 50%;
+}
+
+.search-user-modal {
+  @include follow-user-modal;
+  -webkit-transform: translate(-5%, -30%);
+  transform: translate(100%, -30%);
+}
+
+.search-user-close {
+  position: absolute;
+  font-size: 1.3rem;
+  margin: 5px;
+  color: $main-color;
+  cursor: pointer;
+}
+
+.each-user-flex {
+  @include each-flex-box;
+  div {
+    flex: 0 1 auto;
+    margin: 10px 10px 10px 35px;
+  }
+  button {
+    position: absolute;
+    margin-right: 35px;
+    right: 0;
+    flex: 0 1 auto;
+  }
+}
+
+.add-follow-btn {
+  @include follow-btn;
+  font-size: 1.3rem;
+  line-height: 0.1rem;
+}
