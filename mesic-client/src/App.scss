@@ -130,12 +130,93 @@ body {
 
 .preview {
   width: 200px;
+  height: 140px;
+  padding: 20px 10px;
+  border-radius: 30px;
+  background-color: white;
+  position: relative;
+  box-shadow: $box-shadow;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 55%;
+    width: 0;
+    border-top: 20px solid white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+}
+
+.music-flex-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .preview-img {
-  width: 100px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  flex: 0 0 auto;
 }
 
-.preview-title {
-  font-size: small;
+@keyframes slide {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+@-webkit-keyframes slide {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+.preview-title-container {
+  flex: 1 1 100px;
+  height: 30px;
+  // display: inline-block;
+  // white-space: nowrap;
+  .hide-overflow {
+    overflow: hidden;
+    position: absolute;
+    right: 15px;
+    height: 30px;
+    width: 95px;
+    .preview-title {
+      text-align: left;
+      position: absolute;
+      // display: inline-block;
+      // text-align: center;
+      font-size: 0.9rem;
+      color: rgb(80, 80, 80);
+      margin: 10px 0px 10px 10px;
+      animation-name: slide;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      -webkit-animation-name: slide;
+      -webkit-animation-duration: 3s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+      white-space: nowrap;
+    }
+  }
+}
+
+.preview-memo {
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 15px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: rgb(150, 150, 150);
 }

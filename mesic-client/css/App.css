@@ -48,6 +48,7 @@
 }
 
 .modal-outsider .modal .postMusic {
+  margin: 10px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -61,10 +62,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 25px 0px;
+}
+
+.modal-outsider .modal .postMusic .detail-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 300px;
-  margin-top: 15px;
+  margin-top: 5px;
   border-top: 1px solid #e1e1e1;
 }
 
@@ -81,6 +86,7 @@
 }
 
 .modal-outsider .modal .postPhoto {
+  margin: 10px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -94,10 +100,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 25px 0px;
+}
+
+.modal-outsider .modal .postPhoto .detail-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 300px;
-  margin-top: 15px;
+  margin-top: 5px;
   border-top: 1px solid #e1e1e1;
 }
 
@@ -119,6 +129,7 @@
 }
 
 .modal-outsider .modal .postMemo {
+  margin: 10px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -132,10 +143,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 25px 0px;
+}
+
+.modal-outsider .modal .postMemo .detail-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 300px;
-  margin-top: 15px;
+  margin-top: 5px;
   border-top: 1px solid #e1e1e1;
 }
 
@@ -205,7 +220,7 @@
   position: relative;
   margin: 20px auto;
   width: 80%;
-  color: #646464;
+  color: #505050;
   font-size: 1rem;
   padding: 4px;
 }
@@ -259,7 +274,7 @@
 
 .each-user-name {
   font-size: 1.1rem;
-  color: #646464;
+  color: #505050;
 }
 
 .each-user-email {
@@ -344,7 +359,7 @@
 
 .search-not-found {
   text-align: center;
-  color: #646464;
+  color: #505050;
   margin-top: 50%;
 }
 
@@ -372,7 +387,7 @@
   position: relative;
   margin: 20px auto;
   width: 80%;
-  color: #646464;
+  color: #505050;
   font-size: 1rem;
   padding: 4px;
 }
@@ -489,7 +504,7 @@
   position: relative;
   margin-left: 15px;
   width: 80%;
-  color: #646464;
+  color: #505050;
   font-size: 1rem;
   padding: 4px;
 }
@@ -520,7 +535,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  color: #646464;
+  color: #505050;
   font-size: 0.9rem;
 }
 
@@ -701,12 +716,103 @@ body {
 
 .preview {
   width: 200px;
+  height: 140px;
+  padding: 20px 10px;
+  border-radius: 30px;
+  background-color: white;
+  position: relative;
+  -webkit-box-shadow: 0 8px 6px -6px #545454;
+          box-shadow: 0 8px 6px -6px #545454;
+}
+
+.preview:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 55%;
+  width: 0;
+  border-top: 20px solid white;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.music-flex-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .preview-img {
-  width: 100px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
 }
 
-.preview-title {
-  font-size: small;
+@keyframes slide {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+@-webkit-keyframes slide {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+.preview-title-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100px;
+          flex: 1 1 100px;
+  height: 30px;
+}
+
+.preview-title-container .hide-overflow {
+  overflow: hidden;
+  position: absolute;
+  right: 15px;
+  height: 30px;
+  width: 95px;
+}
+
+.preview-title-container .hide-overflow .preview-title {
+  text-align: left;
+  position: absolute;
+  font-size: 0.9rem;
+  color: #505050;
+  margin: 10px 0px 10px 10px;
+  animation-name: slide;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: slide;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  white-space: nowrap;
+}
+
+.preview-memo {
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 15px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #969696;
 }
