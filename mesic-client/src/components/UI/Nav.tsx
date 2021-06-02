@@ -13,6 +13,7 @@ import {
   editUserinfo,
   getAccessToken,
 } from "../../actions/index";
+import logo from '../../images/mesic-logo.png'
 
 function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   //const {open} = props;
@@ -115,18 +116,17 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
       ></EditMypage>
       <div className="nav">
         <Link to="/">
-          <button
+          <img
+            src={logo}
             className="logo-btn"
             onClick={() => dispatch(clearModeState())}
-          >
-            Logo
-          </button>
+          />
         </Link>
         <div className="nav-btn">
-          <button onClick={isLogin ? clickLogout : clickLogin}>
+          <button className="loginBtn" onClick={isLogin ? clickLogout : clickLogin}>
             {isLogin ? "Logout" : "Login"}
           </button>
-          <button onClick={isLogin ? clickMypage : clickSignup}>
+          <button className="mypageBtn" onClick={isLogin ? clickMypage : clickSignup}>
             {isLogin ? "Mypage" : "Signup"}
           </button>
         </div>

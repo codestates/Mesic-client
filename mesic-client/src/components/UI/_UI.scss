@@ -282,3 +282,62 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   -webkit-transform: translate(0%, 0%);
   transform: translate(0%, -25%);
 }
+
+$mesic-color: #19c9d4;
+$default-black-color: #525252;
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  // border-bottom: solid 1px;
+  // border-color: $default-black-color;
+
+  .logo-btn {
+    margin: none;
+    padding: none;
+    border-radius: 7px;
+
+    color: $mesic-color;
+    background-image: none;
+
+    border: none;
+    outline: none;
+  }
+
+  .nav-btn {
+    .loginBtn {
+      margin: 6px;
+      padding: 10px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 18px;
+
+      background-color: white;
+      color: $mesic-color;
+
+      border: none;
+      outline: none;
+    }
+
+    .mypageBtn {
+      margin: 8px;
+      margin-right: 30px;
+      padding: 10px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 18px;
+
+      color: #fefefe;
+      background-color: $mesic-color;
+
+      border: none;
+      outline: none;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

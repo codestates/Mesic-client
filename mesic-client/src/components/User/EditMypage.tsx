@@ -81,8 +81,8 @@ function EditMypage({
         >
           X
         </div>
-        <div className="mypage-title">EDIT MYPAGE</div>
         <div className="editmypage-content">
+          <div className="mypage-edit-title">EDIT MYPAGE</div>
           <div className="profileImg">
             <figure className="profileImg-outsider">
               {editProfileImg.length > 0 ? (
@@ -100,10 +100,16 @@ function EditMypage({
               ></input>
             </div>
           </div>
-          <div className="edit-email">이메일: {email}</div>
-          <div className="edit-name">이름: {name}</div>
+          <div className="edit-email">
+            <span className="mypage-email-edit-index">Email </span> 
+            <span className="mypage-email-edit-content">{email}</span>
+          </div>
+          <div className="edit-name">
+            <span className="mypage-name-edit-index">Name </span> 
+            <span className="mypage-name-edit-content">{name}</span>
+          </div>
           <div className="edit-nickname">
-            닉네임:
+            <span className="mypage-nickname-edit-index">Nickname </span> 
             <input
               type="text"
               defaultValue={
@@ -113,9 +119,9 @@ function EditMypage({
             ></input>
             <div>{nicknameError}</div>
           </div>
-          <div>
-            <button onClick={sendModifiedData}>저장</button>
-            <button onClick={handleReturnMypage}>취소</button>
+          <div className="mypage-edit-button-section">
+            <button className="edit-modify-btn" onClick={sendModifiedData}>저장</button>
+            <button className="edit-return-btn" onClick={handleReturnMypage}>취소</button>
           </div>
         </div>
       </div>
