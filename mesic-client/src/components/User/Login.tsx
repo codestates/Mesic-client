@@ -4,6 +4,7 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { editUserinfo, getAccessToken } from "../../actions/index";
+import googleLogo from '../../images/google-login.png'
 //axios.defaults.withCredentials = true;
 
 function Login({
@@ -149,8 +150,8 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
         </span>
         <div className="login-content">
           <div className="login-title">LOGIN</div>
-          <div>
-            <span>e-mail</span>
+          <div className="email-input-section">
+            <span>Email</span>
             <input
               onChange={handleIdInput}
               type="text"
@@ -159,8 +160,8 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
             ></input>
             <div className="error-message">{emailError}</div>
           </div>
-          <div>
-            <span>password</span>
+          <div className="password-input-section">
+            <span>Password</span>
             <input
               onChange={handlePwInput}
               type="password"
@@ -177,12 +178,12 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
             )}
           </div>
           <div>
-            <button onClick={responseLogin}>Login</button>
-            <button onClick={loginAsGuest}>Guest로그인</button>
+            <button className="loginBtn-1" onClick={responseLogin}>Login</button>
+            <button className="guestLoginBtn" onClick={loginAsGuest}>Guest</button>
           </div>
         </div>
         <div className="loginContainer" onClick={googleLoginHandler}>
-          <img alt="googlebutton" className="loginBtn" />
+          <img className="loginBtn" src={googleLogo} />
         </div>
       </div>
     </div>

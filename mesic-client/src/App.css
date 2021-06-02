@@ -1,22 +1,367 @@
+@charset "UTF-8";
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .nav .logo-btn {
+    margin: none;
+    padding: none;
+    border-radius: 7px;
+    color: #19C9D4;
+    background-image: none;
+    border: none;
+    outline: none; }
+  .nav .nav-btn .loginBtn {
+    margin: 8px;
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: white;
+    color: #19C9D4;
+    border: none;
+    outline: none; }
+  .nav .nav-btn .mypageBtn {
+    margin: 8px;
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #fefefe;
+    background-color: #19C9D4;
+    border: none;
+    outline: none; }
+    .nav .nav-btn .mypageBtn:hover {
+      opacity: 0.8; }
+
+.login-signup-modal-outsider {
+  position: fixed;
+  /* Stay in place */
+  z-index: 2;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); }
+
+.login-signup-modal {
+  background-color: #fefefe;
+  position: absolute;
+  z-index: 3;
+  /* Sit on top */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 7px; }
+  .login-signup-modal .login-close {
+    color: #19C9D4;
+    font-weight: 800; }
+  .login-signup-modal .signup-close {
+    color: #19C9D4;
+    font-weight: 800; }
+  .login-signup-modal .login-content {
+    text-align: center; }
+    .login-signup-modal .login-content .login-title {
+      color: #19C9D4;
+      margin-bottom: 25px;
+      font-weight: 800;
+      font-size: 26px; }
+    .login-signup-modal .login-content input[type] {
+      background-color: #F4F5F4;
+      border: none;
+      outline: none;
+      height: 25px;
+      margin-left: 10px; }
+    .login-signup-modal .login-content .email-input-section {
+      margin: 15px;
+      color: #9F9999; }
+    .login-signup-modal .login-content .password-input-section {
+      margin: 15px;
+      color: #9F9999; }
+    .login-signup-modal .login-content .loginBtn-1 {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 7px;
+      background-color: #19C9D4;
+      color: white;
+      border: none;
+      outline: none; }
+      .login-signup-modal .login-content .loginBtn-1:hover {
+        opacity: 0.8; }
+    .login-signup-modal .login-content .guestLoginBtn {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 7px;
+      background-color: #f5f1f1;
+      color: #19C9D4;
+      border: none;
+      outline: none; }
+      .login-signup-modal .login-content .guestLoginBtn:hover {
+        opacity: 0.8; }
+  .login-signup-modal .signup-content {
+    text-align: center; }
+    .login-signup-modal .signup-content .signup-title {
+      color: #19C9D4;
+      margin-bottom: 25px;
+      font-weight: 800;
+      font-size: 26px; }
+    .login-signup-modal .signup-content input[type] {
+      background-color: #F4F5F4;
+      border: none;
+      outline: none;
+      height: 22px;
+      margin-left: 10px; }
+    .login-signup-modal .signup-content .email-input-section {
+      margin: 15px;
+      color: #9F9999; }
+    .login-signup-modal .signup-content .name-input-section {
+      margin: 15px;
+      color: #9F9999; }
+    .login-signup-modal .signup-content .nickname-input-section {
+      margin: 15px;
+      color: #9F9999; }
+    .login-signup-modal .signup-content .password-input-section {
+      margin: 15px;
+      color: #9F9999; }
+    .login-signup-modal .signup-content .password-check-input-section {
+      margin: 15px;
+      color: #9F9999; }
+    .login-signup-modal .signup-content .loginBtn-2 {
+      margin: 15px;
+      padding: 10px;
+      border-radius: 7px;
+      background-color: #19C9D4;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      outline: none; }
+  .login-signup-modal .loginContainer {
+    margin: 10px;
+    text-align: center; }
+    .login-signup-modal .loginContainer .loginBtn {
+      width: 32px;
+      height: 32px; }
+
+.mypage-edit-background {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */ }
+
+.mypage-edit-modal {
+  background-color: #fefefe;
+  position: absolute;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  width: 30%;
+  left: 90%;
+  border: none;
+  border-radius: 7px;
+  /* top: 50%; */
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+  .mypage-edit-modal .mypage-close {
+    color: #19C9D4;
+    font-weight: 800; }
+  .mypage-edit-modal .mypage-content {
+    text-align: center; }
+    .mypage-edit-modal .mypage-content .mypage-title {
+      color: #19C9D4;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 20px; }
+    .mypage-edit-modal .mypage-content .profileImg {
+      display: flex;
+      justify-content: center; }
+      .mypage-edit-modal .mypage-content .profileImg .profileImg-outsider .profileImg-content {
+        padding: auto; }
+    .mypage-edit-modal .mypage-content .mypage-email-section {
+      margin-top: 40px; }
+      .mypage-edit-modal .mypage-content .mypage-email-section .mypage-email-index {
+        color: #9F9999; }
+      .mypage-edit-modal .mypage-content .mypage-email-section .mypage-email-content {
+        width: 30px;
+        background-color: #F4F5F4;
+        color: #9F9999;
+        padding: 5px; }
+    .mypage-edit-modal .mypage-content .mypage-name-section {
+      margin-top: 30px; }
+      .mypage-edit-modal .mypage-content .mypage-name-section .mypage-name-index {
+        color: #9F9999; }
+      .mypage-edit-modal .mypage-content .mypage-name-section .mypage-name-content {
+        background-color: #F4F5F4;
+        color: #9F9999;
+        padding: 5px; }
+    .mypage-edit-modal .mypage-content .mypage-nickname-section {
+      margin-top: 30px; }
+      .mypage-edit-modal .mypage-content .mypage-nickname-section .mypage-nickname-index {
+        color: #9F9999; }
+      .mypage-edit-modal .mypage-content .mypage-nickname-section .mypage-nickname-content {
+        background-color: #F4F5F4;
+        color: #9F9999;
+        padding: 5px; }
+    .mypage-edit-modal .mypage-content .mypage-modify-btn-section .mypage-modify-btn {
+      width: 60px;
+      margin: 50px;
+      padding: 10px;
+      border-radius: 7px;
+      background-color: #19C9D4;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      outline: none; }
+      .mypage-edit-modal .mypage-content .mypage-modify-btn-section .mypage-modify-btn:hover {
+        opacity: 0.8; }
+  .mypage-edit-modal .editmypage-close {
+    color: #19C9D4;
+    font-weight: 800; }
+  .mypage-edit-modal .editmypage-content {
+    text-align: center; }
+    .mypage-edit-modal .editmypage-content .mypage-edit-title {
+      color: #19C9D4;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 20px; }
+    .mypage-edit-modal .editmypage-content .edit-email {
+      margin-top: 40px; }
+      .mypage-edit-modal .editmypage-content .edit-email .mypage-email-edit-index {
+        color: #9F9999; }
+      .mypage-edit-modal .editmypage-content .edit-email .mypage-email-edit-content {
+        width: 30px;
+        background-color: #F4F5F4;
+        color: #9F9999;
+        padding: 5px; }
+    .mypage-edit-modal .editmypage-content .edit-name {
+      margin-top: 30px; }
+      .mypage-edit-modal .editmypage-content .edit-name .mypage-name-edit-index {
+        color: #9F9999; }
+      .mypage-edit-modal .editmypage-content .edit-name .mypage-name-edit-content {
+        width: 30px;
+        background-color: #F4F5F4;
+        color: #9F9999;
+        padding: 5px; }
+    .mypage-edit-modal .editmypage-content .edit-nickname {
+      margin-top: 30px; }
+      .mypage-edit-modal .editmypage-content .edit-nickname .mypage-nickname-edit-index {
+        color: #9F9999; }
+      .mypage-edit-modal .editmypage-content .edit-nickname input[type="text"] {
+        background-color: #3C64B1;
+        border: none;
+        outline: none;
+        height: 25px;
+        margin-left: 10px;
+        opacity: 0.1; }
+    .mypage-edit-modal .editmypage-content .mypage-edit-button-section {
+      margin-top: 50px; }
+      .mypage-edit-modal .editmypage-content .mypage-edit-button-section .edit-modify-btn {
+        width: 60px;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 7px;
+        background-color: #19C9D4;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        outline: none; }
+      .mypage-edit-modal .editmypage-content .mypage-edit-button-section .edit-return-btn {
+        width: 60px;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 7px;
+        background-color: #19C9D4;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        outline: none; }
+
+.intro-page .intro-page-section-1 {
+  display: flex;
+  padding: 100px;
+  background-position-y: position / 2; }
+  .intro-page .intro-page-section-1 .intro-page-browser-img {
+    margin-left: 100px;
+    margin-right: 50px; }
+  .intro-page .intro-page-section-1 .intro-page-text-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 200px;
+    margin-top: 150px; }
+    .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus {
+      font-family: Mulish;
+      font-size: 14px;
+      font-style: normal;
+      color: #686262;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: left;
+      margin-bottom: 10px; }
+    .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus-name {
+      font-family: Mulish;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 31px;
+      letter-spacing: 0em;
+      text-align: center;
+      margin-bottom: 10px; }
+    .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus-content {
+      font-family: Mulish;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      color: #000000;
+      opacity: 0.5;
+      line-height: 25px;
+      letter-spacing: 0em;
+      text-align: left; }
+  .intro-page .intro-page-section-1 .quick-start .quick-start-btn {
+    width: 130px;
+    margin-top: 20px;
+    padding: 13px;
+    border-radius: 7px;
+    background-color: #19C9D4;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    outline: none; }
+
+.intro-page .intro-page-section-2 {
+  background-position-y: position / -3; }
+
 * {
   box-sizing: border-box;
   padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column; }
+  margin: 0; }
 
 html,
 body {
   width: 100vw; }
 
-.nav .nav-btn {
-  display: flex;
-  flex: column; }
-  .nav .nav-btn .login-btn {
-    color: red; }
-  .nav .nav-btn .mypage-btn {
-    color: blue; }
-
+/* MainPage & IntroPage 여기서 하세요 */
 #kakao-map {
   z-index: 1;
   width: 100vw;
@@ -47,36 +392,6 @@ body {
   display: none;
   /* Hidden by default */ }
 
-.login-signup-modal-outsider {
-  position: fixed;
-  /* Stay in place */
-  z-index: 2;
-  /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: black;
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); }
-
-.login-signup-modal {
-  background-color: #fefefe;
-  position: absolute;
-  z-index: 3;
-  /* Sit on top */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); }
-
 .mypage-edit-background {
   display: none;
   position: fixed;
@@ -96,8 +411,9 @@ body {
   margin: 15% auto;
   /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
+  border: 1px solid #d4d4d4;
+  width: 20%;
+  height: 50%;
   left: 90%;
   /* top: 50%; */
   -webkit-transform: translate(-50%, -50%);
