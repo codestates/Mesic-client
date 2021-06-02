@@ -1,0 +1,323 @@
+$mesic-color: #19C9D4;
+$default-black-color: #525252;
+
+.intro-page{
+    .intro-page-section-1{
+        display: flex;
+        padding: 65px;
+        background-position-y: position / 2;
+
+        .intro-page-browser-img{
+            margin-left: 65px;
+            margin-right: 20px;
+        }
+
+        .intro-page-text-section{
+            display: flex;
+            flex-direction: column;
+            margin-left: 80px;
+            margin-top: 230px;
+
+            .intro-page-aboutus{
+                font-family: Mulish;
+                font-size: 13.5px;
+                font-style: normal;
+                color: #686262;
+                line-height: 16px;
+                letter-spacing: 0em;
+                text-align: left;
+                margin-bottom: 10px;
+            }
+
+            .intro-page-aboutus-name{
+                font-family: Mulish;
+                font-size: 45px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: 31px;
+                letter-spacing: 0em;
+                text-align: center;
+                margin-bottom: 10px;
+                color: $default-black-color;
+            }
+
+            .intro-page-aboutus-content{
+                font-family: Mulish;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                color: #000000;
+                opacity: 0.5;
+                line-height: 25px;
+                letter-spacing: 0em;
+                text-align: left;
+            }
+        }
+
+        .quick-start{
+            .quick-start-btn{
+                width: 130px;
+                margin-top: 20px;
+                padding: 13px;
+                border-radius: 7px;
+            
+                background-color : $mesic-color;
+                color: white;
+                font-size: 18px;
+                font-weight: 600;
+        
+                border: none;
+                outline: none;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+
+    .intro-page-section-2{
+        display: flex;
+        margin-left: 200px;
+        margin-top: 150px;
+
+        background-position-y: position / -20;
+
+        .intro-page-section2-img{
+            width: 600px;
+            height: 700px;
+            margin: 100px;
+        }
+
+        .intro-page-section-2-content{
+            margin-left: 130px;
+            margin-top: 150px;
+            padding-top: 220px;
+
+            color: $default-black-color;
+
+            background-image: url('./../images/Blob-2.png');
+            background-repeat: no-repeat;
+            background-position-x: 50%;
+            background-position-y: 20%;
+
+            .section2-content-small{
+                color: #000000;
+                opacity: 0.5;
+                font-size: 18px;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+            .section2-content-large{
+                color: $default-black-color;
+                font-size: 36px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .intro-page-section-3{
+        display: flex;
+        margin-left: 130px;
+        margin-top: 100px;
+
+        background-position-y: position / -40;
+
+        .intro-page-section3-img{
+            width: 35%;
+        }
+
+        .intro-page-section-3-content{
+            margin-top: 150px;
+            padding: 100px;
+            padding-top: 270px;
+
+            color: $default-black-color;
+
+            background-image: url('./../images/Blob-3.png');
+            background-repeat: no-repeat;
+            background-position-x: 50%;
+            background-position-y: 55%;
+
+            .section3-content-small{
+                color: #000000;
+                opacity: 0.5;
+                font-size: 18px;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+            .section3-content-large{
+                color: $default-black-color;
+                font-size: 36px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .intro-page-section-4{
+        display: flex;
+        margin-left: 200px;
+        margin-top: 150px;
+
+        background-position-y: position / -60;
+
+        .intro-page-section4-img{
+            width: 40%;
+            margin-right: 200px;
+        }
+
+        .intro-page-section-4-content{
+            margin-top: 200px;
+            padding: 150px;
+
+            color: $default-black-color;
+
+            background-image: url('./../images/Blob-4.png');
+            background-repeat: no-repeat;
+            background-position-x: 50%;
+            background-position-y: 20%;
+
+            .section4-content-small{
+                color: #000000;
+                opacity: 0.5;
+                font-size: 18px;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+            .section4-content-large{
+                color: $default-black-color;
+                font-size: 38px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .intro-page-section-5{
+        display: flex;
+        margin-left: 100px;
+
+        background-position-y: position / -80;
+
+        .intro-page-section5-img{
+            margin-right: 50px;
+            width: 45%;
+            height: 40%;
+        }
+
+        .intro-page-section-5-content{
+            margin-top: 200px;
+            padding: 200px;
+
+            color: $default-black-color;
+
+            background-image: url('./../images/Blob-5.png');
+            background-repeat: no-repeat;
+            background-position-x: 50%;
+            background-position-y: 20%;
+
+            .section5-content-small{
+                color: #000000;
+                opacity: 0.5;
+                font-size: 18px;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+            .section5-content-large{
+                color: $default-black-color;
+                font-size: 36px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .intro-page-section-6{
+        display: flex;
+        margin-left: 200px;
+
+        background-position-y: position / -100;
+        .intro-page-section6-img{
+            width: 40%;
+        }
+
+        .intro-page-section-6-content{
+            margin-left: 100px;
+            margin-top: 140px;
+            padding: 180px;
+
+            color: $default-black-color;
+
+            background-image: url('./../images/Blob-6.png');
+            background-repeat: no-repeat;
+            background-position-x: 50%;
+            background-position-y: 20%;
+
+            .section6-content-small{
+                color: #000000;
+                opacity: 0.5;
+                font-size: 18px;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+            .section6-content-large{
+                color: $default-black-color;
+                font-size: 36px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .below-btn-section{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 170px;
+        .intro-page-below-start-btn{
+            width: 180px;
+            padding: 13px;
+            border-radius: 7px;
+                
+            background-color : $mesic-color;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            
+            border: none;
+            outline: none;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+
+    .footer-section{
+        // padding: 150px;
+
+        width: 100%;
+        height: 150px;
+        background-color: white;
+        border-top: solid 0.5px;        
+        border-color: #cac7c7;
+
+        .footer-section-logo{
+            padding: 20px;
+            margin: auto;
+            width: 9%;
+        }
+    
+        .footer-section-members{
+            margin: auto;
+            width: 50%;
+        }
+    
+        .footer-section-github{
+            padding: 25px;
+            margin: auto;
+            width: 50%;
+        }
+    }
+}

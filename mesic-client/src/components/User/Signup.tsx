@@ -176,9 +176,9 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
           X
         </span>
         <div className="signup-content">
-          <div className="signup-title">SIGNUP</div>
-          <div>
-            <span>e-mail</span>
+          <div className="signup-title">SIGN UP</div>
+          <div className="email-input-section">
+            <span>Email</span>
             <input
               onChange={handleIdInput}
               type="text"
@@ -187,8 +187,8 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
             ></input>
             <div className="error-message">{emailError}</div>
           </div>
-          <div>
-            <span>name</span>
+          <div className="name-input-section">
+            <span>Name</span>
             <input
               onChange={handleNameInput}
               type="text"
@@ -196,8 +196,8 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
               ref={inputName}
             ></input>
           </div>
-          <div>
-            <span>nickname</span>
+          <div className="nickname-input-section">
+            <span>Nickname</span>
             <input
               onChange={handleNicknameInput}
               type="text"
@@ -205,8 +205,8 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
               ref={inputNickname}
             ></input>
           </div>
-          <div>
-            <span>password</span>
+          <div className="password-input-section">
+            <span>Password</span>
             <input
               onChange={handlePwInput}
               type="password"
@@ -214,8 +214,8 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
               ref={inputPw}
             ></input>
           </div>
-          <div>
-            <span>password check</span>
+          <div className="password-check-input-section">
+            <span>Password Check</span>
             <input
               onChange={handlePwCheckInput}
               type="password"
@@ -227,7 +227,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
             </div>
           </div>
           <div>
-            <button onClick={responseSignup}>Signup</button>
+            <button className="loginBtn-2" onClick={responseSignup}>Sign Up</button>
           </div>
         </div>
       </div>
