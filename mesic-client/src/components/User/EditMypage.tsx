@@ -3,6 +3,8 @@ import { profile } from "console";
 import React, { useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import AWS from "aws-sdk";
+
 
 function EditMypage({
   setOpenMypage,
@@ -22,31 +24,56 @@ function EditMypage({
   const editProfileInput = useRef<any>();
   const [editNicknameInput, setEditNicknameInput] = useState<string>("");
   const [editProfileImg, setEditProfileImg] = useState<any>("");
+  const [editPreviewProfileImg, setEditPreviewProfileImg] = useState<any>("");
   const [nicknameError, setNicknameErrorr] = useState<string>("");
 
   const sendModifiedData = () => {
-    const data = { nickname: editNicknameInput, profile: editProfileImg };
-    console.log(data);
-    if (editNicknameInput.length === 0) {
-      setNicknameErrorr("닉네임을 입력해주세요");
-      return;
-    }
-    axios
-      .patch(UPDATE_USER_URL, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        console.log("patchuser === ", res);
-        if (res.status === 200) {
-          getUserInfo(user_id);
-          setOpenEditMypage(false);
-          setOpenMypage(true);
-          editProfileInput.current.value = "";
-          setEditProfileImg("");
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+
+    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
+    const secretAccessKey = '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';
+    const region = 'ap-northeast-2'
+    
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+
+    const param = {
+      Bucket: 'mesic-photo-bucket',
+      Key: `/image/${editProfileImg.name}`,
+      ACL: "public-read",
+      Body: editProfileImg,
+      ContentType: "image/jpg"
+    }; //s3 업로드에 필요한 옵션 설정
+
+    s3.upload(param, function (err: any, data: any) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log("data.Location", data.Location);
+      const updateData = { nickname: editNicknameInput, profile: data.Location };
+      console.log(updateData);
+      
+      if (editNicknameInput.length === 0) {
+        setNicknameErrorr("닉네임을 입력해주세요");
+        return;
+      }
+      
+      axios
+        .patch(UPDATE_USER_URL, updateData, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          console.log("patchuser === ", res);
+          if (res.status === 200) {
+            getUserInfo(user_id);
+            setOpenEditMypage(false);
+            setOpenMypage(true);
+            editProfileInput.current.value = "";
+            setEditProfileImg("");
+          }
+        })
+        .catch((err) => console.log(err));
+    })
+  }
 
   const handleEditNicknameInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,9 +86,9 @@ function EditMypage({
   );
 
   const handleEditProfile = (e: any) => {
-    const blobData = [];
-    blobData.push(e.target.files[0]);
-    setEditProfileImg(window.URL.createObjectURL(new Blob(blobData)));
+    const file = e.target.files[0];
+    setEditPreviewProfileImg(URL.createObjectURL(file))
+    setEditProfileImg(file);
   };
 
   const handleReturnMypage = () => {
@@ -86,7 +113,7 @@ function EditMypage({
           <div className="profileImg">
             <figure className="profileImg-outsider">
               {editProfileImg.length > 0 ? (
-                <img className="profileImg-content" src={editProfileImg}></img>
+                <img className="profileImg-content" src={editPreviewProfileImg}></img>
               ) : (
                 <img className="profileImg-content" src={profileImg}></img>
               )}
@@ -121,6 +148,6 @@ function EditMypage({
       </div>
     </div>
   );
-}
+};
 
 export default EditMypage;

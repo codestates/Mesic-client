@@ -7,20 +7,6 @@ import PostPhoto from "./PostPhoto";
 import PostMemo from "./PostMemo";
 import axios from "axios";
 import AWS from "aws-sdk";
-//import { read } from "fs";
-
-// const bucketRegion = "ap-northeast-2";
-// const bucket = "mesic-photo-bucket";
-
-// AWS.config.update({
-//   accessKeyId: `${process.env.ACCESS_KEY}`,
-//   secretAccessKey: `${process.env.SECRET_ACCESS_KEY}`,
-// });
-
-// const myBucket = new AWS.S3({
-//   params: { Bucket: bucket },
-//   region: bucketRegion,
-// });
 
 function PostModal({ postLatLng }: any) {
   const [postMusic, setPostMusic] = useState<{
@@ -35,7 +21,6 @@ function PostModal({ postLatLng }: any) {
   const [postImg, setPostImg] = useState<any>("");
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
-  const [fileLocation, setFileLocation] = useState<any>("");
 
   const state = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
@@ -52,27 +37,14 @@ function PostModal({ postLatLng }: any) {
     }
     setErrMessage("");
 
-    const bucket = "mesic-photo-bucket";
-    const bucketRegion = "ap-northeast-2";
-    const IdentityPoolId =
-      "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca";
+    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
+    const secretAccessKey = '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';
+    const region = 'ap-northeast-2';
 
-    const s3 = new AWS.S3({
-      accessKeyId: `AKIA2XC7TYWAUO3P7L2I`,
-      secretAccessKey: `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`,
-      region: bucketRegion,
-    }); //s3 configuration
-
-    // AWS.config.update({
-    //   // AWS-SDK 설정을 해주는 데 => 내꺼의 S3로 접근이 가능함.
-    //   region: bucketRegion,
-    //   credentials: new AWS.CognitoIdentityCredentials({
-    //     IdentityPoolId: IdentityPoolId,
-    //   }),
-    // });
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: bucket,
+      Bucket: 'mesic-photo-bucket',
       Key: `/image/${postImg.name}`,
       ACL: "public-read",
       Body: postImg,
