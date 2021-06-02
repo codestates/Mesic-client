@@ -11,6 +11,7 @@ import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
 
+
 declare global {
   interface Window {
     kakao: any;
@@ -189,16 +190,12 @@ function MainPage() {
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
     const bucket = "mesic-photo-bucket";
-    const bucketRegion = "ap-northeast-2";
-    const IdentityPoolId =
-      "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca";
+    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
+    const secretAccessKey = 'rVp+ecaeyz/ZPg5Vu4GIZdLBmHkIzYrPwHteSHo';
+    const region = 'ap-northeast-2';
 
-    const s3 = new AWS.S3({
-      accessKeyId: `AKIA2XC7TYWAUO3P7L2I`,
-      secretAccessKey: `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`,
-      region: bucketRegion,
-    }); //s3 configuration
-    
+    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+
     const photoURL = readMarkerData.photo;
     const file = photoURL.split('/');
     console.log(file[file.length - 1])
