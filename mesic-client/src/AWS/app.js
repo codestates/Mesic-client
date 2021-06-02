@@ -5,7 +5,7 @@ const bucket = 'mesic-photo-bucket';
 const bucketRegion = 'ap-northeast-2';
 const IdentityPoolId = 'ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca';
 
-AWS.config.update({
+AWS.config.update({ // AWS-SDK 설정을 해주는 데 => 내꺼의 S3로 접근이 가능함.
   region: bucketRegion,
   credentials: new AWS.CognitoIdentityCredentials({
     IdentityPoolId: IdentityPoolId
@@ -16,7 +16,7 @@ AWS.config.update({
 class AwsS3 {
   async upload(file) {
     const params = {};
-    params.Key = `image/${file}`;
+    params.Key = `image/${file.name}`;
     params.Bucket = bucket;
     params.Body = file;
     params.contentType = 'image/jpg';
@@ -26,9 +26,24 @@ class AwsS3 {
         console.log(err) 
         return; 
       }
-      console.log(data.location)
+      console.log(data.Location)
       return data.location
     });
+  }
+
+  async get(file) {
+
+    const params = {};
+    params.Key = `image/${file}`;
+    params.Bucket = bucket;
+
+    S3.getObject(params, function (err, data) {
+      if(err) {
+        console.log(err)
+        return;
+      }
+      console.log(data.location);
+    })
   }
 
   async delete(file) {
@@ -45,12 +60,8 @@ class AwsS3 {
       console.log(data);
     })
   }
+
+
 }
 
 module.exports = new AwsS3();
-// this.AwsS3.upload('http://ticketimage.interpark.com/Play/image/large/18/18009670_p.gif')
-
-// AWS.config.region = 'ap-northeast-2'; // 리전
-// AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-//     IdentityPoolId: 'ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca',
-// });
