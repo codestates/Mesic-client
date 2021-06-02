@@ -17,12 +17,15 @@ function Memo({ postMemo, setPostMemo }: any) {
 
   return (
     <>
-      <div className="border">
-        <textarea
-          ref={memoInput}
-          placeholder={"메모를 입력해주세요!"}
-          onChange={handlePostMemo}
-        />
+      <div className="postMemo">
+        <div className="textarea-outsider">
+          <textarea
+            className="input-memo"
+            ref={memoInput}
+            placeholder={"메모를 입력해주세요!"}
+            onChange={handlePostMemo}
+          />
+        </div>
       </div>
     </>
   );

@@ -59,14 +59,18 @@ function PostModal({ postLatLng }: any) {
   };
 
   return (
-    <div className="modal show1">
-      <PostMusic postMusic={postMusic} setPostMusic={setPostMusic} />
-      <PostPhoto postImg={postImg} setPostImg={setPostImg} />
-      <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
-      <div>
-        <div>{errMessage}</div>
-        <button onClick={postPinData}>PIN IT</button>
+    <div className="modal-outsider show1">
+      <div className="modal">
+        <PostMusic postMusic={postMusic} setPostMusic={setPostMusic} />
+        <PostPhoto postImg={postImg} setPostImg={setPostImg} />
+        <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
+        <div className="err-massage">
+          <div>{errMessage}</div>
+        </div>
       </div>
+      <button className="pinit-btn" onClick={postPinData}>
+        PIN IT
+      </button>
     </div>
   );
 }

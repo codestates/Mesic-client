@@ -21,25 +21,6 @@ body {
   height: 100vh;
 }
 
-.modal {
-  z-index: 2;
-  display: none;
-  height: 90vh;
-  width: 400px;
-  border: solid black 1px;
-  position: absolute;
-  left: 90%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.show1 {
-  display: block;
-  /* row-gap: 5vh; */
-  /* grid-template-rows: 10vh 25vh 35vh; */
-}
-
 .border {
   border: dotted black 2px;
   background-color: gray;
@@ -147,20 +128,6 @@ body {
   border-radius: 50%;
   width: 100%;
   height: auto;
-}
-
-.followlist {
-  background-color: #fefefe;
-  position: absolute;
-  z-index: 3;
-  /* Sit on top */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 20%;
-  left: 15%;
-  top: 30%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 
 .my-pin-color {
