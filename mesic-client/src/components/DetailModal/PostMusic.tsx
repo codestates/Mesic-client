@@ -26,41 +26,38 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         setPostMusic={setPostMusic}
       />
       <div className="postMusic">
+        <i className="fa fa-headphones" aria-hidden="true"></i>
+        <div className="detail-line"></div>
         {updateMode ? (
-          <>
-            <div>
-              <iframe
-                src={
-                  postMusic.video_Id
-                    ? `https://www.youtube.com/embed/${postMusic.video_Id}`
-                    : "https://www.youtube.com/embed/"
-                }
-              />
-              <button
-                className="edit-icon"
-                onClick={() => setOpenEditMusic(true)}
-              >
-                수정
-              </button>
-              <button
-                className="delete-icon"
-                onClick={() => setOpenConfirm(true)}
-              >
-                삭제
-              </button>
-              <hr className="detail-line" />
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="detail-line"></div>
+          <div>
+            <iframe
+              src={
+                postMusic.video_Id
+                  ? `https://www.youtube.com/embed/${postMusic.video_Id}`
+                  : "https://www.youtube.com/embed/"
+              }
+            />
             <button
-              className="add-btn-music"
+              className="edit-icon"
               onClick={() => setOpenEditMusic(true)}
             >
-              +
+              수정
             </button>
-          </>
+            <button
+              className="delete-icon"
+              onClick={() => setOpenConfirm(true)}
+            >
+              삭제
+            </button>
+            <hr className="detail-line" />
+          </div>
+        ) : (
+          <button
+            className="add-btn-music"
+            onClick={() => setOpenEditMusic(true)}
+          >
+            +
+          </button>
         )}
       </div>
     </>

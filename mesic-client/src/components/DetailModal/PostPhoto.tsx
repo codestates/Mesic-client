@@ -26,8 +26,9 @@ function PostPhoto({ postImg, setPostImg }: any) {
         setPostImg={setPostImg}
         // setUpdateMode => false로 변경해야지 처음 상태로 돌아감
       />
-      <i className="fa fa-camera-retro"></i>
       <div className="postPhoto">
+        <i className="fa fa-camera"></i>
+        <div className="detail-line"></div>
         {postImg.length === 0 ? (
           <>
             <label className="add-btn-photo" htmlFor="photo-file">
