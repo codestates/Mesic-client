@@ -53,7 +53,7 @@ function IntroPage() {
         <div className="intro-page-section-4">
           <img className="intro-page-section4-img" src={section4_Img}/>
           <div className="intro-page-section-4-content">
-            <div className="section4-content-small">3분동안 잠깐 그 당시로 추억여행을 떠나보시는 건 어떠신가요?</div>
+            <div className="section4-content-small">3분동안 잠깐 그 당시로 <br/> 추억여행을 떠나보는 건 어떠신가요?</div>
             <div className="section4-content-large">Mesic과 함께 당신의 추억을 <br/> 생생하게 기록해보세요! </div>
           </div>
         </div>
