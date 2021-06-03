@@ -284,9 +284,11 @@ function MainPage() {
         position,
       });
       marker.id = myPinData[i]._id;
+
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         console.log(marker.id);
+        infowindow.setMap(null);
         handleMyMarkerClick(marker.id);
       });
 
@@ -328,6 +330,7 @@ function MainPage() {
       titleContainer.append(hideOverflow);
       musicContainer.append(thumbnail, titleContainer);
       iwContent.append(musicContainer, memo);
+
       const infowindow = new window.kakao.maps.CustomOverlay({
         position,
         content: iwContent,
@@ -368,6 +371,7 @@ function MainPage() {
       marker.id = Dummies[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
+        infowindow.setMap(null);
         handleMyMarkerClick(marker.id);
       });
 
@@ -451,8 +455,10 @@ function MainPage() {
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         console.log(marker.id);
+        infowindow.setMap(null);
         handleFollowMarkerClick(marker.id[0]);
       });
+
       //팔로우 마커 호버 적용
       const iwContent = document.createElement("div");
       iwContent.className = "preview";
