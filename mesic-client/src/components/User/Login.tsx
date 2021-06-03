@@ -4,7 +4,7 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { editUserinfo, getAccessToken } from "../../actions/index";
-import googleLogo from '../../images/google-login.png'
+import googleLogo from "../../images/google-login.png";
 //axios.defaults.withCredentials = true;
 
 function Login({
@@ -148,42 +148,50 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
         <span className="login-close" onClick={closeLogin}>
           X
         </span>
-        <div className="login-content">
-          <div className="login-title">LOGIN</div>
-          <div className="email-input-section">
-            <span>Email</span>
-            <input
-              onChange={handleIdInput}
-              type="text"
-              name="email"
-              ref={inputEmail}
-            ></input>
-            <div className="error-message">{emailError}</div>
-          </div>
-          <div className="password-input-section">
-            <span>Password</span>
-            <input
-              onChange={handlePwInput}
-              type="password"
-              name="password"
-              ref={inputPw}
-            ></input>
-            <div className="error-message">
-              {emailError.length === 0 ? <>{pwError}</> : <></>}
+        <div className="login-title">LOGIN</div>
+        <div className="content-flex">
+          <div className="login-content">
+            <div className="email-input-section">
+              <div>Email</div>
+              <input
+                onChange={handleIdInput}
+                type="text"
+                name="email"
+                ref={inputEmail}
+              ></input>
             </div>
-            {emailError.length === 0 && pwError.length === 0 ? (
+            <div className="password-input-section">
+              <div>Password</div>
+              <input
+                onChange={handlePwInput}
+                type="password"
+                name="password"
+                ref={inputPw}
+              ></input>
+            </div>
+          </div>
+        </div>
+        <div className="error-message">
+          {emailError.length === 0 ? <>{pwError}</> : <>{emailError}</>}
+        </div>
+        {/* <div className="error-message">{emailError}</div> */}
+        {/* {emailError.length === 0 && pwError.length === 0 ? (
               <>{errorMsg}</>
             ) : (
               <></>
-            )}
-          </div>
-          <div>
-            <button className="loginBtn-1" onClick={responseLogin}>Login</button>
-            <button className="guestLoginBtn" onClick={loginAsGuest}>Guest</button>
-          </div>
-        </div>
-        <div className="loginContainer" onClick={googleLoginHandler}>
-          <img className="loginBtn" src={googleLogo} />
+            )} */}
+        <button className="loginBtn" onClick={responseLogin}>
+          Login
+        </button>
+        <button className="guestLoginBtn" onClick={loginAsGuest}>
+          Guest
+        </button>
+        <div className="loginContainer">
+          <img
+            className="google-loginBtn"
+            onClick={googleLoginHandler}
+            src={googleLogo}
+          />
         </div>
       </div>
     </div>
