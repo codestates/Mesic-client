@@ -205,19 +205,15 @@ $mypage-modify-able: #3c64b1;
 }
 
 // mypage modal part
-
 .mypage-edit-modal {
   background-color: #fefefe;
   position: absolute;
-  /* 15% from the top and centered */
   padding: 30px 40px 30px 30px;
   width: 500px;
   left: 90%;
   border: none;
   border-radius: 30px;
   text-align: center;
-
-  /* top: 50%; */
   -webkit-transform: translate(-60%, 30%);
   transform: translate(-60%, 30%);
 
@@ -225,11 +221,11 @@ $mypage-modify-able: #3c64b1;
     color: $mesic-color;
     margin: 20px;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 
   .profileImg {
-    height: 160px;
+    position: relative;
     display: flex;
     justify-content: center;
     margin: 30px;
@@ -254,124 +250,52 @@ $mypage-modify-able: #3c64b1;
       white-space: nowrap;
       overflow: hidden;
     }
-  }
-
-  .mypage-modify-btn-section {
-    .mypage-modify-btn {
-      margin: 15px;
-      padding: 10px 25px;
-      border-radius: 15px;
-
+    & > input[type="text"] {
       background-color: $mesic-color;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
-
+      text-align: center;
       border: none;
       outline: none;
+      width: 250px;
+      padding: 10px;
+      font-size: 1.2rem;
+      opacity: 0.5;
+    }
+  }
 
-      &:hover {
-        opacity: 0.8;
-      }
+  .mypage-modify-btn {
+    margin: 15px;
+    padding: 10px 25px;
+    border-radius: 15px;
+    background-color: $mesic-color;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    &:hover {
+      opacity: 0.8;
     }
   }
 }
 
 // ediymypage modal part
-
-.editmypage-close {
-  color: $mesic-color;
-  font-weight: 800;
+#profile-img-input {
+  display: none;
 }
 
-.editmypage-content {
-  text-align: center;
+.edit-profile-img-btn {
+  opacity: 0.4;
+  position: absolute;
+  bottom: 15px;
+  cursor: pointer;
+}
 
-  .mypage-edit-title {
-    color: $mesic-color;
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 20px;
-  }
+.profileImg-content {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
 
-  .edit-email {
-    margin-top: 40px;
-
-    .mypage-email-edit-index {
-      color: $input-color;
-    }
-
-    .mypage-email-edit-content {
-      width: 30px;
-      background-color: $mypage-modify-unable;
-      color: $input-color;
-      padding: 5px;
-    }
-  }
-
-  .edit-name {
-    margin-top: 30px;
-
-    .mypage-name-edit-index {
-      color: $input-color;
-    }
-
-    .mypage-name-edit-content {
-      width: 30px;
-      background-color: $mypage-modify-unable;
-      color: $input-color;
-      padding: 5px;
-    }
-  }
-
-  .edit-nickname {
-    margin-top: 30px;
-
-    .mypage-nickname-edit-index {
-      color: $input-color;
-    }
-
-    input[type="text"] {
-      background-color: $mypage-modify-able;
-      border: none;
-      outline: none;
-      height: 25px;
-      margin-left: 10px;
-      opacity: 0.1;
-    }
-  }
-
-  .mypage-edit-button-section {
-    margin-top: 50px;
-
-    .edit-modify-btn {
-      width: 60px;
-      margin: 15px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-
-      border: none;
-      outline: none;
-    }
-
-    .edit-return-btn {
-      width: 60px;
-      margin: 15px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-
-      border: none;
-      outline: none;
-    }
-  }
+.nickname-error {
+  color: rgba(255, 0, 0, 0.827);
 }

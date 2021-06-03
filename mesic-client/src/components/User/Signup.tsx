@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useState, useRef } from "react";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../reducers";
-import { editUserinfo, getAccessToken } from "../../actions/index";
+import { useDispatch } from "react-redux";
+import { getAccessToken } from "../../actions/index";
 
 function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
   const SIGNUP_URL = `${process.env.REACT_APP_SERVER_URL}/users/signup`;
@@ -227,7 +225,9 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
             </div>
           </div>
           <div>
-            <button className="loginBtn-2" onClick={responseSignup}>Sign Up</button>
+            <button className="loginBtn-2" onClick={responseSignup}>
+              Sign Up
+            </button>
           </div>
         </div>
       </div>
