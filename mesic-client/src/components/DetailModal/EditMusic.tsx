@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+
 const KEY = "AIzaSyA5le4ZDagT75Ntm8_OjFvIyy-NGOPtBUM";
+
 
 function EditMusic({
   openEditMusic,
@@ -36,7 +38,7 @@ function EditMusic({
     params: {
       part: "snippet",
       maxResults: 3,
-      key: KEY,
+      key: process.env.REACT_APP_YOUTUBE_API_KEY,
     },
   });
 
@@ -94,47 +96,55 @@ function EditMusic({
     <div
       className={`edit-music-modal background ${openEditMusic ? "show" : ""}`}
     >
+      <div className="edit-music-title">노래 검색</div>
       <div className="edit-music">
         <input
+          type="text"
           className="search-music"
           placeholder="노래 제목을 검색해주세요"
           onChange={handleSearchMusicInput}
           onKeyUp={searchMusicEvent}
           ref={searchInput}
         />
-        <button onClick={searchMusicEvent}>검색</button>
-        <div>
-          <ul>
-            {searchedMusic.map((each) => (
-              <li
-                style={{ listStyleType: "none" }}
-                onClick={() =>
-                  handleSelect(
-                    each.id.videoId,
-                    each.snippet.title,
-                    each.snippet.thumbnails.medium.url
-                  )
-                }
-              >
-                <img
-                  style={{ width: "100px" }}
-                  src={each.snippet.thumbnails.medium.url}
-                />
-                <span>{each.snippet.title}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <button
-          onClick={() => {
-            setSearchedMusic([]);
-            searchInput.current.value = "";
-            setOpenEditMusic(false);
-          }}
-        >
-          닫기
-        </button>
+        <i onClick={searchMusicEvent} className="fas fa-search"></i>
       </div>
+      <div>
+        <ul className="edit-music-list">
+          {searchedMusic.map((each) => (
+            <li
+              className="edit-music-searched"
+              style={{ listStyleType: "none" }}
+              onClick={() =>
+                handleSelect(
+                  each.id.videoId,
+                  each.snippet.title,
+                  each.snippet.thumbnails.medium.url
+                )
+              }
+            >
+              <img
+                style={{ width: "100px" }}
+                src={each.snippet.thumbnails.medium.url}
+              />
+              <div className="edit-music-hidden">
+                <div className="edit-music-searched-title">
+                  {each.snippet.title}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <span
+        className="edit-music-close-btn"
+        onClick={() => {
+          setSearchedMusic([]);
+          searchInput.current.value = "";
+          setOpenEditMusic(false);
+        }}
+      >
+        X
+      </span>
     </div>
   );
 }

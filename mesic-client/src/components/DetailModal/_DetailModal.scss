@@ -200,13 +200,37 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
 }
 
+.show1 {
+  display: flex;
+}
+
+// edit music
+
+@keyframes slide2 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+@-webkit-keyframes slide2 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
 .edit-music-modal {
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
   border-radius: 35px;
   border: 0;
-  padding: 20px 15px 20px 20px;
+  padding: 20px;
   width: 350px;
   height: 400px;
   top: 30%;
@@ -214,11 +238,94 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   -webkit-transform: translate(-100%, 0%);
   transform: translate(-105%, -41.5%);
 }
-.edit-music {
+
+.edit-music-list {
   display: flex;
   flex-direction: column;
+  padding: 10px 0;
+  height: 300px;
+  img {
+    border-radius: 15px;
+  }
 }
 
-.show1 {
+.edit-music-searched {
   display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  margin: 10px;
+  cursor: pointer;
+  &:hover {
+    & > div > div {
+      animation-name: slide;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      -webkit-animation-name: slide2;
+      -webkit-animation-duration: 3s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+    }
+  }
+}
+
+.edit-music-hidden {
+  position: absolute;
+  overflow: hidden;
+  height: 30px;
+  width: 180px;
+  left: 140px;
+}
+
+.edit-music-searched-title {
+  padding: 5px;
+  font-size: 1rem;
+  overflow: visible;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  color: rgb(80, 80, 80);
+}
+
+.edit-music-title {
+  text-align: center;
+  color: $main-color;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -2px;
+  margin: 10px;
+}
+
+.edit-music {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input[type="text"] {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgb(222, 222, 222);
+    display: block;
+    position: relative;
+    margin: 10px 10px 0px 10px;
+    width: 80%;
+    color: $font-color;
+    font-size: 1rem;
+    padding: 4px;
+  }
+  i {
+    opacity: 0.4;
+    cursor: pointer;
+  }
+  ::placeholder {
+    opacity: 60%;
+  }
+}
+
+.edit-music-close-btn {
+  position: absolute;
+  margin-top: 20px;
+  top: 0;
+  font-size: 1.3rem;
+  color: $main-color;
+  cursor: pointer;
 }

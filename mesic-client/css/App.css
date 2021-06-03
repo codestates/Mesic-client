@@ -10,20 +10,19 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 800px;
+  height: 820px;
   width: 400px;
   right: 0%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(0%, 6%);
 }
 
-.modal-outsider .modal {
+.modal {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,8 +46,8 @@
           box-shadow: 0px 5px 5px 5px rgba(94, 112, 134, 0.3);
 }
 
-.modal-outsider .modal .postMusic {
-  margin: 10px 0px;
+.modal .music {
+  margin: 5px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,7 +63,15 @@
           align-items: center;
 }
 
-.modal-outsider .modal .postMusic .detail-line {
+.modal .music .detail-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.modal .music .detail-line {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -73,7 +80,7 @@
   border-top: 1px solid #e1e1e1;
 }
 
-.modal-outsider .modal .postMusic .add-btn-music {
+.modal .music .add-btn-music {
   cursor: pointer;
   width: 250px;
   height: 120px;
@@ -85,8 +92,12 @@
   color: #989898;
 }
 
-.modal-outsider .modal .postPhoto {
-  margin: 10px 0px;
+.modal .music .music-iframe {
+  margin-top: 5px;
+}
+
+.modal .photo {
+  margin: 5px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -102,7 +113,15 @@
           align-items: center;
 }
 
-.modal-outsider .modal .postPhoto .detail-line {
+.modal .photo .detail-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.modal .photo .detail-line {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -111,7 +130,7 @@
   border-top: 1px solid #e1e1e1;
 }
 
-.modal-outsider .modal .postPhoto .add-btn-photo {
+.modal .photo .add-btn-photo {
   cursor: pointer;
   width: 250px;
   height: 200px;
@@ -124,12 +143,32 @@
   padding: 83px 118px;
 }
 
-.modal-outsider .modal .postPhoto .input-photo {
+.modal .photo .edit-btn-photo {
+  cursor: pointer;
+}
+
+.modal .photo .input-photo {
   display: none;
 }
 
-.modal-outsider .modal .postMemo {
-  margin: 10px 0px;
+.modal .photo .photo-img-outsider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal .photo .photo-img-outsider .photo-img {
+  border-radius: 8px;
+  height: 200px;
+  width: 200px;
+  margin-top: 5px;
+}
+
+.modal .postMemo {
+  margin: 5px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -145,7 +184,15 @@
           align-items: center;
 }
 
-.modal-outsider .modal .postMemo .detail-line {
+.modal .postMemo .detail-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.modal .postMemo .detail-line {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,11 +201,11 @@
   border-top: 1px solid #e1e1e1;
 }
 
-.modal-outsider .modal .postMemo .textarea-outsider {
-  margin-top: 15px;
+.modal .postMemo .textarea-outsider {
+  margin: 15px;
 }
 
-.modal-outsider .modal .postMemo .textarea-outsider .input-memo {
+.modal .postMemo .textarea-outsider .input-memo {
   -webkit-appearance: none;
   width: 250px;
   height: 150px;
@@ -174,7 +221,7 @@
   transition: all 0.15s ease;
 }
 
-.modal-outsider .pinit-btn {
+.pinit-btn {
   position: relative;
   cursor: pointer;
   display: -webkit-box;
@@ -186,14 +233,180 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #19c9d4;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
+          box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
 }
 
 .show1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+@keyframes slide2 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+@-webkit-keyframes slide2 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+.edit-music-modal {
+  background-color: #fefefe;
+  position: absolute;
+  z-index: 3;
+  border-radius: 35px;
+  border: 0;
+  padding: 20px;
+  width: 350px;
+  height: 400px;
+  top: 30%;
+  -webkit-box-shadow: 0 8px 6px -6px #545454;
+          box-shadow: 0 8px 6px -6px #545454;
+  -webkit-transform: translate(-100%, 0%);
+  transform: translate(-105%, -41.5%);
+}
+
+.edit-music-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 10px 0;
+  height: 300px;
+}
+
+.edit-music-list img {
+  border-radius: 15px;
+}
+
+.edit-music-searched {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.edit-music-searched:hover > div > div {
+  -webkit-animation-name: slide;
+          animation-name: slide;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: slide2;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.edit-music-hidden {
+  position: absolute;
+  overflow: hidden;
+  height: 30px;
+  width: 180px;
+  left: 140px;
+}
+
+.edit-music-searched-title {
+  padding: 5px;
+  font-size: 1rem;
+  overflow: visible;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  color: #505050;
+}
+
+.edit-music-title {
+  text-align: center;
+  color: #19c9d4;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -2px;
+  margin: 10px;
+}
+
+.edit-music {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.edit-music input[type="text"] {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #dedede;
+  display: block;
+  position: relative;
+  margin: 10px 10px 0px 10px;
+  width: 80%;
+  color: #646464;
+  font-size: 1rem;
+  padding: 4px;
+}
+
+.edit-music i {
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.edit-music ::-webkit-input-placeholder {
+  opacity: 60%;
+}
+
+.edit-music :-ms-input-placeholder {
+  opacity: 60%;
+}
+
+.edit-music ::-ms-input-placeholder {
+  opacity: 60%;
+}
+
+.edit-music ::placeholder {
+  opacity: 60%;
+}
+
+.edit-music-close-btn {
+  position: absolute;
+  margin-top: 20px;
+  top: 0;
+  font-size: 1.3rem;
+  color: #19c9d4;
+  cursor: pointer;
 }
 
 .followlist {
@@ -1355,11 +1568,6 @@ body {
   height: 100vh;
 }
 
-.border {
-  border: dotted black 2px;
-  background-color: gray;
-}
-
 .background {
   display: none;
   /* Hidden by default */
@@ -1509,15 +1717,17 @@ body {
 }
 
 .preview-title-container .hide-overflow .preview-title {
-  text-align: left;
+  text-align: center;
   position: absolute;
   font-size: 0.9rem;
   color: #505050;
-  margin: 10px 0px 10px 10px;
+  margin: 10px 0;
+  animation-delay: 0.5s;
   animation-name: slide;
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  -webkit-animation-delay: 0.5s;
   -webkit-animation-name: slide;
   -webkit-animation-duration: 3s;
   -webkit-animation-timing-function: linear;
