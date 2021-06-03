@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
@@ -11,11 +11,23 @@ function PostPhoto({ postImg, setPostImg }: any) {
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [previewImg, setPreviewImg] = useState<any>({});
+  const [fileName, setFileName] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof postImg !== "object") {
+      console.log("1");
+      const splitArr = postImg.split("/");
+      const imgName = splitArr[splitArr.length - 1];
+      setFileName(imgName);
+    }
+    return;
+  }, [postImg]);
 
   // Photo 업데이트 버튼
   const handlePostImg = (e: any) => {
     setPostImg(e.target.files[0]);
     setPreviewImg(URL.createObjectURL(e.target.files[0]));
+    setFileName("");
   };
 
   return (
@@ -33,7 +45,7 @@ function PostPhoto({ postImg, setPostImg }: any) {
           <i className="fa fa-camera"></i>
         </div>
         <div className="detail-line"></div>
-        {postImg.length === 0 ? (
+        {fileName === "undefined" ? (
           <>
             <label className="add-btn-photo" htmlFor="photo-file">
               +
@@ -48,7 +60,9 @@ function PostPhoto({ postImg, setPostImg }: any) {
             />
           </>
         ) : (
-          <img className="img" src={previewImg} />
+          <div className="photo-img-outsider">
+            <img className="photo-img" src={previewImg} />
+          </div>
         )}
         {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
       </div>

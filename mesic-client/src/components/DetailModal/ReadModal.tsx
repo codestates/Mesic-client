@@ -43,14 +43,17 @@ function ReadModal({ readMarkerData, setPinUpdate, deleteMyMarker }: any) {
           markerId={_id}
           setPinUpdate={setPinUpdate}
         />
-        {isLogin && mode === "READ" ? (
-          <button onClick={() => deleteMyMarker(readMarkerData._id)}>
-            삭제
-          </button>
-        ) : (
-          <></>
-        )}
       </div>
+      {isLogin && mode === "READ" ? (
+        <button
+          className="delete-pin-btn"
+          onClick={() => deleteMyMarker(readMarkerData._id)}
+        >
+          삭제
+        </button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

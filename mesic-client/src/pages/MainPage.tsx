@@ -11,7 +11,6 @@ import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
 
-
 declare global {
   interface Window {
     kakao: any;
@@ -184,21 +183,23 @@ function MainPage() {
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
     const bucket = "mesic-photo-bucket";
-    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
-    const secretAccessKey = 'rVp+ecaeyz/ZPg5Vu4GIZdLBmHkIzYrPwHteSHo';
-    const region = 'ap-northeast-2';
 
-    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+    AWS.config.region = "ap-northeast-2";
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca",
+    });
+
+    const s3 = new AWS.S3();
 
     const photoURL = readMarkerData.photo;
-    const file = photoURL.split('/');
-    console.log(file[file.length - 1])
+    const file = photoURL.split("/");
+    console.log("split : ", file[file.length - 1]);
     const fileName = file[file.length - 1];
     const param = {
       Bucket: bucket,
-      Key: `/image/${fileName}`,
+      Key: `image/${fileName}`,
     }; //s3 업로드에 필요한 옵션 설정
-    
+
     s3.deleteObject(param, function (err: any, data: any) {
       if (err) {
         console.log(err);
@@ -219,6 +220,16 @@ function MainPage() {
         })
         .catch((err) => console.log(err));
     });
+    // axios
+    //   .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
+    //     headers: { authorization: `Bearer ${token}` },
+    //   })
+    //   .then((res) => {
+    //     console.log("delete pin : ", res);
+    //     setOpenReadModal(false);
+    //     dispatch(switchMode("NONE"));
+    //   })
+    //   .catch((err) => console.log(err));
   };
   // (POST MODE) 지도 클릭 마커
 
