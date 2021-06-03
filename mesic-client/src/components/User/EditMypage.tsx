@@ -163,7 +163,7 @@ function EditMypage({
               ></input>
             </div>
           </div>
-          <div className="nickname-error">{nicknameError}</div>
+          <div className="error-message">{nicknameError}</div>
           <div className="mypage-edit-button-section">
             <button className="mypage-modify-btn" onClick={sendModifiedData}>
               저장

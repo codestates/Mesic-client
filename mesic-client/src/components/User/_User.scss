@@ -3,31 +3,124 @@ $input-color: #9f9999;
 $mypage-modify-unable: #f4f5f4;
 $mypage-modify-able: #3c64b1;
 
-// login, signup modal
+@mixin close-btn {
+  cursor: pointer;
+  top: 30px;
+  left: 30px;
+  position: absolute;
+  font-size: 1.3rem;
+  color: $mesic-color;
+  font-weight: 800;
+}
 
+@mixin modal-title {
+  color: $mesic-color;
+  margin: 20px;
+  font-weight: 800;
+  font-size: 1.7rem;
+}
+
+@mixin input-flex {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin confirm-btn {
+  margin: 15px;
+  padding: 10px 25px;
+  border-radius: 15px;
+  background-color: $mesic-color;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.error-message {
+  text-align: center;
+  font-size: 1rem;
+  color: rgba(255, 0, 0, 0.827);
+}
+
+// login, signup modal
 .login-signup-modal-outsider {
   position: fixed;
-  /* Stay in place */
-  z-index: 2;
-  /* Sit on top */
+  z-index: 4;
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
   background-color: black;
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.login-close {
+  @include close-btn;
+  top: 20px;
+}
+
+.login-title {
+  @include modal-title;
+}
+
+.content-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-content {
+  & > div {
+    @include input-flex;
+    margin: 25px;
+    & > div {
+      color: $input-color;
+      margin-right: 20px;
+      font-size: 1.2rem;
+    }
+    & > input {
+      color: $input-color;
+      background-color: #f4f5f4;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-size: 1rem;
+      height: 30px;
+    }
+  }
+}
+
+.loginBtn {
+  @include confirm-btn;
+}
+
+.guestLoginBtn {
+  @include confirm-btn;
+  background-color: rgb(245, 241, 241);
+  color: $mesic-color;
+}
+
+.loginContainer {
+  margin: 15px;
+  text-align: center;
+}
+
+.google-loginBtn {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
 }
 
 .login-signup-modal {
   background-color: #fefefe;
   position: absolute;
-  z-index: 3;
-  /* Sit on top */
+  z-index: 5;
   padding: 20px;
   border: 1px solid #888;
   width: 400px;
@@ -35,160 +128,14 @@ $mypage-modify-able: #3c64b1;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border-radius: 7px;
-
-  .login-close {
-    color: $mesic-color;
-    font-weight: 800;
-  }
-  .signup-close {
-    color: $mesic-color;
-    font-weight: 800;
-  }
-
-  .login-content {
-    text-align: center;
-
-    .login-title {
-      color: $mesic-color;
-      margin-bottom: 25px;
-      font-weight: 800;
-      font-size: 26px;
-    }
-
-    input[type] {
-      background-color: #f4f5f4;
-      border: none;
-      outline: none;
-      height: 25px;
-      margin-left: 10px;
-    }
-
-    .email-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .password-input-section {
-      margin: 15px;
-      color: $input-color;
-      // .error-message{
-      //     margin-top: 5px;
-      //     font-size: 13px;
-      // }
-    }
-
-    .loginBtn-1 {
-      margin: 10px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-
-      border: none;
-      outline: none;
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-
-    .guestLoginBtn {
-      margin: 10px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: rgb(245, 241, 241);
-      color: $mesic-color;
-
-      border: none;
-      outline: none;
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-  }
-
-  .signup-content {
-    text-align: center;
-
-    .signup-title {
-      color: $mesic-color;
-      margin-bottom: 25px;
-      font-weight: 800;
-      font-size: 26px;
-    }
-
-    input[type] {
-      background-color: #f4f5f4;
-      border: none;
-      outline: none;
-      height: 22px;
-      margin-left: 10px;
-    }
-
-    .email-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .name-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .nickname-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .password-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .password-check-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .loginBtn-2 {
-      margin: 15px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-
-      border: none;
-      outline: none;
-    }
-  }
-
-  .loginContainer {
-    margin: 10px;
-    text-align: center;
-    .loginBtn {
-      width: 32px;
-      height: 32px;
-    }
-  }
+  border-radius: 30px;
+  text-align: center;
 }
 
 // mypage, mypage-edit modal
 
 .mypage-close {
-  cursor: pointer;
-  top: 30px;
-  left: 30px;
-  position: absolute;
-  color: $mesic-color;
-  font-size: 1.3rem;
-  font-weight: 800;
+  @include close-btn;
 }
 
 .mypage-edit-background {
@@ -233,16 +180,15 @@ $mypage-modify-able: #3c64b1;
   }
 
   .mypage-info > div {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: $input-color;
+    @include input-flex;
     margin: 30px;
     & > div:first-child {
+      color: $input-color;
       margin-right: 25px;
       font-size: 1.4rem;
     }
     & > div:last-child {
+      color: $input-color;
       padding: 10px;
       font-size: 1.2rem;
       width: 250px;
@@ -264,18 +210,7 @@ $mypage-modify-able: #3c64b1;
   }
 
   .mypage-modify-btn {
-    margin: 15px;
-    padding: 10px 25px;
-    border-radius: 15px;
-    background-color: $mesic-color;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border: none;
-    outline: none;
-    &:hover {
-      opacity: 0.8;
-    }
+    @include confirm-btn;
   }
 }
 
@@ -295,8 +230,4 @@ $mypage-modify-able: #3c64b1;
   border-radius: 50%;
   width: 200px;
   height: 200px;
-}
-
-.nickname-error {
-  color: rgba(255, 0, 0, 0.827);
 }
