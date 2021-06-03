@@ -21,43 +21,10 @@ body {
   width: 100vw;
   height: 100vh;
 }
-// .border {
-//   border: dotted black 2px;
-//   background-color: gray;
-// }
 
 .background {
   display: none;
   /* Hidden by default */
-}
-
-.mypage-edit-background {
-  display: none;
-  position: fixed;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-}
-
-.mypage-edit-modal {
-  background-color: #fefefe;
-  position: absolute;
-  margin: 15% auto;
-  /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid rgb(212, 212, 212);
-  width: 20%;
-  height: 50%;
-  left: 90%;
-  /* top: 50%; */
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 
 .confirm-modal-outsider {

@@ -13,7 +13,7 @@ export const initialState = {
     isLogin: true,
     email: "gwanwoo@gmail.com",
     name: "정관우",
-    nickname: "",
+    nickname: "정관우",
     user_id: "60b39c0cbd3a7938962a3db6",
     follow: [
       "60abb703473efa33250b3e63",
