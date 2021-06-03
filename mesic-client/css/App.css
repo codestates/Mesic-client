@@ -82,8 +82,8 @@
 
 .modal .music .add-btn-music {
   cursor: pointer;
-  width: 250px;
-  height: 120px;
+  width: 65%;
+  height: 100px;
   margin: 10px 0px;
   background-color: #f8f8f8;
   border-radius: 10px;
@@ -131,8 +131,9 @@
 }
 
 .modal .photo .add-btn-photo {
+  position: relative;
   cursor: pointer;
-  width: 250px;
+  width: 200px;
   height: 200px;
   margin: 13px 0px 10px 0px;
   background-color: #f8f8f8;
@@ -167,7 +168,37 @@
   margin-top: 5px;
 }
 
-.modal .postMemo {
+.modal .photo .add-btn-read-photo {
+  position: relative;
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
+  margin: 10px 0px 10px 0px;
+  background-color: #f8f8f8;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  font-size: 26px;
+  color: #989898;
+  padding: 83px 118px;
+}
+
+.modal .photo .add-btn-outsider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .memo {
   margin: 5px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -184,7 +215,7 @@
           align-items: center;
 }
 
-.modal .postMemo .detail-icon {
+.modal .memo .detail-icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -192,7 +223,7 @@
       align-self: flex-start;
 }
 
-.modal .postMemo .detail-line {
+.modal .memo .detail-line {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -201,13 +232,30 @@
   border-top: 1px solid #e1e1e1;
 }
 
-.modal .postMemo .textarea-outsider {
+.modal .memo .textarea-outsider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 15px;
 }
 
-.modal .postMemo .textarea-outsider .input-memo {
+.modal .memo .textarea-outsider .input-memo {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-appearance: none;
-  width: 250px;
+  width: 240px;
   height: 150px;
   border: 0;
   padding: 12px 3px;
@@ -221,7 +269,37 @@
   transition: all 0.15s ease;
 }
 
+.modal .memo .read-memo {
+  height: 200px;
+  overflow: auto;
+  padding: 20px;
+}
+
 .pinit-btn {
+  position: relative;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 120px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #19c9d4;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
+          box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
+}
+
+.delete-pin-btn {
   position: relative;
   cursor: pointer;
   display: -webkit-box;
@@ -887,12 +965,12 @@
 }
 
 .login-signup-modal .login-close {
-  color: #19C9D4;
+  color: #19c9d4;
   font-weight: 800;
 }
 
 .login-signup-modal .signup-close {
-  color: #19C9D4;
+  color: #19c9d4;
   font-weight: 800;
 }
 
@@ -901,14 +979,14 @@
 }
 
 .login-signup-modal .login-content .login-title {
-  color: #19C9D4;
+  color: #19c9d4;
   margin-bottom: 25px;
   font-weight: 800;
   font-size: 26px;
 }
 
 .login-signup-modal .login-content input[type] {
-  background-color: #F4F5F4;
+  background-color: #f4f5f4;
   border: none;
   outline: none;
   height: 25px;
@@ -917,19 +995,19 @@
 
 .login-signup-modal .login-content .email-input-section {
   margin: 15px;
-  color: #9F9999;
+  color: #9f9999;
 }
 
 .login-signup-modal .login-content .password-input-section {
   margin: 15px;
-  color: #9F9999;
+  color: #9f9999;
 }
 
 .login-signup-modal .login-content .loginBtn-1 {
   margin: 10px;
   padding: 10px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   border: none;
   outline: none;
@@ -944,7 +1022,7 @@
   padding: 10px;
   border-radius: 7px;
   background-color: #f5f1f1;
-  color: #19C9D4;
+  color: #19c9d4;
   border: none;
   outline: none;
 }
@@ -958,14 +1036,14 @@
 }
 
 .login-signup-modal .signup-content .signup-title {
-  color: #19C9D4;
+  color: #19c9d4;
   margin-bottom: 25px;
   font-weight: 800;
   font-size: 26px;
 }
 
 .login-signup-modal .signup-content input[type] {
-  background-color: #F4F5F4;
+  background-color: #f4f5f4;
   border: none;
   outline: none;
   height: 22px;
@@ -974,34 +1052,34 @@
 
 .login-signup-modal .signup-content .email-input-section {
   margin: 15px;
-  color: #9F9999;
+  color: #9f9999;
 }
 
 .login-signup-modal .signup-content .name-input-section {
   margin: 15px;
-  color: #9F9999;
+  color: #9f9999;
 }
 
 .login-signup-modal .signup-content .nickname-input-section {
   margin: 15px;
-  color: #9F9999;
+  color: #9f9999;
 }
 
 .login-signup-modal .signup-content .password-input-section {
   margin: 15px;
-  color: #9F9999;
+  color: #9f9999;
 }
 
 .login-signup-modal .signup-content .password-check-input-section {
   margin: 15px;
-  color: #9F9999;
+  color: #9f9999;
 }
 
 .login-signup-modal .signup-content .loginBtn-2 {
   margin: 15px;
   padding: 10px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -1019,10 +1097,19 @@
   height: 32px;
 }
 
+.mypage-close {
+  top: 30px;
+  left: 30px;
+  position: absolute;
+  color: #19c9d4;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
 .mypage-edit-background {
   display: none;
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   top: 0;
   width: 100%;
@@ -1036,163 +1123,137 @@
 .mypage-edit-modal {
   background-color: #fefefe;
   position: absolute;
-  margin: 15% auto;
   /* 15% from the top and centered */
-  padding: 20px;
-  width: 30%;
+  padding: 30px 40px 30px 30px;
+  width: 500px;
   left: 90%;
   border: none;
-  border-radius: 7px;
-  /* top: 50%; */
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.mypage-edit-modal .mypage-close {
-  color: #19C9D4;
-  font-weight: 800;
-}
-
-.mypage-edit-modal .mypage-content {
+  border-radius: 30px;
   text-align: center;
+  /* top: 50%; */
+  -webkit-transform: translate(-60%, 30%);
+  transform: translate(-60%, 30%);
 }
 
-.mypage-edit-modal .mypage-content .mypage-title {
-  color: #19C9D4;
-  margin-bottom: 15px;
-  font-weight: 700;
-  font-size: 20px;
+.mypage-edit-modal .mypage-title {
+  color: #19c9d4;
+  margin: 20px;
+  font-weight: 800;
+  font-size: 1.6rem;
 }
 
-.mypage-edit-modal .mypage-content .profileImg {
+.mypage-edit-modal .profileImg {
+  height: 160px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin: 30px;
 }
 
-.mypage-edit-modal .mypage-content .profileImg .profileImg-outsider .profileImg-content {
-  padding: auto;
+.mypage-edit-modal .mypage-info > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #9f9999;
+  margin: 30px;
 }
 
-.mypage-edit-modal .mypage-content .mypage-email-section {
-  margin-top: 40px;
+.mypage-edit-modal .mypage-info > div > div:first-child {
+  margin-right: 25px;
+  font-size: 1.4rem;
 }
 
-.mypage-edit-modal .mypage-content .mypage-email-section .mypage-email-index {
-  color: #9F9999;
-}
-
-.mypage-edit-modal .mypage-content .mypage-email-section .mypage-email-content {
-  width: 30px;
-  background-color: #F4F5F4;
-  color: #9F9999;
-  padding: 5px;
-}
-
-.mypage-edit-modal .mypage-content .mypage-name-section {
-  margin-top: 30px;
-}
-
-.mypage-edit-modal .mypage-content .mypage-name-section .mypage-name-index {
-  color: #9F9999;
-}
-
-.mypage-edit-modal .mypage-content .mypage-name-section .mypage-name-content {
-  background-color: #F4F5F4;
-  color: #9F9999;
-  padding: 5px;
-}
-
-.mypage-edit-modal .mypage-content .mypage-nickname-section {
-  margin-top: 30px;
-}
-
-.mypage-edit-modal .mypage-content .mypage-nickname-section .mypage-nickname-index {
-  color: #9F9999;
-}
-
-.mypage-edit-modal .mypage-content .mypage-nickname-section .mypage-nickname-content {
-  background-color: #F4F5F4;
-  color: #9F9999;
-  padding: 5px;
-}
-
-.mypage-edit-modal .mypage-content .mypage-modify-btn-section .mypage-modify-btn {
-  width: 60px;
-  margin: 50px;
+.mypage-edit-modal .mypage-info > div > div:last-child {
   padding: 10px;
-  border-radius: 7px;
-  background-color: #19C9D4;
+  font-size: 1.2rem;
+  width: 250px;
+  background-color: #f4f5f4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mypage-edit-modal .mypage-modify-btn-section .mypage-modify-btn {
+  margin: 15px;
+  padding: 10px 25px;
+  border-radius: 15px;
+  background-color: #19c9d4;
   color: white;
-  font-size: 16px;
+  font-size: 1.2rem;
   font-weight: 600;
   border: none;
   outline: none;
 }
 
-.mypage-edit-modal .mypage-content .mypage-modify-btn-section .mypage-modify-btn:hover {
+.mypage-edit-modal .mypage-modify-btn-section .mypage-modify-btn:hover {
   opacity: 0.8;
 }
 
-.mypage-edit-modal .editmypage-close {
-  color: #19C9D4;
+.editmypage-close {
+  color: #19c9d4;
   font-weight: 800;
 }
 
-.mypage-edit-modal .editmypage-content {
+.editmypage-content {
   text-align: center;
 }
 
-.mypage-edit-modal .editmypage-content .mypage-edit-title {
-  color: #19C9D4;
+.editmypage-content .mypage-edit-title {
+  color: #19c9d4;
   margin-bottom: 15px;
   font-weight: 700;
   font-size: 20px;
 }
 
-.mypage-edit-modal .editmypage-content .edit-email {
+.editmypage-content .edit-email {
   margin-top: 40px;
 }
 
-.mypage-edit-modal .editmypage-content .edit-email .mypage-email-edit-index {
-  color: #9F9999;
+.editmypage-content .edit-email .mypage-email-edit-index {
+  color: #9f9999;
 }
 
-.mypage-edit-modal .editmypage-content .edit-email .mypage-email-edit-content {
+.editmypage-content .edit-email .mypage-email-edit-content {
   width: 30px;
-  background-color: #F4F5F4;
-  color: #9F9999;
+  background-color: #f4f5f4;
+  color: #9f9999;
   padding: 5px;
 }
 
-.mypage-edit-modal .editmypage-content .edit-name {
+.editmypage-content .edit-name {
   margin-top: 30px;
 }
 
-.mypage-edit-modal .editmypage-content .edit-name .mypage-name-edit-index {
-  color: #9F9999;
+.editmypage-content .edit-name .mypage-name-edit-index {
+  color: #9f9999;
 }
 
-.mypage-edit-modal .editmypage-content .edit-name .mypage-name-edit-content {
+.editmypage-content .edit-name .mypage-name-edit-content {
   width: 30px;
-  background-color: #F4F5F4;
-  color: #9F9999;
+  background-color: #f4f5f4;
+  color: #9f9999;
   padding: 5px;
 }
 
-.mypage-edit-modal .editmypage-content .edit-nickname {
+.editmypage-content .edit-nickname {
   margin-top: 30px;
 }
 
-.mypage-edit-modal .editmypage-content .edit-nickname .mypage-nickname-edit-index {
-  color: #9F9999;
+.editmypage-content .edit-nickname .mypage-nickname-edit-index {
+  color: #9f9999;
 }
 
-.mypage-edit-modal .editmypage-content .edit-nickname input[type="text"] {
-  background-color: #3C64B1;
+.editmypage-content .edit-nickname input[type="text"] {
+  background-color: #3c64b1;
   border: none;
   outline: none;
   height: 25px;
@@ -1200,16 +1261,16 @@
   opacity: 0.1;
 }
 
-.mypage-edit-modal .editmypage-content .mypage-edit-button-section {
+.editmypage-content .mypage-edit-button-section {
   margin-top: 50px;
 }
 
-.mypage-edit-modal .editmypage-content .mypage-edit-button-section .edit-modify-btn {
+.editmypage-content .mypage-edit-button-section .edit-modify-btn {
   width: 60px;
   margin: 15px;
   padding: 10px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -1217,12 +1278,12 @@
   outline: none;
 }
 
-.mypage-edit-modal .editmypage-content .mypage-edit-button-section .edit-return-btn {
+.editmypage-content .mypage-edit-button-section .edit-return-btn {
   width: 60px;
   margin: 15px;
   padding: 10px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -1571,35 +1632,6 @@ body {
 .background {
   display: none;
   /* Hidden by default */
-}
-
-.mypage-edit-background {
-  display: none;
-  position: fixed;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-}
-
-.mypage-edit-modal {
-  background-color: #fefefe;
-  position: absolute;
-  margin: 15% auto;
-  /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #d4d4d4;
-  width: 20%;
-  height: 50%;
-  left: 90%;
-  /* top: 50%; */
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 
 .confirm-modal-outsider {
