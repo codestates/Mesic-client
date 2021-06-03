@@ -3,9 +3,6 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
-const KEY = "AIzaSyA5le4ZDagT75Ntm8_OjFvIyy-NGOPtBUM";
-
-
 function EditMusic({
   openEditMusic,
   updateMode,
