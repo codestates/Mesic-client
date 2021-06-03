@@ -86,39 +86,51 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
           <i className="fa fa-headphones" aria-hidden="true"></i>
         </div>
         {updateMode ? (
-          <div>
-            <div className="ifram-outsider">
-              <button
+          <div className="music-content">
+            <div className="edit-del-btn">
+              {/* <button
                 onClick={() => {
                   setOpenEditMusic(true);
                 }}
               >
                 수정
-              </button>
-              <div>
-                <div className="detail-line"></div>
+              </button> */}
+              <i
+                className="fa fa-pencil"
+                aria-hidden="true"
+                onClick={() => setOpenEditMusic(true)}
+              ></i>
+            </div>
+            <div className="detail-line"></div>
+            <div className="ifram-outsider">
+              <div className="widget-outsider">
+                <img src={updateMusic.thumbnail}></img>
+                <div>{updateMusic.title}</div>
                 <iframe
-                  className="music-iframe"
                   src={
                     updateMusic.video_Id
                       ? `https://www.youtube.com/embed/${updateMusic.video_Id}`
                       : "https://www.youtube.com/embed/"
                   }
+                  id="ytplayer"
+                  frameBorder="0"
                 ></iframe>
               </div>
-              <button onClick={updateReadMusic}>저장</button>
-              <button
-                onClick={() => {
-                  setUpdateMode(false);
-                  setUpdateMusic({
-                    video_Id: "",
-                    title: "",
-                    thumbnail: "",
-                  });
-                }}
-              >
-                취소
-              </button>
+              <div className="save-cancel-btn">
+                <button onClick={updateReadMusic}>저장</button>
+                <button
+                  onClick={() => {
+                    setUpdateMode(false);
+                    setUpdateMusic({
+                      video_Id: "",
+                      title: "",
+                      thumbnail: "",
+                    });
+                  }}
+                >
+                  취소
+                </button>
+              </div>
             </div>
           </div>
         ) : (
@@ -136,24 +148,39 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
             ) : (
               <>
                 {isLogin && mode !== "WATCH" ? (
-                  <>
-                    <button onClick={() => setOpenEditMusic(true)}>수정</button>
-                    <button onClick={() => setOpenConfirm(true)}>삭제</button>
-                  </>
+                  <div className="edit-del-btn">
+                    {/* <button onClick={() => setOpenEditMusic(true)}>수정</button> */}
+                    {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
+                    <i
+                      className="fa fa-pencil"
+                      aria-hidden="true"
+                      onClick={() => setOpenEditMusic(true)}
+                    ></i>
+                    <i
+                      className="fa fa-trash"
+                      aria-hidden="true"
+                      onClick={() => setOpenConfirm(true)}
+                    ></i>
+                  </div>
                 ) : (
                   <></>
                 )}
-                <div>
+                <>
                   <div className="detail-line"></div>
-                  <iframe
-                    className="music-iframe"
-                    src={
-                      readMusic.video_Id
-                        ? `https://www.youtube.com/embed/${readMusic.video_Id}`
-                        : "https://www.youtube.com/embed/"
-                    }
-                  ></iframe>
-                </div>
+                  <div className="widget-outsider">
+                    <img src={readMusic.thumbnail}></img>
+                    <div>{readMusic.title}</div>
+                    <iframe
+                      src={
+                        readMusic.video_Id
+                          ? `https://www.youtube.com/embed/${readMusic.video_Id}`
+                          : "https://www.youtube.com/embed/"
+                      }
+                      id="ytplayer"
+                      frameBorder="0"
+                    ></iframe>
+                  </div>
+                </>
               </>
             )}
           </>

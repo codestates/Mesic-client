@@ -32,9 +32,9 @@ function PostModal({ postLatLng }: any) {
     if (
       postMusic.title.length === 0 &&
       postMemo.length === 0 &&
-      postImg.length === 0
+      postImg === location
     ) {
-      setErrMessage("내용을 입력해주세요");
+      setErrMessage("내용을 입력해주세요.");
       return;
     }
     setErrMessage("");
