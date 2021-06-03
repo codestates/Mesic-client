@@ -12,7 +12,7 @@
     border: none;
     outline: none; }
   .nav .nav-btn .loginBtn {
-    margin: 8px;
+    margin: 6px;
     padding: 10px;
     border-radius: 7px;
     font-weight: 600;
@@ -23,6 +23,7 @@
     outline: none; }
   .nav .nav-btn .mypageBtn {
     margin: 8px;
+    margin-right: 30px;
     padding: 10px;
     border-radius: 7px;
     font-weight: 600;
@@ -299,19 +300,19 @@
 
 .intro-page .intro-page-section-1 {
   display: flex;
-  padding: 100px;
+  padding: 65px;
   background-position-y: position / 2; }
   .intro-page .intro-page-section-1 .intro-page-browser-img {
-    margin-left: 100px;
-    margin-right: 50px; }
+    margin-left: 65px;
+    margin-right: 20px; }
   .intro-page .intro-page-section-1 .intro-page-text-section {
     display: flex;
     flex-direction: column;
-    margin-left: 200px;
-    margin-top: 150px; }
+    margin-left: 80px;
+    margin-top: 230px; }
     .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus {
       font-family: Mulish;
-      font-size: 14px;
+      font-size: 13.5px;
       font-style: normal;
       color: #686262;
       line-height: 16px;
@@ -320,13 +321,14 @@
       margin-bottom: 10px; }
     .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus-name {
       font-family: Mulish;
-      font-size: 40px;
+      font-size: 45px;
       font-style: normal;
       font-weight: 800;
       line-height: 31px;
       letter-spacing: 0em;
       text-align: center;
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      color: #525252; }
     .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus-content {
       font-family: Mulish;
       font-size: 18px;
@@ -348,9 +350,179 @@
     font-weight: 600;
     border: none;
     outline: none; }
+    .intro-page .intro-page-section-1 .quick-start .quick-start-btn:hover {
+      opacity: 0.8; }
 
 .intro-page .intro-page-section-2 {
-  background-position-y: position / -3; }
+  display: flex;
+  margin-left: 200px;
+  margin-top: 150px;
+  background-position-y: position / -20; }
+  .intro-page .intro-page-section-2 .intro-page-section2-img {
+    width: 30%;
+    height: 700px;
+    margin: 100px; }
+  .intro-page .intro-page-section-2 .intro-page-section-2-content {
+    margin-left: 130px;
+    margin-top: 150px;
+    padding-top: 220px;
+    color: #525252;
+    background-image: url("./../images/Blob-2.png");
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 20%; }
+    .intro-page .intro-page-section-2 .intro-page-section-2-content .section2-content-small {
+      color: #000000;
+      opacity: 0.5;
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 600; }
+    .intro-page .intro-page-section-2 .intro-page-section-2-content .section2-content-large {
+      color: #525252;
+      font-size: 36px;
+      font-weight: 700; }
+
+.intro-page .intro-page-section-3 {
+  display: flex;
+  margin-left: 130px;
+  margin-top: 100px;
+  background-position-y: position / -40; }
+  .intro-page .intro-page-section-3 .intro-page-section3-img {
+    width: 35%; }
+  .intro-page .intro-page-section-3 .intro-page-section-3-content {
+    margin-top: 150px;
+    padding: 100px;
+    padding-top: 270px;
+    color: #525252;
+    background-image: url("./../images/Blob-3.png");
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 55%; }
+    .intro-page .intro-page-section-3 .intro-page-section-3-content .section3-content-small {
+      color: #000000;
+      opacity: 0.5;
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 600; }
+    .intro-page .intro-page-section-3 .intro-page-section-3-content .section3-content-large {
+      color: #525252;
+      font-size: 36px;
+      font-weight: 700; }
+
+.intro-page .intro-page-section-4 {
+  display: flex;
+  margin-left: 200px;
+  margin-top: 150px;
+  background-position-y: position / -60; }
+  .intro-page .intro-page-section-4 .intro-page-section4-img {
+    width: 40%;
+    margin-right: 200px; }
+  .intro-page .intro-page-section-4 .intro-page-section-4-content {
+    margin-top: 200px;
+    padding: 150px;
+    color: #525252;
+    background-image: url("./../images/Blob-4.png");
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 20%; }
+    .intro-page .intro-page-section-4 .intro-page-section-4-content .section4-content-small {
+      color: #000000;
+      opacity: 0.5;
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 600; }
+    .intro-page .intro-page-section-4 .intro-page-section-4-content .section4-content-large {
+      color: #525252;
+      font-size: 38px;
+      font-weight: 700; }
+
+.intro-page .intro-page-section-5 {
+  display: flex;
+  margin-left: 100px;
+  background-position-y: position / -80; }
+  .intro-page .intro-page-section-5 .intro-page-section5-img {
+    margin-right: 50px;
+    width: 45%;
+    height: 40%; }
+  .intro-page .intro-page-section-5 .intro-page-section-5-content {
+    margin-top: 200px;
+    padding: 200px;
+    color: #525252;
+    background-image: url("./../images/Blob-5.png");
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 20%; }
+    .intro-page .intro-page-section-5 .intro-page-section-5-content .section5-content-small {
+      color: #000000;
+      opacity: 0.5;
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 600; }
+    .intro-page .intro-page-section-5 .intro-page-section-5-content .section5-content-large {
+      color: #525252;
+      font-size: 36px;
+      font-weight: 700; }
+
+.intro-page .intro-page-section-6 {
+  display: flex;
+  margin-left: 200px;
+  background-position-y: position / -100; }
+  .intro-page .intro-page-section-6 .intro-page-section6-img {
+    width: 40%; }
+  .intro-page .intro-page-section-6 .intro-page-section-6-content {
+    margin-left: 100px;
+    margin-top: 140px;
+    padding: 180px;
+    color: #525252;
+    background-image: url("./../images/Blob-6.png");
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 20%; }
+    .intro-page .intro-page-section-6 .intro-page-section-6-content .section6-content-small {
+      color: #000000;
+      opacity: 0.5;
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 600; }
+    .intro-page .intro-page-section-6 .intro-page-section-6-content .section6-content-large {
+      color: #525252;
+      font-size: 36px;
+      font-weight: 700; }
+
+.intro-page .below-btn-section {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 170px; }
+  .intro-page .below-btn-section .intro-page-below-start-btn {
+    width: 180px;
+    padding: 13px;
+    border-radius: 7px;
+    background-color: #19C9D4;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    border: none;
+    outline: none; }
+    .intro-page .below-btn-section .intro-page-below-start-btn:hover {
+      opacity: 0.7; }
+
+.intro-page .footer-section {
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  border-top: solid 0.5px;
+  border-color: #cac7c7; }
+  .intro-page .footer-section .footer-section-logo {
+    padding: 20px;
+    margin: auto;
+    width: 9%; }
+  .intro-page .footer-section .footer-section-members {
+    margin: auto;
+    width: 50%; }
+  .intro-page .footer-section .footer-section-github {
+    padding: 25px;
+    margin: auto;
+    width: 50%; }
 
 * {
   box-sizing: border-box;
