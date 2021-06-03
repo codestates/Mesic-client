@@ -1,0 +1,331 @@
+$color: #fefefe;
+$main-color: #19c9d4;
+$font-color: rgb(100, 100, 100);
+$box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
+
+@mixin flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-outsider {
+  z-index: 2;
+  display: none;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 820px;
+  width: 400px;
+  right: 0%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(0%, 6%);
+}
+
+.modal {
+  display: flex;
+  position: relative;
+  padding: 50px 0px 15px 0px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $color;
+  border-radius: 20px;
+  height: 760px;
+  width: 350px;
+  box-shadow: 0px 5px 5px 5px rgba(94, 112, 134, 0.3);
+  $margin: 5px 0px;
+
+  @mixin detail-line {
+    display: flex;
+    width: 300px;
+    margin-top: 5px;
+    border-top: 1px solid #e1e1e1;
+  }
+  @mixin detail-icon {
+    display: flex;
+    align-self: flex-start;
+  }
+
+  .music {
+    margin: $margin;
+    @include flex;
+    .detail-icon {
+      @include detail-icon;
+    }
+    .detail-line {
+      @include detail-line;
+    }
+    .add-btn-music {
+      cursor: pointer;
+      width: 65%;
+      height: 100px;
+      margin: 10px 0px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      border: 1px solid #e1e1e1;
+      font-size: 26px;
+      color: #989898;
+    }
+    .music-iframe {
+      margin-top: 5px;
+    }
+  }
+
+  .photo {
+    margin: $margin;
+    @include flex;
+    .detail-icon {
+      @include detail-icon;
+    }
+    .detail-line {
+      @include detail-line;
+    }
+    .add-btn-photo {
+      position: relative;
+      cursor: pointer;
+      width: 200px;
+      height: 200px;
+      margin: 13px 0px 10px 0px;
+      background-color: #f8f8f8;
+      border: 1px solid #e1e1e1;
+      border-radius: 10px;
+      font-size: 26px;
+      color: #989898;
+      padding: 83px 118px;
+    }
+    .edit-btn-photo {
+      cursor: pointer;
+    }
+    .input-photo {
+      display: none;
+    }
+    .photo-img-outsider {
+      display: flex;
+      justify-content: center;
+      .photo-img {
+        border-radius: 8px;
+        height: 200px;
+        width: 200px;
+        margin-top: 5px;
+      }
+    }
+    .add-btn-read-photo {
+      position: relative;
+      cursor: pointer;
+      width: 200px;
+      height: 200px;
+      margin: 10px 0px 10px 0px;
+      background-color: #f8f8f8;
+      border: 1px solid #e1e1e1;
+      border-radius: 10px;
+      font-size: 26px;
+      color: #989898;
+      padding: 83px 118px;
+    }
+    .add-btn-outsider {
+      @include flex;
+    }
+  }
+  .memo {
+    margin: $margin;
+    @include flex;
+    .detail-icon {
+      @include detail-icon;
+    }
+    .detail-line {
+      @include detail-line;
+    }
+    .textarea-outsider {
+      @include flex;
+      margin: 15px;
+      .input-memo {
+        position: relative;
+        display: flex;
+        -webkit-appearance: none;
+        width: 240px;
+        height: 150px;
+        border: 0;
+        padding: 12px 3px;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 500;
+        background: none;
+        border-radius: 0;
+        color: black;
+        transition: all 0.15s ease;
+      }
+    }
+    .read-memo {
+      height: 200px;
+      overflow: auto;
+      padding: 20px;
+    }
+  }
+}
+
+.pinit-btn {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background-color: $main-color;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
+}
+.delete-pin-btn {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background-color: $main-color;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
+}
+
+.show1 {
+  display: flex;
+}
+
+// edit music
+
+@keyframes slide2 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+@-webkit-keyframes slide2 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -300%;
+  }
+}
+
+.edit-music-modal {
+  background-color: #fefefe;
+  position: absolute;
+  z-index: 3;
+  border-radius: 35px;
+  border: 0;
+  padding: 20px;
+  width: 350px;
+  height: 400px;
+  top: 30%;
+  box-shadow: $box-shadow;
+  -webkit-transform: translate(-100%, 0%);
+  transform: translate(-105%, -41.5%);
+}
+
+.edit-music-list {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  height: 300px;
+  img {
+    border-radius: 15px;
+  }
+}
+
+.edit-music-searched {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  margin: 10px;
+  cursor: pointer;
+  &:hover {
+    & > div > div {
+      animation-name: slide;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      -webkit-animation-name: slide2;
+      -webkit-animation-duration: 3s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+    }
+  }
+}
+
+.edit-music-hidden {
+  position: absolute;
+  overflow: hidden;
+  height: 30px;
+  width: 180px;
+  left: 140px;
+}
+
+.edit-music-searched-title {
+  padding: 5px;
+  font-size: 1rem;
+  overflow: visible;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  color: rgb(80, 80, 80);
+}
+
+.edit-music-title {
+  text-align: center;
+  color: $main-color;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -2px;
+  margin: 10px;
+}
+
+.edit-music {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input[type="text"] {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgb(222, 222, 222);
+    display: block;
+    position: relative;
+    margin: 10px 10px 0px 10px;
+    width: 80%;
+    color: $font-color;
+    font-size: 1rem;
+    padding: 4px;
+  }
+  i {
+    opacity: 0.4;
+    cursor: pointer;
+  }
+  ::placeholder {
+    opacity: 60%;
+  }
+}
+
+.edit-music-close-btn {
+  position: absolute;
+  margin-top: 20px;
+  top: 0;
+  font-size: 1.3rem;
+  color: $main-color;
+  cursor: pointer;
+}

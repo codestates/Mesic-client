@@ -23,27 +23,34 @@ function ReadModal({ readMarkerData, setPinUpdate, deleteMyMarker }: any) {
   const [readMemo, setReadMemo] = useState<string>(memo);
 
   return (
-    <div className="modal show1">
-      <ReadMusic
-        readMusic={readMusic}
-        setReadMusic={setReadMusic}
-        markerId={_id}
-        setPinUpdate={setPinUpdate}
-      />
-      <ReadPhoto
-        readImg={readImg}
-        setReadImg={setReadImg}
-        markerId={_id}
-        setPinUpdate={setPinUpdate}
-      />
-      <ReadMemo
-        readMemo={readMemo}
-        setReadMemo={setReadMemo}
-        markerId={_id}
-        setPinUpdate={setPinUpdate}
-      />
+    <div className="modal-outsider show1">
+      <div className="modal">
+        <ReadMusic
+          readMusic={readMusic}
+          setReadMusic={setReadMusic}
+          markerId={_id}
+          setPinUpdate={setPinUpdate}
+        />
+        <ReadPhoto
+          readImg={readImg}
+          setReadImg={setReadImg}
+          markerId={_id}
+          setPinUpdate={setPinUpdate}
+        />
+        <ReadMemo
+          readMemo={readMemo}
+          setReadMemo={setReadMemo}
+          markerId={_id}
+          setPinUpdate={setPinUpdate}
+        />
+      </div>
       {isLogin && mode === "READ" ? (
-        <button onClick={() => deleteMyMarker(readMarkerData._id)}>삭제</button>
+        <button
+          className="delete-pin-btn"
+          onClick={() => deleteMyMarker(readMarkerData._id)}
+        >
+          삭제
+        </button>
       ) : (
         <></>
       )}

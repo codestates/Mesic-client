@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
@@ -10,10 +10,24 @@ function PostPhoto({ postImg, setPostImg }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+  const [previewImg, setPreviewImg] = useState<any>({});
+  const [fileName, setFileName] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof postImg !== "object") {
+      console.log("1");
+      const splitArr = postImg.split("/");
+      const imgName = splitArr[splitArr.length - 1];
+      setFileName(imgName);
+    }
+    return;
+  }, [postImg]);
 
   // Photo 업데이트 버튼
   const handlePostImg = (e: any) => {
-    setPostImg(URL.createObjectURL(e.target.files[0]));
+    setPostImg(e.target.files[0]);
+    setPreviewImg(URL.createObjectURL(e.target.files[0]));
+    setFileName("");
   };
 
   return (
@@ -26,21 +40,31 @@ function PostPhoto({ postImg, setPostImg }: any) {
         setPostImg={setPostImg}
         // setUpdateMode => false로 변경해야지 처음 상태로 돌아감
       />
-      <div className="border">
-        <input
-          ref={imageInput}
-          type="file"
-          accept="image/*"
-          onChange={handlePostImg}
-        />
-        {postImg === null ? (
-          <div>사진 추가하기</div>
-        ) : (
+      <div className="photo">
+        <div className="detail-icon">
+          <i className="fa fa-camera"></i>
+        </div>
+        <div className="detail-line"></div>
+        {fileName === "undefined" ? (
           <>
-            <button onClick={() => setOpenConfirm(true)}>삭제</button>
+            <label className="add-btn-photo" htmlFor="photo-file">
+              +
+            </label>
+            <input
+              className="input-photo"
+              ref={imageInput}
+              type="file"
+              id="photo-file"
+              accept="image/*"
+              onChange={handlePostImg}
+            />
           </>
+        ) : (
+          <div className="photo-img-outsider">
+            <img className="photo-img" src={previewImg} />
+          </div>
         )}
-        <img className="img" src={postImg} />
+        {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
       </div>
     </>
   );

@@ -6,6 +6,9 @@
 .pnp.js
 .env
 .eslintignore
+/src/App.css
+/src/App.css.map
+.DS_Store
 
 # testing
 /coverage

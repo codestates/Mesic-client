@@ -88,7 +88,7 @@ function FollowList({ setLoginController }: any) {
   return (
     <>
       <div className="followlist">
-        <div className="followlist-title">팔로우 찾기</div>
+        <div className="followlist-title">팔로우 목록</div>
         <div>
           <input
             type="text"
@@ -110,7 +110,9 @@ function FollowList({ setLoginController }: any) {
                 );
               })
             ) : (
-              <div>다른 유저를 찾아 팔로우하세요</div>
+              <div className="search-not-found">
+                다른 유저를 찾아 팔로우하세요
+              </div>
             )
           ) : searchedFollow.length > 0 ? (
             searchedFollow.map((searched: any) => (
@@ -121,12 +123,17 @@ function FollowList({ setLoginController }: any) {
               />
             ))
           ) : (
-            <div>검색 결과가 없습니다</div>
+            <div className="search-not-found">검색 결과가 없습니다</div>
           )}
         </div>
-        <button onClick={() => setOpenSearchUser(true)}>
-          새로운 유저 찾아보기
-        </button>
+        <div className="search-user-box">
+          <button
+            className="find-user-btn"
+            onClick={() => setOpenSearchUser(true)}
+          >
+            새로운 유저 찾아보기
+          </button>
+        </div>
         <SearchUser
           openSearchUser={openSearchUser}
           setOpenSearchUser={setOpenSearchUser}
