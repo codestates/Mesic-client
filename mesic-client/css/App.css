@@ -1098,6 +1098,7 @@
 }
 
 .mypage-close {
+  cursor: pointer;
   top: 30px;
   left: 30px;
   position: absolute;

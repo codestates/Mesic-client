@@ -10,7 +10,6 @@ function EditMypage({
   setOpenEditMypage,
   getUserInfo,
 }: any) {
-
   const { user_id, token, email, name, nickname, profileImg } = useSelector(
     (state: RootState) => state.userReducer.user
   );
@@ -50,7 +49,7 @@ function EditMypage({
       }
 
       console.log("data.Location", data.Location);
-      
+
       const updateData = {
         nickname: editNicknameInput.length > 0 ? editNicknameInput : nickname,
         profile: editProfileImg.name ? data.Location : profileImg,
@@ -100,6 +99,7 @@ function EditMypage({
     setOpenEditMypage(false);
     setOpenMypage(true);
     editProfileInput.current.value = "";
+    setEditPreviewProfileImg(profileImg);
     setEditProfileImg(profileImg);
     setEditNicknameInput(nickname);
   };
@@ -107,7 +107,14 @@ function EditMypage({
   return (
     <div className={`mypage-edit-background ${openEditMypage ? "show" : ""}`}>
       <div className="mypage-edit-modal">
-        <div className="mypage-close" onClick={() => setOpenEditMypage(false)}>
+        <div
+          className="mypage-close"
+          onClick={() => {
+            handleReturnMypage();
+            setOpenMypage(false);
+            setOpenEditMypage(false);
+          }}
+        >
           X
         </div>
         <div className="editmypage-content">
@@ -123,6 +130,7 @@ function EditMypage({
                 <img className="profileImg-content" src={profileImg}></img>
               )}
             </figure>
+
             <label htmlFor="profile-img-input">
               <i className="fas fa-pencil-alt edit-profile-img-btn" />
             </label>
