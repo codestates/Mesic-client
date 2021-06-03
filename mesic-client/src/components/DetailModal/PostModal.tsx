@@ -18,7 +18,9 @@ function PostModal({ postLatLng }: any) {
     title: "",
     thumbnail: "",
   });
-  const [postImg, setPostImg] = useState<any>("");
+  const location =
+    "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
+  const [postImg, setPostImg] = useState<any>(location);
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
 
@@ -37,15 +39,15 @@ function PostModal({ postLatLng }: any) {
     }
     setErrMessage("");
 
-    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
-    const secretAccessKey = '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';
-    const region = 'ap-northeast-2';
+    const accessKeyId = "AKIA2XC7TYWAUO3P7L2I";
+    const secretAccessKey = "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";
+    const region = "ap-northeast-2";
 
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: 'mesic-photo-bucket',
-      Key: `/image/${postImg.name}`,
+      Bucket: "mesic-photo-bucket",
+      Key: `image/${postImg.name}`,
       ACL: "public-read",
       Body: postImg,
       ContentType: "image/jpg",
@@ -56,7 +58,7 @@ function PostModal({ postLatLng }: any) {
         console.log(err);
         return;
       }
-      console.log("data.Location", data.Location);
+      console.log("data.Location : ", data.Location);
 
       const postData = {
         user_id,
