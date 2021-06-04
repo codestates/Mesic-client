@@ -227,7 +227,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
           {emailError.length === 0 ? <>{pwError}</> : <>{emailError}</>}
         </div>
         <div>
-          <button className="loginBtn" onClick={responseSignup}>
+          <button className="loginBtn-2" onClick={responseSignup}>
             Sign Up
           </button>
         </div>

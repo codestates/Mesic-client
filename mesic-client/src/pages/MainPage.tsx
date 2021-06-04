@@ -730,6 +730,8 @@ function MainPage() {
   return (
     <div className="App">
       <Nav
+        setOpenPostModal={setOpenPostModal}
+        setOpenReadModal={setOpenReadModal}
         loginController={loginController}
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}

@@ -15,7 +15,13 @@ import {
 } from "../../actions/index";
 import logo from "../../images/mesic-logo.png";
 
-function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
+function Nav({
+  loginController,
+  setLoginController,
+  deletePostMarkers,
+  setOpenReadModal,
+  setOpenPostModal,
+}: any) {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const { isLogin, user_id }: any = state.userReducer.user;
@@ -50,6 +56,8 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
     setOpenSignup(true);
   };
   const clickMypage = () => {
+    setOpenReadModal(false);
+    setOpenPostModal(false);
     setOpenMypage(true);
   };
   const closeMypage = () => {

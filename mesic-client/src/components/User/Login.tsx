@@ -180,18 +180,20 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
             ) : (
               <></>
             )} */}
-        <button className="loginBtn" onClick={responseLogin}>
+        <button className="loginBtn-2" onClick={responseLogin}>
           Login
         </button>
         <button className="guestLoginBtn" onClick={loginAsGuest}>
           Guest
         </button>
         <div className="loginContainer">
-          <img
-            className="google-loginBtn"
-            onClick={googleLoginHandler}
-            src={googleLogo}
-          />
+          <div>
+            <img
+              className="google-loginBtn"
+              onClick={googleLoginHandler}
+              src={googleLogo}
+            />
+          </div>
         </div>
       </div>
     </div>

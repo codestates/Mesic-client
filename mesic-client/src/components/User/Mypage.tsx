@@ -23,7 +23,10 @@ function Mypage(props: MypageProps) {
   };
 
   return (
-    <div className={`mypage-edit-background ${openMypage ? "show" : ""}`}>
+    <div
+      onClick={clickCloseMypage}
+      className={`mypage-edit-background ${openMypage ? "show" : ""}`}
+    >
       <div className="mypage-edit-modal">
         <div className="mypage-close" onClick={clickCloseMypage}>
           X

@@ -1,7 +1,8 @@
 $main-color: #19c9d4;
 $font-color: rgb(80, 80, 80);
 $sub-font-color: rgb(158, 158, 158);
-$box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+$box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
+$btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 
 @mixin follow-user-modal {
   background-color: #fefefe;
@@ -145,6 +146,7 @@ $box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
 }
 
 .find-user-btn {
+  box-shadow: $btn-shadow;
   margin: 0 auto;
   transform: translateX(33%);
   padding: 11px 22px;
@@ -295,7 +297,7 @@ $default-black-color: #525252;
   position: fixed;
   overflow-y: scroll;
   overflow-x: hidden;
-  box-shadow: $box-shadow;
+  box-shadow: 0px 5px 5px 1px rgba(84, 84, 84, 0.2);
   z-index: 2;
   .logo-btn {
     width: 5%;
@@ -315,10 +317,8 @@ $default-black-color: #525252;
       border-radius: 7px;
       font-weight: 600;
       font-size: 18px;
-
       background-color: white;
       color: $mesic-color;
-
       border: none;
       outline: none;
     }
@@ -329,12 +329,11 @@ $default-black-color: #525252;
       border-radius: 7px;
       font-weight: 600;
       font-size: 18px;
-
       color: #fefefe;
       background-color: $mesic-color;
-
       border: none;
       outline: none;
+      box-shadow: $btn-shadow;
 
       &:hover {
         opacity: 0.8;

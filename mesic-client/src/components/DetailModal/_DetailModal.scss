@@ -1,7 +1,7 @@
 $color: #fefefe;
 $main-color: #19c9d4;
 $font-color: rgb(100, 100, 100);
-$box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+$box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 
 @mixin flex {
   display: flex;
@@ -36,7 +36,7 @@ $box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
   border-radius: 20px;
   height: 760px;
   width: 350px;
-  box-shadow: 0px 5px 5px 5px rgba(94, 112, 134, 0.3);
+  box-shadow: $box-shadow;
   $margin: 5px 0px;
 
   @mixin detail-line {
