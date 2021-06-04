@@ -73,6 +73,9 @@ function MainPage() {
   const [myPinData, setMypinData] = useState<any[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
 
+  // 미리보기 모두 저장
+  const [saveInfowindows, setSaveinfowindows] = useState<any[]>([]);
+
   // 지도 동적 렌더링
   useEffect(() => {
     window.kakao.maps.load(() => {
@@ -139,6 +142,11 @@ function MainPage() {
       }
     }
   }, [myPinData, map]);
+
+  // 미리보기 사라지게 하기
+  useEffect(() => {
+    deleteInfowindows();
+  });
 
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
@@ -289,7 +297,7 @@ function MainPage() {
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         console.log(marker.id);
-        infowindow.setMap(null);
+        // infowindow.setMap(null);
         handleMyMarkerClick(marker.id);
       });
 
@@ -348,6 +356,7 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
+      setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setMyMarkers(markers);
   };
@@ -372,7 +381,7 @@ function MainPage() {
       marker.id = Dummies[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
-        infowindow.setMap(null);
+        // infowindow.setMap(null);
         handleMyMarkerClick(marker.id);
       });
 
@@ -515,6 +524,7 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
+      setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setFollowMarkers([...followMarkers, markers]);
   };
@@ -583,6 +593,12 @@ function MainPage() {
   const deleteSearchMarkers = () => {
     for (let i = 0; i < searchMarkers.length; i++) {
       searchMarkers[i].setMap(null);
+    }
+  };
+
+  const deleteInfowindows = () => {
+    for (let i = 0; i < saveInfowindows.length; i++) {
+      saveInfowindows[i].setMap(null);
     }
   };
 
@@ -715,6 +731,8 @@ function MainPage() {
   return (
     <div className="App">
       <Nav
+        setOpenPostModal={setOpenPostModal}
+        setOpenReadModal={setOpenReadModal}
         loginController={loginController}
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}

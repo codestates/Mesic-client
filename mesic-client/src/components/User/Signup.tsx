@@ -176,7 +176,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
         <div className="login-title">SIGN UP</div>
         <div className="content-flex">
           <div className="login-content">
-            <div className="email-input-section">
+            <div>
               <div>Email</div>
               <input
                 onChange={handleIdInput}
@@ -185,7 +185,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 ref={inputEmail}
               ></input>
             </div>
-            <div className="name-input-section">
+            <div>
               <div>Name</div>
               <input
                 onChange={handleNameInput}
@@ -194,7 +194,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 ref={inputName}
               ></input>
             </div>
-            <div className="nickname-input-section">
+            <div>
               <div>Nickname</div>
               <input
                 onChange={handleNicknameInput}
@@ -203,7 +203,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 ref={inputNickname}
               ></input>
             </div>
-            <div className="password-input-section">
+            <div>
               <div>Password</div>
               <input
                 onChange={handlePwInput}
@@ -212,7 +212,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 ref={inputPw}
               ></input>
             </div>
-            <div className="password-check-input-section">
+            <div>
               <div>Pw Check</div>
               <input
                 onChange={handlePwCheckInput}
@@ -227,7 +227,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
           {emailError.length === 0 ? <>{pwError}</> : <>{emailError}</>}
         </div>
         <div>
-          <button className="loginBtn" onClick={responseSignup}>
+          <button className="loginBtn-2" onClick={responseSignup}>
             Sign Up
           </button>
         </div>

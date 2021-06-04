@@ -1,5 +1,19 @@
 $mesic-color: #19c9d4;
 $default-black-color: #525252;
+$btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
+
+.intro-page {
+  .intro-page-section-1 {
+    display: flex;
+    padding: 65px;
+    background-position-y: position / 2;
+
+    .intro-page-browser-img {
+      width: 50%;
+      margin: 3%;
+      padding: 1%;
+      padding-right: 0px;
+    }
 
 .intro-page {
   .intro-page-section-1 {
@@ -92,36 +106,8 @@ $default-black-color: #525252;
       margin: auto;
       margin-left: 15%;
     }
-
-    .intro-page-section-2-content {
-      padding: 15vw;
-      justify-items: center;
-      color: $default-black-color;
-
-      background-image: url("./../images/Blob-2.png");
-      background-repeat: no-repeat;
-      // background-size: contain;
-      background-position-x: 50%;
-      background-position-y: 50%;
-      background-size: 23vw;
-
-      .section2-content-small {
-        color: #000000;
-        opacity: 0.5;
-        // font-size: 18px;
-        font-size: 1.2vw;
-        margin-bottom: 5px;
-        font-weight: 600;
-      }
-
-      .section2-content-large {
-        color: $default-black-color;
-        font-size: 2vw;
-        font-weight: 700;
-      }
-    }
   }
-
+  
   .intro-page-section-3 {
     display: flex;
     margin: auto;
@@ -152,8 +138,7 @@ $default-black-color: #525252;
       // background-position-y: 55%;
 
       .section3-content-small {
-        color: #000000;
-        opacity: 0.5;
+        color: #868686;
         font-size: 1.1vw;
         margin-bottom: 5px;
         font-weight: 600;
@@ -162,7 +147,6 @@ $default-black-color: #525252;
       .section3-content-large {
         color: $default-black-color;
         font-size: 2vw;
-
         font-weight: 700;
       }
     }
@@ -195,8 +179,7 @@ $default-black-color: #525252;
       background-size: 22vw;
 
       .section4-content-small {
-        color: #000000;
-        opacity: 0.5;
+        color: #868686;
         font-size: 1.1vw;
         margin-bottom: 5px;
         font-weight: 600;
@@ -238,8 +221,7 @@ $default-black-color: #525252;
       background-size: 24vw;
 
       .section5-content-small {
-        color: #000000;
-        opacity: 0.5;
+        color: #868686;
         font-size: 1.2vw;
         margin-bottom: 5px;
         font-weight: 600;
@@ -279,8 +261,7 @@ $default-black-color: #525252;
       background-size: 25vw;
 
       .section6-content-small {
-        color: #000000;
-        opacity: 0.5;
+        color: #868686;
         font-size: 1.1vw;
         margin-bottom: 5px;
         font-weight: 600;
@@ -302,7 +283,7 @@ $default-black-color: #525252;
       width: 180px;
       padding: 13px;
       border-radius: 7px;
-
+      box-shadow: $btn-shadow;
       background-color: $mesic-color;
       color: white;
       font-size: 24px;

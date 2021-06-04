@@ -105,7 +105,14 @@ function EditMypage({
   };
 
   return (
-    <div className={`mypage-edit-background ${openEditMypage ? "show" : ""}`}>
+    <div
+      onClick={() => {
+        handleReturnMypage();
+        setOpenMypage(false);
+        setOpenEditMypage(false);
+      }}
+      className={`mypage-edit-background ${openEditMypage ? "show" : ""}`}
+    >
       <div className="mypage-edit-modal">
         <div
           className="mypage-close"
@@ -168,7 +175,7 @@ function EditMypage({
             <button className="mypage-modify-btn" onClick={sendModifiedData}>
               저장
             </button>
-            <button className="mypage-modify-btn" onClick={handleReturnMypage}>
+            <button className="mypage-cancel-btn" onClick={handleReturnMypage}>
               취소
             </button>
           </div>

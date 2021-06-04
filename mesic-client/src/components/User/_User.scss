@@ -2,6 +2,8 @@ $mesic-color: #19c9d4;
 $input-color: #9f9999;
 $mypage-modify-unable: #f4f5f4;
 $mypage-modify-able: #3c64b1;
+$btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
+$box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 
 @mixin close-btn {
   cursor: pointer;
@@ -27,6 +29,7 @@ $mypage-modify-able: #3c64b1;
 }
 
 @mixin confirm-btn {
+  box-shadow: $btn-shadow;
   margin: 15px;
   padding: 10px 25px;
   border-radius: 15px;
@@ -98,21 +101,36 @@ $mypage-modify-able: #3c64b1;
 
 .loginBtn {
   @include confirm-btn;
+  box-shadow: none;
+}
+
+.loginBtn-2 {
+  @include confirm-btn;
 }
 
 .guestLoginBtn {
   @include confirm-btn;
-  background-color: rgb(245, 241, 241);
+  background-color: white;
   color: $mesic-color;
 }
 
 .loginContainer {
-  margin: 15px;
-  text-align: center;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  div {
+    border-radius: 20px;
+    box-shadow: $btn-shadow;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .google-loginBtn {
-  cursor: pointer;
   width: 32px;
   height: 32px;
 }
@@ -128,7 +146,7 @@ $mypage-modify-able: #3c64b1;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border-radius: 30px;
+  border-radius: 20px;
   text-align: center;
 }
 
@@ -141,7 +159,8 @@ $mypage-modify-able: #3c64b1;
 .mypage-edit-background {
   display: none;
   position: fixed;
-  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 4;
   left: 0;
   top: 0;
   width: 100%;
@@ -154,13 +173,15 @@ $mypage-modify-able: #3c64b1;
 
 // mypage modal part
 .mypage-edit-modal {
+  z-index: 3;
+  box-shadow: $box-shadow;
   background-color: #fefefe;
   position: absolute;
   padding: 30px 40px 30px 30px;
   width: 500px;
   left: 90%;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   text-align: center;
   -webkit-transform: translate(-60%, 30%);
   transform: translate(-60%, 30%);
@@ -211,6 +232,12 @@ $mypage-modify-able: #3c64b1;
 
   .mypage-modify-btn {
     @include confirm-btn;
+  }
+
+  .mypage-cancel-btn {
+    @include confirm-btn;
+    background-color: white;
+    color: $mesic-color;
   }
 }
 
