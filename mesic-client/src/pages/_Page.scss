@@ -15,19 +15,6 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
       padding-right: 0px;
     }
 
-.intro-page {
-  .intro-page-section-1 {
-    display: flex;
-    padding: 65px;
-    background-position-y: position / 2;
-
-    .intro-page-browser-img {
-      width: 50%;
-      margin: 3%;
-      padding: 1%;
-      padding-right: 0px;
-    }
-
     .intro-page-text-section {
       display: flex;
       flex-direction: column;
@@ -107,7 +94,35 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
       margin-left: 15%;
     }
   }
-  
+
+  .intro-page-section-2-content {
+    padding: 15vw;
+    justify-items: center;
+    color: $default-black-color;
+
+    background-image: url("./../images/Blob-2.png");
+    background-repeat: no-repeat;
+    // background-size: contain;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: 23vw;
+
+    .section2-content-small {
+      color: #000000;
+      opacity: 0.5;
+      // font-size: 18px;
+      font-size: 1.2vw;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .section2-content-large {
+      color: $default-black-color;
+      font-size: 2vw;
+      font-weight: 700;
+    }
+  }
+
   .intro-page-section-3 {
     display: flex;
     margin: auto;
