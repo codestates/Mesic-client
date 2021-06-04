@@ -6,7 +6,7 @@
 
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FYyf7g%2Fbtq6v9QQthx%2FxuK3sot4SxIt5WklNifTd0%2Fimg.png)
 
-음악을 들으면 생각나는 추억이 있으신가요?   
+🎧 음악을 들으면 생각나는 추억이 있으신가요?   
 Mesic에서 추억을 기록하고 사람들과 공유해보세요!
 
 
@@ -35,7 +35,7 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
 ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b9a23de2-32cd-4e73-abcb-baf9b7458ade/Screen_Shot_2021-06-04_at_3.33.50_PM.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210604%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210604T063707Z&X-Amz-Expires=86400&X-Amz-Signature=54111387bd484ab3c171a2883e58ba86613219725d475a2fd0d4146140cde7d3&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Screen_Shot_2021-06-04_at_3.33.50_PM.png%22)
 
 
-# 사용 스텍 및 아키텍처
+# 사용 스텍 및 시스템아키텍처
 
 ![](https://cdn.discordapp.com/attachments/836032297622175820/850248630257319936/mesic-tech-stack.jpg)
 ![](https://cdn.discordapp.com/attachments/836032297622175818/849941557569126460/Web_App_Reference_Architecture.png)
