@@ -83,17 +83,10 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         setReadMusic={setReadMusic}
       />
       <div className="music">
-        <div className="detail-icon">
-          <i className="fa fa-headphones" aria-hidden="true"></i>
-        </div>
         {updateMode ? (
-          <div className="music-content">
-            <div className="edit-del-btn">
-              <i
-                className="fa fa-pencil"
-                aria-hidden="true"
-                onClick={() => setOpenEditMusic(true)}
-              ></i>
+          <>
+            <div className="post-icon">
+              <i className="fa fa-camera"></i>
             </div>
             <div className="detail-line"></div>
             <div className="ifram-outsider">
@@ -126,25 +119,26 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 </button>
               </div>
             </div>
-          </div>
+          </>
         ) : (
           <>
             {isLogin && mode !== "WATCH" ? (
               readMusic.video_Id.length > 0 ? (
                 <>
                   <div className="edit-del-btn">
-                    {/* <button onClick={() => setOpenEditMusic(true)}>수정</button> */}
-                    {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
-                    <i
-                      className="fas fa-pencil-alt"
-                      aria-hidden="true"
-                      onClick={() => setOpenEditMusic(true)}
-                    ></i>
-                    <i
-                      className="fa fa-trash"
-                      aria-hidden="true"
-                      onClick={() => setOpenConfirm(true)}
-                    ></i>
+                    <i className="fa fa-headphones" aria-hidden="true"></i>
+                    <div>
+                      <i
+                        className="fas fa-pencil-alt"
+                        aria-hidden="true"
+                        onClick={() => setOpenEditMusic(true)}
+                      ></i>
+                      <i
+                        className="fa fa-trash"
+                        aria-hidden="true"
+                        onClick={() => setOpenConfirm(true)}
+                      ></i>
+                    </div>
                   </div>
                   <div className="detail-line"></div>
                   <div className="widget-outsider">
@@ -163,6 +157,9 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 </>
               ) : (
                 <>
+                  <div className="post-icon">
+                    <i className="fa fa-headphones" aria-hidden="true"></i>
+                  </div>
                   <div className="detail-line"></div>
                   <button
                     className="add-btn-music"

@@ -26,23 +26,22 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         setPostMusic={setPostMusic}
       />
       <div className="music">
-        <div className="detail-icon">
-          <i className="fa fa-headphones" aria-hidden="true"></i>
-        </div>
-
         {updateMode ? (
           <div className="music-content">
             <div className="edit-del-btn">
-              <i
-                className="fas fa-pencil-alt"
-                aria-hidden="true"
-                onClick={() => setOpenEditMusic(true)}
-              ></i>
-              <i
-                className="fa fa-trash"
-                aria-hidden="true"
-                onClick={() => setOpenConfirm(true)}
-              ></i>
+              <i className="fa fa-headphones" aria-hidden="true"></i>
+              <div>
+                <i
+                  className="fas fa-pencil-alt"
+                  aria-hidden="true"
+                  onClick={() => setOpenEditMusic(true)}
+                ></i>
+                <i
+                  className="fa fa-trash"
+                  aria-hidden="true"
+                  onClick={() => setOpenConfirm(true)}
+                ></i>
+              </div>
             </div>
             <div className="detail-line"></div>
             <div className="widget-outsider">
@@ -61,6 +60,9 @@ function PostMusic({ postMusic, setPostMusic }: any) {
           </div>
         ) : (
           <>
+            <div className="post-icon">
+              <i className="fa fa-headphones" aria-hidden="true"></i>
+            </div>
             <div className="detail-line"></div>
             <button
               className="add-btn-music"

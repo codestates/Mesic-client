@@ -19,6 +19,8 @@ function ConfirmModal({
   deleteReadMusic,
   markerId,
   setPinUpdate,
+  deleteMyMarker,
+  readMarkerData,
 }: any) {
   const state = useSelector((state: RootState) => state);
   const { token } = state.userReducer.user;
@@ -84,14 +86,10 @@ function ConfirmModal({
   };
 
   const deletePostImg = () => {
-    // TODO
-    setPostImg(null);
+    const location =
+      "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
+    setPostImg(location);
     imageInput.current.value = "";
-    setOpenConfirm(false);
-  };
-  const deleteReadMemo = () => {
-    //서버요청
-    setReadMemo("");
     setOpenConfirm(false);
   };
   const deletePostMusic = () => {
@@ -110,9 +108,7 @@ function ConfirmModal({
       <div className="confirm-modal-content">
         <div>삭제하시겠습니까?</div>
         <div>
-          {confirmType === "memo" ? (
-            <button onClick={deleteReadMemo}>예</button>
-          ) : confirmType === "postPhoto" ? (
+          {confirmType === "postPhoto" ? (
             <button onClick={deletePostImg}>예</button>
           ) : confirmType === "readPhoto" ? (
             <button onClick={deleteReadImg}>예</button>
@@ -120,6 +116,17 @@ function ConfirmModal({
             <button onClick={deletePostMusic}>예</button>
           ) : confirmType === "readMusic" ? (
             <button onClick={() => deleteReadMusic()}>예</button>
+          ) : confirmType === "readModal" ? (
+            <button
+              onClick={async function () {
+                let result = await deleteMyMarker(readMarkerData._id);
+                if (result) {
+                  setOpenConfirm(false);
+                }
+              }}
+            >
+              예
+            </button>
           ) : (
             <></>
           )}

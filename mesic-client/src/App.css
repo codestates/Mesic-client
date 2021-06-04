@@ -27,7 +27,7 @@
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  padding: 50px 0px 15px 0px;
+  padding: 15px 0px 15px 0px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -46,8 +46,27 @@
           box-shadow: 0px 5px 5px 5px rgba(94, 112, 134, 0.3);
 }
 
+.modal > div:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin: 0px 0px 20px 15px;
+  font-size: 1.3rem;
+  color: #19c9d4;
+  cursor: pointer;
+}
+
+.modal .post-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
 .modal .music {
-  margin: 5px 0px;
   height: 170px;
   width: 300px;
   display: -webkit-box;
@@ -150,17 +169,19 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  width: 250px;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 300px;
 }
 
 .modal .music .edit-del-btn i {
   width: 20px;
   height: 20px;
+}
+
+.modal .music .edit-del-btn > div > i {
+  cursor: pointer;
 }
 
 .modal .music .save-cancel-btn {
@@ -320,15 +341,19 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 300px;
 }
 
 .modal .photo .edit-del-btn i {
   width: 20px;
   height: 20px;
+}
+
+.modal .photo .edit-del-btn > div > i {
+  cursor: pointer;
 }
 
 .modal .photo .save-cancel-btn {
@@ -448,15 +473,19 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 300px;
 }
 
 .modal .memo .edit-del-btn i {
   width: 20px;
   height: 20px;
+}
+
+.modal .memo .edit-del-btn > div > i {
+  cursor: pointer;
 }
 
 .modal .memo .save-cancel-btn {
@@ -720,24 +749,21 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 25vw;
-  height: 25vh;
-  position: relative;
+  width: 20vw;
+  height: 17vh;
+  position: absolute;
   -webkit-transform: translate(-50%, 0%);
-  transform: translate(200%, 135%);
+  transform: translate(275%, 210%);
   background-color: white;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .confirm-modal-content > div:first-child {
-  margin-top: 60px;
-  height: 10vh;
-  font-size: 1.5rem;
+  margin-top: 40px;
+  font-size: 1.2rem;
 }
 
 .confirm-modal-content > div:last-child {
-  position: relative;
-  height: 400;
   width: 450vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -753,29 +779,29 @@
 }
 
 .confirm-modal-content > div:last-child > button:first-child {
-  width: 205px;
-  height: 50px;
+  width: 6vw;
+  height: 4vh;
   border: 0;
   background-color: #19c9d4;
   color: white;
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: -1px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   margin-right: 5px;
 }
 
 .confirm-modal-content > div:last-child > button:last-child {
-  width: 205px;
-  height: 50px;
+  width: 6vw;
+  height: 4vh;
   border: 0;
   background-color: #19c9d4;
   color: white;
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: -1px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   margin-left: 5px;
 }
@@ -1528,7 +1554,6 @@
 }
 
 .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus {
-  font-family: Mulish;
   font-size: 0.7vw;
   font-style: normal;
   color: #686262;
@@ -1540,7 +1565,6 @@
 
 .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus-name {
   margin: auto;
-  font-family: Mulish;
   font-size: 2.5vw;
   font-style: normal;
   font-weight: 800;
@@ -1553,7 +1577,6 @@
 
 .intro-page .intro-page-section-1 .intro-page-text-section .intro-page-aboutus-content {
   margin-top: 0.3vh;
-  font-family: Mulish;
   font-size: 1vw;
   font-style: normal;
   font-weight: 400;
@@ -1569,7 +1592,7 @@
   margin-top: 20px;
   padding: 13px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   font-size: 18px;
   font-weight: 600;
@@ -1798,7 +1821,7 @@
   width: 180px;
   padding: 13px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   font-size: 24px;
   font-weight: 600;
@@ -1851,6 +1874,7 @@
           box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 html,
@@ -2004,17 +2028,12 @@ body {
 }
 
 .detail-modal-close {
-  z-index: 3;
-  position: fixed;
   height: 20px;
   width: 20px;
   font-size: 1.3rem;
-  right: 10vw;
   color: #19c9d4;
   border: none;
   cursor: pointer;
-  -webkit-transform: translate(-100%, 100%);
-  transform: translate(-800%, 330%);
 }
 
 .detail-modal-hide {

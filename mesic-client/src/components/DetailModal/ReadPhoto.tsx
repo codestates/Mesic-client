@@ -95,11 +95,11 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
         setPinUpdate={setPinUpdate}
       />
       <div className="photo">
-        <div className="detail-icon">
-          <i className="fa fa-camera"></i>
-        </div>
         {updateMode ? (
           <div>
+            <div className="post-icon">
+              <i className="fa fa-camera"></i>
+            </div>
             <div className="detail-line"></div>
             <input
               className="input-photo"
@@ -130,8 +130,40 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
               fileName !== "undefined" ? (
                 <>
                   <div className="edit-del-btn">
-                    <label className="edit-btn-photo" htmlFor="photo-file">
-                      <i className="fas fa-pencil-alt"></i>
+                    <i className="fa fa-camera"></i>
+                    <div>
+                      <label className="edit-btn-photo" htmlFor="photo-file">
+                        <i className="fas fa-pencil-alt"></i>
+                      </label>
+                      <input
+                        className="input-photo"
+                        ref={editedImageInput}
+                        type="file"
+                        id="photo-file"
+                        accept="image/*"
+                        onChange={handleEditedImg}
+                      />
+                      <i
+                        className="fa fa-trash"
+                        aria-hidden="true"
+                        onClick={() => setOpenConfirm(true)}
+                      ></i>
+                    </div>
+                  </div>
+                  <div className="detail-line"></div>
+                  <div className="photo-img-outsider">
+                    <img className="photo-img" src={readImg} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="post-icon">
+                    <i className="fa fa-camera"></i>
+                  </div>
+                  <div className="detail-line"></div>
+                  <div className="add-btn-outsider">
+                    <label className="add-btn-read-photo" htmlFor="photo-file">
+                      +
                     </label>
                     <input
                       className="input-photo"
@@ -141,32 +173,8 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
                       accept="image/*"
                       onChange={handleEditedImg}
                     />
-                    <i
-                      className="fa fa-trash"
-                      aria-hidden="true"
-                      onClick={() => setOpenConfirm(true)}
-                    ></i>
-                  </div>
-                  <div className="detail-line"></div>
-                  <div className="photo-img-outsider">
-                    <img className="photo-img" src={readImg} />
                   </div>
                 </>
-              ) : (
-                <div className="add-btn-outsider">
-                  <div className="detail-line"></div>
-                  <label className="add-btn-read-photo" htmlFor="photo-file">
-                    +
-                  </label>
-                  <input
-                    className="input-photo"
-                    ref={editedImageInput}
-                    type="file"
-                    id="photo-file"
-                    accept="image/*"
-                    onChange={handleEditedImg}
-                  />
-                </div>
               )
             ) : fileName !== "undefined" ? (
               <>
