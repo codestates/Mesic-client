@@ -105,21 +105,21 @@ function ConfirmModal({
   };
 
   return (
-    <div className={`background ${openConfirm ? "show" : ""}`}>
+    <div className={`confirm-modal background ${openConfirm ? "show" : ""}`}>
       <div className="confirm-modal-outsider" />
-      <div className="confirm-modal">
+      <div className="confirm-modal-content">
         <div>삭제하시겠습니까?</div>
         <div>
           {confirmType === "memo" ? (
-            <button onClick={deleteReadMemo}>예-memo</button>
+            <button onClick={deleteReadMemo}>예</button>
           ) : confirmType === "postPhoto" ? (
-            <button onClick={deletePostImg}>예-postPhoto</button>
+            <button onClick={deletePostImg}>예</button>
           ) : confirmType === "readPhoto" ? (
-            <button onClick={deleteReadImg}>예-readPhoto</button>
+            <button onClick={deleteReadImg}>예</button>
           ) : confirmType === "postMusic" ? (
-            <button onClick={deletePostMusic}>예-postMusic</button>
+            <button onClick={deletePostMusic}>예</button>
           ) : confirmType === "readMusic" ? (
-            <button onClick={() => deleteReadMusic()}>예-readeMusic</button>
+            <button onClick={() => deleteReadMusic()}>예</button>
           ) : (
             <></>
           )}

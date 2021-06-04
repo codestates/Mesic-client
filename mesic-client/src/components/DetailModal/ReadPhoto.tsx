@@ -112,7 +112,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
             <div className="photo-img-outsider">
               <img className="photo-img" src={editedPreviewImg} />
             </div>
-            <div>
+            <div className="save-cancel-btn">
               <button onClick={updateReadImg}>저장</button>
               <button
                 onClick={() => {
@@ -129,18 +129,24 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
             {isLogin && mode !== "WATCH" ? (
               fileName !== "undefined" ? (
                 <>
-                  <label className="edit-btn-photo" htmlFor="photo-file">
-                    수정
-                  </label>
-                  <input
-                    className="input-photo"
-                    ref={editedImageInput}
-                    type="file"
-                    id="photo-file"
-                    accept="image/*"
-                    onChange={handleEditedImg}
-                  />
-                  <button onClick={() => setOpenConfirm(true)}>삭제</button>
+                  <div className="edit-del-btn">
+                    <label className="edit-btn-photo" htmlFor="photo-file">
+                      <i className="fas fa-pencil-alt"></i>
+                    </label>
+                    <input
+                      className="input-photo"
+                      ref={editedImageInput}
+                      type="file"
+                      id="photo-file"
+                      accept="image/*"
+                      onChange={handleEditedImg}
+                    />
+                    <i
+                      className="fa fa-trash"
+                      aria-hidden="true"
+                      onClick={() => setOpenConfirm(true)}
+                    ></i>
+                  </div>
                   <div className="detail-line"></div>
                   <div className="photo-img-outsider">
                     <img className="photo-img" src={readImg} />

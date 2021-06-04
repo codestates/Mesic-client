@@ -53,7 +53,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 
   .music {
     margin: $margin;
-    height: 150px;
+    height: 170px;
     width: 300px;
     @include flex;
     .detail-icon {
@@ -67,7 +67,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       cursor: pointer;
       width: 200px;
       height: 100px;
-      margin: 10px 0px;
+      margin: 15px 0px;
       background-color: #f8f8f8;
       border-radius: 10px;
       border: 1px solid #e1e1e1;
@@ -84,7 +84,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
     .widget-outsider {
       display: flex;
       margin-top: 15px;
-      padding-right: 20px;
+      padding-right: 30px;
       justify-content: space-around;
       img {
         margin-top: 10px;
@@ -94,7 +94,8 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
         box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
       }
       div {
-        padding: 15px 25px;
+        padding: 15px 0px 15px 20px;
+        margin-top: 5px;
       }
       iframe {
         align-self: center;
@@ -109,9 +110,9 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      width: 300px;
+      width: 250px;
+      align-self: flex-end;
       i {
-        border: 1px solid #19c9d4;
         width: 20px;
         height: 20px;
       }
@@ -122,16 +123,24 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       justify-content: flex-end;
       width: 300px;
       button {
-        border: 1px solid #19c9d4;
+        margin-right: 5px;
         width: 40px;
         height: 20px;
+        border: 0;
+        background-color: $main-color;
+        color: white;
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: -1px;
+        border-radius: 5px;
+        cursor: pointer;
       }
     }
   }
 
   .photo {
     margin: $margin;
-    height: 250px;
+    height: 270px;
     @include flex;
     .detail-icon {
       @include detail-icon;
@@ -165,7 +174,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
         border-radius: 8px;
         height: 200px;
         width: 200px;
-        margin-top: 5px;
+        margin-top: 10px;
       }
     }
     .add-btn-read-photo {
@@ -183,6 +192,36 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
     }
     .add-btn-outsider {
       @include flex;
+    }
+    .edit-del-btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 300px;
+      i {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .save-cancel-btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 300px;
+      margin-top: 10px;
+      button {
+        margin-right: 5px;
+        width: 40px;
+        height: 20px;
+        border: 0;
+        background-color: $main-color;
+        color: white;
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: -1px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
     }
   }
   .memo {
@@ -220,6 +259,35 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
       overflow: auto;
       padding: 20px;
     }
+    .edit-del-btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 300px;
+      i {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .save-cancel-btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 300px;
+      button {
+        margin-right: 5px;
+        width: 40px;
+        height: 20px;
+        border: 0;
+        background-color: $main-color;
+        color: white;
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: -1px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -254,10 +322,6 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   font-size: 1.1rem;
   font-weight: 700;
   box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
-}
-
-.show1 {
-  display: flex;
 }
 
 // edit music
@@ -384,4 +448,67 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   font-size: 1.3rem;
   color: $main-color;
   cursor: pointer;
+}
+.confirm-modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  z-index: 4;
+  border: 0;
+  padding: 20px;
+  width: 150vw;
+  height: 110vh;
+  top: 30%;
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(-20%, -34%);
+}
+.confirm-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25vw;
+  height: 25vh;
+  position: relative;
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(200%, 135%);
+  background-color: white;
+  border-radius: 5px;
+  & > div:first-child {
+    margin-top: 60px;
+    height: 10vh;
+    font-size: 1.5rem;
+  }
+  & > div:last-child {
+    position: relative;
+    height: 400;
+    width: 450vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 15px;
+    @mixin confirm-btn {
+      width: 205px;
+      height: 50px;
+      border: 0;
+      background-color: $main-color;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -1px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    & > button:first-child {
+      @include confirm-btn;
+      margin-right: 5px;
+    }
+    & > button:last-child {
+      @include confirm-btn;
+      margin-left: 5px;
+    }
+  }
+}
+
+.show1 {
+  display: flex;
 }

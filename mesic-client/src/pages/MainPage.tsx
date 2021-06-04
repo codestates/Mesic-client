@@ -720,32 +720,37 @@ function MainPage() {
       />
       {openPostModal || openReadModal ? (
         <>
-          <button
+          <div
+            className="detail-modal-close"
             onClick={() => {
               setOpenPostModal(false);
               setOpenReadModal(false);
               deletePostMarkers();
             }}
           >
-            Close
-          </button>
+            X
+          </div>
           {showDetailModal ? (
             <button
+              className="detail-modal-hide"
               onClick={() => {
                 showHideDetailModal();
                 setShowDetailModal(false);
               }}
             >
-              Show
+              {"<"}
+              {/*show*/}
             </button>
           ) : (
             <button
+              className="detail-modal-hide"
               onClick={() => {
                 showHideDetailModal();
                 setShowDetailModal(true);
               }}
             >
-              Hide
+              {"<"}
+              {/*hide*/}
             </button>
           )}{" "}
         </>
