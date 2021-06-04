@@ -72,11 +72,11 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
         setReadMemo={setReadMemo}
       />
       <div className="memo">
-        <div className="detail-icon">
-          <i className="fa fa-sticky-note read" aria-hidden="true"></i>
-        </div>
         {updateMode ? (
           <div>
+            <div className="edit-del-btn">
+              <i className="fa fa-sticky-note read" aria-hidden="true"></i>
+            </div>
             <div className="detail-line"></div>
             <div className="textarea-outsider">
               <textarea className="input-memo" onChange={handleUpdateMemo}>
@@ -107,7 +107,10 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
               readMemo.length > 0 ? (
                 <>
                   <div className="edit-del-btn">
-                    {/* <button onClick={() => setUpdateMode(true)}>수정</button> */}
+                    <i
+                      className="fa fa-sticky-note read"
+                      aria-hidden="true"
+                    ></i>
                     <i
                       className="fas fa-pencil-alt"
                       aria-hidden="true"
@@ -119,6 +122,12 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                 </>
               ) : (
                 <>
+                  <div className="post-icon">
+                    <i
+                      className="fa fa-sticky-note read"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
                   <div className="detail-line"></div>
                   <div className="textarea-outsider">
                     <textarea

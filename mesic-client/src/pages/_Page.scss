@@ -15,6 +15,19 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
       padding-right: 0px;
     }
 
+.intro-page {
+  .intro-page-section-1 {
+    display: flex;
+    padding: 65px;
+    background-position-y: position / 2;
+
+    .intro-page-browser-img {
+      width: 50%;
+      margin: 3%;
+      padding: 1%;
+      padding-right: 0px;
+    }
+
     .intro-page-text-section {
       display: flex;
       flex-direction: column;
@@ -23,7 +36,7 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
       padding-left: 0px;
 
       .intro-page-aboutus {
-        font-family: Mulish;
+        // font-family: Mulish;
         font-size: 0.7vw;
         font-style: normal;
         color: #686262;
@@ -35,7 +48,7 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 
       .intro-page-aboutus-name {
         margin: auto;
-        font-family: Mulish;
+        // font-family: Mulish;
         font-size: 2.5vw;
         font-style: normal;
         font-weight: 800;
@@ -48,11 +61,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 
       .intro-page-aboutus-content {
         margin-top: 0.3vh;
-        font-family: Mulish;
+        // font-family: Mulish;
         font-size: 1vw;
         font-style: normal;
         font-weight: 400;
-        color: #868686;
+        color: #000000;
+        opacity: 0.5;
         line-height: 25px;
         letter-spacing: 0em;
         text-align: left;
@@ -65,7 +79,6 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
         margin-top: 20px;
         padding: 13px;
         border-radius: 7px;
-        box-shadow: $btn-shadow;
 
         background-color: $mesic-color;
         color: white;
@@ -93,35 +106,8 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
       margin: auto;
       margin-left: 15%;
     }
-
-    .intro-page-section-2-content {
-      padding: 15vw;
-      justify-items: center;
-      color: $default-black-color;
-
-      background-image: url("./../images/Blob-2.png");
-      background-repeat: no-repeat;
-      // background-size: contain;
-      background-position-x: 50%;
-      background-position-y: 50%;
-      background-size: 23vw;
-
-      .section2-content-small {
-        color: #868686;
-        // font-size: 18px;
-        font-size: 1.2vw;
-        margin-bottom: 5px;
-        font-weight: 600;
-      }
-
-      .section2-content-large {
-        color: $default-black-color;
-        font-size: 2vw;
-        font-weight: 700;
-      }
-    }
   }
-
+  
   .intro-page-section-3 {
     display: flex;
     margin: auto;
@@ -161,7 +147,6 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
       .section3-content-large {
         color: $default-black-color;
         font-size: 2vw;
-
         font-weight: 700;
       }
     }
@@ -299,7 +284,6 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
       padding: 13px;
       border-radius: 7px;
       box-shadow: $btn-shadow;
-
       background-color: $mesic-color;
       color: white;
       font-size: 24px;

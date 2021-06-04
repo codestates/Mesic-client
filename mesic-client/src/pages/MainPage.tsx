@@ -150,6 +150,7 @@ function MainPage() {
 
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
+    console.log(token);
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${user_id}`)
       .then((res) => res.data)
@@ -738,7 +739,7 @@ function MainPage() {
       />
       {openPostModal || openReadModal ? (
         <>
-          <div
+          {/* <div
             className="detail-modal-close"
             onClick={() => {
               setOpenPostModal(false);
@@ -747,7 +748,7 @@ function MainPage() {
             }}
           >
             X
-          </div>
+          </div> */}
           {showDetailModal ? (
             <button
               className="detail-modal-hide"
@@ -789,9 +790,14 @@ function MainPage() {
             readMarkerData={readMarkerData}
             setPinUpdate={setPinUpdate}
             deleteMyMarker={deleteMyMarker}
+            setOpenReadModal={setOpenReadModal}
           />
         ) : openPostModal ? (
-          <PostModal postLatLng={postLatLng} />
+          <PostModal
+            postLatLng={postLatLng}
+            setOpenPostModal={setOpenPostModal}
+            deletePostMarkers={deletePostMarkers}
+          />
         ) : (
           <></>
         )}

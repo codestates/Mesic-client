@@ -8,7 +8,7 @@ import PostMemo from "./PostMemo";
 import axios from "axios";
 import AWS from "aws-sdk";
 
-function PostModal({ postLatLng }: any) {
+function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
   const [postMusic, setPostMusic] = useState<{
     video_Id: string;
     title: string;
@@ -87,6 +87,14 @@ function PostModal({ postLatLng }: any) {
   return (
     <div className="modal-outsider show1">
       <div className="modal">
+        <div
+          onClick={() => {
+            setOpenPostModal(false);
+            deletePostMarkers();
+          }}
+        >
+          X
+        </div>
         <PostMusic postMusic={postMusic} setPostMusic={setPostMusic} />
         <PostPhoto postImg={postImg} setPostImg={setPostImg} />
         <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
