@@ -588,7 +588,9 @@
   top: 30%;
   box-shadow: 0 8px 6px -6px #545454;
   -webkit-transform: translate(10%, 10%);
-  transform: translate(10%, 10%); }
+  transform: translate(10%, 10%);
+  -webkit-transform: translate(-6%, -30%);
+  transform: translate(-6%, -30%); }
   .search-user-modal input[type="text"] {
     outline: 0;
     border-width: 0 0 2px;
