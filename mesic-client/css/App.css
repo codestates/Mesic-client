@@ -965,8 +965,10 @@
   top: 30%;
   -webkit-box-shadow: 0 8px 6px -6px #545454;
           box-shadow: 0 8px 6px -6px #545454;
-  -webkit-transform: translate(100%, -30%);
-  transform: translate(100%, -30%);
+  -webkit-transform: translate(10%, 10%);
+  transform: translate(10%, 10%);
+  -webkit-transform: translate(-6%, -30%);
+  transform: translate(-6%, -30%);
 }
 
 .search-user-modal input[type="text"] {

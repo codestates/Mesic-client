@@ -14,6 +14,8 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   height: 550px;
   top: 30%;
   box-shadow: $box-shadow;
+  -webkit-transform: translate(10%, 10%);
+  transform: translate(10%, 10%);
   input[type="text"] {
     outline: 0;
     border-width: 0 0 2px;
@@ -69,8 +71,6 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 
 .followlist {
   @include follow-user-modal;
-  -webkit-transform: translate(10%, 10%);
-  transform: translate(10%, 10%);
 }
 
 .followlist-title {
@@ -166,8 +166,8 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 
 .search-user-modal {
   @include follow-user-modal;
-  -webkit-transform: translate(100%, -30%);
-  transform: translate(100%, -30%);
+  -webkit-transform: translate(-6%, -30%);
+  transform: translate(-6%, -30%);
 }
 
 .search-user-close {
