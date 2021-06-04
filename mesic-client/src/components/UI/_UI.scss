@@ -1,13 +1,13 @@
 $main-color: #19c9d4;
 $font-color: rgb(80, 80, 80);
 $sub-font-color: rgb(158, 158, 158);
-$box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
+$box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
 
 @mixin follow-user-modal {
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 35px;
+  border-radius: 20px;
   border: 0;
   padding: 20px 15px 20px 20px;
   width: 350px;
@@ -208,13 +208,13 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 80px;
+  border-radius: 15px;
   border: 0;
   width: 220px;
   padding: 0 5px;
   height: 60px;
   -webkit-transform: translate(15%, 130%);
-  transform: translate(14%, 130%);
+  transform: translate(14%, 250%);
   ::placeholder {
     opacity: 60%;
     font-size: 0.9rem;
@@ -290,7 +290,13 @@ $default-black-color: #525252;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  position: fix;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  box-shadow: $box-shadow;
+  z-index: 2;
   .logo-btn {
     width: 5%;
     border-radius: 7px;

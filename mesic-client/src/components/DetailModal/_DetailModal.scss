@@ -1,7 +1,7 @@
 $color: #fefefe;
 $main-color: #19c9d4;
 $font-color: rgb(100, 100, 100);
-$box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
+$box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
 
 @mixin flex {
   display: flex;

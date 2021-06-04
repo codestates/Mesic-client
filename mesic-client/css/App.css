@@ -563,8 +563,8 @@
   width: 350px;
   height: 400px;
   top: 30%;
-  -webkit-box-shadow: 0 8px 6px -6px #545454;
-          box-shadow: 0 8px 6px -6px #545454;
+  -webkit-box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+          box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
   -webkit-transform: translate(-100%, 0%);
   transform: translate(-105%, -41.5%);
 }
@@ -790,14 +790,14 @@
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 35px;
+  border-radius: 20px;
   border: 0;
   padding: 20px 15px 20px 20px;
   width: 350px;
   height: 550px;
   top: 30%;
-  -webkit-box-shadow: 0 8px 6px -6px #545454;
-          box-shadow: 0 8px 6px -6px #545454;
+  -webkit-box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+          box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
   -webkit-transform: translate(10%, 10%);
   transform: translate(10%, 10%);
 }
@@ -957,14 +957,14 @@
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 35px;
+  border-radius: 20px;
   border: 0;
   padding: 20px 15px 20px 20px;
   width: 350px;
   height: 550px;
   top: 30%;
-  -webkit-box-shadow: 0 8px 6px -6px #545454;
-          box-shadow: 0 8px 6px -6px #545454;
+  -webkit-box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+          box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
   -webkit-transform: translate(10%, 10%);
   transform: translate(10%, 10%);
   -webkit-transform: translate(-6%, -30%);
@@ -1057,15 +1057,15 @@
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 80px;
+  border-radius: 15px;
   border: 0;
   width: 220px;
   padding: 0 5px;
   height: 60px;
   -webkit-transform: translate(15%, 130%);
-  transform: translate(14%, 130%);
-  -webkit-box-shadow: 0 8px 6px -6px #545454;
-          box-shadow: 0 8px 6px -6px #545454;
+  transform: translate(14%, 250%);
+  -webkit-box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+          box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
 }
 
 .search-location ::-webkit-input-placeholder {
@@ -1190,7 +1190,14 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  position: fix;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+          box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+  z-index: 2;
 }
 
 .nav .logo-btn {
@@ -1370,7 +1377,7 @@
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border-radius: 30px;
+  border-radius: 20px;
   text-align: center;
 }
 
@@ -1405,7 +1412,7 @@
   width: 500px;
   left: 90%;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   text-align: center;
   -webkit-transform: translate(-60%, 30%);
   transform: translate(-60%, 30%);
@@ -1561,8 +1568,7 @@
   font-size: 1vw;
   font-style: normal;
   font-weight: 400;
-  color: #000000;
-  opacity: 0.5;
+  color: #868686;
   line-height: 25px;
   letter-spacing: 0em;
   text-align: left;
@@ -1573,7 +1579,7 @@
   margin-top: 20px;
   padding: 13px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   font-size: 18px;
   font-weight: 600;
@@ -1612,8 +1618,7 @@
 }
 
 .intro-page .intro-page-section-2 .intro-page-section-2-content .section2-content-small {
-  color: #000000;
-  opacity: 0.5;
+  color: #868686;
   font-size: 1.2vw;
   margin-bottom: 5px;
   font-weight: 600;
@@ -1653,8 +1658,7 @@
 }
 
 .intro-page .intro-page-section-3 .intro-page-section-3-content .section3-content-small {
-  color: #000000;
-  opacity: 0.5;
+  color: #868686;
   font-size: 1.1vw;
   margin-bottom: 5px;
   font-weight: 600;
@@ -1694,8 +1698,7 @@
 }
 
 .intro-page .intro-page-section-4 .intro-page-section-4-content .section4-content-small {
-  color: #000000;
-  opacity: 0.5;
+  color: #868686;
   font-size: 1.1vw;
   margin-bottom: 5px;
   font-weight: 600;
@@ -1734,8 +1737,7 @@
 }
 
 .intro-page .intro-page-section-5 .intro-page-section-5-content .section5-content-small {
-  color: #000000;
-  opacity: 0.5;
+  color: #868686;
   font-size: 1.2vw;
   margin-bottom: 5px;
   font-weight: 600;
@@ -1775,8 +1777,7 @@
 }
 
 .intro-page .intro-page-section-6 .intro-page-section-6-content .section6-content-small {
-  color: #000000;
-  opacity: 0.5;
+  color: #868686;
   font-size: 1.1vw;
   margin-bottom: 5px;
   font-weight: 600;
@@ -1802,7 +1803,7 @@
   width: 180px;
   padding: 13px;
   border-radius: 7px;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   color: white;
   font-size: 24px;
   font-weight: 600;
@@ -1910,8 +1911,8 @@ body {
   border-radius: 30px;
   background-color: white;
   position: relative;
-  -webkit-box-shadow: 0 8px 6px -6px #545454;
-          box-shadow: 0 8px 6px -6px #545454;
+  -webkit-box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
+          box-shadow: 0 3px 5px 4px rgba(84, 84, 84, 0.3);
 }
 
 .preview:before {
