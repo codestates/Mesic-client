@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
 import EditMusic from "../DetailModal/EditMusic";
+import cdImg from "../../images/cdcd.png";
 
 function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
@@ -189,10 +190,13 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 </div>
               </>
             ) : (
-              <div>
-                {/* <img>CD</img> */}
-                <div>팔로우가 음악을 추가하지 않았어요</div>
-              </div>
+              <>
+                <div className="detail-line"></div>
+                <div className="follow-widget-outsider">
+                  <img src={cdImg}></img>
+                  <div>팔로우가 음악을 추가하지 않았어요</div>
+                </div>
+              </>
             )}
           </>
         )}
