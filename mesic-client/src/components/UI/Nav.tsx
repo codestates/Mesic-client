@@ -13,13 +13,12 @@ import {
   editUserinfo,
   getAccessToken,
 } from "../../actions/index";
-import logo from '../../images/mesic-logo.png'
+import logo from "../../images/mesic-logo.png";
 
 function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
   //const {open} = props;
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-
   const { isLogin, email, name, nickname, profileImg, user_id }: any =
     state.userReducer.user;
 
@@ -48,6 +47,7 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
         console.log(err);
       });
   };
+
   const clickSignup = () => {
     setOpenSignup(true);
   };
@@ -68,6 +68,7 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
       })
       .catch((err) => console.log(err));
   };
+
   useEffect(() => {
     if (loginController) {
       setOpenLogin(true);
@@ -85,35 +86,24 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
         getUserInfo={getUserInfo}
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}
-      ></Login>
+      />
       <Signup
         openSignup={openSignup}
         setOpenSignup={setOpenSignup}
-        email={email}
-        name={name}
-        nickname={nickname}
         getUserInfo={getUserInfo}
-      ></Signup>
+      />
       <Mypage
         openMypage={openMypage}
         closeMypage={closeMypage}
-        profileImg={profileImg}
-        email={email}
-        name={name}
-        nickname={nickname}
         openEditMypage={openEditMapage}
         setOpenEditMypage={setOpenEditMypage}
-      ></Mypage>
+      />
       <EditMypage
         setOpenMypage={setOpenMypage}
-        profileImg={profileImg}
-        email={email}
-        name={name}
-        nickname={nickname}
         openEditMypage={openEditMapage}
         setOpenEditMypage={setOpenEditMypage}
         getUserInfo={getUserInfo}
-      ></EditMypage>
+      />
       <div className="nav">
         <Link to="/">
           <img
@@ -123,10 +113,16 @@ function Nav({ loginController, setLoginController, deletePostMarkers }: any) {
           />
         </Link>
         <div className="nav-btn">
-          <button className="loginBtn" onClick={isLogin ? clickLogout : clickLogin}>
+          <button
+            className="loginBtn"
+            onClick={isLogin ? clickLogout : clickLogin}
+          >
             {isLogin ? "Logout" : "Login"}
           </button>
-          <button className="mypageBtn" onClick={isLogin ? clickMypage : clickSignup}>
+          <button
+            className="mypageBtn"
+            onClick={isLogin ? clickMypage : clickSignup}
+          >
             {isLogin ? "Mypage" : "Signup"}
           </button>
         </div>

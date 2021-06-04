@@ -3,31 +3,124 @@ $input-color: #9f9999;
 $mypage-modify-unable: #f4f5f4;
 $mypage-modify-able: #3c64b1;
 
-// login, signup modal
+@mixin close-btn {
+  cursor: pointer;
+  top: 30px;
+  left: 30px;
+  position: absolute;
+  font-size: 1.3rem;
+  color: $mesic-color;
+  font-weight: 800;
+}
 
+@mixin modal-title {
+  color: $mesic-color;
+  margin: 20px;
+  font-weight: 800;
+  font-size: 1.7rem;
+}
+
+@mixin input-flex {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin confirm-btn {
+  margin: 15px;
+  padding: 10px 25px;
+  border-radius: 15px;
+  background-color: $mesic-color;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.error-message {
+  text-align: center;
+  font-size: 1rem;
+  color: rgba(255, 0, 0, 0.827);
+}
+
+// login, signup modal
 .login-signup-modal-outsider {
   position: fixed;
-  /* Stay in place */
-  z-index: 2;
-  /* Sit on top */
+  z-index: 4;
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
   background-color: black;
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.login-close {
+  @include close-btn;
+  top: 20px;
+}
+
+.login-title {
+  @include modal-title;
+}
+
+.content-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-content {
+  & > div {
+    @include input-flex;
+    margin: 25px;
+    & > div {
+      color: $input-color;
+      margin-right: 20px;
+      font-size: 1.2rem;
+    }
+    & > input {
+      color: $input-color;
+      background-color: #f4f5f4;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-size: 1rem;
+      height: 30px;
+    }
+  }
+}
+
+.loginBtn {
+  @include confirm-btn;
+}
+
+.guestLoginBtn {
+  @include confirm-btn;
+  background-color: rgb(245, 241, 241);
+  color: $mesic-color;
+}
+
+.loginContainer {
+  margin: 15px;
+  text-align: center;
+}
+
+.google-loginBtn {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
 }
 
 .login-signup-modal {
   background-color: #fefefe;
   position: absolute;
-  z-index: 3;
-  /* Sit on top */
+  z-index: 5;
   padding: 20px;
   border: 1px solid #888;
   width: 400px;
@@ -35,159 +128,14 @@ $mypage-modify-able: #3c64b1;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border-radius: 7px;
-
-  .login-close {
-    color: $mesic-color;
-    font-weight: 800;
-  }
-  .signup-close {
-    color: $mesic-color;
-    font-weight: 800;
-  }
-
-  .login-content {
-    text-align: center;
-
-    .login-title {
-      color: $mesic-color;
-      margin-bottom: 25px;
-      font-weight: 800;
-      font-size: 26px;
-    }
-
-    input[type] {
-      background-color: #f4f5f4;
-      border: none;
-      outline: none;
-      height: 25px;
-      margin-left: 10px;
-    }
-
-    .email-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .password-input-section {
-      margin: 15px;
-      color: $input-color;
-      // .error-message{
-      //     margin-top: 5px;
-      //     font-size: 13px;
-      // }
-    }
-
-    .loginBtn-1 {
-      margin: 10px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-
-      border: none;
-      outline: none;
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-
-    .guestLoginBtn {
-      margin: 10px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: rgb(245, 241, 241);
-      color: $mesic-color;
-
-      border: none;
-      outline: none;
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-  }
-
-  .signup-content {
-    text-align: center;
-
-    .signup-title {
-      color: $mesic-color;
-      margin-bottom: 25px;
-      font-weight: 800;
-      font-size: 26px;
-    }
-
-    input[type] {
-      background-color: #f4f5f4;
-      border: none;
-      outline: none;
-      height: 22px;
-      margin-left: 10px;
-    }
-
-    .email-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .name-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .nickname-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .password-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .password-check-input-section {
-      margin: 15px;
-      color: $input-color;
-    }
-
-    .loginBtn-2 {
-      margin: 15px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-
-      border: none;
-      outline: none;
-    }
-  }
-
-  .loginContainer {
-    margin: 10px;
-    text-align: center;
-    .loginBtn {
-      width: 32px;
-      height: 32px;
-    }
-  }
+  border-radius: 30px;
+  text-align: center;
 }
 
 // mypage, mypage-edit modal
 
 .mypage-close {
-  top: 30px;
-  left: 30px;
-  position: absolute;
-  color: $mesic-color;
-  font-size: 1.3rem;
-  font-weight: 800;
+  @include close-btn;
 }
 
 .mypage-edit-background {
@@ -205,19 +153,15 @@ $mypage-modify-able: #3c64b1;
 }
 
 // mypage modal part
-
 .mypage-edit-modal {
   background-color: #fefefe;
   position: absolute;
-  /* 15% from the top and centered */
   padding: 30px 40px 30px 30px;
   width: 500px;
   left: 90%;
   border: none;
   border-radius: 30px;
   text-align: center;
-
-  /* top: 50%; */
   -webkit-transform: translate(-60%, 30%);
   transform: translate(-60%, 30%);
 
@@ -225,27 +169,26 @@ $mypage-modify-able: #3c64b1;
     color: $mesic-color;
     margin: 20px;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 
   .profileImg {
-    height: 160px;
+    position: relative;
     display: flex;
     justify-content: center;
     margin: 30px;
   }
 
   .mypage-info > div {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: $input-color;
+    @include input-flex;
     margin: 30px;
     & > div:first-child {
+      color: $input-color;
       margin-right: 25px;
       font-size: 1.4rem;
     }
     & > div:last-child {
+      color: $input-color;
       padding: 10px;
       font-size: 1.2rem;
       width: 250px;
@@ -254,124 +197,37 @@ $mypage-modify-able: #3c64b1;
       white-space: nowrap;
       overflow: hidden;
     }
-  }
-
-  .mypage-modify-btn-section {
-    .mypage-modify-btn {
-      margin: 15px;
-      padding: 10px 25px;
-      border-radius: 15px;
-
+    & > input[type="text"] {
       background-color: $mesic-color;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
-
+      text-align: center;
       border: none;
       outline: none;
-
-      &:hover {
-        opacity: 0.8;
-      }
+      width: 250px;
+      padding: 10px;
+      font-size: 1.2rem;
+      opacity: 0.5;
     }
+  }
+
+  .mypage-modify-btn {
+    @include confirm-btn;
   }
 }
 
 // ediymypage modal part
-
-.editmypage-close {
-  color: $mesic-color;
-  font-weight: 800;
+#profile-img-input {
+  display: none;
 }
 
-.editmypage-content {
-  text-align: center;
+.edit-profile-img-btn {
+  opacity: 0.4;
+  position: absolute;
+  bottom: 15px;
+  cursor: pointer;
+}
 
-  .mypage-edit-title {
-    color: $mesic-color;
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 20px;
-  }
-
-  .edit-email {
-    margin-top: 40px;
-
-    .mypage-email-edit-index {
-      color: $input-color;
-    }
-
-    .mypage-email-edit-content {
-      width: 30px;
-      background-color: $mypage-modify-unable;
-      color: $input-color;
-      padding: 5px;
-    }
-  }
-
-  .edit-name {
-    margin-top: 30px;
-
-    .mypage-name-edit-index {
-      color: $input-color;
-    }
-
-    .mypage-name-edit-content {
-      width: 30px;
-      background-color: $mypage-modify-unable;
-      color: $input-color;
-      padding: 5px;
-    }
-  }
-
-  .edit-nickname {
-    margin-top: 30px;
-
-    .mypage-nickname-edit-index {
-      color: $input-color;
-    }
-
-    input[type="text"] {
-      background-color: $mypage-modify-able;
-      border: none;
-      outline: none;
-      height: 25px;
-      margin-left: 10px;
-      opacity: 0.1;
-    }
-  }
-
-  .mypage-edit-button-section {
-    margin-top: 50px;
-
-    .edit-modify-btn {
-      width: 60px;
-      margin: 15px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-
-      border: none;
-      outline: none;
-    }
-
-    .edit-return-btn {
-      width: 60px;
-      margin: 15px;
-      padding: 10px;
-      border-radius: 7px;
-
-      background-color: $mesic-color;
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-
-      border: none;
-      outline: none;
-    }
-  }
+.profileImg-content {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
 }
