@@ -88,13 +88,6 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         {updateMode ? (
           <div className="music-content">
             <div className="edit-del-btn">
-              {/* <button
-                onClick={() => {
-                  setOpenEditMusic(true);
-                }}
-              >
-                수정
-              </button> */}
               <i
                 className="fa fa-pencil"
                 aria-hidden="true"
@@ -135,24 +128,14 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
           </div>
         ) : (
           <>
-            {readMusic.video_Id.length === 0 && mode !== "WATCH" ? (
-              <>
-                <div className="detail-line"></div>
-                <button
-                  className="add-btn-music"
-                  onClick={() => setOpenEditMusic(true)}
-                >
-                  +
-                </button>
-              </>
-            ) : (
-              <>
-                {isLogin && mode !== "WATCH" ? (
+            {isLogin && mode !== "WATCH" ? (
+              readMusic.video_Id.length > 0 ? (
+                <>
                   <div className="edit-del-btn">
                     {/* <button onClick={() => setOpenEditMusic(true)}>수정</button> */}
                     {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
                     <i
-                      className="fa fa-pencil"
+                      className="fas fa-pencil-alt"
                       aria-hidden="true"
                       onClick={() => setOpenEditMusic(true)}
                     ></i>
@@ -162,10 +145,6 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                       onClick={() => setOpenConfirm(true)}
                     ></i>
                   </div>
-                ) : (
-                  <></>
-                )}
-                <>
                   <div className="detail-line"></div>
                   <div className="widget-outsider">
                     <img src={readMusic.thumbnail}></img>
@@ -181,7 +160,39 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                     ></iframe>
                   </div>
                 </>
+              ) : (
+                <>
+                  <div className="detail-line"></div>
+                  <button
+                    className="add-btn-music"
+                    onClick={() => setOpenEditMusic(true)}
+                  >
+                    +
+                  </button>
+                </>
+              )
+            ) : readMusic.video_Id.length > 0 ? (
+              <>
+                <div className="detail-line"></div>
+                <div className="widget-outsider">
+                  <img src={readMusic.thumbnail}></img>
+                  <div>{readMusic.title}</div>
+                  <iframe
+                    src={
+                      readMusic.video_Id
+                        ? `https://www.youtube.com/embed/${readMusic.video_Id}`
+                        : "https://www.youtube.com/embed/"
+                    }
+                    id="ytplayer"
+                    frameBorder="0"
+                  ></iframe>
+                </div>
               </>
+            ) : (
+              <div>
+                {/* <img>CD</img> */}
+                <div>팔로우가 음악을 추가하지 않았어요</div>
+              </div>
             )}
           </>
         )}

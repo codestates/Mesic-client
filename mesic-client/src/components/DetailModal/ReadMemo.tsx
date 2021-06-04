@@ -73,7 +73,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
       />
       <div className="memo">
         <div className="detail-icon">
-          <i className="fa fa-sticky-note" aria-hidden="true"></i>
+          <i className="fa fa-sticky-note read" aria-hidden="true"></i>
         </div>
         {updateMode ? (
           <div>
@@ -85,7 +85,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
             </div>
             <div>
               {isLogin ? (
-                <>
+                <div className="save-cancel-btn">
                   <button onClick={updateReadMemo}>저장</button>
                   <button
                     onClick={() => {
@@ -95,7 +95,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                   >
                     취소
                   </button>
-                </>
+                </div>
               ) : (
                 <></>
               )}
@@ -106,7 +106,14 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
             {isLogin && mode !== "WATCH" ? (
               readMemo.length > 0 ? (
                 <>
-                  <button onClick={() => setUpdateMode(true)}>수정</button>
+                  <div className="edit-del-btn">
+                    {/* <button onClick={() => setUpdateMode(true)}>수정</button> */}
+                    <i
+                      className="fas fa-pencil-alt"
+                      aria-hidden="true"
+                      onClick={() => setUpdateMode(true)}
+                    ></i>
+                  </div>
                   <div className="detail-line"></div>
                   <div className="read-memo">{readMemo}</div>
                 </>
@@ -117,26 +124,26 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                     <textarea
                       ref={addMemoInput}
                       className="input-memo"
-                      placeholder={"메모를 입력해주세요!"}
+                      placeholder={"메모를 입력해주세요."}
                       onChange={handleAddMemo}
                     />
-                    {savebtn ? (
-                      <div>
-                        <button onClick={addReadMemo}>저장</button>
-                        <button
-                          onClick={() => {
-                            setSavebtn(false);
-                            setAddedMemo("");
-                            addMemoInput.current.value = "";
-                          }}
-                        >
-                          취소
-                        </button>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
                   </div>
+                  {savebtn ? (
+                    <div className="save-cancel-btn">
+                      <button onClick={addReadMemo}>저장</button>
+                      <button
+                        onClick={() => {
+                          setSavebtn(false);
+                          setAddedMemo("");
+                          addMemoInput.current.value = "";
+                        }}
+                      >
+                        취소
+                      </button>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </>
               )
             ) : readMemo.length > 0 ? (

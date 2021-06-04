@@ -33,18 +33,16 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         {updateMode ? (
           <div className="music-content">
             <div className="edit-del-btn">
-              <button
-                className="edit-icon"
+              <i
+                className="fas fa-pencil-alt"
+                aria-hidden="true"
                 onClick={() => setOpenEditMusic(true)}
-              >
-                수정
-              </button>
-              <button
-                className="delete-icon"
+              ></i>
+              <i
+                className="fa fa-trash"
+                aria-hidden="true"
                 onClick={() => setOpenConfirm(true)}
-              >
-                삭제
-              </button>
+              ></i>
             </div>
             <div className="detail-line"></div>
             <div className="widget-outsider">
