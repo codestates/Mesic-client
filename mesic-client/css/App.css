@@ -48,7 +48,7 @@
 
 .modal .music {
   margin: 5px 0px;
-  height: 150px;
+  height: 170px;
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -89,7 +89,7 @@
   cursor: pointer;
   width: 200px;
   height: 100px;
-  margin: 10px 0px;
+  margin: 15px 0px;
   background-color: #f8f8f8;
   border-radius: 10px;
   border: 1px solid #e1e1e1;
@@ -112,7 +112,7 @@
   display: -ms-flexbox;
   display: flex;
   margin-top: 15px;
-  padding-right: 20px;
+  padding-right: 30px;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
@@ -127,7 +127,8 @@
 }
 
 .modal .music .widget-outsider div {
-  padding: 15px 25px;
+  padding: 15px 0px 15px 20px;
+  margin-top: 5px;
 }
 
 .modal .music .widget-outsider iframe {
@@ -152,11 +153,12 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  width: 300px;
+  width: 250px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .modal .music .edit-del-btn i {
-  border: 1px solid #19c9d4;
   width: 20px;
   height: 20px;
 }
@@ -176,14 +178,38 @@
 }
 
 .modal .music .save-cancel-btn button {
-  border: 1px solid #19c9d4;
+  margin-right: 5px;
   width: 40px;
   height: 20px;
+  border: 0;
+  background-color: #19c9d4;
+  color: white;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: -1px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal .music .follow-widget-outsider {
+  margin-top: 10px;
+}
+
+.modal .music .follow-widget-outsider img {
+  width: 100px;
+  height: 80px;
+  padding: 0;
+  margin-top: 10px;
+  border-radius: 100%;
+}
+
+.modal .music .follow-widget-outsider div {
+  margin-top: 10px;
 }
 
 .modal .photo {
   margin: 5px 0px;
-  height: 250px;
+  height: 270px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -253,7 +279,7 @@
   border-radius: 8px;
   height: 200px;
   width: 200px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .modal .photo .add-btn-read-photo {
@@ -284,6 +310,54 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.modal .photo .edit-del-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 300px;
+}
+
+.modal .photo .edit-del-btn i {
+  width: 20px;
+  height: 20px;
+}
+
+.modal .photo .save-cancel-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 300px;
+  margin-top: 10px;
+}
+
+.modal .photo .save-cancel-btn button {
+  margin-right: 5px;
+  width: 40px;
+  height: 20px;
+  border: 0;
+  background-color: #19c9d4;
+  color: white;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: -1px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal .memo {
@@ -366,6 +440,53 @@
   padding: 20px;
 }
 
+.modal .memo .edit-del-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 300px;
+}
+
+.modal .memo .edit-del-btn i {
+  width: 20px;
+  height: 20px;
+}
+
+.modal .memo .save-cancel-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 300px;
+}
+
+.modal .memo .save-cancel-btn button {
+  margin-right: 5px;
+  width: 40px;
+  height: 20px;
+  border: 0;
+  background-color: #19c9d4;
+  color: white;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: -1px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .pinit-btn {
   position: relative;
   cursor: pointer;
@@ -412,12 +533,6 @@
   font-weight: 700;
   -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
           box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
-}
-
-.show1 {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 @keyframes slide2 {
@@ -576,6 +691,99 @@
   font-size: 1.3rem;
   color: #19c9d4;
   cursor: pointer;
+}
+
+.confirm-modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  z-index: 4;
+  border: 0;
+  padding: 20px;
+  width: 150vw;
+  height: 110vh;
+  top: 30%;
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(-20%, -34%);
+}
+
+.confirm-modal-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 25vw;
+  height: 25vh;
+  position: relative;
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(200%, 135%);
+  background-color: white;
+  border-radius: 5px;
+}
+
+.confirm-modal-content > div:first-child {
+  margin-top: 60px;
+  height: 10vh;
+  font-size: 1.5rem;
+}
+
+.confirm-modal-content > div:last-child {
+  position: relative;
+  height: 400;
+  width: 450vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 15px;
+}
+
+.confirm-modal-content > div:last-child > button:first-child {
+  width: 205px;
+  height: 50px;
+  border: 0;
+  background-color: #19c9d4;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -1px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.confirm-modal-content > div:last-child > button:last-child {
+  width: 205px;
+  height: 50px;
+  border: 0;
+  background-color: #19c9d4;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -1px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.show1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .followlist {
@@ -986,16 +1194,18 @@
 .nav .logo-btn {
   width: 5%;
   border-radius: 7px;
-  color: #19C9D4;
+  color: #19c9d4;
   background-image: none;
   border: none;
   outline: none;
+  margin: 0 20px;
 }
 
 .nav .nav-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0 20px;
 }
 
 .nav .nav-btn .loginBtn {
@@ -1004,7 +1214,7 @@
   font-weight: 600;
   font-size: 18px;
   background-color: white;
-  color: #19C9D4;
+  color: #19c9d4;
   border: none;
   outline: none;
 }
@@ -1016,7 +1226,7 @@
   font-weight: 600;
   font-size: 18px;
   color: #fefefe;
-  background-color: #19C9D4;
+  background-color: #19c9d4;
   border: none;
   outline: none;
 }
@@ -1643,6 +1853,7 @@
           box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 html,
@@ -1676,10 +1887,6 @@ body {
 
 .hide {
   display: none;
-}
-
-.img {
-  height: 250px;
 }
 
 .profileImg-outsider {
@@ -1797,4 +2004,35 @@ body {
   white-space: nowrap;
   overflow: hidden;
   color: #969696;
+}
+
+.detail-modal-close {
+  z-index: 3;
+  position: fixed;
+  height: 20px;
+  width: 20px;
+  font-size: 1.3rem;
+  right: 10vw;
+  color: #19c9d4;
+  border: none;
+  cursor: pointer;
+  -webkit-transform: translate(-100%, 100%);
+  transform: translate(-800%, 330%);
+}
+
+.detail-modal-hide {
+  display: none;
+  z-index: 3;
+  position: fixed;
+  height: 70px;
+  width: 40px;
+  font-size: 1.3rem;
+  right: 10vw;
+  color: #19c9d4;
+  background-color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  -webkit-transform: translate(-100%, 0%);
+  transform: translate(-470%, 500%);
 }
