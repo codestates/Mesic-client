@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
@@ -86,7 +86,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         {updateMode ? (
           <>
             <div className="post-icon">
-              <i className="fa fa-camera"></i>
+              <i className="fa fa-headphones" aria-hidden="true"></i>
             </div>
             <div className="detail-line"></div>
             <div className="ifram-outsider">
@@ -96,7 +96,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 <iframe
                   src={
                     updateMusic.video_Id
-                      ? `https://www.youtube.com/embed/${updateMusic.video_Id}`
+                      ? `https://www.youtube.com/embed/${updateMusic.video_Id}?modestbranding=1`
                       : "https://www.youtube.com/embed/"
                   }
                   id="ytplayer"
@@ -147,7 +147,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                     <iframe
                       src={
                         readMusic.video_Id
-                          ? `https://www.youtube.com/embed/${readMusic.video_Id}`
+                          ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1`
                           : "https://www.youtube.com/embed/"
                       }
                       id="ytplayer"
@@ -171,6 +171,9 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               )
             ) : readMusic.video_Id.length > 0 ? (
               <>
+                <div className="post-icon">
+                  <i className="fa fa-headphones" aria-hidden="true"></i>
+                </div>
                 <div className="detail-line"></div>
                 <div className="widget-outsider">
                   <img src={readMusic.thumbnail}></img>
@@ -178,7 +181,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                   <iframe
                     src={
                       readMusic.video_Id
-                        ? `https://www.youtube.com/embed/${readMusic.video_Id}`
+                        ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1`
                         : "https://www.youtube.com/embed/"
                     }
                     id="ytplayer"
@@ -188,6 +191,9 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               </>
             ) : (
               <>
+                <div className="post-icon">
+                  <i className="fa fa-headphones" aria-hidden="true"></i>
+                </div>
                 <div className="detail-line"></div>
                 <div className="follow-widget-outsider">
                   <img src={cdImg}></img>
