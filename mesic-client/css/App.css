@@ -15,11 +15,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 820px;
-  width: 400px;
+  height: 87vh;
+  width: 40vw;
   right: 0%;
   -webkit-transform: translate(-50%, -50%);
-  transform: translate(0%, 6%);
+  transform: translate(16%, 12%);
 }
 
 .modal {
@@ -40,8 +40,8 @@
           align-items: center;
   background-color: #fefefe;
   border-radius: 20px;
-  height: 760px;
-  width: 350px;
+  height: 80vh;
+  width: 42vh;
   -webkit-box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
           box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 }
@@ -66,9 +66,14 @@
       align-self: flex-start;
 }
 
+.modal .fa,
+.modal .fas {
+  opacity: 0.5;
+}
+
 .modal .music {
-  height: 170px;
-  width: 300px;
+  height: 16vh;
+  width: 19vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,9 +101,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  width: 300px;
+  position: relative;
+  width: 19vw;
   margin-top: 1px;
   border-top: 1px solid #e1e1e1;
 }
@@ -106,8 +110,8 @@
 .modal .music .add-btn-music {
   position: relative;
   cursor: pointer;
-  width: 200px;
-  height: 100px;
+  height: 13vh;
+  width: 13vw;
   margin: 15px 0px;
   background-color: #f8f8f8;
   border-radius: 10px;
@@ -130,35 +134,52 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 15px;
+  margin-top: 5px;
   padding-right: 30px;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.modal .music .widget-outsider img {
-  margin-top: 10px;
-  width: 80px;
-  height: 80px;
+.modal .music .widget-outsider .thumbnail-cd {
+  margin: 10px 10px 0px 0px;
+  width: 100px;
+  height: 100px;
   border-radius: 100%;
   -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
           box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
 }
 
-.modal .music .widget-outsider div {
-  padding: 15px 0px 15px 20px;
-  margin-top: 5px;
-}
-
-.modal .music .widget-outsider iframe {
+.modal .music .widget-outsider .title-cd {
+  margin: 10px 10px;
+  padding: 10px 0px 0px 10px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  border-radius: 15px;
-  background-color: #19c9d4;
-  width: 40px;
-  height: 40px;
-  margin-left: 10px;
+}
+
+.modal .music .widget-outsider iframe {
+  display: none;
+}
+
+.modal .music .widget-outsider > div:last-child {
+  margin-left: 3px;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.modal .music .widget-outsider .play-pause {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 2.6vw;
+  height: 4.5vh;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 .modal .music .edit-del-btn {
@@ -172,15 +193,15 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 300px;
+  width: 19vw;
 }
 
-.modal .music .edit-del-btn i {
-  width: 20px;
-  height: 20px;
+.modal .music .edit-del-btn > div > i:first-child {
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-.modal .music .edit-del-btn > div > i {
+.modal .music .edit-del-btn > div > i:last-child {
   cursor: pointer;
 }
 
@@ -195,13 +216,14 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  width: 300px;
+  width: 19vw;
+  margin-top: 10px;
 }
 
 .modal .music .save-cancel-btn button {
   margin-right: 5px;
-  width: 40px;
-  height: 20px;
+  width: 2.5vw;
+  height: 2vh;
   border: 0;
   background-color: #19c9d4;
   color: white;
@@ -230,7 +252,9 @@
 
 .modal .photo {
   margin: 5px 0px;
-  height: 270px;
+  height: 27vh;
+  width: 19vw;
+  padding-bottom: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -258,9 +282,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  width: 300px;
+  position: relative;
+  width: 19vw;
   margin-top: 1px;
   border-top: 1px solid #e1e1e1;
 }
@@ -268,8 +291,8 @@
 .modal .photo .add-btn-photo {
   position: relative;
   cursor: pointer;
-  width: 200px;
-  height: 200px;
+  height: 21vh;
+  width: 13vw;
   margin: 13px 0px 10px 0px;
   background-color: #f8f8f8;
   border: 1px solid #e1e1e1;
@@ -298,16 +321,16 @@
 
 .modal .photo .photo-img-outsider .photo-img {
   border-radius: 8px;
-  height: 200px;
-  width: 200px;
+  height: 23vh;
+  width: 13vw;
   margin-top: 10px;
 }
 
 .modal .photo .add-btn-read-photo {
   position: relative;
   cursor: pointer;
-  width: 200px;
-  height: 200px;
+  height: 21vh;
+  width: 13vw;
   margin: 10px 0px 10px 0px;
   background-color: #f8f8f8;
   border: 1px solid #e1e1e1;
@@ -344,12 +367,12 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 300px;
+  width: 19vw;
 }
 
-.modal .photo .edit-del-btn i {
-  width: 20px;
-  height: 20px;
+.modal .photo .edit-del-btn > div > label > i {
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .modal .photo .edit-del-btn > div > i {
@@ -367,14 +390,14 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  width: 300px;
-  margin-top: 10px;
+  width: 19vw;
+  margin-top: 5px;
 }
 
 .modal .photo .save-cancel-btn button {
   margin-right: 5px;
-  width: 40px;
-  height: 20px;
+  width: 2.5vw;
+  height: 2vh;
   border: 0;
   background-color: #19c9d4;
   color: white;
@@ -386,8 +409,9 @@
 }
 
 .modal .memo {
-  margin: 5px 0px;
-  height: 250px;
+  margin: 18px 0px 0px 0px;
+  height: 24vh;
+  width: 19vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -415,9 +439,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  width: 300px;
+  position: relative;
+  width: 19vw;
   margin-top: 1px;
   border-top: 1px solid #e1e1e1;
 }
@@ -445,8 +468,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-appearance: none;
-  width: 240px;
-  height: 150px;
+  width: 13vw;
+  height: 18vh;
   border: 0;
   padding: 12px 3px;
   font-family: inherit;
@@ -476,15 +499,15 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 300px;
+  width: 19vw;
 }
 
-.modal .memo .edit-del-btn i {
-  width: 20px;
-  height: 20px;
+.modal .memo .edit-del-btn > div > i:first-child {
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-.modal .memo .edit-del-btn > div > i {
+.modal .memo .edit-del-btn > div > i:last-child {
   cursor: pointer;
 }
 
@@ -499,13 +522,13 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  width: 300px;
+  width: 19vw;
 }
 
 .modal .memo .save-cancel-btn button {
   margin-right: 5px;
-  width: 40px;
-  height: 20px;
+  width: 2.5vw;
+  height: 2.2vh;
   border: 0;
   background-color: #19c9d4;
   color: white;
@@ -528,13 +551,13 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 120px;
-  height: 40px;
+  width: 11vw;
+  height: 5vh;
   border: 0;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #19c9d4;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
           box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
@@ -552,13 +575,13 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 120px;
-  height: 40px;
+  width: 11vw;
+  height: 5vh;
   border: 0;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #19c9d4;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
           box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
@@ -595,7 +618,7 @@
   -webkit-box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
           box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   -webkit-transform: translate(-100%, 0%);
-  transform: translate(-105%, -41.5%);
+  transform: translate(-113%, -59.3%);
 }
 
 .edit-music-list {
@@ -1746,15 +1769,15 @@
 
 .first-section .mainpage-mesic-subtitle {
   line-height: 0.7vw;
-  font-size: 1.2vw;
+  font-size: 1.4vw;
 }
 
 .first-section .mainpage-mesic-title {
-  font-size: 2vw;
+  font-size: 2.4vw;
 }
 
 .first-section .blob-img {
-  width: 22vw;
+  width: 26vw;
 }
 
 .second-section .section-img {
@@ -1762,17 +1785,17 @@
 }
 
 .second-section .mainpage-mesic-subtitle {
-  line-height: 1.7vw;
-  font-size: 1.1vw;
+  line-height: 1.9vw;
+  font-size: 1.3vw;
 }
 
 .second-section .mainpage-mesic-title {
-  line-height: 2.7vw;
-  font-size: 2vw;
+  line-height: 3vw;
+  font-size: 2.4vw;
 }
 
 .second-section .blob-img {
-  width: 23vw;
+  width: 26vw;
 }
 
 .third-section .section-img {
@@ -1781,16 +1804,17 @@
 }
 
 .third-section .mainpage-mesic-subtitle {
-  line-height: 1.7vw;
+  line-height: 1.9vw;
+  font-size: 1.4vw;
 }
 
 .third-section .mainpage-mesic-title {
-  line-height: 2.5vw;
-  font-size: 2vw;
+  line-height: 3vw;
+  font-size: 2.4vw;
 }
 
 .third-section .blob-img {
-  width: 22vw;
+  width: 24vw;
 }
 
 .fourth-section .mainpage-mesic-text {
@@ -1803,13 +1827,13 @@
 }
 
 .fourth-section .mainpage-mesic-subtitle {
-  line-height: 1.7vw;
-  font-size: 1.2vw;
+  line-height: 1.9vw;
+  font-size: 1.4vw;
 }
 
 .fourth-section .mainpage-mesic-title {
-  line-height: 2.1vw;
-  font-size: 2.1vw;
+  line-height: 2.3vw;
+  font-size: 2.4vw;
 }
 
 .fourth-section .blob-img {
@@ -1827,11 +1851,12 @@
 
 .fifth-section .mainpage-mesic-subtitle {
   line-height: 1.7vw;
+  font-size: 1.5vw;
 }
 
 .fifth-section .mainpage-mesic-title {
-  line-height: 2.5vw;
-  font-size: 2vw;
+  line-height: 2.7vw;
+  font-size: 2.4vw;
 }
 
 .fifth-section .blob-img {
@@ -1968,6 +1993,168 @@
           justify-content: flex-end;
   font-size: 1vw;
   letter-spacing: 0.02vw;
+}
+
+.scroll-down {
+  position: fixed;
+  z-index: 1;
+  height: 2vw;
+  width: 2vw;
+  color: #858585;
+  font-size: 0.8vw;
+  left: 47.2vw;
+  bottom: 4.5vh;
+  white-space: nowrap;
+  -webkit-animation: scroll-down 1.5s ease-in-out infinite;
+          animation: scroll-down 1.5s ease-in-out infinite;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.scroll-down::before,
+.scroll-down::after {
+  content: "";
+  position: fixed;
+  bottom: 50vw;
+  left: 50vw;
+  bottom: 4vh;
+  height: 0.5vw;
+  width: 0.5vw;
+  border: 0.1vw solid #858585;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+          transform: translate(-50%, -50%) rotate(45deg);
+  border-top: transparent;
+  border-left: transparent;
+  -webkit-animation: scroll-down 1.5s ease-in-out infinite;
+          animation: scroll-down 1.5s ease-in-out infinite;
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+
+.scroll-down::after {
+  bottom: 3vh;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+@-webkit-keyframes scroll-down {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+.scroll-up {
+  position: fixed;
+  cursor: pointer;
+  z-index: 1;
+  height: 4vh;
+  width: 2vw;
+  color: #858585;
+  font-size: 0.8vw;
+  right: 2.5vw;
+  bottom: 2.5vh;
+  white-space: nowrap;
+  -webkit-animation: scroll-up 1.5s ease-in-out infinite;
+          animation: scroll-up 1.5s ease-in-out infinite;
+}
+
+.scroll-up::before,
+.scroll-up::after {
+  content: "";
+  position: fixed;
+  bottom: 50vw;
+  right: 3vw;
+  bottom: 5.5vh;
+  height: 0.5vw;
+  width: 0.5vw;
+  border: 0.1vw solid #858585;
+  -webkit-transform: translate(-50%, -50%) rotate(225deg);
+          transform: translate(-50%, -50%) rotate(225deg);
+  border-top: transparent;
+  border-left: transparent;
+  -webkit-animation: scroll-up 1.5s ease-in-out infinite;
+          animation: scroll-up 1.5s ease-in-out infinite;
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+
+.scroll-up::after {
+  bottom: 6.5vh;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.align-middle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@-webkit-keyframes scroll-up {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scroll-up {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 * {
