@@ -21,6 +21,11 @@ import blob_5 from "../images/Blob-6.png";
 function IntroPage() {
   const history = useHistory();
   const [scrollY, setScrollY] = useState<number>(0);
+  const [isVisible1, setIsVisible1] = useState<boolean>(false);
+  const [isVisible2, setIsVisible2] = useState<boolean>(false);
+  const [isVisible3, setIsVisible3] = useState<boolean>(false);
+  const [isVisible4, setIsVisible4] = useState<boolean>(false);
+  const [isVisible5, setIsVisible5] = useState<boolean>(false);
 
   const moveToTop = () => {
     window.scrollTo({
@@ -32,7 +37,24 @@ function IntroPage() {
   const onScroll = () => {
     // console.log(window.scrollY);
     setScrollY(window.scrollY);
+    console.log("Y : ", window.scrollY);
   };
+  useEffect(() => {
+    if (scrollY > 4300) {
+      setTimeout(() => setIsVisible5(true), 3000);
+    } else if (scrollY > 3500) {
+      setTimeout(() => setIsVisible4(true), 2000);
+    } else if (scrollY > 2400) {
+      setTimeout(() => setIsVisible3(true), 2000);
+    } else if (scrollY > 1300) {
+      setTimeout(() => setIsVisible2(true), 2000);
+    } else if (scrollY > 400) {
+      setTimeout(() => setIsVisible1(true), 3000);
+    } else if (scrollY < 400) {
+      setTimeout(() => setIsVisible1(true), 2000);
+    }
+    return;
+  }, [scrollY]);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
@@ -78,10 +100,19 @@ function IntroPage() {
         </section>
         <section className="mainpage-mesic first-section">
           <div className="mainpage-mesic-body">
-            <img src={section1_Img} className="section-img" />
+            <img
+              src={section1_Img}
+              className={`section-img ${scrollY < 400 ? "display-none" : "in"}`}
+            />
             <div className="mainpage-mesic-text">
-              <img className="blob-img" src={blob_1} />
-              <div className="mainpage-mesic-subtitle">
+              <img className="blob-img blob-1" src={blob_1} />
+              <div
+                className={`${
+                  scrollY > 400 && isVisible1
+                    ? "mainpage-mesic-subtitle "
+                    : "opacity-0"
+                }`}
+              >
                 <p>
                   "<strong>그 노래</strong>만 들으면{" "}
                   <strong>그 때 그 일</strong>이 생각나.."
@@ -96,8 +127,14 @@ function IntroPage() {
         <section className="mainpage-mesic second-section">
           <div className="mainpage-mesic-body">
             <div className="mainpage-mesic-text">
-              <img className="blob-img" src={blob_2} />
-              <div className="mainpage-mesic-subtitle">
+              <img className="blob-img blob-2" src={blob_2} />
+              <div
+                className={`${
+                  scrollY > 1300 && isVisible2
+                    ? "mainpage-mesic-subtitle "
+                    : "opacity-0"
+                }`}
+              >
                 <p>
                   <strong>학교 가는 길</strong>에 들었던 신나는 힙합,
                   <br />
@@ -109,15 +146,31 @@ function IntroPage() {
                 다양한 추억들이 있습니다.
               </div>
             </div>
-            <img src={section2_Img} className="section-img" />
+            <img
+              src={section2_Img}
+              className={`section-img ${
+                scrollY < 1300 ? "display-none" : "in"
+              }`}
+            />
           </div>
         </section>
         <section className="mainpage-mesic third-section">
           <div className="mainpage-mesic-body">
-            <img src={section3_Img} className="section-img" />
+            <img
+              src={section3_Img}
+              className={`section-img ${
+                scrollY < 2400 ? "display-none" : "in"
+              }`}
+            />
             <div className="mainpage-mesic-text">
-              <img className="blob-img" src={blob_3} />
-              <div className="mainpage-mesic-subtitle">
+              <img className="blob-img blob-3" src={blob_3} />
+              <div
+                className={`${
+                  scrollY > 2400 && isVisible3
+                    ? "mainpage-mesic-subtitle "
+                    : "opacity-0"
+                }`}
+              >
                 <p>
                   3분동안 잠깐 그 당시로 <br />
                   <strong>추억여행</strong>을 떠나보시는 건 어떠신가요?
@@ -132,8 +185,14 @@ function IntroPage() {
         <section className="mainpage-mesic fourth-section">
           <div className="mainpage-mesic-body">
             <div className="mainpage-mesic-text">
-              <img className="blob-img" src={blob_4} />
-              <div className="mainpage-mesic-subtitle">
+              <img className="blob-img blob-4" src={blob_4} />
+              <div
+                className={`${
+                  scrollY > 3500 && isVisible4
+                    ? "mainpage-mesic-subtitle "
+                    : "opacity-0"
+                }`}
+              >
                 <p>
                   내가 있는 <strong>장소</strong>에서
                   <br /> 지금의 순간을 <strong>음악, 사진, 메모</strong> 등
@@ -143,15 +202,31 @@ function IntroPage() {
                 추억을 다양한 기록으로 남겨보세요.
               </div>
             </div>
-            <img src={section4_Img} className="section-img" />
+            <img
+              src={section4_Img}
+              className={`section-img ${
+                scrollY < 3500 ? "display-none" : "in"
+              }`}
+            />
           </div>
         </section>
         <section className="mainpage-mesic fifth-section">
           <div className="mainpage-mesic-body">
-            <img src={section5_Img} className="section-img" />
+            <img
+              src={section5_Img}
+              className={`section-img ${
+                scrollY < 4300 ? "display-none" : "in"
+              }`}
+            />
             <div className="mainpage-mesic-text">
-              <img className="blob-img" src={blob_5} />
-              <div className="mainpage-mesic-subtitle">
+              <img className="blob-img blob-5" src={blob_5} />
+              <div
+                className={`${
+                  scrollY > 4300 && isVisible5
+                    ? "mainpage-mesic-subtitle "
+                    : "opacity-0"
+                }`}
+              >
                 <p>
                   그 <strong>당시</strong>의 <strong>풍경</strong>이 눈 앞에
                   펼쳐지는
