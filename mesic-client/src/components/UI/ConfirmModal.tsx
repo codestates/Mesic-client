@@ -108,29 +108,33 @@ function ConfirmModal({
       <div className="confirm-modal-content">
         <div>삭제하시겠습니까?</div>
         <div>
-          {confirmType === "postPhoto" ? (
-            <button onClick={deletePostImg}>예</button>
-          ) : confirmType === "readPhoto" ? (
-            <button onClick={deleteReadImg}>예</button>
-          ) : confirmType === "postMusic" ? (
-            <button onClick={deletePostMusic}>예</button>
-          ) : confirmType === "readMusic" ? (
-            <button onClick={() => deleteReadMusic()}>예</button>
-          ) : confirmType === "readModal" ? (
-            <button
-              onClick={async function () {
-                let result = await deleteMyMarker(readMarkerData._id);
-                if (result) {
-                  setOpenConfirm(false);
-                }
-              }}
-            >
-              예
-            </button>
-          ) : (
-            <></>
-          )}
-          <button onClick={() => setOpenConfirm(false)}>아니오</button>
+          <div>
+            {confirmType === "postPhoto" ? (
+              <button onClick={deletePostImg}>예</button>
+            ) : confirmType === "readPhoto" ? (
+              <button onClick={deleteReadImg}>예</button>
+            ) : confirmType === "postMusic" ? (
+              <button onClick={deletePostMusic}>예</button>
+            ) : confirmType === "readMusic" ? (
+              <button onClick={() => deleteReadMusic()}>예</button>
+            ) : confirmType === "readModal" ? (
+              <button
+                onClick={async function () {
+                  let result = await deleteMyMarker(readMarkerData._id);
+                  if (result) {
+                    setOpenConfirm(false);
+                  }
+                }}
+              >
+                예
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div>
+            <button onClick={() => setOpenConfirm(false)}>아니오</button>
+          </div>
         </div>
       </div>
     </div>

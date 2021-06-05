@@ -731,6 +731,8 @@ function MainPage() {
   return (
     <div className="App">
       <Nav
+        openReadModal={openReadModal}
+        openPostModal={openPostModal}
         setOpenPostModal={setOpenPostModal}
         setOpenReadModal={setOpenReadModal}
         loginController={loginController}
