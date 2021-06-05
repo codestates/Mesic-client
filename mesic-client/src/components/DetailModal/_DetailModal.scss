@@ -3,6 +3,7 @@ $main-color: #19c9d4;
 $font-color: rgb(100, 100, 100);
 $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
+$font-color2: rgb(80, 80, 80);
 $border-color: #e1e1e1;
 
 @mixin flex {
@@ -562,10 +563,12 @@ $border-color: #e1e1e1;
   -webkit-transform: translate(-50%, 0%);
   transform: translate(275%, 210%);
   background-color: white;
-  border-radius: 8px;
+  border-radius: 15px;
   & > div:first-child {
     margin-top: 40px;
     font-size: 1.2rem;
+    font-weight: 600;
+    color: $font-color2;
   }
   & > div:last-child {
     // position: relative;
@@ -576,25 +579,29 @@ $border-color: #e1e1e1;
     margin-bottom: 15px;
 
     @mixin confirm-btn {
+      box-shadow: $btn-shadow;
+      margin: 15px;
+      padding: 10px 25px;
       width: 6vw;
-      height: 4vh;
-      border: 0;
+      border-radius: 15px;
       background-color: $main-color;
       color: white;
-      font-weight: 700;
       font-size: 1rem;
-      letter-spacing: -1px;
-      border-radius: 20px;
-      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      outline: none;
+      &:hover {
+        opacity: 0.8;
+      }
     }
 
-    & > button:first-child {
+    & > div:first-child > button {
       @include confirm-btn;
-      margin-right: 5px;
     }
-    & > button:last-child {
+    & > div:last-child > button {
       @include confirm-btn;
-      margin-left: 5px;
+      background-color: white;
+      color: $main-color;
     }
   }
 }

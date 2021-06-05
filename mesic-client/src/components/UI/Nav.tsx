@@ -21,6 +21,8 @@ function Nav({
   deletePostMarkers,
   setOpenReadModal,
   setOpenPostModal,
+  openPostModal,
+  openReadModal,
 }: any) {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
@@ -56,8 +58,11 @@ function Nav({
     setOpenSignup(true);
   };
   const clickMypage = () => {
-    setOpenReadModal(false);
-    setOpenPostModal(false);
+    if (openReadModal) {
+      setOpenReadModal(false);
+    } else if (openPostModal) {
+      setOpenPostModal(false);
+    }
     setOpenMypage(true);
   };
   const closeMypage = () => {
