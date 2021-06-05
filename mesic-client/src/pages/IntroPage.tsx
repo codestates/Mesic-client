@@ -47,7 +47,9 @@ function IntroPage() {
         </div>
         <div
           onClick={() => moveToTop()}
-          className={`scroll-up ${scrollY < 300 ? "display-none" : ""}`}
+          className={`scroll-up ${
+            scrollY < 300 ? "display-none" : "align-middle"
+          }`}
         >
           top
         </div>

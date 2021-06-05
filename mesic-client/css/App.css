@@ -2007,6 +2007,11 @@
   white-space: nowrap;
   -webkit-animation: scroll-down 1.5s ease-in-out infinite;
           animation: scroll-down 1.5s ease-in-out infinite;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .scroll-down::before,
@@ -2073,12 +2078,12 @@
   position: fixed;
   cursor: pointer;
   z-index: 1;
-  height: 2vw;
+  height: 4vh;
   width: 2vw;
   color: #858585;
   font-size: 0.8vw;
-  right: 2.1vw;
-  bottom: 2vh;
+  right: 2.5vw;
+  bottom: 2.5vh;
   white-space: nowrap;
   -webkit-animation: scroll-up 1.5s ease-in-out infinite;
           animation: scroll-up 1.5s ease-in-out infinite;
@@ -2108,6 +2113,18 @@
   bottom: 6.5vh;
   -webkit-animation-delay: 0.2s;
           animation-delay: 0.2s;
+}
+
+.align-middle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @-webkit-keyframes scroll-up {

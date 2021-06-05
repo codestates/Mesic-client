@@ -288,13 +288,17 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   z-index: 1;
   height: 2vw;
   width: 2vw;
-  //   border: 0.1vw solid $subtitle-color;
   color: $subtitle-color;
   font-size: 0.8vw;
   left: 47.2vw;
   bottom: 4.5vh;
   white-space: nowrap;
   animation: scroll-down 1.5s ease-in-out infinite;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .scroll-down::before,
@@ -341,12 +345,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   position: fixed;
   cursor: pointer;
   z-index: 1;
-  height: 2vw;
+  height: 4vh;
   width: 2vw;
   color: $subtitle-color;
   font-size: 0.8vw;
-  right: 2.1vw;
-  bottom: 2vh;
+  right: 2.5vw;
+  bottom: 2.5vh;
   white-space: nowrap;
   animation: scroll-up 1.5s ease-in-out infinite;
 }
@@ -370,6 +374,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 .scroll-up::after {
   bottom: 6.5vh;
   animation-delay: 0.2s;
+}
+
+.align-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes scroll-up {
