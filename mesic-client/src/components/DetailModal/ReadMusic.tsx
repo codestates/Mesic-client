@@ -124,56 +124,54 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               <i className="fa fa-headphones" aria-hidden="true"></i>
             </div>
             <div className="detail-line"></div>
-            <div className="ifram-outsider">
-              <div className="widget-outsider">
-                <img className="thumbnail-cd" src={updateMusic.thumbnail}></img>
-                <div className="title-cd">{updateMusic.title}</div>
-                <iframe
-                  src={
-                    updateMusic.video_Id
-                      ? `https://www.youtube.com/embed/${updateMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=0&loop=1&playlist=${updateMusic.video_Id}
+            <div className="widget-outsider">
+              <img className="thumbnail-cd" src={updateMusic.thumbnail}></img>
+              <div className="title-cd">{updateMusic.title}</div>
+              <iframe
+                src={
+                  updateMusic.video_Id
+                    ? `https://www.youtube.com/embed/${updateMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=0&loop=1&playlist=${updateMusic.video_Id}
                       `
-                      : "https://www.youtube.com/embed/"
+                    : "https://www.youtube.com/embed/"
+                }
+                id="ytplayer"
+                frameBorder="0"
+                allow="autoplay"
+              ></iframe>
+              <div
+                onClick={() => {
+                  if (!isPlay) {
+                    setIsPlay(true);
+                  } else {
+                    setIsPlay(false);
                   }
-                  id="ytplayer"
-                  frameBorder="0"
-                  allow="autoplay"
-                ></iframe>
-                <div
-                  onClick={() => {
-                    if (!isPlay) {
-                      setIsPlay(true);
-                    } else {
-                      setIsPlay(false);
-                    }
-                  }}
-                >
-                  {isPlay ? (
-                    <img className="play-pause" src={pauseImg} />
-                  ) : (
-                    <img className="play-pause" src={playImg} />
-                  )}
-                </div>
+                }}
+              >
+                {isPlay ? (
+                  <img className="play-pause" src={pauseImg} />
+                ) : (
+                  <img className="play-pause" src={playImg} />
+                )}
               </div>
-              <div className="save-cancel-btn">
-                <button onClick={updateReadMusic}>저장</button>
-                <button
-                  onClick={() => {
-                    setUpdateMode(false);
-                    setUpdateMusic({
-                      video_Id: "",
-                      title: "",
-                      thumbnail: "",
-                    });
-                  }}
-                >
-                  취소
-                </button>
-              </div>
+            </div>
+            <div className="save-cancel-btn">
+              <button onClick={updateReadMusic}>저장</button>
+              <button
+                onClick={() => {
+                  setUpdateMode(false);
+                  setUpdateMusic({
+                    video_Id: "",
+                    title: "",
+                    thumbnail: "",
+                  });
+                }}
+              >
+                취소
+              </button>
             </div>
           </>
         ) : (
-          <>
+          <div>
             {isLogin && mode !== "WATCH" ? (
               readMusic.video_Id.length > 0 ? (
                 <>
@@ -233,12 +231,14 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                     <i className="fa fa-headphones" aria-hidden="true"></i>
                   </div>
                   <div className="detail-line"></div>
-                  <button
-                    className="add-btn-music"
-                    onClick={() => setOpenEditMusic(true)}
-                  >
-                    +
-                  </button>
+                  <div>
+                    <button
+                      className="add-btn-music"
+                      onClick={() => setOpenEditMusic(true)}
+                    >
+                      +
+                    </button>
+                  </div>
                 </>
               )
             ) : readMusic.video_Id.length > 0 ? (
@@ -290,7 +290,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 </div>
               </>
             )}
-          </>
+          </div>
         )}
       </div>
     </>

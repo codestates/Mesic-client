@@ -6,7 +6,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 @mixin flex {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -30,7 +30,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   position: relative;
   padding: 15px 0px 15px 0px;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background-color: $color;
   border-radius: 20px;
@@ -40,6 +40,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   $margin: 5px 0px;
 
   & > div:first-child {
+    position: absolute;
     display: flex;
     align-self: flex-start;
     margin: 0px 0px 20px 15px;
@@ -83,8 +84,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     opacity: 0.5;
   }
   .music {
-    height: 16vh;
-    width: 19vw;
+    height: 30vh;
+    width: 20vw;
     @include flex;
     .detail-icon {
       @include detail-icon;
@@ -114,8 +115,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     .widget-outsider {
       display: flex;
       margin-top: 5px;
-      padding-right: 30px;
       justify-content: space-around;
+      padding: 0px 10px;
       align-items: center;
       .thumbnail-cd {
         margin: 10px 10px 0px 0px;
@@ -246,6 +247,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     }
     .add-btn-outsider {
       @include flex;
+      //flex-direction: row;
     }
     .edit-del-btn {
       display: flex;
