@@ -18,11 +18,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 820px;
-  width: 400px;
+  height: 87vh;
+  width: 40vw;
   right: 0%;
   -webkit-transform: translate(-50%, -50%);
-  transform: translate(0%, 6%);
+  transform: translate(16%, 12%);
 }
 
 .modal {
@@ -34,8 +34,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   align-items: center;
   background-color: $color;
   border-radius: 20px;
-  height: 760px;
-  width: 350px;
+  height: 80vh;
+  width: 42vh;
   box-shadow: $box-shadow;
   $margin: 5px 0px;
 
@@ -50,8 +50,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 
   @mixin detail-line {
     display: flex;
-    align-self: flex-start;
-    width: 300px;
+    position: relative;
+    width: 19vw;
     margin-top: 1px;
     border-top: 1px solid #e1e1e1;
   }
@@ -64,12 +64,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 300px;
-    i {
-      width: 20px;
-      height: 20px;
+    width: 19vw;
+    & > div > i:first-child {
+      cursor: pointer;
+      margin-right: 10px;
     }
-    & > div > i {
+    & > div > i:last-child {
       cursor: pointer;
     }
   }
@@ -78,10 +78,13 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     display: flex;
     align-self: flex-start;
   }
-
+  .fa,
+  .fas {
+    opacity: 0.5;
+  }
   .music {
-    height: 170px;
-    width: 300px;
+    height: 16vh;
+    width: 19vw;
     @include flex;
     .detail-icon {
       @include detail-icon;
@@ -92,8 +95,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     .add-btn-music {
       position: relative;
       cursor: pointer;
-      width: 200px;
-      height: 100px;
+      height: 13vh;
+      width: 13vw;
       margin: 15px 0px;
       background-color: #f8f8f8;
       border-radius: 10px;
@@ -141,11 +144,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      width: 300px;
+      width: 19vw;
+      margin-top: 10px;
       button {
         margin-right: 5px;
-        width: 40px;
-        height: 20px;
+        width: 2.5vw;
+        height: 2vh;
         border: 0;
         background-color: $main-color;
         color: white;
@@ -173,7 +177,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 
   .photo {
     margin: $margin;
-    height: 270px;
+    height: 27vh;
+    width: 19vw;
+    padding-bottom: 10px;
     @include flex;
     .detail-icon {
       @include detail-icon;
@@ -184,8 +190,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     .add-btn-photo {
       position: relative;
       cursor: pointer;
-      width: 200px;
-      height: 200px;
+      height: 21vh;
+      width: 13vw;
       margin: 13px 0px 10px 0px;
       background-color: #f8f8f8;
       border: 1px solid #e1e1e1;
@@ -205,16 +211,16 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       justify-content: center;
       .photo-img {
         border-radius: 8px;
-        height: 200px;
-        width: 200px;
+        height: 23vh;
+        width: 13vw;
         margin-top: 10px;
       }
     }
     .add-btn-read-photo {
       position: relative;
       cursor: pointer;
-      width: 200px;
-      height: 200px;
+      height: 21vh;
+      width: 13vw;
       margin: 10px 0px 10px 0px;
       background-color: #f8f8f8;
       border: 1px solid #e1e1e1;
@@ -227,18 +233,28 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       @include flex;
     }
     .edit-del-btn {
-      @include edit-del-icon;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 19vw;
+      & > div > label > i {
+        cursor: pointer;
+        margin-right: 10px;
+      }
+      & > div > i {
+        cursor: pointer;
+      }
     }
     .save-cancel-btn {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      width: 300px;
-      margin-top: 10px;
+      width: 19vw;
+      margin-top: 5px;
       button {
         margin-right: 5px;
-        width: 40px;
-        height: 20px;
+        width: 2.5vw;
+        height: 2vh;
         border: 0;
         background-color: $main-color;
         color: white;
@@ -251,8 +267,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     }
   }
   .memo {
-    margin: $margin;
-    height: 250px;
+    margin: 18px 0px 0px 0px;
+    height: 24vh;
+    width: 19vw;
     @include flex;
     .detail-icon {
       @include detail-icon;
@@ -267,8 +284,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
         position: relative;
         display: flex;
         -webkit-appearance: none;
-        width: 240px;
-        height: 150px;
+        width: 13vw;
+        height: 18vh;
         border: 0;
         padding: 12px 3px;
         font-family: inherit;
@@ -292,11 +309,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      width: 300px;
+      width: 19vw;
       button {
         margin-right: 5px;
-        width: 40px;
-        height: 20px;
+        width: 2.5vw;
+        height: 2.2vh;
         border: 0;
         background-color: $main-color;
         color: white;
@@ -316,13 +333,13 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 40px;
+  width: 11vw;
+  height: 5vh;
   border: 0;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: $main-color;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
 }
@@ -332,13 +349,13 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 40px;
+  width: 11vw;
+  height: 5vh;
   border: 0;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: $main-color;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
 }

@@ -157,11 +157,17 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
               )
             ) : readMemo.length > 0 ? (
               <>
+                <div className="post-icon">
+                  <i className="fa fa-sticky-note read" aria-hidden="true"></i>
+                </div>
                 <div className="detail-line"></div>
                 <div className="read-memo">{readMemo}</div>
               </>
             ) : (
               <>
+                <div className="post-icon">
+                  <i className="fa fa-sticky-note read" aria-hidden="true"></i>
+                </div>
                 <div className="detail-line"></div>
                 <div className="read-memo">팔로우의 메모가 없습니다.</div>
               </>

@@ -50,7 +50,7 @@ function PostMusic({ postMusic, setPostMusic }: any) {
               <iframe
                 src={
                   postMusic.video_Id
-                    ? `https://www.youtube.com/embed/${postMusic.video_Id}`
+                    ? `https://www.youtube.com/embed/${postMusic.video_Id}?modestbranding=1`
                     : "https://www.youtube.com/embed/"
                 }
                 id="ytplayer"
