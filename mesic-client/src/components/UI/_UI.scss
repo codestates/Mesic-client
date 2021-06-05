@@ -311,10 +311,12 @@ $default-black-color: #525252;
 
   .nav-btn {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 20px;
     .loginBtn {
-      padding: 10px;
-      border-radius: 7px;
+      padding: 10px 20px;
+      border-radius: 15px;
       font-weight: 600;
       font-size: 18px;
       background-color: white;
@@ -325,8 +327,8 @@ $default-black-color: #525252;
 
     .mypageBtn {
       margin: 15px;
-      padding: 10px;
-      border-radius: 7px;
+      padding: 10px 20px;
+      border-radius: 15px;
       font-weight: 600;
       font-size: 18px;
       color: #fefefe;
