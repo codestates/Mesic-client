@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import EditMusic from "./EditMusic";
 import ConfirmModal from "../UI/ConfirmModal";
+import pauseImg from "../../images/pause.png";
+import playImg from "../../images/play.png";
 
 function PostMusic({ postMusic, setPostMusic }: any) {
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+
+  const [isPlay, setIsPlay] = useState<boolean>(false);
+
+  const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
+    input !== null && input.tagName === "IFRAME";
+
+  useEffect(() => {
+    let frame = document.getElementById("ytplayer");
+    if (isPlay) {
+      if (isIFrame(frame) && frame.contentWindow) {
+        frame.contentWindow.postMessage(
+          '{"event":"command","func":"playVideo","args":""}',
+          "*"
+        );
+      }
+    } else {
+      if (isIFrame(frame) && frame.contentWindow) {
+        frame.contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          "*"
+        );
+      }
+    }
+  }, [isPlay]);
 
   return (
     <>
@@ -45,17 +71,33 @@ function PostMusic({ postMusic, setPostMusic }: any) {
             </div>
             <div className="detail-line"></div>
             <div className="widget-outsider">
-              <img src={postMusic.thumbnail}></img>
-              <div>{postMusic.title}</div>
+              <img className="thumbnail-cd" src={postMusic.thumbnail}></img>
+              <div className="title-cd">{postMusic.title}</div>
               <iframe
                 src={
                   postMusic.video_Id
-                    ? `https://www.youtube.com/embed/${postMusic.video_Id}?modestbranding=1`
+                    ? `https://www.youtube.com/embed/${postMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=0&loop=1&playlist=${postMusic.video_Id}`
                     : "https://www.youtube.com/embed/"
                 }
                 id="ytplayer"
                 frameBorder="0"
+                allow="autoplay"
               />
+              <div
+                onClick={() => {
+                  if (!isPlay) {
+                    setIsPlay(true);
+                  } else {
+                    setIsPlay(false);
+                  }
+                }}
+              >
+                {isPlay ? (
+                  <img className="play-pause" src={pauseImg} />
+                ) : (
+                  <img className="play-pause" src={playImg} />
+                )}
+              </div>
             </div>
           </div>
         ) : (
