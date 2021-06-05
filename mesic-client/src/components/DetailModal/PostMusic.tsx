@@ -55,7 +55,7 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         {updateMode ? (
           <div className="music-content">
             <div className="edit-del-btn">
-              <i className="fa fa-headphones" aria-hidden="true"></i>
+              <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
               <div>
                 <i
                   className="fas fa-pencil-alt"
@@ -69,10 +69,11 @@ function PostMusic({ postMusic, setPostMusic }: any) {
                 ></i>
               </div>
             </div>
-            <div className="detail-line"></div>
             <div className="widget-outsider">
               <img className="thumbnail-cd" src={postMusic.thumbnail}></img>
-              <div className="title-cd">{postMusic.title}</div>
+              <div className="title-cd-hidden">
+                <div className="title-cd">{postMusic.title}</div>
+              </div>
               <iframe
                 src={
                   postMusic.video_Id
@@ -102,10 +103,9 @@ function PostMusic({ postMusic, setPostMusic }: any) {
           </div>
         ) : (
           <>
-            <div className="post-icon">
-              <i className="fa fa-headphones" aria-hidden="true"></i>
+            <div className="update-mode-post-icon">
+              <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
             </div>
-            <div className="detail-line"></div>
             <button
               className="add-btn-music"
               onClick={() => setOpenEditMusic(true)}
