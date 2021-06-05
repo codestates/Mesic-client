@@ -178,9 +178,6 @@ $border-color: #e1e1e1;
         border-radius: 100%;
         box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
       }
-      .title-cd {
-        // align-self: center;
-      }
       iframe {
         display: none;
         // align-self: center;
@@ -396,15 +393,14 @@ $border-color: #e1e1e1;
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 35px;
+  border-radius: 20px;
   border: 0;
   padding: 20px;
   width: 350px;
   height: 400px;
-  top: 30%;
-  box-shadow: $box-shadow;
-  -webkit-transform: translate(-19vw, -24vh);
-  transform: translate(-19vw, -24vh);
+  top: 0%;
+  box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
+  transform: translateX(-135%);
 }
 
 .edit-music-list {
