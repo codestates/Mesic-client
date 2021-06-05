@@ -102,14 +102,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     margin-right: 10vw;
   }
   .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
+    animation: fadein 2.5s;
+    -webkit-animation: fadein 2.5s;
   }
   .mainpage-mesic-subtitle {
     line-height: 0.7vw;
     font-size: 1.4vw;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-title {
     font-size: 2.4vw;
@@ -125,14 +123,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   }
   .in {
     display: flex;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
+    animation: fadein 2.5s;
+    -webkit-animation: fadein 2.5s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.3vw;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-title {
     line-height: 3vw;
@@ -149,14 +145,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 45vw;
   }
   .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
+    animation: fadein 2.5s;
+    -webkit-animation: fadein 2.5s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.4vw;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-title {
     line-height: 3vw;
@@ -176,14 +170,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 50vw;
   }
   .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
+    animation: fadein 2.5s;
+    -webkit-animation: fadein 2.5s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.4vw;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-title {
     line-height: 2.3vw;
@@ -203,14 +195,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 55vw;
   }
   .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
+    animation: fadein 2.5s;
+    -webkit-animation: fadein 2.5s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.7vw;
     font-size: 1.5vw;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-title {
     line-height: 2.7vw;
@@ -371,9 +361,9 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 .display-none {
   display: none;
 }
-.opacity-0 {
-  opacity: 0;
-}
+// .opacity-0 {
+//   opacity: 0;
+// }
 
 .scroll-up {
   position: fixed;
