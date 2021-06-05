@@ -4,6 +4,7 @@ $font-color: rgb(100, 100, 100);
 $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 $font-color2: rgb(80, 80, 80);
+$border-color: #e1e1e1;
 
 @mixin flex {
   display: flex;
@@ -23,28 +24,26 @@ $font-color2: rgb(80, 80, 80);
   height: 87vh;
   width: 40vw;
   right: 0%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(16%, 12%);
+  -webkit-transform: translate(7vw, 10vh);
+  transform: translate(7vw, 10vh);
 }
 
 .modal {
   display: flex;
   position: relative;
-  padding: 15px 0px 15px 0px;
+  padding: 2.5vh 0;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: $color;
   border-radius: 20px;
   height: 80vh;
-  width: 42vh;
+  width: 22vw;
   box-shadow: $box-shadow;
   $margin: 5px 0px;
 
   & > div:first-child {
     position: absolute;
-    display: flex;
-    align-self: flex-start;
     margin: 0px 0px 20px 15px;
     font-size: 1.3rem;
     color: #19c9d4;
@@ -67,7 +66,6 @@ $font-color2: rgb(80, 80, 80);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 19vw;
     & > div > i:first-child {
       cursor: pointer;
       margin-right: 10px;
@@ -77,16 +75,64 @@ $font-color2: rgb(80, 80, 80);
     }
   }
 
-  .post-icon {
+  .fa-pencil-alt,
+  .fa-trash {
+    opacity: 0.3;
+  }
+  .fa-lg {
+    margin-bottom: 0.6vh;
+    opacity: 0.4;
+  }
+
+  .add-btn-container {
+    padding: 1vh 0.5vw;
+  }
+
+  .save-cancel-btn {
     display: flex;
-    align-self: flex-start;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 16vw;
+    margin-top: 0.5vh;
+    button:nth-child(1) {
+      margin-right: 5px;
+      width: 2.5vw;
+      height: 2vh;
+      border: 0;
+      background-color: $main-color;
+      color: white;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: -1px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: $btn-shadow;
+    }
+    button:nth-child(2) {
+      margin-right: 5px;
+      width: 2.5vw;
+      height: 2vh;
+      border: 0;
+      background-color: white;
+      color: $main-color;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: -1px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: $btn-shadow;
+    }
   }
-  .fa,
-  .fas {
-    opacity: 0.5;
+
+  .update-mode-post-icon {
+    width: 17vw;
+    align-self: center;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 1vh;
   }
+
   .music {
-    height: 30vh;
+    height: max-content;
     width: 20vw;
     @include flex;
     .detail-icon {
@@ -95,16 +141,20 @@ $font-color2: rgb(80, 80, 80);
     .detail-line {
       @include detail-line;
     }
+    .post-icon {
+      display: flex;
+      align-self: flex-start;
+      border-bottom: 1px solid $border-color;
+    }
     .add-btn-music {
       position: relative;
       cursor: pointer;
       height: 13vh;
-      width: 13vw;
-      margin: 15px 0px;
+      width: 16vw;
       background-color: #f8f8f8;
       border-radius: 10px;
       border: 1px solid #e1e1e1;
-      font-size: 26px;
+      font-size: 2vw;
       color: #989898;
     }
     // .music-iframe {
@@ -116,21 +166,20 @@ $font-color2: rgb(80, 80, 80);
     }
     .widget-outsider {
       display: flex;
+      height: 12vh;
+      width: 17vw;
       margin-top: 5px;
-      justify-content: space-around;
-      padding: 0px 10px;
+      justify-content: space-between;
+      padding: 0 0.6vw;
       align-items: center;
       .thumbnail-cd {
-        margin: 10px 10px 0px 0px;
-        width: 100px;
-        height: 100px;
+        width: 4.2vw;
+        height: 4.2vw;
         border-radius: 100%;
         box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
       }
       .title-cd {
-        margin: 10px 10px;
-        padding: 10px 0px 0px 10px;
-        align-self: center;
+        // align-self: center;
       }
       iframe {
         display: none;
@@ -156,28 +205,10 @@ $font-color2: rgb(80, 80, 80);
     }
     .edit-del-btn {
       @include edit-del-icon;
+      justify-content: space-between;
+      border-bottom: 1px solid $border-color;
     }
 
-    .save-cancel-btn {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      width: 19vw;
-      margin-top: 10px;
-      button {
-        margin-right: 5px;
-        width: 2.5vw;
-        height: 2vh;
-        border: 0;
-        background-color: $main-color;
-        color: white;
-        font-weight: 700;
-        font-size: 0.7rem;
-        letter-spacing: -1px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    }
     .follow-widget-outsider {
       margin-top: 10px;
       img {
@@ -194,10 +225,8 @@ $font-color2: rgb(80, 80, 80);
   }
 
   .photo {
-    margin: $margin;
-    height: 27vh;
+    height: max-content;
     width: 19vw;
-    padding-bottom: 10px;
     @include flex;
     .detail-icon {
       @include detail-icon;
@@ -205,18 +234,24 @@ $font-color2: rgb(80, 80, 80);
     .detail-line {
       @include detail-line;
     }
+    .post-icon {
+      display: flex;
+      align-self: flex-start;
+      border-bottom: 1px solid $border-color;
+    }
     .add-btn-photo {
       position: relative;
       cursor: pointer;
-      height: 21vh;
-      width: 13vw;
-      margin: 13px 0px 10px 0px;
+      height: 24vh;
+      width: 16vw;
       background-color: #f8f8f8;
       border: 1px solid #e1e1e1;
       border-radius: 10px;
-      font-size: 26px;
+      font-size: 2vw;
       color: #989898;
-      padding: 83px 118px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .edit-btn-photo {
       cursor: pointer;
@@ -227,25 +262,27 @@ $font-color2: rgb(80, 80, 80);
     .photo-img-outsider {
       display: flex;
       justify-content: center;
-      .photo-img {
-        border-radius: 8px;
-        height: 23vh;
-        width: 13vw;
-        margin-top: 10px;
-      }
     }
+
+    .photo-img {
+      border-radius: 8px;
+      height: 24vh;
+      width: 16vw;
+    }
+
     .add-btn-read-photo {
       position: relative;
       cursor: pointer;
-      height: 21vh;
-      width: 13vw;
-      margin: 10px 0px 10px 0px;
+      height: 24vh;
+      width: 16vw;
       background-color: #f8f8f8;
       border: 1px solid #e1e1e1;
       border-radius: 10px;
-      font-size: 26px;
+      font-size: 2vw;
       color: #989898;
-      padding: 83px 118px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .add-btn-outsider {
       @include flex;
@@ -253,9 +290,10 @@ $font-color2: rgb(80, 80, 80);
     }
     .edit-del-btn {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
-      width: 19vw;
+      width: 16.5vw;
+      margin-bottom: 1vh;
+      border-bottom: 1px solid $border-color;
       & > div > label > i {
         cursor: pointer;
         margin-right: 10px;
@@ -264,32 +302,15 @@ $font-color2: rgb(80, 80, 80);
         cursor: pointer;
       }
     }
-    .save-cancel-btn {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      width: 19vw;
-      margin-top: 5px;
-      button {
-        margin-right: 5px;
-        width: 2.5vw;
-        height: 2vh;
-        border: 0;
-        background-color: $main-color;
-        color: white;
-        font-weight: 700;
-        font-size: 0.7rem;
-        letter-spacing: -1px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    }
   }
+
   .memo {
     margin: 18px 0px 0px 0px;
     height: 24vh;
     width: 19vw;
-    @include flex;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     .detail-icon {
       @include detail-icon;
     }
@@ -298,15 +319,13 @@ $font-color2: rgb(80, 80, 80);
     }
     .textarea-outsider {
       @include flex;
-      margin: 15px;
       .input-memo {
         position: relative;
         display: flex;
         -webkit-appearance: none;
-        width: 13vw;
-        height: 18vh;
+        width: 16vw;
+        height: 24vh;
         border: 0;
-        padding: 12px 3px;
         font-family: inherit;
         font-size: 16px;
         font-weight: 500;
@@ -316,71 +335,45 @@ $font-color2: rgb(80, 80, 80);
         transition: all 0.15s ease;
       }
     }
+    .read-memo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .read-memo {
-      height: 200px;
+      height: 24vh;
+      width: 16vw;
       overflow: auto;
-      padding: 20px;
     }
     .edit-del-btn {
-      @include edit-del-icon;
-    }
-    .save-cancel-btn {
       display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      width: 19vw;
-      button {
-        margin-right: 5px;
-        width: 2.5vw;
-        height: 2.2vh;
-        border: 0;
-        background-color: $main-color;
-        color: white;
-        font-weight: 700;
-        font-size: 0.7rem;
-        letter-spacing: -1px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+      justify-content: space-between;
+      align-self: center;
+      width: 16.5vw;
+      margin-bottom: 1vh;
+      border-bottom: 1px solid $border-color;
     }
   }
 }
 
-.pinit-btn {
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 11vw;
-  height: 5vh;
-  border: 0;
-  border-radius: 15px;
-  background-color: $main-color;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 700;
-  box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
-}
+.pinit-btn,
 .delete-pin-btn {
   position: relative;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 11vw;
-  height: 5vh;
+  padding: 1vh 2vw;
   border: 0;
-  border-radius: 15px;
+  border-radius: 20px;
   background-color: $main-color;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1vw;
   font-weight: 700;
   box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
 }
 
 // edit music
-
 @keyframes slide2 {
   from {
     left: 0%;
@@ -410,8 +403,8 @@ $font-color2: rgb(80, 80, 80);
   height: 400px;
   top: 30%;
   box-shadow: $box-shadow;
-  -webkit-transform: translate(-100%, 0%);
-  transform: translate(-113%, -59.3%);
+  -webkit-transform: translate(-19vw, -24vh);
+  transform: translate(-19vw, -24vh);
 }
 
 .edit-music-list {
@@ -450,6 +443,49 @@ $font-color2: rgb(80, 80, 80);
   height: 30px;
   width: 180px;
   left: 140px;
+}
+
+.title-cd-hidden {
+  position: absolute;
+  overflow: hidden;
+  height: 1.5vh;
+  width: 8.2vw;
+  right: 6vw;
+}
+
+.title-cd {
+  font-size: 0.7vw;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  color: rgb(80, 80, 80);
+  animation-delay: 2s;
+  animation-name: slide3;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: slide3;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes slide3 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -200%;
+  }
+}
+
+@-webkit-keyframes slide3 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -200%;
+  }
 }
 
 .edit-music-searched-title {
@@ -572,4 +608,10 @@ $font-color2: rgb(80, 80, 80);
 
 .show1 {
   display: flex;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.5vh;
+  left: 0.5vw;
 }

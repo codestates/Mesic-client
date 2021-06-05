@@ -120,13 +120,14 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
       <div className="music">
         {updateMode ? (
           <>
-            <div className="post-icon">
-              <i className="fa fa-headphones" aria-hidden="true"></i>
+            <div className="update-mode-post-icon">
+              <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
             </div>
-            <div className="detail-line"></div>
             <div className="widget-outsider">
               <img className="thumbnail-cd" src={updateMusic.thumbnail}></img>
-              <div className="title-cd">{updateMusic.title}</div>
+              <div className="title-cd-hidden">
+                <div className="title-cd">{updateMusic.title}</div>
+              </div>
               <iframe
                 src={
                   updateMusic.video_Id
@@ -176,7 +177,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               readMusic.video_Id.length > 0 ? (
                 <>
                   <div className="edit-del-btn">
-                    <i className="fa fa-headphones" aria-hidden="true"></i>
+                    <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
                     <div>
                       <i
                         className="fas fa-pencil-alt"
@@ -190,13 +191,14 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                       ></i>
                     </div>
                   </div>
-                  <div className="detail-line"></div>
                   <div className="widget-outsider">
                     <img
                       className="thumbnail-cd"
                       src={readMusic.thumbnail}
                     ></img>
-                    <div className="title-cd">{readMusic.title}</div>
+                    <div className="title-cd-hidden">
+                      <div className="title-cd">{readMusic.title}</div>
+                    </div>
                     <iframe
                       src={
                         readMusic.video_Id
@@ -228,10 +230,9 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               ) : (
                 <>
                   <div className="post-icon">
-                    <i className="fa fa-headphones" aria-hidden="true"></i>
+                    <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
                   </div>
-                  <div className="detail-line"></div>
-                  <div>
+                  <div className="add-btn-container">
                     <button
                       className="add-btn-music"
                       onClick={() => setOpenEditMusic(true)}
@@ -244,7 +245,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
             ) : readMusic.video_Id.length > 0 ? (
               <>
                 <div className="post-icon">
-                  <i className="fa fa-headphones" aria-hidden="true"></i>
+                  <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
                 </div>
                 <div className="detail-line"></div>
                 <div className="widget-outsider">
@@ -281,7 +282,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
             ) : (
               <>
                 <div className="post-icon">
-                  <i className="fa fa-headphones" aria-hidden="true"></i>
+                  <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
                 </div>
                 <div className="detail-line"></div>
                 <div className="follow-widget-outsider">

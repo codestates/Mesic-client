@@ -32,6 +32,7 @@ function ReadModal({
     <div className="modal-outsider show1">
       <div className="modal">
         <div
+        className="modal-close-btn"
           onClick={() => {
             setOpenReadModal(false);
           }}

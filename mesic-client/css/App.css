@@ -18,8 +18,8 @@
   height: 87vh;
   width: 40vw;
   right: 0%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(16%, 12%);
+  -webkit-transform: translate(7vw, 10vh);
+  transform: translate(7vw, 10vh);
 }
 
 .modal {
@@ -27,53 +27,107 @@
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  padding: 15px 0px 15px 0px;
+  padding: 2.5vh 0;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   background-color: #fefefe;
   border-radius: 20px;
   height: 80vh;
-  width: 42vh;
+  width: 22vw;
   -webkit-box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
           box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 }
 
 .modal > div:first-child {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
+  position: absolute;
   margin: 0px 0px 20px 15px;
   font-size: 1.3rem;
   color: #19c9d4;
   cursor: pointer;
 }
 
-.modal .post-icon {
+.modal .fa-pencil-alt,
+.modal .fa-trash {
+  opacity: 0.3;
+}
+
+.modal .fa-lg {
+  margin-bottom: 0.6vh;
+  opacity: 0.4;
+}
+
+.modal .add-btn-container {
+  padding: 1vh 0.5vw;
+}
+
+.modal .save-cancel-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 16vw;
+  margin-top: 0.5vh;
 }
 
-.modal .fa,
-.modal .fas {
-  opacity: 0.5;
+.modal .save-cancel-btn button:nth-child(1) {
+  margin-right: 5px;
+  width: 2.5vw;
+  height: 2vh;
+  border: 0;
+  background-color: #19c9d4;
+  color: white;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: -1px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
+          box-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
+}
+
+.modal .save-cancel-btn button:nth-child(2) {
+  margin-right: 5px;
+  width: 2.5vw;
+  height: 2vh;
+  border: 0;
+  background-color: white;
+  color: #19c9d4;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: -1px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
+          box-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
+}
+
+.modal .update-mode-post-icon {
+  width: 17vw;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 1vh;
 }
 
 .modal .music {
-  height: 16vh;
-  width: 19vw;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: 20vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -81,9 +135,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -107,16 +161,24 @@
   border-top: 1px solid #e1e1e1;
 }
 
+.modal .music .post-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  border-bottom: 1px solid #e1e1e1;
+}
+
 .modal .music .add-btn-music {
   position: relative;
   cursor: pointer;
   height: 13vh;
-  width: 13vw;
-  margin: 15px 0px;
+  width: 16vw;
   background-color: #f8f8f8;
   border-radius: 10px;
   border: 1px solid #e1e1e1;
-  font-size: 26px;
+  font-size: 2vw;
   color: #989898;
 }
 
@@ -134,30 +196,24 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 12vh;
+  width: 17vw;
   margin-top: 5px;
-  padding-right: 30px;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 0.6vw;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
 .modal .music .widget-outsider .thumbnail-cd {
-  margin: 10px 10px 0px 0px;
-  width: 100px;
-  height: 100px;
+  width: 4.2vw;
+  height: 4.2vw;
   border-radius: 100%;
   -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
           box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
-}
-
-.modal .music .widget-outsider .title-cd {
-  margin: 10px 10px;
-  padding: 10px 0px 0px 10px;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
 }
 
 .modal .music .widget-outsider iframe {
@@ -193,7 +249,8 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 19vw;
+  justify-content: space-between;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .modal .music .edit-del-btn > div > i:first-child {
@@ -202,35 +259,6 @@
 }
 
 .modal .music .edit-del-btn > div > i:last-child {
-  cursor: pointer;
-}
-
-.modal .music .save-cancel-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  width: 19vw;
-  margin-top: 10px;
-}
-
-.modal .music .save-cancel-btn button {
-  margin-right: 5px;
-  width: 2.5vw;
-  height: 2vh;
-  border: 0;
-  background-color: #19c9d4;
-  color: white;
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: -1px;
-  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -251,10 +279,10 @@
 }
 
 .modal .photo {
-  margin: 5px 0px;
-  height: 27vh;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   width: 19vw;
-  padding-bottom: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -262,9 +290,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -288,18 +316,34 @@
   border-top: 1px solid #e1e1e1;
 }
 
+.modal .photo .post-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  border-bottom: 1px solid #e1e1e1;
+}
+
 .modal .photo .add-btn-photo {
   position: relative;
   cursor: pointer;
-  height: 21vh;
-  width: 13vw;
-  margin: 13px 0px 10px 0px;
+  height: 24vh;
+  width: 16vw;
   background-color: #f8f8f8;
   border: 1px solid #e1e1e1;
   border-radius: 10px;
-  font-size: 26px;
+  font-size: 2vw;
   color: #989898;
-  padding: 83px 118px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .modal .photo .edit-btn-photo {
@@ -319,25 +363,31 @@
           justify-content: center;
 }
 
-.modal .photo .photo-img-outsider .photo-img {
+.modal .photo .photo-img {
   border-radius: 8px;
-  height: 23vh;
-  width: 13vw;
-  margin-top: 10px;
+  height: 24vh;
+  width: 16vw;
 }
 
 .modal .photo .add-btn-read-photo {
   position: relative;
   cursor: pointer;
-  height: 21vh;
-  width: 13vw;
-  margin: 10px 0px 10px 0px;
+  height: 24vh;
+  width: 16vw;
   background-color: #f8f8f8;
   border: 1px solid #e1e1e1;
   border-radius: 10px;
-  font-size: 26px;
+  font-size: 2vw;
   color: #989898;
-  padding: 83px 118px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .modal .photo .add-btn-outsider {
@@ -348,9 +398,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -360,14 +410,12 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 19vw;
+  width: 16.5vw;
+  margin-bottom: 1vh;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .modal .photo .edit-del-btn > div > label > i {
@@ -379,35 +427,6 @@
   cursor: pointer;
 }
 
-.modal .photo .save-cancel-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  width: 19vw;
-  margin-top: 5px;
-}
-
-.modal .photo .save-cancel-btn button {
-  margin-right: 5px;
-  width: 2.5vw;
-  height: 2vh;
-  border: 0;
-  background-color: #19c9d4;
-  color: white;
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: -1px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .modal .memo {
   margin: 18px 0px 0px 0px;
   height: 24vh;
@@ -415,16 +434,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .modal .memo .detail-icon {
@@ -453,13 +469,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 15px;
 }
 
 .modal .memo .textarea-outsider .input-memo {
@@ -468,10 +483,9 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-appearance: none;
-  width: 13vw;
-  height: 18vh;
+  width: 16vw;
+  height: 24vh;
   border: 0;
-  padding: 12px 3px;
   font-family: inherit;
   font-size: 16px;
   font-weight: 500;
@@ -482,66 +496,7 @@
   transition: all 0.15s ease;
 }
 
-.modal .memo .read-memo {
-  height: 200px;
-  overflow: auto;
-  padding: 20px;
-}
-
-.modal .memo .edit-del-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  width: 19vw;
-}
-
-.modal .memo .edit-del-btn > div > i:first-child {
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.modal .memo .edit-del-btn > div > i:last-child {
-  cursor: pointer;
-}
-
-.modal .memo .save-cancel-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  width: 19vw;
-}
-
-.modal .memo .save-cancel-btn button {
-  margin-right: 5px;
-  width: 2.5vw;
-  height: 2.2vh;
-  border: 0;
-  background-color: #19c9d4;
-  color: white;
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: -1px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pinit-btn {
-  position: relative;
-  cursor: pointer;
+.modal .memo .read-memo-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -551,18 +506,29 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 11vw;
-  height: 5vh;
-  border: 0;
-  border-radius: 15px;
-  background-color: #19c9d4;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 700;
-  -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
-          box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
 }
 
+.modal .memo .read-memo {
+  height: 24vh;
+  width: 16vw;
+  overflow: auto;
+}
+
+.modal .memo .edit-del-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 16.5vw;
+  margin-bottom: 1vh;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.pinit-btn,
 .delete-pin-btn {
   position: relative;
   cursor: pointer;
@@ -575,13 +541,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 11vw;
-  height: 5vh;
+  padding: 1vh 2vw;
   border: 0;
-  border-radius: 15px;
+  border-radius: 20px;
   background-color: #19c9d4;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1vw;
   font-weight: 700;
   -webkit-box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
           box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
@@ -617,8 +582,8 @@
   top: 30%;
   -webkit-box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
           box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
-  -webkit-transform: translate(-100%, 0%);
-  transform: translate(-113%, -59.3%);
+  -webkit-transform: translate(-19vw, -24vh);
+  transform: translate(-19vw, -24vh);
 }
 
 .edit-music-list {
@@ -669,6 +634,50 @@
   height: 30px;
   width: 180px;
   left: 140px;
+}
+
+.title-cd-hidden {
+  position: absolute;
+  overflow: hidden;
+  height: 1.5vh;
+  width: 8.2vw;
+  right: 6vw;
+}
+
+.title-cd {
+  font-size: 0.7vw;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  color: #505050;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  animation-name: slide3;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: slide3;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes slide3 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -200%;
+  }
+}
+
+@-webkit-keyframes slide3 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -200%;
+  }
 }
 
 .edit-music-searched-title {
@@ -833,6 +842,12 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.5vh;
+  left: 0.5vw;
 }
 
 .followlist {

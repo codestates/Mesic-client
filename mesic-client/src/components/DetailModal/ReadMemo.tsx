@@ -75,9 +75,8 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
         {updateMode ? (
           <>
             <div className="edit-del-btn">
-              <i className="fa fa-sticky-note read" aria-hidden="true"></i>
+              <i className="fa fa-sticky-note read fa-lg" aria-hidden="true"></i>
             </div>
-            <div className="detail-line"></div>
             <div className="textarea-outsider">
               <textarea className="input-memo" onChange={handleUpdateMemo}>
                 {readMemo}
@@ -108,7 +107,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                 <>
                   <div className="edit-del-btn">
                     <i
-                      className="fa fa-sticky-note read"
+                      className="fa fa-sticky-note read fa-lg"
                       aria-hidden="true"
                     ></i>
                     <i
@@ -117,18 +116,18 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                       onClick={() => setUpdateMode(true)}
                     ></i>
                   </div>
-                  <div className="detail-line"></div>
-                  <div className="read-memo">{readMemo}</div>
+                  <div className="read-memo-container">
+                    <div className="read-memo">{readMemo}</div>
+                  </div>
                 </>
               ) : (
                 <>
                   <div className="post-icon">
                     <i
-                      className="fa fa-sticky-note read"
+                      className="fa fa-sticky-note read fa-lg"
                       aria-hidden="true"
                     ></i>
                   </div>
-                  <div className="detail-line"></div>
                   <div className="textarea-outsider">
                     <textarea
                       ref={addMemoInput}
@@ -158,17 +157,15 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
             ) : readMemo.length > 0 ? (
               <>
                 <div className="post-icon">
-                  <i className="fa fa-sticky-note read" aria-hidden="true"></i>
+                  <i className="fa fa-sticky-note read fa-lg" aria-hidden="true"></i>
                 </div>
-                <div className="detail-line"></div>
                 <div className="read-memo">{readMemo}</div>
               </>
             ) : (
               <>
                 <div className="post-icon">
-                  <i className="fa fa-sticky-note read" aria-hidden="true"></i>
+                  <i className="fa fa-sticky-note read fa-lg" aria-hidden="true"></i>
                 </div>
-                <div className="detail-line"></div>
                 <div className="read-memo">팔로우의 메모가 없습니다.</div>
               </>
             )}
