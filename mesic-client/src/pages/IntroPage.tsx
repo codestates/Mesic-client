@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Nav from "../components/UI/Nav";
 
@@ -20,11 +20,40 @@ import blob_5 from "../images/Blob-6.png";
 
 function IntroPage() {
   const history = useHistory();
+  const [scrollY, setScrollY] = useState<number>(0);
+
+  const moveToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+  const onScroll = () => {
+    // console.log(window.scrollY);
+    setScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
     <>
       <Nav />
       <div className="mainpage">
-        <div className="mainpage-mesic">
+        <div className={`scroll-down ${scrollY > 300 ? "display-none" : ""}`}>
+          see more details
+        </div>
+        <div
+          onClick={() => moveToTop()}
+          className={`scroll-up ${
+            scrollY < 300 ? "display-none" : "align-middle"
+          }`}
+        >
+          top
+        </div>
+        <section className="mainpage-mesic">
           <div className="mainpage-mesic-body">
             <img src={browser} className="left-img mainpage-img" />
             <div className="mainpage-mesic-text">
@@ -46,8 +75,8 @@ function IntroPage() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="mainpage-mesic first-section">
+        </section>
+        <section className="mainpage-mesic first-section">
           <div className="mainpage-mesic-body">
             <img src={section1_Img} className="section-img" />
             <div className="mainpage-mesic-text">
@@ -63,8 +92,8 @@ function IntroPage() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="mainpage-mesic second-section">
+        </section>
+        <section className="mainpage-mesic second-section">
           <div className="mainpage-mesic-body">
             <div className="mainpage-mesic-text">
               <img className="blob-img" src={blob_2} />
@@ -82,8 +111,8 @@ function IntroPage() {
             </div>
             <img src={section2_Img} className="section-img" />
           </div>
-        </div>
-        <div className="mainpage-mesic third-section">
+        </section>
+        <section className="mainpage-mesic third-section">
           <div className="mainpage-mesic-body">
             <img src={section3_Img} className="section-img" />
             <div className="mainpage-mesic-text">
@@ -99,8 +128,8 @@ function IntroPage() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="mainpage-mesic fourth-section">
+        </section>
+        <section className="mainpage-mesic fourth-section">
           <div className="mainpage-mesic-body">
             <div className="mainpage-mesic-text">
               <img className="blob-img" src={blob_4} />
@@ -116,8 +145,8 @@ function IntroPage() {
             </div>
             <img src={section4_Img} className="section-img" />
           </div>
-        </div>
-        <div className="mainpage-mesic fifth-section">
+        </section>
+        <section className="mainpage-mesic fifth-section">
           <div className="mainpage-mesic-body">
             <img src={section5_Img} className="section-img" />
             <div className="mainpage-mesic-text">
@@ -133,16 +162,16 @@ function IntroPage() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="mainpage-mesic-btn-end">
+        </section>
+        <section className="mainpage-mesic-btn-end">
           <button onClick={() => history.push("/mainpage")}>
             <div>
               <img src={logo} />
               <div>시작하기</div>
             </div>
           </button>
-        </div>
-        <div className="mainpage-footer">
+        </section>
+        <section className="mainpage-footer">
           <div className="mainpage-footer-body">
             <div className="mainpage-footer-logo">
               <img src={logo} />
@@ -201,7 +230,7 @@ function IntroPage() {
               <div>Copyrightⓒ2021 PORT757 All rights reserved.</div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );
