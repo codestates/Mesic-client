@@ -103,13 +103,13 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   }
   .mainpage-mesic-subtitle {
     line-height: 0.7vw;
-    font-size: 1.2vw;
+    font-size: 1.4vw;
   }
   .mainpage-mesic-title {
-    font-size: 2vw;
+    font-size: 2.4vw;
   }
   .blob-img {
-    width: 22vw;
+    width: 26vw;
   }
 }
 
@@ -118,15 +118,15 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     margin-left: 13vw;
   }
   .mainpage-mesic-subtitle {
-    line-height: 1.7vw;
-    font-size: 1.1vw;
+    line-height: 1.9vw;
+    font-size: 1.3vw;
   }
   .mainpage-mesic-title {
-    line-height: 2.7vw;
-    font-size: 2vw;
+    line-height: 3vw;
+    font-size: 2.4vw;
   }
   .blob-img {
-    width: 23vw;
+    width: 26vw;
   }
 }
 
@@ -136,14 +136,15 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 45vw;
   }
   .mainpage-mesic-subtitle {
-    line-height: 1.7vw;
+    line-height: 1.9vw;
+    font-size: 1.4vw;
   }
   .mainpage-mesic-title {
-    line-height: 2.5vw;
-    font-size: 2vw;
+    line-height: 3vw;
+    font-size: 2.4vw;
   }
   .blob-img {
-    width: 22vw;
+    width: 24vw;
   }
 }
 
@@ -156,12 +157,12 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 50vw;
   }
   .mainpage-mesic-subtitle {
-    line-height: 1.7vw;
-    font-size: 1.2vw;
+    line-height: 1.9vw;
+    font-size: 1.4vw;
   }
   .mainpage-mesic-title {
-    line-height: 2.1vw;
-    font-size: 2.1vw;
+    line-height: 2.3vw;
+    font-size: 2.4vw;
   }
   .blob-img {
     width: 22vw;
@@ -178,10 +179,11 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   }
   .mainpage-mesic-subtitle {
     line-height: 1.7vw;
+    font-size: 1.5vw;
   }
   .mainpage-mesic-title {
-    line-height: 2.5vw;
-    font-size: 2vw;
+    line-height: 2.7vw;
+    font-size: 2.4vw;
   }
   .blob-img {
     width: 22vw;
@@ -279,4 +281,108 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   justify-content: flex-end;
   font-size: 1vw;
   letter-spacing: 0.02vw;
+}
+
+.scroll-down {
+  position: fixed;
+  z-index: 1;
+  height: 2vw;
+  width: 2vw;
+  //   border: 0.1vw solid $subtitle-color;
+  color: $subtitle-color;
+  font-size: 0.8vw;
+  left: 47.2vw;
+  bottom: 4.5vh;
+  white-space: nowrap;
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+.scroll-down::before,
+.scroll-down::after {
+  content: "";
+  position: fixed;
+  bottom: 50vw;
+  left: 50vw;
+  bottom: 4vh;
+  height: 0.5vw;
+  width: 0.5vw;
+  border: 0.1vw solid $subtitle-color;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-top: transparent;
+  border-left: transparent;
+  animation: scroll-down 1.5s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+.scroll-down::after {
+  bottom: 3vh;
+  animation-delay: 0.2s;
+}
+
+@keyframes scroll-down {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+.scroll-up {
+  position: fixed;
+  cursor: pointer;
+  z-index: 1;
+  height: 2vw;
+  width: 2vw;
+  color: $subtitle-color;
+  font-size: 0.8vw;
+  right: 2.1vw;
+  bottom: 2vh;
+  white-space: nowrap;
+  animation: scroll-up 1.5s ease-in-out infinite;
+}
+
+.scroll-up::before,
+.scroll-up::after {
+  content: "";
+  position: fixed;
+  bottom: 50vw;
+  right: 3vw;
+  bottom: 5.5vh;
+  height: 0.5vw;
+  width: 0.5vw;
+  border: 0.1vw solid $subtitle-color;
+  transform: translate(-50%, -50%) rotate(225deg);
+  border-top: transparent;
+  border-left: transparent;
+  animation: scroll-up 1.5s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+.scroll-up::after {
+  bottom: 6.5vh;
+  animation-delay: 0.2s;
+}
+
+@keyframes scroll-up {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
