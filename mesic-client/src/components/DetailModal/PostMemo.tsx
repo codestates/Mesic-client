@@ -18,10 +18,9 @@ function Memo({ postMemo, setPostMemo }: any) {
   return (
     <>
       <div className="memo">
-        <div className="detail-icon">
-          <i className="fa fa-sticky-note" aria-hidden="true"></i>
+        <div className="update-mode-post-icon">
+          <i className="fa fa-sticky-note fa-lg" aria-hidden="true"></i>
         </div>
-        <div className="detail-line"></div>
         <div className="textarea-outsider">
           <textarea
             className="input-memo"

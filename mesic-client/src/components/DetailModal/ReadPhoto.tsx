@@ -97,10 +97,9 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
       <div className="photo">
         {updateMode ? (
           <>
-            <div className="post-icon">
-              <i className="fa fa-camera"></i>
+            <div className="update-mode-post-icon">
+              <i className="fa fa-camera fa-lg"></i>
             </div>
-            <div className="detail-line"></div>
             {/* <input
               className="input-photo"
               ref={editedImageInput}
@@ -109,7 +108,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
               accept="image/*"
               onChange={handleEditedImg}
             /> */}
-            <div className="photo-img-outsider">
+            <div className="photo-img-outsider add-btn-container">
               <img className="photo-img" src={editedPreviewImg} />
             </div>
             <div className="save-cancel-btn">
@@ -130,7 +129,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
               fileName !== "undefined" ? (
                 <>
                   <div className="edit-del-btn">
-                    <i className="fa fa-camera"></i>
+                    <i className="fa fa-camera fa-lg"></i>
                     <div>
                       <label className="edit-btn-photo" htmlFor="photo-file">
                         <i className="fas fa-pencil-alt"></i>
@@ -150,49 +149,54 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
                       ></i>
                     </div>
                   </div>
-                  <div className="detail-line"></div>
                   <div className="photo-img-outsider">
                     <img className="photo-img" src={readImg} />
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="post-icon">
-                    <i className="fa fa-camera"></i>
-                  </div>
-                  <div className="detail-line"></div>
-                  <div className="add-btn-outsider">
-                    <label className="add-btn-read-photo" htmlFor="photo-file">
-                      +
-                    </label>
-                    <input
-                      className="input-photo"
-                      ref={editedImageInput}
-                      type="file"
-                      id="photo-file"
-                      accept="image/*"
-                      onChange={handleEditedImg}
-                    />
+                  <div>
+                    <div className="post-icon">
+                      <i className="fa fa-camera fa-lg"></i>
+                    </div>
+                    <div className="add-btn-outsider add-btn-container">
+                      <label
+                        className="add-btn-read-photo"
+                        htmlFor="photo-file"
+                      >
+                        +
+                      </label>
+                      <input
+                        className="input-photo"
+                        ref={editedImageInput}
+                        type="file"
+                        id="photo-file"
+                        accept="image/*"
+                        onChange={handleEditedImg}
+                      />
+                    </div>
                   </div>
                 </>
               )
             ) : fileName !== "undefined" ? (
               <>
-                <div className="post-icon">
-                  <i className="fa fa-camera"></i>
-                </div>
-                <div className="detail-line"></div>
-                <div className="photo-img-outsider">
-                  <img className="photo-img" src={readImg} />
+                <div>
+                  <div className="post-icon">
+                    <i className="fa fa-camera fa-lg"></i>
+                  </div>
+                  <div className="photo-img-outsider">
+                    <img className="photo-img" src={readImg} />
+                  </div>
                 </div>
               </>
             ) : (
               <>
-                <div className="post-icon">
-                  <i className="fa fa-camera"></i>
+                <div>
+                  <div className="post-icon">
+                    <i className="fa fa-camera fa-lg"></i>
+                  </div>
+                  <div>팔로우가 사진을 추가하지 않았어요</div>
                 </div>
-                <div className="detail-line"></div>
-                <div>팔로우가 사진을 추가하지 않았어요</div>
               </>
             )}
           </>

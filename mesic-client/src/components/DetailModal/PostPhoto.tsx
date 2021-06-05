@@ -43,10 +43,9 @@ function PostPhoto({ postImg, setPostImg }: any) {
       <div className="photo">
         {fileName === "undefined" ? (
           <>
-            <div className="post-icon">
-              <i className="fa fa-camera"></i>
+            <div className="update-mode-post-icon">
+              <i className="fa fa-camera fa-lg"></i>
             </div>
-            <div className="detail-line"></div>
             <label className="add-btn-photo" htmlFor="photo-file">
               +
             </label>
@@ -62,7 +61,7 @@ function PostPhoto({ postImg, setPostImg }: any) {
         ) : (
           <>
             <div className="edit-del-btn">
-              <i className="fa fa-camera"></i>
+              <i className="fa fa-camera fa-lg"></i>
               <div>
                 <label className="edit-btn-photo" htmlFor="photo-file">
                   <i className="fas fa-pencil-alt"></i>
@@ -82,7 +81,6 @@ function PostPhoto({ postImg, setPostImg }: any) {
                 ></i>
               </div>
             </div>
-            <div className="detail-line"></div>
             <div className="photo-img-outsider">
               <img className="photo-img" src={previewImg} />
             </div>

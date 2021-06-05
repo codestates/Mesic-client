@@ -88,6 +88,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
     <div className="modal-outsider show1">
       <div className="modal">
         <div
+          className="modal-close-btn"
           onClick={() => {
             setOpenPostModal(false);
             deletePostMarkers();
