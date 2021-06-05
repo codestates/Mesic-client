@@ -113,27 +113,42 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     }
     .widget-outsider {
       display: flex;
-      margin-top: 15px;
+      margin-top: 5px;
       padding-right: 30px;
       justify-content: space-around;
-      img {
-        margin-top: 10px;
-        width: 80px;
-        height: 80px;
+      align-items: center;
+      .thumbnail-cd {
+        margin: 10px 10px 0px 0px;
+        width: 100px;
+        height: 100px;
         border-radius: 100%;
         box-shadow: 0px 3px 3px 0px rgba(94, 112, 134, 0.7);
       }
-      div {
-        padding: 15px 0px 15px 20px;
-        margin-top: 5px;
+      .title-cd {
+        margin: 10px 10px;
+        padding: 10px 0px 0px 10px;
+        align-self: center;
       }
       iframe {
+        display: none;
+        // align-self: center;
+        // border-radius: 15px;
+        // background-color: $main-color;
+        // width: 40px;
+        // height: 40px;
+        // margin-left: 10px;
+      }
+      & > div:last-child {
+        margin-left: 3px;
+        align-content: center;
+      }
+      .play-pause {
+        display: flex;
         align-self: center;
-        border-radius: 15px;
-        background-color: $main-color;
-        width: 40px;
-        height: 40px;
-        margin-left: 10px;
+        width: 2.6vw;
+        height: 4.5vh;
+        cursor: pointer;
+        margin-top: 10px;
       }
     }
     .edit-del-btn {
@@ -392,7 +407,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   top: 30%;
   box-shadow: $box-shadow;
   -webkit-transform: translate(-100%, 0%);
-  transform: translate(-105%, -41.5%);
+  transform: translate(-113%, -59.3%);
 }
 
 .edit-music-list {

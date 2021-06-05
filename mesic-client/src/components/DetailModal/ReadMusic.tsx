@@ -5,6 +5,9 @@ import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
 import EditMusic from "../DetailModal/EditMusic";
 import cdImg from "../../images/cdcd.png";
+import pauseImg from "../../images/pause.png";
+import playImg from "../../images/play.png";
+import { idText } from "typescript";
 
 function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
@@ -61,8 +64,40 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         setPinUpdate(true);
         setUpdateMode(false);
         setOpenConfirm(false);
+        setIsPlay(true);
       });
   };
+
+  const [isPlay, setIsPlay] = useState<boolean>(true);
+
+  const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
+    input !== null && input.tagName === "IFRAME";
+
+  useEffect(() => {
+    let frame = document.getElementById("ytplayer");
+    if (isPlay) {
+      if (isIFrame(frame) && frame.contentWindow) {
+        frame.contentWindow.postMessage(
+          '{"event":"command","func":"playVideo","args":""}',
+          "*"
+        );
+      }
+    } else {
+      if (isIFrame(frame) && frame.contentWindow) {
+        frame.contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          "*"
+        );
+      }
+    }
+  }, [isPlay]);
+
+  useEffect(() => {
+    if (updateMode && isPlay) {
+      setIsPlay(false);
+    }
+    return;
+  }, [updateMode]);
 
   return (
     <>
@@ -91,17 +126,34 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
             <div className="detail-line"></div>
             <div className="ifram-outsider">
               <div className="widget-outsider">
-                <img src={updateMusic.thumbnail}></img>
-                <div>{updateMusic.title}</div>
+                <img className="thumbnail-cd" src={updateMusic.thumbnail}></img>
+                <div className="title-cd">{updateMusic.title}</div>
                 <iframe
                   src={
                     updateMusic.video_Id
-                      ? `https://www.youtube.com/embed/${updateMusic.video_Id}?modestbranding=1`
+                      ? `https://www.youtube.com/embed/${updateMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=0&loop=1&playlist=${updateMusic.video_Id}
+                      `
                       : "https://www.youtube.com/embed/"
                   }
                   id="ytplayer"
                   frameBorder="0"
+                  allow="autoplay"
                 ></iframe>
+                <div
+                  onClick={() => {
+                    if (!isPlay) {
+                      setIsPlay(true);
+                    } else {
+                      setIsPlay(false);
+                    }
+                  }}
+                >
+                  {isPlay ? (
+                    <img className="play-pause" src={pauseImg} />
+                  ) : (
+                    <img className="play-pause" src={playImg} />
+                  )}
+                </div>
               </div>
               <div className="save-cancel-btn">
                 <button onClick={updateReadMusic}>저장</button>
@@ -142,17 +194,37 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                   </div>
                   <div className="detail-line"></div>
                   <div className="widget-outsider">
-                    <img src={readMusic.thumbnail}></img>
-                    <div>{readMusic.title}</div>
+                    <img
+                      className="thumbnail-cd"
+                      src={readMusic.thumbnail}
+                    ></img>
+                    <div className="title-cd">{readMusic.title}</div>
                     <iframe
                       src={
                         readMusic.video_Id
-                          ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1`
+                          ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=${readMusic.video_Id}
+                          `
                           : "https://www.youtube.com/embed/"
                       }
                       id="ytplayer"
                       frameBorder="0"
+                      allow="autoplay"
                     ></iframe>
+                    <div>
+                      {isPlay ? (
+                        <img
+                          className="play-pause"
+                          src={pauseImg}
+                          onClick={() => setIsPlay(false)}
+                        />
+                      ) : (
+                        <img
+                          className="play-pause"
+                          src={playImg}
+                          onClick={() => setIsPlay(true)}
+                        />
+                      )}
+                    </div>
                   </div>
                 </>
               ) : (
@@ -176,17 +248,34 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 </div>
                 <div className="detail-line"></div>
                 <div className="widget-outsider">
-                  <img src={readMusic.thumbnail}></img>
-                  <div>{readMusic.title}</div>
+                  <img className="thumbnail-cd" src={readMusic.thumbnail}></img>
+                  <div className="title-cd">{readMusic.title}</div>
                   <iframe
                     src={
                       readMusic.video_Id
-                        ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1`
+                        ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=${readMusic.video_Id}
+                        `
                         : "https://www.youtube.com/embed/"
                     }
                     id="ytplayer"
                     frameBorder="0"
+                    allow="autoplay"
                   ></iframe>
+                  <div
+                    onClick={() => {
+                      if (!isPlay) {
+                        setIsPlay(true);
+                      } else {
+                        setIsPlay(false);
+                      }
+                    }}
+                  >
+                    {isPlay ? (
+                      <img className="play-pause" src={pauseImg} />
+                    ) : (
+                      <img className="play-pause" src={playImg} />
+                    )}
+                  </div>
                 </div>
               </>
             ) : (
