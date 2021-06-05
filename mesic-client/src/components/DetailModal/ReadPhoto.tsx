@@ -96,19 +96,19 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
       />
       <div className="photo">
         {updateMode ? (
-          <div>
+          <>
             <div className="post-icon">
               <i className="fa fa-camera"></i>
             </div>
             <div className="detail-line"></div>
-            <input
+            {/* <input
               className="input-photo"
               ref={editedImageInput}
               type="file"
               id="photo-file"
               accept="image/*"
               onChange={handleEditedImg}
-            />
+            /> */}
             <div className="photo-img-outsider">
               <img className="photo-img" src={editedPreviewImg} />
             </div>
@@ -123,9 +123,9 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
                 취소
               </button>
             </div>
-          </div>
+          </>
         ) : (
-          <div className="read-mode-photo">
+          <>
             {isLogin && mode !== "WATCH" ? (
               fileName !== "undefined" ? (
                 <>
@@ -195,7 +195,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
                 <div>팔로우가 사진을 추가하지 않았어요</div>
               </>
             )}
-          </div>
+          </>
         )}
       </div>
     </>

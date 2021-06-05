@@ -73,7 +73,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
       />
       <div className="memo">
         {updateMode ? (
-          <div>
+          <>
             <div className="edit-del-btn">
               <i className="fa fa-sticky-note read" aria-hidden="true"></i>
             </div>
@@ -83,7 +83,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                 {readMemo}
               </textarea>
             </div>
-            <div>
+            <>
               {isLogin ? (
                 <div className="save-cancel-btn">
                   <button onClick={updateReadMemo}>저장</button>
@@ -99,10 +99,10 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
               ) : (
                 <></>
               )}
-            </div>
-          </div>
+            </>
+          </>
         ) : (
-          <div>
+          <>
             {isLogin && mode !== "WATCH" ? (
               readMemo.length > 0 ? (
                 <>
@@ -172,7 +172,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                 <div className="read-memo">팔로우의 메모가 없습니다.</div>
               </>
             )}
-          </div>
+          </>
         )}
       </div>
     </>
