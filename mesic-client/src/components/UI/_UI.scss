@@ -88,8 +88,7 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 }
 
 .search-user-box {
-  position: absolute;
-  bottom: 20px;
+  text-align: center;
 }
 
 .each-follow {
@@ -147,8 +146,6 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 
 .find-user-btn {
   box-shadow: $btn-shadow;
-  margin: 0 auto;
-  transform: translateX(33%);
   padding: 11px 22px;
   border: 0;
   background-color: $main-color;
@@ -168,6 +165,7 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 
 .search-user-modal {
   @include follow-user-modal;
+  box-shadow: none;
   -webkit-transform: translate(-6%, -30%);
   transform: translate(-6%, -30%);
 }
