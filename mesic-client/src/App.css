@@ -229,7 +229,7 @@
       .modal .photo .edit-del-btn > div > i {
         cursor: pointer; }
   .modal .memo {
-    margin: 18px 0px 0px 0px;
+    margin-top: 2vh;
     height: 24vh;
     width: 19vw;
     display: flex;
@@ -311,15 +311,14 @@
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 35px;
+  border-radius: 20px;
   border: 0;
   padding: 20px;
   width: 350px;
   height: 400px;
-  top: 30%;
+  top: 0%;
   box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
-  -webkit-transform: translate(-19vw, -24vh);
-  transform: translate(-19vw, -24vh); }
+  transform: translateX(-120%); }
 
 .edit-music-list {
   display: flex;
@@ -507,6 +506,21 @@
   top: 1.5vh;
   left: 0.5vw; }
 
+.no-contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #646464;
+  height: 22vh; }
+
+.no-music {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #646464;
+  width: 16.5vw;
+  height: 13vh; }
+
 .followlist {
   background-color: #fefefe;
   position: absolute;
@@ -549,8 +563,7 @@
   height: 340px; }
 
 .search-user-box {
-  position: absolute;
-  bottom: 20px; }
+  text-align: center; }
 
 .each-follow {
   padding: 0px 10px;
@@ -605,8 +618,6 @@
 
 .find-user-btn {
   box-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
-  margin: 0 auto;
-  transform: translateX(33%);
   padding: 11px 22px;
   border: 0;
   background-color: #19c9d4;
@@ -635,6 +646,7 @@
   box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   -webkit-transform: translate(10%, 10%);
   transform: translate(10%, 10%);
+  box-shadow: none;
   -webkit-transform: translate(-6%, -30%);
   transform: translate(-6%, -30%); }
   .search-user-modal input[type="text"] {
