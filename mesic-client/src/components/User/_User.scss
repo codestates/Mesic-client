@@ -173,7 +173,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 
 // mypage modal part
 .mypage-edit-modal {
-  z-index: 3;
+  display: none;
+  position: absolute;
+  z-index: 5;
   box-shadow: $box-shadow;
   background-color: #fefefe;
   position: absolute;
