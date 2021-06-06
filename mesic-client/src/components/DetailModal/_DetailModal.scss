@@ -542,11 +542,11 @@ $border-color: #e1e1e1;
   z-index: 4;
   border: 0;
   padding: 20px;
-  width: 150vw;
-  height: 110vh;
+  width: 100vw;
+  height: 100vh;
   top: 30%;
-  -webkit-transform: translate(-50%, 0%);
-  transform: translate(-20%, -34%);
+  -webkit-transform: translate(-37vw, -34.65vh);
+  transform: translate(-37vw, -34.65vh);
 }
 .confirm-modal-content {
   display: flex;
@@ -556,8 +556,8 @@ $border-color: #e1e1e1;
   width: 20vw;
   height: 17vh;
   position: absolute;
-  -webkit-transform: translate(-50%, 0%);
-  transform: translate(275%, 210%);
+  -webkit-transform: translate(38vw, 35vh);
+  transform: translate(38vw, 35vh);
   background-color: white;
   border-radius: 15px;
   & > div:first-child {
