@@ -48,21 +48,16 @@ function EditMypage({
         return;
       }
 
-      console.log("data.Location", data.Location);
-
       const updateData = {
         nickname: editNicknameInput.length > 0 ? editNicknameInput : nickname,
         profile: editProfileImg.name ? data.Location : profileImg,
       };
-
-      console.log(updateData);
 
       axios
         .patch(UPDATE_USER_URL, updateData, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          console.log("patchuser === ", res);
           if (res.status === 200) {
             getUserInfo(user_id);
             setOpenEditMypage(false);

@@ -179,12 +179,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   position: absolute;
   padding: 30px 40px 30px 30px;
   width: 500px;
-  left: 90%;
+  right: 2%;
+  bottom: 25%;
   border: none;
   border-radius: 20px;
   text-align: center;
-  -webkit-transform: translate(-14vw, 20vh);
-  transform: translate(-14vw, 20vh);
 
   .mypage-title {
     color: $mesic-color;

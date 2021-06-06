@@ -150,12 +150,10 @@ function MainPage() {
 
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
-    console.log(token);
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${user_id}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log("my pin data : ", data);
         setMypinData(data);
         setPinUpdate(false);
       })
@@ -202,7 +200,6 @@ function MainPage() {
 
     const photoURL = readMarkerData.photo;
     const file = photoURL.split("/");
-    console.log("split : ", file[file.length - 1]);
     const fileName = file[file.length - 1];
     const param = {
       Bucket: bucket,
@@ -214,7 +211,6 @@ function MainPage() {
         console.log(err);
         return;
       }
-      console.log("delete complete");
 
       axios
         .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
@@ -229,16 +225,6 @@ function MainPage() {
         })
         .catch((err) => console.log(err));
     });
-    // axios
-    //   .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
-    //     headers: { authorization: `Bearer ${token}` },
-    //   })
-    //   .then((res) => {
-    //     console.log("delete pin : ", res);
-    //     setOpenReadModal(false);
-    //     dispatch(switchMode("NONE"));
-    //   })
-    //   .catch((err) => console.log(err));
   };
   // (POST MODE) 지도 클릭 마커
 
@@ -296,7 +282,6 @@ function MainPage() {
 
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
-        console.log(marker.id);
         infowindow.setMap(null);
         handleMyMarkerClick(marker.id);
       });
@@ -433,7 +418,6 @@ function MainPage() {
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${checkAdded}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log("follow pin data : ", data);
         setFollowPinData(data);
       })
       .catch((err) => console.log(err));
@@ -464,7 +448,6 @@ function MainPage() {
 
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
-        console.log(marker.id);
         infowindow.setMap(null);
         handleFollowMarkerClick(marker.id[0]);
       });
@@ -642,7 +625,6 @@ function MainPage() {
       setOpenReadModal(false);
       setReadMarkerData(null);
       const clickPosition = mouseEvent.latLng;
-      console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
         setLoginController(true);
@@ -664,7 +646,6 @@ function MainPage() {
   const handleChangeKeywordInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setKeywordInput(e.target?.value);
-      console.log(keywordInput);
     },
     [keywordInput]
   );

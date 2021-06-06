@@ -16,7 +16,6 @@ function ReadModal({
   const state = useSelector((state: RootState) => state);
   const { isLogin } = state.userReducer.user;
   const { mode } = state.modeReducer.user;
-  console.log(readMarkerData);
   const { video_Id, title, thumbnail } = readMarkerData.music;
   const { photo, memo, _id } = readMarkerData;
   const [readMusic, setReadMusic] = useState<any>({

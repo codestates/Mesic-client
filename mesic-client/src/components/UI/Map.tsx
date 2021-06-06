@@ -32,7 +32,6 @@ function Map(props: MapProps) {
       "click",
       function (mouseEvent: any) {
         var markerPosition = mouseEvent.latLng;
-        console.log(markerPosition);
         // 마커를 생성
         let marker = new window.kakao.maps.Marker({
           position: markerPosition,
@@ -42,7 +41,6 @@ function Map(props: MapProps) {
         마커를 지도 위에 표시*/
         marker.setMap(map);
         if (!isLogin) {
-          console.log("로그인 후 나만의 로그를 만들어보세요!");
           setTimeout(() => marker.setMap(null), 2000);
         } else {
           dispatch(switchMode("POST"));
