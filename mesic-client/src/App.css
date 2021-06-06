@@ -8,10 +8,9 @@
   justify-content: space-around;
   align-items: center;
   height: 87vh;
-  width: 40vw;
   right: 0%;
-  -webkit-transform: translate(7vw, 10vh);
-  transform: translate(7vw, 10vh); }
+  -webkit-transform: translate(-2vw, 10vh);
+  transform: translate(-2vw, 10vh); }
 
 .modal {
   display: flex;
@@ -438,11 +437,11 @@
   z-index: 4;
   border: 0;
   padding: 20px;
-  width: 150vw;
-  height: 110vh;
+  width: 100vw;
+  height: 100vh;
   top: 30%;
-  -webkit-transform: translate(-50%, 0%);
-  transform: translate(-20%, -34%); }
+  -webkit-transform: translate(-37vw, -34.65vh);
+  transform: translate(-37vw, -34.65vh); }
 
 .confirm-modal-content {
   display: flex;
@@ -452,8 +451,8 @@
   width: 20vw;
   height: 17vh;
   position: absolute;
-  -webkit-transform: translate(-50%, 0%);
-  transform: translate(275%, 210%);
+  -webkit-transform: translate(38vw, 35vh);
+  transform: translate(38vw, 35vh);
   background-color: white;
   border-radius: 15px; }
   .confirm-modal-content > div:first-child {
@@ -1157,8 +1156,8 @@
   margin-right: 10vw; }
 
 .first-section .in {
-  animation: fadein 2.5s;
-  -webkit-animation: fadein 2.5s; }
+  animation: fadein 2s;
+  -webkit-animation: fadein 2s; }
 
 .first-section .mainpage-mesic-subtitle {
   line-height: 0.7vw;
@@ -1175,8 +1174,8 @@
 
 .second-section .in {
   display: flex;
-  animation: fadein 2.5s;
-  -webkit-animation: fadein 2.5s; }
+  animation: fadein 2s;
+  -webkit-animation: fadein 2s; }
 
 .second-section .mainpage-mesic-subtitle {
   line-height: 1.9vw;
@@ -1194,8 +1193,8 @@
   width: 45vw; }
 
 .third-section .in {
-  animation: fadein 2.5s;
-  -webkit-animation: fadein 2.5s; }
+  animation: fadein 2s;
+  -webkit-animation: fadein 2s; }
 
 .third-section .mainpage-mesic-subtitle {
   line-height: 1.9vw;
@@ -1216,8 +1215,8 @@
   width: 50vw; }
 
 .fourth-section .in {
-  animation: fadein 2.5s;
-  -webkit-animation: fadein 2.5s; }
+  animation: fadein 2s;
+  -webkit-animation: fadein 2s; }
 
 .fourth-section .mainpage-mesic-subtitle {
   line-height: 1.9vw;
@@ -1238,8 +1237,8 @@
   width: 55vw; }
 
 .fifth-section .in {
-  animation: fadein 2.5s;
-  -webkit-animation: fadein 2.5s; }
+  animation: fadein 2s;
+  -webkit-animation: fadein 2s; }
 
 .fifth-section .mainpage-mesic-subtitle {
   line-height: 1.7vw;
@@ -1429,7 +1428,8 @@
 
 @keyframes fadein {
   from {
-    opacity: 0; }
+    opacity: 0;
+    transform: scale(0.8, 0.8); }
   to {
     opacity: 1; } }
 
