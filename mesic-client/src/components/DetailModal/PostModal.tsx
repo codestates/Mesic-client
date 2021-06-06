@@ -58,7 +58,6 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
         console.log(err);
         return;
       }
-      console.log("data.Location : ", data.Location);
 
       const postData = {
         user_id,
@@ -70,7 +69,6 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
         photo: data.Location,
         memo: postMemo,
       };
-      console.log("sending : ", postData);
 
       axios
         .post(`${process.env.REACT_APP_SERVER_URL}/pins`, postData, {

@@ -59,7 +59,6 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${markerId}`)
       .then((res) => {
-        console.log("deleteMusic: ", res.data.music);
         setReadMusic(res.data.music);
         setPinUpdate(true);
         setUpdateMode(false);

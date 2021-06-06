@@ -26,7 +26,6 @@ function FollowList({ setLoginController }: any) {
         axios
           .get(`${process.env.REACT_APP_SERVER_URL}/users/${eachId}`)
           .then((res) => {
-            console.log("getting follow userinfo : ", res);
             res.data.marker = "";
             tempArr.push(res.data);
           });
@@ -64,7 +63,6 @@ function FollowList({ setLoginController }: any) {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/${user_id}`)
       .then((res) => {
-        console.log("update follow : ", res);
         dispatch(refreshFollow(res.data.follow));
       })
       .catch((err) => console.log(err));

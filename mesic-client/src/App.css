@@ -989,8 +989,8 @@
   border: none;
   border-radius: 20px;
   text-align: center;
-  -webkit-transform: translate(-60%, 30%);
-  transform: translate(-60%, 30%); }
+  -webkit-transform: translate(-14vw, 20vh);
+  transform: translate(-14vw, 20vh); }
   .mypage-edit-modal .mypage-title {
     color: #19c9d4;
     margin: 20px;

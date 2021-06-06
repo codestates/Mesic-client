@@ -30,9 +30,7 @@ function IntroPage() {
     });
   };
   const onScroll = () => {
-    // console.log(window.scrollY);
     setScrollY(window.scrollY);
-    console.log("Y : ", window.scrollY);
   };
 
   useEffect(() => {

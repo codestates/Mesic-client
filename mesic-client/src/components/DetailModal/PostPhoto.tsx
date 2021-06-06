@@ -15,7 +15,6 @@ function PostPhoto({ postImg, setPostImg }: any) {
 
   useEffect(() => {
     if (typeof postImg !== "object") {
-      console.log("1");
       const splitArr = postImg.split("/");
       const imgName = splitArr[splitArr.length - 1];
       setFileName(imgName);

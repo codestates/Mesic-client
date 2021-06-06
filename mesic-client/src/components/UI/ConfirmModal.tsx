@@ -49,7 +49,6 @@ function ConfirmModal({
         console.log(err);
         return;
       }
-      console.log("delete complete");
 
       const location =
         "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
@@ -68,7 +67,6 @@ function ConfirmModal({
           }
         )
         .then((res) => {
-          console.log("delete-patch photo : ", res);
           getUpdatedPin();
         })
         .catch((err) => console.log(err));

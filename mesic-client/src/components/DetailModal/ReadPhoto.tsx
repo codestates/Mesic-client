@@ -49,12 +49,10 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
         console.log(err);
         return;
       }
-      //console.log("data.Location", data.Location);
 
       const updateData = {
         photo: data.Location,
       };
-      console.log("sending to update : ", updateData);
 
       axios
         .patch(
@@ -65,7 +63,6 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
           }
         )
         .then((res) => {
-          //console.log("patch photo", res);
           setEditedImg("");
           getUpdatedPin();
         })

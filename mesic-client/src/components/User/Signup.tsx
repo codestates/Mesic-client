@@ -66,14 +66,13 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
       follow: [],
       refreshToken: "",
     };
-    //console.log(signupData);
+
     const validEmail = validateEmail(idInput);
     const validPw = validatePassword(pwInput, pwCheckInput);
     if (validEmail && validPw) {
       axios
         .post(SIGNUP_URL, signupData)
         .then((res) => {
-          console.log("signup  ===", res);
           if (res.status === 201) {
             //closeSignup();
             axios
@@ -82,7 +81,6 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 password: res.data.password,
               })
               .then((res) => {
-                console.log("login after signup === ", res);
                 if (res.data.accessToken) {
                   dispatch(getAccessToken(res.data.accessToken));
                   getUserInfo(res.data.id);
