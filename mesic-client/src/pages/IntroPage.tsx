@@ -32,12 +32,33 @@ function IntroPage() {
   const onScroll = () => {
     // console.log(window.scrollY);
     setScrollY(window.scrollY);
-    //console.log("Y : ", window.scrollY);
+    console.log("Y : ", window.scrollY);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const addAnimation = () => {
+    const illus = document.querySelectorAll(".section-img");
+    for (let i = 0; i < illus.length; i++) {
+      const bounding = illus[i].getBoundingClientRect().top;
+      if (window.innerHeight > bounding) {
+        illus[i].classList.add("in");
+      } else {
+        illus[i].classList.remove("in");
+      }
+    }
+  };
+  const addEventListener = () => {
+    window.addEventListener("scroll", addAnimation);
+    window.addEventListener("load", addAnimation);
+  };
+
+  useEffect(() => {
+    addEventListener();
+    addAnimation();
   }, []);
   return (
     <>
@@ -79,10 +100,7 @@ function IntroPage() {
         </section>
         <section className="mainpage-mesic first-section">
           <div className="mainpage-mesic-body">
-            <img
-              src={section1_Img}
-              className={`section-img ${scrollY < 400 ? "display-none" : "in"}`}
-            />
+            <img src={section1_Img} className="section-img" />
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-1" src={blob_1} />
               <div className="mainpage-mesic-subtitle ">
@@ -113,22 +131,12 @@ function IntroPage() {
                 다양한 추억들이 있습니다.
               </div>
             </div>
-            <img
-              src={section2_Img}
-              className={`section-img ${
-                scrollY < 1300 ? "display-none" : "in"
-              }`}
-            />
+            <img src={section2_Img} className="section-img" />
           </div>
         </section>
         <section className="mainpage-mesic third-section">
           <div className="mainpage-mesic-body">
-            <img
-              src={section3_Img}
-              className={`section-img ${
-                scrollY < 2300 ? "display-none" : "in"
-              }`}
-            />
+            <img src={section3_Img} className="section-img" />
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-3" src={blob_3} />
               <div className="mainpage-mesic-subtitle ">
@@ -157,22 +165,12 @@ function IntroPage() {
                 추억을 다양한 기록으로 남겨보세요.
               </div>
             </div>
-            <img
-              src={section4_Img}
-              className={`section-img ${
-                scrollY < 3300 ? "display-none" : "in"
-              }`}
-            />
+            <img src={section4_Img} className="section-img" />
           </div>
         </section>
         <section className="mainpage-mesic fifth-section">
           <div className="mainpage-mesic-body">
-            <img
-              src={section5_Img}
-              className={`section-img ${
-                scrollY < 4300 ? "display-none" : "in"
-              }`}
-            />
+            <img src={section5_Img} className="section-img" />
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-5" src={blob_5} />
               <div className="mainpage-mesic-subtitle ">

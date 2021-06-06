@@ -102,8 +102,8 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     margin-right: 10vw;
   }
   .in {
-    animation: fadein 2.5s;
-    -webkit-animation: fadein 2.5s;
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 0.7vw;
@@ -123,8 +123,8 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   }
   .in {
     display: flex;
-    animation: fadein 2.5s;
-    -webkit-animation: fadein 2.5s;
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
@@ -145,8 +145,8 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 45vw;
   }
   .in {
-    animation: fadein 2.5s;
-    -webkit-animation: fadein 2.5s;
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
@@ -170,8 +170,8 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 50vw;
   }
   .in {
-    animation: fadein 2.5s;
-    -webkit-animation: fadein 2.5s;
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
@@ -195,8 +195,8 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
     width: 55vw;
   }
   .in {
-    animation: fadein 2.5s;
-    -webkit-animation: fadein 2.5s;
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.7vw;
@@ -423,6 +423,7 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 @keyframes fadein {
   from {
     opacity: 0;
+    transform: scale(0.8, 0.8);
   }
   to {
     opacity: 1;
