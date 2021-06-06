@@ -100,15 +100,16 @@ function EditMypage({
   };
 
   return (
-    <div
-      onClick={() => {
-        handleReturnMypage();
-        setOpenMypage(false);
-        setOpenEditMypage(false);
-      }}
-      className={`mypage-edit-background ${openEditMypage ? "show" : ""}`}
-    >
-      <div className="mypage-edit-modal">
+    <>
+      <div
+        onClick={() => {
+          handleReturnMypage();
+          setOpenMypage(false);
+          setOpenEditMypage(false);
+        }}
+        className={`mypage-edit-background ${openEditMypage ? "show" : ""}`}
+      ></div>
+      <div className={`mypage-edit-modal ${openEditMypage ? "show" : ""}`}>
         <div
           className="mypage-close"
           onClick={() => {
@@ -176,7 +177,7 @@ function EditMypage({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
