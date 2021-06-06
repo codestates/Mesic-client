@@ -75,7 +75,10 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
         {updateMode ? (
           <>
             <div className="edit-del-btn">
-              <i className="fa fa-sticky-note read fa-lg" aria-hidden="true"></i>
+              <i
+                className="fa fa-sticky-note read fa-lg"
+                aria-hidden="true"
+              ></i>
             </div>
             <div className="textarea-outsider">
               <textarea className="input-memo" onChange={handleUpdateMemo}>
@@ -122,7 +125,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
                 </>
               ) : (
                 <>
-                  <div className="post-icon">
+                  <div className="edit-del-btn">
                     <i
                       className="fa fa-sticky-note read fa-lg"
                       aria-hidden="true"
@@ -156,17 +159,30 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
               )
             ) : readMemo.length > 0 ? (
               <>
-                <div className="post-icon">
-                  <i className="fa fa-sticky-note read fa-lg" aria-hidden="true"></i>
+                <div className="edit-del-btn">
+                  <i
+                    className="fa fa-sticky-note read fa-lg"
+                    aria-hidden="true"
+                  ></i>
                 </div>
-                <div className="read-memo">{readMemo}</div>
+                <div className="read-memo" style={{ alignSelf: "center" }}>
+                  {readMemo}
+                </div>
               </>
             ) : (
               <>
-                <div className="post-icon">
-                  <i className="fa fa-sticky-note read fa-lg" aria-hidden="true"></i>
+                <div className="edit-del-btn">
+                  <i
+                    className="fa fa-sticky-note read fa-lg"
+                    aria-hidden="true"
+                  ></i>
                 </div>
-                <div className="read-memo">팔로우의 메모가 없습니다.</div>
+                <div
+                  className="read-memo no-contents"
+                  style={{ alignSelf: "center" }}
+                >
+                  메모가 없습니다.
+                </div>
               </>
             )}
           </>
