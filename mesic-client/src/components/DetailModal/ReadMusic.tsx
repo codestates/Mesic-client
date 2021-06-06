@@ -177,7 +177,10 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               readMusic.video_Id.length > 0 ? (
                 <>
                   <div className="edit-del-btn">
-                    <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
+                    <i
+                      className="fa fa-headphones fa-lg"
+                      aria-hidden="true"
+                    ></i>
                     <div>
                       <i
                         className="fas fa-pencil-alt"
@@ -230,7 +233,10 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               ) : (
                 <>
                   <div className="post-icon">
-                    <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
+                    <i
+                      className="fa fa-headphones fa-lg"
+                      aria-hidden="true"
+                    ></i>
                   </div>
                   <div className="add-btn-container">
                     <button
@@ -247,10 +253,11 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 <div className="post-icon">
                   <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
                 </div>
-                <div className="detail-line"></div>
                 <div className="widget-outsider">
                   <img className="thumbnail-cd" src={readMusic.thumbnail}></img>
-                  <div className="title-cd">{readMusic.title}</div>
+                  <div className="title-cd-hidden">
+                    <div className="title-cd">{readMusic.title}</div>
+                  </div>
                   <iframe
                     src={
                       readMusic.video_Id
@@ -281,13 +288,11 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               </>
             ) : (
               <>
-                <div className="post-icon">
+                <div className="edit-del-btn">
                   <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
                 </div>
-                <div className="detail-line"></div>
                 <div className="follow-widget-outsider">
-                  <img src={cdImg}></img>
-                  <div>팔로우가 음악을 추가하지 않았어요</div>
+                  <div className="no-music">음악이 없습니다.</div>
                 </div>
               </>
             )}

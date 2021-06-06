@@ -181,7 +181,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
             ) : fileName !== "undefined" ? (
               <>
                 <div>
-                  <div className="post-icon">
+                  <div className="edit-del-btn">
                     <i className="fa fa-camera fa-lg"></i>
                   </div>
                   <div className="photo-img-outsider">
@@ -192,10 +192,12 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
             ) : (
               <>
                 <div>
-                  <div className="post-icon">
+                  <div className="edit-del-btn">
                     <i className="fa fa-camera fa-lg"></i>
                   </div>
-                  <div>팔로우가 사진을 추가하지 않았어요</div>
+                  <div className="no-contents">
+                    사진이 없습니다.
+                  </div>
                 </div>
               </>
             )}
