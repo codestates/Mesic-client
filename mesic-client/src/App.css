@@ -252,6 +252,7 @@
         position: relative;
         display: flex;
         -webkit-appearance: none;
+        outline: 0;
         width: 16vw;
         height: 24vh;
         border: 0;
@@ -594,6 +595,7 @@
     padding: 10px;
     flex: 0 1 auto;
     margin: 5px;
+    outline: 0;
     cursor: pointer; }
   .each-follow-flex button {
     position: absolute;
@@ -980,7 +982,9 @@
   /* Enable scroll if needed */ }
 
 .mypage-edit-modal {
-  z-index: 3;
+  display: none;
+  position: absolute;
+  z-index: 5;
   box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   background-color: #fefefe;
   position: absolute;
@@ -1089,10 +1093,21 @@
   justify-content: center;
   position: relative; }
 
-.mainpage-img {
+.mainpage-preview-container {
+  border-radius: 20px;
+  border: 1px solid #e8e8e8;
   width: 60vw;
-  margin-right: 2vw;
-  height: max-content; }
+  margin-right: 6vw;
+  height: max-content;
+  box-shadow: 0px 15px 20px 10px rgba(84, 84, 84, 0.4);
+  overflow: hidden; }
+  .mainpage-preview-container video {
+    display: block; }
+
+.browser {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #e8e8e8; }
 
 .blob-img {
   position: absolute;
@@ -1442,9 +1457,6 @@
 html,
 body {
   width: 100vw; }
-
-input {
-  outline: 0; }
 
 /* MainPage & IntroPage 여기서 하세요 */
 #kakao-map {

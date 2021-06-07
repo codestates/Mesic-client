@@ -4,7 +4,7 @@ import Nav from "../components/UI/Nav";
 
 import logo from "../images/mesic-logo.png";
 import github_logo from "../images/github-logo.png";
-import browser from "../images/Browser.png";
+import browser from "../images/browser.png";
 
 import section1_Img from "../images/illustration-1.png";
 import section2_Img from "../images/illustration-2.png";
@@ -75,7 +75,15 @@ function IntroPage() {
         </div>
         <section className="mainpage-mesic">
           <div className="mainpage-mesic-body">
-            <img src={browser} className="left-img mainpage-img" />
+            <div className="mainpage-preview-container">
+              <img src={browser} className="browser" />
+              <video autoPlay muted loop width="100%" height="100%">
+                <source
+                  src="https://drive.google.com/uc?export=download&id=1TcSwrqhmR-y94CnA17XXDOgNdOu8emCb"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
             <div className="mainpage-mesic-text">
               <div className="mainpage-mesic-about-us">ABOUT US</div>
               <div className="mainpage-mesic-title">
