@@ -53,7 +53,7 @@ function Mypage(props: MypageProps) {
               <div>{nickname}</div>
             </div>
           </div>
-          {email !== "yatong@hahaha.com" ? (
+          {email !== "guest@codestates.com" ? (
             <button
               className="mypage-modify-btn"
               onClick={handleOpenEditMypage}

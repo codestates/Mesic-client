@@ -92,7 +92,7 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
   }, [isLogin]);
 
   const loginAsGuest = () => {
-    const loginData = { email: "yatong@hahaha.com", password: "asdf1!" };
+    const loginData = { email: "guest@codestates.com", password: "asdf1!" };
     axios.post(LOGIN_URL, loginData).then((res) => {
       if (res.data.accessToken) {
         dispatch(getAccessToken(res.data.accessToken));
