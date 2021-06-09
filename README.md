@@ -4,7 +4,9 @@
 
 ### 🪄🔮  Mesic [ Memory + Music ]  
 
-![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FYyf7g%2Fbtq6v9QQthx%2FxuK3sot4SxIt5WklNifTd0%2Fimg.png)
+<p align="center">
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FYyf7g%2Fbtq6v9QQthx%2FxuK3sot4SxIt5WklNifTd0%2Fimg.png" />
+</p>
 
 🎧 음악을 들으면 생각나는 추억이 있으신가요?   
 Mesic에서 추억을 기록하고 사람들과 공유해보세요!
