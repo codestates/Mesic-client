@@ -39,12 +39,12 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
 ![](https://images.velog.io/images/jinhw12/post/3e835f75-a913-45b9-b1ca-ae1ff0d78f59/image.png)
 
 
-# 사용 스텍 및 시스템아키텍처
+## 사용 스텍 및 시스템아키텍처
 
 ![](https://cdn.discordapp.com/attachments/836032297622175820/850248630257319936/mesic-tech-stack.jpg)
 ![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/Architecture.png?raw=true)
 
->## Front-end
+>### Front-end
 
 - Typescript
 - React 
@@ -54,7 +54,7 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
 - Scss
 
 
->## Back-end
+>### Back-end
 
 - NestJS
 - Node.js
