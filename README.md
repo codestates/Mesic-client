@@ -19,12 +19,9 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
     
 # 서비스 이용 방법
 
-  ### 1. 핀을 등록할 장소를 검색하세요. 🔍
-
 ![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/step%201.png?raw=true)
 
-  ### 2. 지도에서 원하는 위치에 음악, 사진, 메모를 추가하세요. 📷 🎶 📝 👈
-
+![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/step2.png?raw=true)
 
   ### 3. PIN IT을 누르고 지도에 핀을 생성하세요. 📍 
 
