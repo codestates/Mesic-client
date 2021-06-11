@@ -19,12 +19,7 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
     
 # 서비스 이용 방법
 
-![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/step%201.png?raw=true)
-
-![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/step2.png?raw=true)
-
- 
-
+![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/mesic-steps.png?raw=true)
 
 ## 사용 스텍 및 시스템아키텍처
 
