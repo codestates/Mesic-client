@@ -21,13 +21,12 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
 
   ### 1. 핀을 등록할 장소를 검색하세요. 🔍
 
-![](https://images.velog.io/images/jinhw12/post/4fc75d5c-6366-4091-bf98-d26acaa78bdb/image.png)
+![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/step%201.png?raw=true)
 
-  ### 2. 지도에서 원하는 위치를 클릭하고 음악, 사진, 메모를 추가한 후 PIN IT을 누르세요. 📷 🎶 📝 👈
+  ### 2. 지도에서 원하는 위치에 음악, 사진, 메모를 추가하세요. 📷 🎶 📝 👈
 
-![](https://images.velog.io/images/jinhw12/post/d4a779c4-27ed-4237-9aea-939dd127d333/image.png)
 
-  ### 3. 지도에 핀이 생성되었어요. 📍 
+  ### 3. PIN IT을 누르고 지도에 핀을 생성하세요. 📍 
 
 ![](https://images.velog.io/images/jinhw12/post/864a790c-6c74-482b-94df-f565f60fddb2/image.png)
 
