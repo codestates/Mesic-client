@@ -22,10 +22,10 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
 ![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/mesic-steps.png?raw=true)
 
 
-## Flowchart
-### client
+## Flow chart
+>### client
 ![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/mesic-flowchart.jpeg?raw=true)
-### server
+>### server
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FKONZF%2Fbtq6uIfn1cO%2FFvOV8Gv60GiovR0fE1FDD0%2Fimg.jpg)
 
 ## 사용 스텍 및 시스템 아키텍처
