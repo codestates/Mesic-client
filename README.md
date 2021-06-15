@@ -24,7 +24,7 @@ Mesic에서 추억을 기록하고 사람들과 공유해보세요!
 
 ## Flow Chart
 >### Client
-![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/mesic-flowchart.jpeg?raw=true)
+![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/mesic-flowchart-client.jpeg?raw=true)
 >### Server
 ![](https://github.com/Gwan-Woo-Jeong/mesic_gifs/blob/main/server-flowchart.jpeg?raw=true)
 
