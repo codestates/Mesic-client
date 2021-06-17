@@ -4,7 +4,7 @@ import Nav from "../components/UI/Nav";
 
 import logo from "../images/mesic-logo.png";
 import github_logo from "../images/github-logo.png";
-import browser from "../images/browser.png";
+import browser from "../images/Browser.png";
 
 import section1_Img from "../images/illustration-1.png";
 import section2_Img from "../images/illustration-2.png";
