@@ -10,11 +10,12 @@ declare global {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
 
-// const persistor = persistStore(store);
+const persistor = persistStore(store);
 
-export default store;
+export { store, persistor };

@@ -16,10 +16,9 @@
       -ms-flex-align: center;
           align-items: center;
   height: 87vh;
-  width: 40vw;
   right: 0%;
-  -webkit-transform: translate(7vw, 10vh);
-  transform: translate(7vw, 10vh);
+  -webkit-transform: translate(-2vw, 10vh);
+  transform: translate(-2vw, 10vh);
 }
 
 .modal {
@@ -483,6 +482,7 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-appearance: none;
+  outline: 0;
   width: 16vw;
   height: 24vh;
   border: 0;
@@ -760,11 +760,11 @@
   z-index: 4;
   border: 0;
   padding: 20px;
-  width: 150vw;
-  height: 110vh;
+  width: 100vw;
+  height: 100vh;
   top: 30%;
-  -webkit-transform: translate(-50%, 0%);
-  transform: translate(-20%, -34%);
+  -webkit-transform: translate(-37vw, -34.65vh);
+  transform: translate(-37vw, -34.65vh);
 }
 
 .confirm-modal-content {
@@ -784,8 +784,8 @@
   width: 20vw;
   height: 17vh;
   position: absolute;
-  -webkit-transform: translate(-50%, 0%);
-  transform: translate(275%, 210%);
+  -webkit-transform: translate(38vw, 35vh);
+  transform: translate(38vw, 35vh);
   background-color: white;
   border-radius: 15px;
 }
@@ -1009,6 +1009,7 @@
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
   margin: 5px;
+  outline: 0;
   cursor: pointer;
 }
 
@@ -1308,6 +1309,7 @@
 }
 
 .nav .logo-btn {
+  cursor: pointer;
   width: 5%;
   border-radius: 7px;
   color: #19c9d4;
@@ -1570,19 +1572,20 @@
 }
 
 .mypage-edit-modal {
-  z-index: 3;
+  display: none;
+  position: absolute;
+  z-index: 5;
   -webkit-box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
           box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   background-color: #fefefe;
   position: absolute;
   padding: 30px 40px 30px 30px;
   width: 500px;
-  left: 90%;
+  right: 2%;
+  bottom: 25%;
   border: none;
   border-radius: 20px;
   text-align: center;
-  -webkit-transform: translate(-60%, 30%);
-  transform: translate(-60%, 30%);
 }
 
 .mypage-edit-modal .mypage-title {
@@ -1731,12 +1734,27 @@
   position: relative;
 }
 
-.mainpage-img {
+.mainpage-preview-container {
+  border-radius: 20px;
+  border: 1px solid #e8e8e8;
   width: 60vw;
-  margin-right: 2vw;
+  margin-right: 6vw;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  -webkit-box-shadow: 0px 15px 20px 10px rgba(84, 84, 84, 0.4);
+          box-shadow: 0px 15px 20px 10px rgba(84, 84, 84, 0.4);
+  overflow: hidden;
+}
+
+.mainpage-preview-container video {
+  display: block;
+}
+
+.browser {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .blob-img {
@@ -1831,8 +1849,6 @@
 .first-section .mainpage-mesic-subtitle {
   line-height: 0.7vw;
   font-size: 1.4vw;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s;
 }
 
 .first-section .mainpage-mesic-title {
@@ -1858,8 +1874,6 @@
 .second-section .mainpage-mesic-subtitle {
   line-height: 1.9vw;
   font-size: 1.3vw;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s;
 }
 
 .second-section .mainpage-mesic-title {
@@ -1884,8 +1898,6 @@
 .third-section .mainpage-mesic-subtitle {
   line-height: 1.9vw;
   font-size: 1.4vw;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s;
 }
 
 .third-section .mainpage-mesic-title {
@@ -1914,8 +1926,6 @@
 .fourth-section .mainpage-mesic-subtitle {
   line-height: 1.9vw;
   font-size: 1.4vw;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s;
 }
 
 .fourth-section .mainpage-mesic-title {
@@ -1944,8 +1954,6 @@
 .fifth-section .mainpage-mesic-subtitle {
   line-height: 1.7vw;
   font-size: 1.5vw;
-  animation: fadein 2s;
-  -webkit-animation: fadein 2s;
 }
 
 .fifth-section .mainpage-mesic-title {
@@ -2168,10 +2176,6 @@
   display: none;
 }
 
-.opacity-0 {
-  opacity: 0;
-}
-
 .scroll-up {
   position: fixed;
   cursor: pointer;
@@ -2258,6 +2262,8 @@
 @-webkit-keyframes fadein {
   from {
     opacity: 0;
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
   }
   to {
     opacity: 1;
@@ -2267,6 +2273,8 @@
 @keyframes fadein {
   from {
     opacity: 0;
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
   }
   to {
     opacity: 1;
