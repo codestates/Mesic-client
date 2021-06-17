@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useState, useRef } from "react";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../reducers";
-import { editUserinfo, getAccessToken } from "../../actions/index";
+import { useDispatch } from "react-redux";
+import { getAccessToken } from "../../actions/index";
 
 function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
   const SIGNUP_URL = `${process.env.REACT_APP_SERVER_URL}/users/signup`;
@@ -68,14 +66,13 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
       follow: [],
       refreshToken: "",
     };
-    //console.log(signupData);
+
     const validEmail = validateEmail(idInput);
     const validPw = validatePassword(pwInput, pwCheckInput);
     if (validEmail && validPw) {
       axios
         .post(SIGNUP_URL, signupData)
         .then((res) => {
-          console.log("signup  ===", res);
           if (res.status === 201) {
             //closeSignup();
             axios
@@ -84,7 +81,6 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 password: res.data.password,
               })
               .then((res) => {
-                console.log("login after signup === ", res);
                 if (res.data.accessToken) {
                   dispatch(getAccessToken(res.data.accessToken));
                   getUserInfo(res.data.id);
@@ -172,63 +168,66 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
     <div className={`background ${openSignup ? "show" : ""}`}>
       <div className="login-signup-modal-outsider" onClick={closeSignup} />
       <div className="login-signup-modal">
-        <span className="signup-close" onClick={closeSignup}>
+        <span className="login-close" onClick={closeSignup}>
           X
         </span>
-        <div className="signup-content">
-          <div className="signup-title">SIGN UP</div>
-          <div className="email-input-section">
-            <span>Email</span>
-            <input
-              onChange={handleIdInput}
-              type="text"
-              name="email"
-              ref={inputEmail}
-            ></input>
-            <div className="error-message">{emailError}</div>
-          </div>
-          <div className="name-input-section">
-            <span>Name</span>
-            <input
-              onChange={handleNameInput}
-              type="text"
-              name="name"
-              ref={inputName}
-            ></input>
-          </div>
-          <div className="nickname-input-section">
-            <span>Nickname</span>
-            <input
-              onChange={handleNicknameInput}
-              type="text"
-              name="nickname"
-              ref={inputNickname}
-            ></input>
-          </div>
-          <div className="password-input-section">
-            <span>Password</span>
-            <input
-              onChange={handlePwInput}
-              type="password"
-              name="password"
-              ref={inputPw}
-            ></input>
-          </div>
-          <div className="password-check-input-section">
-            <span>Password Check</span>
-            <input
-              onChange={handlePwCheckInput}
-              type="password"
-              name="check_password"
-              ref={inputPwCheck}
-            ></input>
-            <div className="error-message">
-              {emailError.length === 0 ? <>{pwError}</> : <></>}
+        <div className="login-title">SIGN UP</div>
+        <div className="content-flex">
+          <div className="login-content">
+            <div>
+              <div>Email</div>
+              <input
+                onChange={handleIdInput}
+                type="text"
+                name="email"
+                ref={inputEmail}
+              ></input>
+            </div>
+            <div>
+              <div>Name</div>
+              <input
+                onChange={handleNameInput}
+                type="text"
+                name="name"
+                ref={inputName}
+              ></input>
+            </div>
+            <div>
+              <div>Nickname</div>
+              <input
+                onChange={handleNicknameInput}
+                type="text"
+                name="nickname"
+                ref={inputNickname}
+              ></input>
+            </div>
+            <div>
+              <div>Password</div>
+              <input
+                onChange={handlePwInput}
+                type="password"
+                name="password"
+                ref={inputPw}
+              ></input>
+            </div>
+            <div>
+              <div>Pw Check</div>
+              <input
+                onChange={handlePwCheckInput}
+                type="password"
+                name="check_password"
+                ref={inputPwCheck}
+              ></input>
             </div>
           </div>
-          <div>
-            <button className="loginBtn-2" onClick={responseSignup}>Sign Up</button>
-          </div>
+        </div>
+        <div className="error-message">
+          {emailError.length === 0 ? <>{pwError}</> : <>{emailError}</>}
+        </div>
+        <div>
+          <button className="loginBtn-2" onClick={responseSignup}>
+            Sign Up
+          </button>
         </div>
       </div>
     </div>

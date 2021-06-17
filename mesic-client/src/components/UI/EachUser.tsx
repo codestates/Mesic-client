@@ -25,7 +25,6 @@ function EachUser({ searchedUsers, updateFollow, setLoginController }: any) {
         }
       )
       .then((res) => {
-        console.log("add Follow : ", res);
         updateFollow();
       })
       .catch((err) => console.log(err));

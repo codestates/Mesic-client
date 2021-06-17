@@ -1,19 +1,22 @@
 $main-color: #19c9d4;
 $font-color: rgb(80, 80, 80);
 $sub-font-color: rgb(158, 158, 158);
-$box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
+$box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
+$btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
 
 @mixin follow-user-modal {
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 35px;
+  border-radius: 20px;
   border: 0;
   padding: 20px 15px 20px 20px;
   width: 350px;
   height: 550px;
   top: 30%;
   box-shadow: $box-shadow;
+  -webkit-transform: translate(10%, 10%);
+  transform: translate(10%, 10%);
   input[type="text"] {
     outline: 0;
     border-width: 0 0 2px;
@@ -69,8 +72,6 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 
 .followlist {
   @include follow-user-modal;
-  -webkit-transform: translate(10%, 10%);
-  transform: translate(10%, 10%);
 }
 
 .followlist-title {
@@ -87,8 +88,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 }
 
 .search-user-box {
-  position: absolute;
-  bottom: 20px;
+  text-align: center;
 }
 
 .each-follow {
@@ -124,6 +124,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
     padding: 10px;
     flex: 0 1 auto;
     margin: 5px;
+    outline: 0;
     cursor: pointer;
   }
   button {
@@ -145,8 +146,7 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 }
 
 .find-user-btn {
-  margin: 0 auto;
-  transform: translateX(33%);
+  box-shadow: $btn-shadow;
   padding: 11px 22px;
   border: 0;
   background-color: $main-color;
@@ -166,8 +166,9 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
 
 .search-user-modal {
   @include follow-user-modal;
-  -webkit-transform: translate(100%, -30%);
-  transform: translate(100%, -30%);
+  box-shadow: none;
+  -webkit-transform: translate(-6%, -30%);
+  transform: translate(-6%, -30%);
 }
 
 .search-user-close {
@@ -208,13 +209,13 @@ $box-shadow: 0 8px 6px -6px rgb(84, 84, 84);
   background-color: #fefefe;
   position: absolute;
   z-index: 3;
-  border-radius: 80px;
+  border-radius: 15px;
   border: 0;
   width: 220px;
   padding: 0 5px;
   height: 60px;
   -webkit-transform: translate(15%, 130%);
-  transform: translate(14%, 130%);
+  transform: translate(14%, 250%);
   ::placeholder {
     opacity: 60%;
     font-size: 0.9rem;
@@ -290,50 +291,51 @@ $default-black-color: #525252;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  // border-bottom: solid 1px;
-  // border-color: $default-black-color;
-
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  box-shadow: 0px 5px 5px 1px rgba(84, 84, 84, 0.2);
+  z-index: 2;
   .logo-btn {
-    margin: none;
-    padding: none;
+    cursor: pointer;
+    width: 5%;
     border-radius: 7px;
-
     color: $mesic-color;
     background-image: none;
-
     border: none;
     outline: none;
+    margin: 0 20px;
   }
 
   .nav-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
     .loginBtn {
-      margin: 6px;
-      padding: 10px;
-      border-radius: 7px;
+      padding: 10px 20px;
+      border-radius: 15px;
       font-weight: 600;
       font-size: 18px;
-
       background-color: white;
       color: $mesic-color;
-
       border: none;
       outline: none;
     }
 
     .mypageBtn {
-      margin: 8px;
-      margin-right: 30px;
-      padding: 10px;
-      border-radius: 7px;
+      margin: 15px;
+      padding: 10px 20px;
+      border-radius: 15px;
       font-weight: 600;
       font-size: 18px;
-
       color: #fefefe;
       background-color: $mesic-color;
-
       border: none;
       outline: none;
+      box-shadow: $btn-shadow;
 
       &:hover {
         opacity: 0.8;

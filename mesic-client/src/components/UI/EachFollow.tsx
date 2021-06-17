@@ -33,7 +33,6 @@ function EachFollow({ eachFollow, updateFollow }: any) {
         }
       )
       .then((res) => {
-        console.log("delete follow : ", res);
         updateFollow();
       })
       .catch((err) => console.log(err));

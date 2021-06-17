@@ -11,7 +11,6 @@ import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
 
-
 declare global {
   interface Window {
     kakao: any;
@@ -73,6 +72,9 @@ function MainPage() {
   // 로그인 유저의 핀 데이터
   const [myPinData, setMypinData] = useState<any[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
+
+  // 미리보기 모두 저장
+  // const [saveInfowindows, setSaveinfowindows] = useState<any[]>([]);
 
   // 지도 동적 렌더링
   useEffect(() => {
@@ -141,13 +143,17 @@ function MainPage() {
     }
   }, [myPinData, map]);
 
+  // 미리보기 사라지게 하기
+  // useEffect(() => {
+  //   deleteInfowindows();
+  // });
+
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${user_id}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log("my pin data : ", data);
         setMypinData(data);
         setPinUpdate(false);
       })
@@ -184,27 +190,27 @@ function MainPage() {
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
     const bucket = "mesic-photo-bucket";
-    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
-    const secretAccessKey = 'rVp+ecaeyz/ZPg5Vu4GIZdLBmHkIzYrPwHteSHo';
-    const region = 'ap-northeast-2';
 
-    const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
+    AWS.config.region = "ap-northeast-2";
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca",
+    });
+
+    const s3 = new AWS.S3();
 
     const photoURL = readMarkerData.photo;
-    const file = photoURL.split('/');
-    console.log(file[file.length - 1])
+    const file = photoURL.split("/");
     const fileName = file[file.length - 1];
     const param = {
       Bucket: bucket,
-      Key: `/image/${fileName}`,
+      Key: `image/${fileName}`,
     }; //s3 업로드에 필요한 옵션 설정
-    
+
     s3.deleteObject(param, function (err: any, data: any) {
       if (err) {
         console.log(err);
         return;
       }
-      console.log("delete complete");
 
       axios
         .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
@@ -273,9 +279,10 @@ function MainPage() {
         position,
       });
       marker.id = myPinData[i]._id;
+
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
-        console.log(marker.id);
+        infowindow.setMap(null);
         handleMyMarkerClick(marker.id);
       });
 
@@ -317,6 +324,7 @@ function MainPage() {
       titleContainer.append(hideOverflow);
       musicContainer.append(thumbnail, titleContainer);
       iwContent.append(musicContainer, memo);
+
       const infowindow = new window.kakao.maps.CustomOverlay({
         position,
         content: iwContent,
@@ -333,6 +341,7 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
+      // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setMyMarkers(markers);
   };
@@ -357,6 +366,7 @@ function MainPage() {
       marker.id = Dummies[i]._id;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
+        infowindow.setMap(null);
         handleMyMarkerClick(marker.id);
       });
 
@@ -408,7 +418,6 @@ function MainPage() {
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${checkAdded}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log("follow pin data : ", data);
         setFollowPinData(data);
       })
       .catch((err) => console.log(err));
@@ -439,9 +448,10 @@ function MainPage() {
 
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
-        console.log(marker.id);
+        infowindow.setMap(null);
         handleFollowMarkerClick(marker.id[0]);
       });
+
       //팔로우 마커 호버 적용
       const iwContent = document.createElement("div");
       iwContent.className = "preview";
@@ -497,6 +507,7 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
+      // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setFollowMarkers([...followMarkers, markers]);
   };
@@ -568,6 +579,12 @@ function MainPage() {
     }
   };
 
+  // const deleteInfowindows = () => {
+  //   for (let i = 0; i < saveInfowindows.length; i++) {
+  //     saveInfowindows[i].setMap(null);
+  //   }
+  // };
+
   // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: string | number) => {
     if (openPostModal) {
@@ -608,7 +625,6 @@ function MainPage() {
       setOpenReadModal(false);
       setReadMarkerData(null);
       const clickPosition = mouseEvent.latLng;
-      console.log(clickPosition);
       setPostLatLng([clickPosition.Ma, clickPosition.La]);
       if (!isLogin) {
         setLoginController(true);
@@ -630,7 +646,6 @@ function MainPage() {
   const handleChangeKeywordInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setKeywordInput(e.target?.value);
-      console.log(keywordInput);
     },
     [keywordInput]
   );
@@ -697,38 +712,47 @@ function MainPage() {
   return (
     <div className="App">
       <Nav
+        openReadModal={openReadModal}
+        openPostModal={openPostModal}
+        setOpenPostModal={setOpenPostModal}
+        setOpenReadModal={setOpenReadModal}
         loginController={loginController}
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}
       />
       {openPostModal || openReadModal ? (
         <>
-          <button
+          {/* <div
+            className="detail-modal-close"
             onClick={() => {
               setOpenPostModal(false);
               setOpenReadModal(false);
               deletePostMarkers();
             }}
           >
-            Close
-          </button>
+            X
+          </div> */}
           {showDetailModal ? (
             <button
+              className="detail-modal-hide"
               onClick={() => {
                 showHideDetailModal();
                 setShowDetailModal(false);
               }}
             >
-              Show
+              {"<"}
+              {/*show*/}
             </button>
           ) : (
             <button
+              className="detail-modal-hide"
               onClick={() => {
                 showHideDetailModal();
                 setShowDetailModal(true);
               }}
             >
-              Hide
+              {"<"}
+              {/*hide*/}
             </button>
           )}{" "}
         </>
@@ -749,9 +773,14 @@ function MainPage() {
             readMarkerData={readMarkerData}
             setPinUpdate={setPinUpdate}
             deleteMyMarker={deleteMyMarker}
+            setOpenReadModal={setOpenReadModal}
           />
         ) : openPostModal ? (
-          <PostModal postLatLng={postLatLng} />
+          <PostModal
+            postLatLng={postLatLng}
+            setOpenPostModal={setOpenPostModal}
+            deletePostMarkers={deletePostMarkers}
+          />
         ) : (
           <></>
         )}

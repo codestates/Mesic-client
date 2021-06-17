@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-const KEY = "AIzaSyC77gm8pbkNvv_BYkvD45foo9m19j9jOKs";
 
 function EditMusic({
   openEditMusic,
@@ -36,7 +35,7 @@ function EditMusic({
     params: {
       part: "snippet",
       maxResults: 3,
-      key: KEY,
+      key: process.env.REACT_APP_YOUTUBE_API_KEY,
     },
   });
 
@@ -91,18 +90,26 @@ function EditMusic({
   };
 
   return (
-    <div className={`border background ${openEditMusic ? "show" : ""}`}>
-      <input
-        placeholder="노래 제목을 검색해주세요"
-        onChange={handleSearchMusicInput}
-        onKeyUp={searchMusicEvent}
-        ref={searchInput}
-      />
-      <button onClick={searchMusicEvent}>검색</button>
+    <div
+      className={`edit-music-modal background ${openEditMusic ? "show" : ""}`}
+    >
+      <div className="edit-music-title">노래 검색</div>
+      <div className="edit-music">
+        <input
+          type="text"
+          className="search-music"
+          placeholder="노래 제목을 검색해주세요"
+          onChange={handleSearchMusicInput}
+          onKeyUp={searchMusicEvent}
+          ref={searchInput}
+        />
+        <i onClick={searchMusicEvent} className="fas fa-search"></i>
+      </div>
       <div>
-        <ul>
+        <ul className="edit-music-list">
           {searchedMusic.map((each) => (
             <li
+              className="edit-music-searched"
               style={{ listStyleType: "none" }}
               onClick={() =>
                 handleSelect(
@@ -116,20 +123,25 @@ function EditMusic({
                 style={{ width: "100px" }}
                 src={each.snippet.thumbnails.medium.url}
               />
-              <span>{each.snippet.title}</span>
+              <div className="edit-music-hidden">
+                <div className="edit-music-searched-title">
+                  {each.snippet.title}
+                </div>
+              </div>
             </li>
           ))}
         </ul>
       </div>
-      <button
+      <span
+        className="edit-music-close-btn"
         onClick={() => {
           setSearchedMusic([]);
           searchInput.current.value = "";
           setOpenEditMusic(false);
         }}
       >
-        닫기
-      </button>
+        X
+      </span>
     </div>
   );
 }

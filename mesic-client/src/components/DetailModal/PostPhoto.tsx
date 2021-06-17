@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { switchMode } from "../../actions/index";
 import { RootState } from "../../reducers";
@@ -11,11 +11,22 @@ function PostPhoto({ postImg, setPostImg }: any) {
 
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [previewImg, setPreviewImg] = useState<any>({});
+  const [fileName, setFileName] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof postImg !== "object") {
+      const splitArr = postImg.split("/");
+      const imgName = splitArr[splitArr.length - 1];
+      setFileName(imgName);
+    }
+    return;
+  }, [postImg]);
 
   // Photo 업데이트 버튼
   const handlePostImg = (e: any) => {
     setPostImg(e.target.files[0]);
     setPreviewImg(URL.createObjectURL(e.target.files[0]));
+    setFileName("");
   };
 
   return (
@@ -28,11 +39,12 @@ function PostPhoto({ postImg, setPostImg }: any) {
         setPostImg={setPostImg}
         // setUpdateMode => false로 변경해야지 처음 상태로 돌아감
       />
-      <div className="postPhoto">
-        <i className="fa fa-camera"></i>
-        <div className="detail-line"></div>
-        {postImg.length === 0 ? (
+      <div className="photo">
+        {fileName === "undefined" ? (
           <>
+            <div className="update-mode-post-icon">
+              <i className="fa fa-camera fa-lg"></i>
+            </div>
             <label className="add-btn-photo" htmlFor="photo-file">
               +
             </label>
@@ -46,7 +58,32 @@ function PostPhoto({ postImg, setPostImg }: any) {
             />
           </>
         ) : (
-          <img className="img" src={previewImg} />
+          <>
+            <div className="edit-del-btn">
+              <i className="fa fa-camera fa-lg"></i>
+              <div>
+                <label className="edit-btn-photo" htmlFor="photo-file">
+                  <i className="fas fa-pencil-alt"></i>
+                </label>
+                <input
+                  className="input-photo"
+                  ref={imageInput}
+                  type="file"
+                  id="photo-file"
+                  accept="image/*"
+                  onChange={handlePostImg}
+                />
+                <i
+                  className="fa fa-trash"
+                  aria-hidden="true"
+                  onClick={() => setOpenConfirm(true)}
+                ></i>
+              </div>
+            </div>
+            <div className="photo-img-outsider">
+              <img className="photo-img" src={previewImg} />
+            </div>
+          </>
         )}
         {/* <button onClick={() => setOpenConfirm(true)}>삭제</button> */}
       </div>

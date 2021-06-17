@@ -8,7 +8,7 @@ import PostMemo from "./PostMemo";
 import axios from "axios";
 import AWS from "aws-sdk";
 
-function PostModal({ postLatLng }: any) {
+function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
   const [postMusic, setPostMusic] = useState<{
     video_Id: string;
     title: string;
@@ -18,7 +18,9 @@ function PostModal({ postLatLng }: any) {
     title: "",
     thumbnail: "",
   });
-  const [postImg, setPostImg] = useState<any>("");
+  const location =
+    "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
+  const [postImg, setPostImg] = useState<any>(location);
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
 
@@ -30,22 +32,22 @@ function PostModal({ postLatLng }: any) {
     if (
       postMusic.title.length === 0 &&
       postMemo.length === 0 &&
-      postImg.length === 0
+      postImg === location
     ) {
-      setErrMessage("내용을 입력해주세요");
+      setErrMessage("내용을 입력해주세요.");
       return;
     }
     setErrMessage("");
 
-    const accessKeyId = 'AKIA2XC7TYWAUO3P7L2I';
-    const secretAccessKey = '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';
-    const region = 'ap-northeast-2';
+    const accessKeyId = "AKIA2XC7TYWAUO3P7L2I";
+    const secretAccessKey = "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";
+    const region = "ap-northeast-2";
 
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: 'mesic-photo-bucket',
-      Key: `/image/${postImg.name}`,
+      Bucket: "mesic-photo-bucket",
+      Key: `image/${postImg.name}`,
       ACL: "public-read",
       Body: postImg,
       ContentType: "image/jpg",
@@ -56,7 +58,6 @@ function PostModal({ postLatLng }: any) {
         console.log(err);
         return;
       }
-      console.log("data.Location", data.Location);
 
       const postData = {
         user_id,
@@ -68,7 +69,6 @@ function PostModal({ postLatLng }: any) {
         photo: data.Location,
         memo: postMemo,
       };
-      console.log("sending : ", postData);
 
       axios
         .post(`${process.env.REACT_APP_SERVER_URL}/pins`, postData, {
@@ -85,6 +85,15 @@ function PostModal({ postLatLng }: any) {
   return (
     <div className="modal-outsider show1">
       <div className="modal">
+        <div
+          className="modal-close-btn"
+          onClick={() => {
+            setOpenPostModal(false);
+            deletePostMarkers();
+          }}
+        >
+          X
+        </div>
         <PostMusic postMusic={postMusic} setPostMusic={setPostMusic} />
         <PostPhoto postImg={postImg} setPostImg={setPostImg} />
         <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
