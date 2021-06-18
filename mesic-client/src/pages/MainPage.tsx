@@ -284,6 +284,9 @@ function MainPage() {
         position,
       });
       marker.id = myPinData[i]._id;
+      marker.pos = position;
+
+      console.log(marker);
 
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
@@ -369,6 +372,8 @@ function MainPage() {
         image,
       });
       marker.id = Dummies[i]._id;
+      marker.pos = position;
+
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         infowindow.setMap(null);
@@ -449,6 +454,7 @@ function MainPage() {
         position,
       });
       marker.id = [followPinData[i]._id, followPinData[i].user_id];
+      marker.pos = position;
 
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
@@ -551,12 +557,21 @@ function MainPage() {
 
   // 체크박스 해제 시 마커 제거
   const deleteFollowMarkers = () => {
+    let target;
     for (let i = 0; i < followMarkers.length; i += 1) {
       for (let j = 0; j < followMarkers[i].length; j += 1) {
         if (followMarkers[i][j].id[1] === checkRemoved) {
           followMarkers[i][j].setMap(null);
+          target = i;
         }
       }
+    }
+
+    if (target) {
+      setFollowMarkers([
+        ...followMarkers.slice(0, target),
+        ...followMarkers.slice(target + 1),
+      ]);
     }
     dispatch(clearCheckedRemove());
   };
@@ -567,8 +582,17 @@ function MainPage() {
 
   // 마커 제거 함수들
   const deleteMyMarkers = () => {
+    let target;
     for (let i = 0; i < myMarkers.length; i++) {
       myMarkers[i].setMap(null);
+      target = i;
+    }
+
+    if (target) {
+      setMyMarkers([
+        ...myMarkers.slice(0, target),
+        ...myMarkers.slice(target + 1),
+      ]);
     }
   };
 
@@ -642,10 +666,9 @@ function MainPage() {
 
   //체크된 마커에 따라 지도 범위 재설정
   useEffect(() => {
-    if (myMarkers.length === 0 && followMarkers.length === 0) {
-      return;
+    if (myMarkers.length > 0 || followMarkers.length > 0) {
+      setMapBounds();
     }
-    setMapBounds();
   }, [myMarkers, followMarkers]);
 
   const setMapBounds = () => {
@@ -653,24 +676,22 @@ function MainPage() {
     let followMarkersPos: any[] = [];
 
     if (myMarkers.length > 0) {
-      myMarkersPos = myMarkers.map((each: any) => each.n);
+      myMarkersPos = myMarkers.map((each: any) => each.pos);
     }
 
     if (followMarkers.length > 0) {
       for (let i = 0; i < followMarkers.length; i += 1) {
-        followMarkersPos = [...followMarkers[i]];
+        followMarkersPos = [...followMarkersPos, ...followMarkers[i]];
       }
-      followMarkersPos = followMarkersPos.map((each: any) => each.n);
+      followMarkersPos = followMarkersPos.map((each: any) => each.pos);
     }
 
     const position = [...myMarkersPos, ...followMarkersPos];
-    const points = position.map((each) => {
-      console.log(each.Ma, each.La);
-      return new window.kakao.maps.LatLng(each.Ma, each.La);
-    });
+    const points = position.map(
+      (each) => new window.kakao.maps.LatLng(each.Ma, each.La)
+    );
 
     var bounds = new window.kakao.maps.LatLngBounds();
-    console.log(bounds);
 
     let i, marker;
     for (let i = 0; i < points.length; i += 1) {
@@ -678,10 +699,10 @@ function MainPage() {
       bounds.extend(points[i]);
     }
 
-    // setBounds();
+    setBounds();
 
     function setBounds() {
-      map.setBounds(bounds);
+      map.setBounds(bounds, 200);
     }
   };
 
