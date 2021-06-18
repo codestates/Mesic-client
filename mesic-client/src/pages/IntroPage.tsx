@@ -87,7 +87,7 @@ function IntroPage() {
             <div className="mainpage-mesic-text">
               <div className="mainpage-mesic-about-us">ABOUT US</div>
               <div className="mainpage-mesic-title">
-                Mesic <span>[Memory + Music]</span>
+                <span>Mesic</span> <span>[Memory + Music]</span>
               </div>
               <div className="mainpage-mesic-subtitle">
                 <p>
