@@ -11,10 +11,6 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   position: absolute;
   height: 670vh;
   overflow-y: hidden;
-
-  // @include tablet {
-  //   height: 100vh;
-  // }
 }
 
 .mainpage-mesic {
@@ -58,7 +54,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     display: flex;
     flex-direction: column;
     align-self: center;
-    margin: 0 0 2rem 0;
+    margin: 0 0 5vw 0;
     width: 85vw;
   }
 }
@@ -74,6 +70,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
+  @include tablet {
+    display: none;
+  }
 }
 
 .mainpage-mesic-text {
@@ -95,7 +95,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   color: #a1a1a1;
 
   @include tablet {
-    font-size: 1rem;
+    font-size: 2.5vw;
   }
 }
 
@@ -107,12 +107,20 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   line-height: 3vw;
   white-space: nowrap;
   span:first-child {
-    font-size: 2.8rem;
+    font-size: 2rem;
     font-weight: 300;
     letter-spacing: -0.01vw;
+
+    @include tablet {
+      font-size: 6vw;
+    }
   }
   span:last-child {
     font-size: 1.8rem;
+
+    @include tablet {
+      font-size: 4vw;
+    }
   }
 }
 
@@ -126,8 +134,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 
   @include tablet {
     margin-top: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: 3vw;
+    line-height: 4vw;
     text-align: center;
   }
 }
@@ -148,8 +156,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     cursor: pointer;
 
     @include tablet {
-      width: 40rem;
-      height: 3.5rem;
+      width: 90vw;
+      height: 6vh;
       font-size: 1.2rem;
     }
   }
@@ -170,6 +178,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 .first-section {
   .section-img {
     margin-right: 10vw;
+
+    @include tablet {
+      margin: 0;
+      width: 65vw;
+    }
   }
   .in {
     animation: fadein 2s;
@@ -178,9 +191,18 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .mainpage-mesic-subtitle {
     line-height: 0.7vw;
     font-size: 1.4vw;
+
+    @include tablet {
+      font-size: 2.5vw;
+      line-height: 4vw;
+    }
   }
   .mainpage-mesic-title {
     font-size: 2.4vw;
+
+    @include tablet {
+      font-size: 4vw;
+    }
   }
   .blob-img {
     width: 26vw;
@@ -190,6 +212,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 .second-section {
   .section-img {
     margin-left: 13vw;
+
+    @include tablet {
+      margin: 0;
+      width: 65vw;
+    }
   }
   .in {
     display: flex;
@@ -213,6 +240,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .section-img {
     margin-right: 10vw;
     width: 45vw;
+    @include tablet {
+      margin: 0;
+      width: 75vw;
+    }
   }
   .in {
     animation: fadein 2s;
@@ -396,7 +427,6 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 .scroll-down::after {
   content: "";
   position: fixed;
-  bottom: 50vw;
   left: 50vw;
   bottom: 4vh;
   height: 0.5vw;
