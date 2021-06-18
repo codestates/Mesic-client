@@ -1,3 +1,6 @@
+@import "../media-queries";
+@import "../colors";
+
 $title-color: #525252;
 $subtitle-color: #858585;
 $mesic-color: #19c9d4;
@@ -8,6 +11,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   position: absolute;
   height: 670vh;
   overflow-y: hidden;
+
+  // @include tablet {
+  //   height: 100vh;
+  // }
 }
 
 .mainpage-mesic {
@@ -17,12 +24,22 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   height: 100vh;
   width: 100vw;
   padding: 12vh;
+
+  @include tablet {
+    padding: 3rem;
+  }
 }
 
 .mainpage-mesic-body {
   display: flex;
   justify-content: center;
   position: relative;
+
+  @include tablet {
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
 }
 
 .mainpage-preview-container {
@@ -35,6 +52,14 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   overflow: hidden;
   video {
     display: block;
+  }
+
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 0 0 2rem 0;
+    width: 85vw;
   }
 }
 
@@ -56,6 +81,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   flex-direction: column;
   justify-content: center;
   position: relative;
+
+  @include tablet {
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .mainpage-mesic-about-us {
@@ -63,6 +93,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   letter-spacing: -1px;
   line-height: 3rem;
   color: #a1a1a1;
+
+  @include tablet {
+    font-size: 1rem;
+  }
 }
 
 .mainpage-mesic-title {
@@ -72,10 +106,13 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   letter-spacing: -0.01vw;
   line-height: 3vw;
   white-space: nowrap;
-  span {
+  span:first-child {
     font-size: 2.8rem;
     font-weight: 300;
     letter-spacing: -0.01vw;
+  }
+  span:last-child {
+    font-size: 1.8rem;
   }
 }
 
@@ -86,6 +123,13 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   letter-spacing: -0.01vw;
   line-height: 1.8vw;
   margin: 0.5vw 0;
+
+  @include tablet {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: center;
+  }
 }
 
 .mainpage-mesic-btn {
@@ -102,6 +146,18 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     letter-spacing: -1px;
     border-radius: 0.8vw;
     cursor: pointer;
+
+    @include tablet {
+      width: 40rem;
+      height: 3.5rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  @include tablet {
+    position: fixed;
+    z-index: 2;
+    bottom: 0;
   }
 }
 
@@ -355,6 +411,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 .scroll-down::after {
   bottom: 3vh;
   animation-delay: 0.2s;
+
+  // @include tablet {
+  //   bottom: 10rem;
+  // }
 }
 
 @keyframes scroll-down {

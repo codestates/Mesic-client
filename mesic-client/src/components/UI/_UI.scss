@@ -1,3 +1,5 @@
+@import "../../media-queries";
+
 $main-color: #19c9d4;
 $font-color: rgb(80, 80, 80);
 $sub-font-color: rgb(158, 158, 158);
@@ -300,21 +302,26 @@ $default-black-color: #525252;
   z-index: 2;
   .logo-btn {
     cursor: pointer;
-    width: 5%;
+    width: 100px;
     border-radius: 7px;
     color: $mesic-color;
     background-image: none;
     border: none;
     outline: none;
     margin: 0 20px;
+
+    @include tablet {
+      margin-left: 5px;
+    }
   }
 
-  .nav-btn {
+  &-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 20px;
     .loginBtn {
+      position: relative;
       padding: 10px 20px;
       border-radius: 15px;
       font-weight: 600;
@@ -326,6 +333,7 @@ $default-black-color: #525252;
     }
 
     .mypageBtn {
+      position: relative;
       margin: 15px;
       padding: 10px 20px;
       border-radius: 15px;
