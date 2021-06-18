@@ -2292,6 +2292,7 @@
 html,
 body {
   width: 100vw;
+  min-width: 280px;
 }
 
 /* MainPage & IntroPage 여기서 하세요 */
