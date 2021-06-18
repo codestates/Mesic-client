@@ -65,6 +65,12 @@ function MainPage() {
   // 선택한 READ 마커의 데이터
   const [readMarkerData, setReadMarkerData] = useState<any>(null);
 
+  // 로그인 유저 마커
+  const [myMarkers, setMyMarkers] = useState<any[]>([]);
+
+  // 체크한 팔로우 마커
+  const [followMarkers, setFollowMarkers] = useState<any[]>([]);
+
   // 모달 숨기기
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const detailModal = useRef<any>();
@@ -235,6 +241,7 @@ function MainPage() {
     deleteSearchMarkers();
     const markers = [];
     const position = new window.kakao.maps.LatLng(postLatLng[0], postLatLng[1]);
+    console.log(position);
 
     const image = new window.kakao.maps.MarkerImage(
       `/images/marker/post-marker.png`,
@@ -252,8 +259,6 @@ function MainPage() {
   };
 
   // (READ MODE) 유저의 마커 생성
-
-  const [myMarkers, setMyMarkers] = useState<any[]>([]);
   const viewMyMarkers = () => {
     deleteMyMarkers();
     // CREATED 모드일 때 방금 만들어진 데이터를 띄움
@@ -424,7 +429,6 @@ function MainPage() {
   };
 
   // 체크 된 팔로우 마커 생성
-  const [followMarkers, setFollowMarkers] = useState<any[]>([]);
   const viewFollowMarkers = () => {
     const markers = [];
 
@@ -509,6 +513,7 @@ function MainPage() {
       markers.push(marker);
       // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
+    console.log(markers);
     setFollowMarkers([...followMarkers, markers]);
   };
 
@@ -633,6 +638,51 @@ function MainPage() {
         setOpenPostModal(true);
       }
     });
+  };
+
+  //체크된 마커에 따라 지도 범위 재설정
+  useEffect(() => {
+    if (myMarkers.length === 0 && followMarkers.length === 0) {
+      return;
+    }
+    setMapBounds();
+  }, [myMarkers, followMarkers]);
+
+  const setMapBounds = () => {
+    let myMarkersPos: any[] = [];
+    let followMarkersPos: any[] = [];
+
+    if (myMarkers.length > 0) {
+      myMarkersPos = myMarkers.map((each: any) => each.n);
+    }
+
+    if (followMarkers.length > 0) {
+      for (let i = 0; i < followMarkers.length; i += 1) {
+        followMarkersPos = [...followMarkers[i]];
+      }
+      followMarkersPos = followMarkersPos.map((each: any) => each.n);
+    }
+
+    const position = [...myMarkersPos, ...followMarkersPos];
+    const points = position.map((each) => {
+      console.log(each.Ma, each.La);
+      return new window.kakao.maps.LatLng(each.Ma, each.La);
+    });
+
+    var bounds = new window.kakao.maps.LatLngBounds();
+    console.log(bounds);
+
+    let i, marker;
+    for (let i = 0; i < points.length; i += 1) {
+      marker = new window.kakao.maps.Marker({ position: points[i] });
+      bounds.extend(points[i]);
+    }
+
+    // setBounds();
+
+    function setBounds() {
+      map.setBounds(bounds);
+    }
   };
 
   // 맵 이동
