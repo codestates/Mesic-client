@@ -286,8 +286,6 @@ function MainPage() {
       marker.id = myPinData[i]._id;
       marker.pos = position;
 
-      console.log(marker);
-
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         infowindow.setMap(null);
@@ -519,7 +517,6 @@ function MainPage() {
       markers.push(marker);
       // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
-    console.log(markers);
     setFollowMarkers([...followMarkers, markers]);
   };
 
@@ -567,12 +564,17 @@ function MainPage() {
       }
     }
 
-    if (target) {
-      setFollowMarkers([
-        ...followMarkers.slice(0, target),
-        ...followMarkers.slice(target + 1),
-      ]);
+    if (target !== undefined) {
+      if (followMarkers.length > 1) {
+        setFollowMarkers([
+          ...followMarkers.slice(0, target),
+          ...followMarkers.slice(target + 1),
+        ]);
+      } else {
+        setFollowMarkers([]);
+      }
     }
+
     dispatch(clearCheckedRemove());
   };
 
@@ -588,11 +590,15 @@ function MainPage() {
       target = i;
     }
 
-    if (target) {
-      setMyMarkers([
-        ...myMarkers.slice(0, target),
-        ...myMarkers.slice(target + 1),
-      ]);
+    if (target !== undefined) {
+      if (myMarkers.length > 1) {
+        setMyMarkers([
+          ...myMarkers.slice(0, target),
+          ...myMarkers.slice(target + 1),
+        ]);
+      } else {
+        setMyMarkers([]);
+      }
     }
   };
 
@@ -691,7 +697,7 @@ function MainPage() {
       (each) => new window.kakao.maps.LatLng(each.Ma, each.La)
     );
 
-    var bounds = new window.kakao.maps.LatLngBounds();
+    const bounds = new window.kakao.maps.LatLngBounds();
 
     let i, marker;
     for (let i = 0; i < points.length; i += 1) {
