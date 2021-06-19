@@ -112,7 +112,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     letter-spacing: -0.01vw;
 
     @include tablet {
-      font-size: 6vw;
+      font-size: 7vw;
     }
   }
   span:last-child {
@@ -180,8 +180,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     margin-right: 10vw;
 
     @include tablet {
-      margin: 0;
-      width: 65vw;
+      margin: 0 0 10vw 0;
+      width: 55vw;
     }
   }
   .in {
@@ -195,13 +195,14 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     @include tablet {
       font-size: 2.5vw;
       line-height: 4vw;
+      margin-bottom: 1vw;
     }
   }
   .mainpage-mesic-title {
     font-size: 2.4vw;
 
     @include tablet {
-      font-size: 4vw;
+      font-size: 5vw;
     }
   }
   .blob-img {
@@ -214,8 +215,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     margin-left: 13vw;
 
     @include tablet {
-      margin: 0;
-      width: 65vw;
+      width: 55vw;
+      margin: 0 0 10vw 0;
     }
   }
   .in {
@@ -226,10 +227,44 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.3vw;
+
+    @include tablet {
+      display: none;
+    }
   }
   .mainpage-mesic-title {
     line-height: 3vw;
     font-size: 2.4vw;
+
+    @include tablet {
+      display: none;
+    }
+  }
+  .mainpage-mesic-subtitle-resp {
+    display: none;
+    @include tablet {
+      display: block;
+      color: $subtitle-color;
+      font-weight: 300;
+      letter-spacing: -0.01vw;
+      margin: 1vw 0;
+      font-size: 2.5vw;
+      line-height: 4vw;
+      text-align: center;
+    }
+  }
+  .mainpage-mesic-title-resp {
+    display: none;
+    @include tablet {
+      display: block;
+      color: $title-color;
+      font-weight: 800;
+      letter-spacing: -0.01vw;
+      white-space: nowrap;
+      line-height: 6.5vw;
+      font-size: 5vw;
+      text-align: center;
+    }
   }
   .blob-img {
     width: 26vw;
@@ -242,7 +277,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     width: 45vw;
     @include tablet {
       margin: 0;
-      width: 75vw;
+      width: 70vw;
     }
   }
   .in {
@@ -252,10 +287,21 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.4vw;
+
+    @include tablet {
+      font-size: 2.5vw;
+      line-height: 4vw;
+      margin-bottom: 1vw;
+    }
   }
   .mainpage-mesic-title {
     line-height: 3vw;
     font-size: 2.4vw;
+
+    @include tablet {
+      font-size: 5vw;
+      line-height: 6.5vw;
+    }
   }
   .blob-img {
     width: 24vw;
@@ -269,6 +315,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .section-img {
     margin-left: 0vw;
     width: 50vw;
+
+    @include tablet {
+      margin: 0;
+      width: 85vw;
+    }
   }
   .in {
     animation: fadein 2s;
@@ -277,10 +328,44 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.4vw;
+
+    @include tablet {
+      display: none;
+    }
   }
   .mainpage-mesic-title {
     line-height: 2.3vw;
     font-size: 2.4vw;
+
+    @include tablet {
+      display: none;
+    }
+  }
+  .mainpage-mesic-subtitle-resp {
+    display: none;
+    @include tablet {
+      display: block;
+      color: $subtitle-color;
+      font-weight: 300;
+      letter-spacing: -0.01vw;
+      margin: 1vw 0 2vw 0;
+      font-size: 2.5vw;
+      line-height: 4vw;
+      text-align: center;
+    }
+  }
+  .mainpage-mesic-title-resp {
+    display: none;
+    @include tablet {
+      display: block;
+      color: $title-color;
+      font-weight: 800;
+      letter-spacing: -0.01vw;
+      white-space: nowrap;
+      line-height: 3vw;
+      font-size: 5vw;
+      text-align: center;
+    }
   }
   .blob-img {
     width: 22vw;
@@ -290,10 +375,18 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 .fifth-section {
   .mainpage-mesic-text {
     margin-right: 5vw;
+    @include tablet {
+      margin: 0;
+    }
   }
   .section-img {
     margin-right: 0vw;
     width: 55vw;
+
+    @include tablet {
+      margin: 0;
+      width: 90vw;
+    }
   }
   .in {
     animation: fadein 2s;
@@ -302,10 +395,21 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .mainpage-mesic-subtitle {
     line-height: 1.7vw;
     font-size: 1.5vw;
+
+    @include tablet {
+      font-size: 2.5vw;
+      line-height: 4vw;
+      margin-bottom: 2vw;
+    }
   }
   .mainpage-mesic-title {
     line-height: 2.7vw;
     font-size: 2.4vw;
+
+    @include tablet {
+      font-size: 5vw;
+      line-height: 2vw;
+    }
   }
   .blob-img {
     width: 22vw;
@@ -325,6 +429,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   }
   img {
     width: 3.9vw;
+    @include tablet {
+      width: 11vw;
+    }
   }
   button {
     box-shadow: $btn-shadow;
@@ -337,6 +444,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     letter-spacing: -1px;
     border-radius: 0.8vw;
     cursor: pointer;
+
+    @include tablet {
+      width: 30vw;
+      height: 6vh;
+      font-size: 3vw;
+    }
   }
 }
 
@@ -344,6 +457,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   width: 100vw;
   height: 45vh;
   padding: 12vh 12vh 6vh 12vh;
+  @include tablet {
+    padding: 10vh 0;
+  }
 }
 
 .mainpage-footer-body {
@@ -359,6 +475,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     position: absolute;
     top: 1vw;
     width: 8vw;
+    @include tablet {
+      margin-left: 1vw;
+    }
   }
 }
 
@@ -370,6 +489,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     font-size: 1.2vw;
     font-weight: 800;
     margin: 6vh 0 1vh 0;
+    @include tablet {
+      font-size: 3vw;
+      margin-top: 5vh;
+      font-weight: 1000;
+    }
   }
   div:not(:first-child) {
     cursor: pointer;
@@ -377,6 +501,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     font-size: 1vw;
     font-weight: 300;
     margin: 0.35vw;
+    @include tablet {
+      font-size: 2vw;
+    }
+  }
+  @include tablet {
+    margin-left: 15vw;
   }
 }
 
@@ -386,6 +516,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   img:first-child {
     width: 2vw;
     margin: 5vh 0 1vh 0;
+    @include tablet {
+      width: 4vw;
+    }
   }
   div:not(:first-child) {
     cursor: pointer;
@@ -393,6 +526,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     font-size: 1vw;
     font-weight: 300;
     margin: 0.25vw;
+    @include tablet {
+      font-size: 2vw;
+    }
+  }
+  @include tablet {
+    margin-left: 6vw;
   }
 }
 
@@ -403,6 +542,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   justify-content: flex-end;
   font-size: 1vw;
   letter-spacing: 0.02vw;
+  @include tablet {
+    opacity: 0;
+  }
 }
 
 .scroll-down {
@@ -421,6 +563,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  @include tablet {
+    bottom: 13vh;
+    font-size: 2vw;
+    left: 42.6vw;
+  }
 }
 
 .scroll-down::before,
@@ -437,14 +584,16 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   border-left: transparent;
   animation: scroll-down 1.5s ease-in-out infinite;
   animation-delay: 0.1s;
+  @include tablet {
+    bottom: 11vh;
+  }
 }
 .scroll-down::after {
   bottom: 3vh;
   animation-delay: 0.2s;
-
-  // @include tablet {
-  //   bottom: 10rem;
-  // }
+  @include tablet {
+    bottom: 10vh;
+  }
 }
 
 @keyframes scroll-down {
@@ -481,13 +630,17 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   bottom: 2.5vh;
   white-space: nowrap;
   animation: scroll-up 1.5s ease-in-out infinite;
+  @include tablet {
+    bottom: 8vh;
+    right: 3vw;
+    font-size: 2vw;
+  }
 }
 
 .scroll-up::before,
 .scroll-up::after {
   content: "";
   position: fixed;
-  bottom: 50vw;
   right: 3vw;
   bottom: 5.5vh;
   height: 0.5vw;
@@ -498,10 +651,17 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   border-left: transparent;
   animation: scroll-up 1.5s ease-in-out infinite;
   animation-delay: 0.1s;
+  @include tablet {
+    bottom: 11vh;
+    right: 3.5vw;
+  }
 }
 .scroll-up::after {
   bottom: 6.5vh;
   animation-delay: 0.2s;
+  @include tablet {
+    bottom: 12vh;
+  }
 }
 
 .align-middle {
