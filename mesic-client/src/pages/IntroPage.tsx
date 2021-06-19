@@ -138,6 +138,17 @@ function IntroPage() {
               </div>
             </div>
             <img src={section2_Img} className="section-img" />
+            <div className="mainpage-mesic-subtitle-resp">
+              <p>
+                <strong>학교 가는 길</strong>에 들었던 신나는 힙합,
+                <br />
+                <strong>연인과 헤어지고 들었던</strong> 슬픈 발라드 같이
+              </p>
+            </div>
+            <div className="mainpage-mesic-title-resp">
+              우리에겐 노래에 대한 <br />
+              다양한 추억들이 있습니다.
+            </div>
           </div>
         </section>
         <section className="mainpage-mesic third-section">
@@ -172,6 +183,15 @@ function IntroPage() {
               </div>
             </div>
             <img src={section4_Img} className="section-img" />
+            <div className="mainpage-mesic-subtitle-resp ">
+              <p>
+                내가 있는 <strong>장소</strong>에서
+                <br /> 지금의 순간을 <strong>음악, 사진, 메모</strong> 등
+              </p>
+            </div>
+            <div className="mainpage-mesic-title-resp">
+              추억을 다양한 기록으로 남겨보세요.
+            </div>
           </div>
         </section>
         <section className="mainpage-mesic fifth-section">
