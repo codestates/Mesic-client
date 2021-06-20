@@ -10,6 +10,7 @@ import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
+import jwtDecode, { JwtPayload } from "jwt-decode";
 
 declare global {
   interface Window {
@@ -87,6 +88,12 @@ function MainPage() {
     window.kakao.maps.load(() => {
       loadKakaoMap();
     });
+  }, [isLogin]);
+
+  useEffect(() => {
+    if (token.length > 0) {
+      console.log(jwtDecode<JwtPayload>(token));
+    }
   }, [isLogin]);
 
   // 로그인 후 유저의 핀 가져오기
