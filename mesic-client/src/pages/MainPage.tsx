@@ -99,7 +99,9 @@ function MainPage() {
   // 로그인 후 유저의 핀 가져오기
   useEffect(() => {
     if (isLogin || pinUpdate) {
-      getMyPins();
+      if (mode !== "POST") {
+        getMyPins();
+      }
     }
     return;
   }, [map, mode, isLogin, pinUpdate]);
@@ -154,7 +156,7 @@ function MainPage() {
         viewMyMarkers();
       }
     }
-  }, [myPinData, map]);
+  }, [map, myPinData]);
 
   // 미리보기 사라지게 하기
   // useEffect(() => {
@@ -248,8 +250,6 @@ function MainPage() {
     deleteSearchMarkers();
     const markers = [];
     const position = new window.kakao.maps.LatLng(postLatLng[0], postLatLng[1]);
-    console.log(position);
-
     const image = new window.kakao.maps.MarkerImage(
       `/images/marker/post-marker.png`,
       new window.kakao.maps.Size(45, 45),
