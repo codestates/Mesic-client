@@ -84,10 +84,12 @@ function IntroPage() {
                 />
               </video>
             </div>
-            <div className="mainpage-mesic-text title">
+            <div className="mainpage-mesic-text">
               <div className="mainpage-mesic-about-us">ABOUT US</div>
-              <div className="mainpage-mesic-title typing">
-                <span>Mesic</span> <span>[Memory + Music]</span>
+              <div className="title-container">
+                <div className="mainpage-mesic-title typing">
+                  <span>Mesic</span> <span>[Memory + Music]</span>
+                </div>
               </div>
               <div className="mainpage-mesic-subtitle">
                 <p>
