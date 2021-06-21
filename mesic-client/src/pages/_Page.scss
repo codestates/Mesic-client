@@ -19,10 +19,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  padding: 100px 0;
-  @include tablet {
-    padding: 3rem;
-  }
+  padding: 12vh;
 }
 
 .mainpage-mesic-body {
@@ -78,17 +75,16 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   justify-content: center;
   position: relative;
   @include tablet {
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    margin: 0;
   }
 }
-.title {
-  width: 350px;
-  margin: 0 130px 0 0;
+.title-container {
+  width: 28vw;
+  margin: 0;
   @include tablet {
-    margin: 0;
-    width: 650px;
-    height: 200px;
+    width: 50vw;
   }
 }
 
@@ -141,7 +137,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     width: 0px;
   }
   60% {
-    width: 24vw;
+    width: 27vw;
     border-color: $title-color;
   }
   70% {
@@ -154,7 +150,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     border-color: transparent;
   }
   100% {
-    width: 24vw;
+    width: 27vw;
   }
 }
 @keyframes typing_resp {
@@ -353,11 +349,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 }
 
 .fourth-section {
-  .mainpage-mesic-text {
-    margin-left: 5vw;
-  }
   .section-img {
-    margin-left: 0vw;
+    margin-left: 4vw;
     width: 50vw;
     @include tablet {
       margin: 0;
@@ -415,13 +408,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 
 .fifth-section {
   .mainpage-mesic-text {
-    margin-right: 5vw;
     @include tablet {
       margin: 0;
     }
   }
   .section-img {
-    margin-right: 0vw;
+    margin-right: 2vw;
     width: 55vw;
     @include tablet {
       margin: 0;
