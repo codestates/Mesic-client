@@ -313,6 +313,10 @@ $default-black-color: #525252;
     @include tablet {
       margin-left: 5px;
     }
+
+    @include mobile {
+      margin : 0;
+    }
   }
 
   &-btn {
@@ -330,6 +334,10 @@ $default-black-color: #525252;
       color: $mesic-color;
       border: none;
       outline: none;
+
+      @include mobile {
+        margin: 0;
+      }
     }
 
     .mypageBtn {
@@ -344,6 +352,10 @@ $default-black-color: #525252;
       border: none;
       outline: none;
       box-shadow: $btn-shadow;
+
+      @include mobile {
+        margin: 0;
+      }
 
       &:hover {
         opacity: 0.8;
