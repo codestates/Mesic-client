@@ -282,12 +282,14 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     letter-spacing: -1px;
     border-radius: 0.8vw;
     cursor: pointer;
+
     @include tablet {
       width: 90vw;
       height: 6vh;
-      font-size: 1.2rem;
+      font-size: 4.8vw;
     }
   }
+
   @include tablet {
     position: fixed;
     z-index: 2;
@@ -308,7 +310,13 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       margin: 0;
       width: 55vw;
     }
+
+    @include mobile {
+      margin: 0;
+      width: 75vw;
+    }
   }
+
   .mainpage-mesic-subtitle {
     line-height: 0.7vw;
     font-size: 1.4vw;
@@ -317,11 +325,21 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       line-height: 4vw;
       margin-bottom: 1vw;
     }
+
+    @include mobile {
+      font-size: 3.5vw;
+      line-height: 6vw;
+      margin-bottom: 1vw;
+    }
   }
   .mainpage-mesic-title {
     font-size: 2.4vw;
     @include tablet {
       font-size: 5vw;
+    }
+
+    @include mobile {
+      font-size: 5.3vw;
     }
   }
   .blob-img {
@@ -336,11 +354,20 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       margin: 0;
       width: 55vw;
     }
+
+    @include mobile {
+      margin: 0 0 2vw 0;
+      width: 75vw;
+    }
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.3vw;
     @include tablet {
+      display: none;
+    }
+
+    @include mobile {
       display: none;
     }
   }
@@ -350,31 +377,54 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     @include tablet {
       display: none;
     }
+
+    @include mobile {
+      display: none;
+    }
   }
   .mainpage-mesic-subtitle-resp {
     display: none;
+    color: $subtitle-color;
+    font-weight: 300;
+    letter-spacing: -0.01vw;
+    margin: 1vw 0;
+    font-size: 2.5vw;
+    line-height: 4vw;
+    text-align: center;
+
     @include tablet {
       display: block;
-      color: $subtitle-color;
+    }
+
+    @include mobile {
+      display: block;
+      white-space: nowrap;
       font-weight: 300;
       letter-spacing: -0.01vw;
       margin: 1vw 0;
-      font-size: 2.5vw;
-      line-height: 4vw;
-      text-align: center;
+      font-size: 3.5vw;
+      line-height: 5.5vw;
     }
   }
   .mainpage-mesic-title-resp {
     display: none;
+    color: $title-color;
+    font-weight: 800;
+    letter-spacing: -0.01vw;
+    white-space: nowrap;
+    line-height: 6.5vw;
+    font-size: 5vw;
+    text-align: center;
+
     @include tablet {
       display: block;
-      color: $title-color;
-      font-weight: 800;
+    }
+
+    @include mobile {
+      display: block;
       letter-spacing: -0.01vw;
-      white-space: nowrap;
-      line-height: 6.5vw;
-      font-size: 5vw;
-      text-align: center;
+      line-height: 6.7vw;
+      font-size: 5.3vw;
     }
   }
   .blob-img {
@@ -390,22 +440,40 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       margin: 0;
       width: 70vw;
     }
+
+    @include mobile {
+      margin: 0;
+      width: 90vw;
+    }
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.4vw;
+
     @include tablet {
       font-size: 2.5vw;
       line-height: 4vw;
+      margin-bottom: 1vw;
+    }
+
+    @include mobile {
+      font-size: 3.5vw;
+      line-height: 5.5vw;
       margin-bottom: 1vw;
     }
   }
   .mainpage-mesic-title {
     line-height: 3vw;
     font-size: 2.4vw;
+
     @include tablet {
       font-size: 5vw;
       line-height: 6.5vw;
+    }
+
+    @include mobile {
+      line-height: 6.7vw;
+      font-size: 5.3vw;
     }
   }
   .blob-img {
@@ -417,14 +485,25 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .section-img {
     margin-left: 4vw;
     width: 50vw;
+
     @include tablet {
       margin: 0;
       width: 75vw;
+    }
+
+    @include mobile {
+      margin: 0;
+      width: 90vw;
     }
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.4vw;
+
+    @include tablet {
+      display: none;
+    }
+
     @include tablet {
       display: none;
     }
@@ -432,34 +511,53 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .mainpage-mesic-title {
     line-height: 2.3vw;
     font-size: 2.4vw;
+
+    @include tablet {
+      display: none;
+    }
+
     @include tablet {
       display: none;
     }
   }
   .mainpage-mesic-subtitle-resp {
     display: none;
+    color: $subtitle-color;
+    font-weight: 300;
+    letter-spacing: -0.01vw;
+    margin: 1vw 0 2vw 0;
+    font-size: 2.5vw;
+    line-height: 4vw;
+    text-align: center;
+
     @include tablet {
       display: block;
-      color: $subtitle-color;
-      font-weight: 300;
-      letter-spacing: -0.01vw;
-      margin: 1vw 0 2vw 0;
-      font-size: 2.5vw;
-      line-height: 4vw;
-      text-align: center;
+    }
+
+    @include mobile {
+      display: block;
+      font-size: 3.5vw;
+      line-height: 5.5vw;
     }
   }
   .mainpage-mesic-title-resp {
     display: none;
+    color: $title-color;
+    font-weight: 800;
+    letter-spacing: -0.01vw;
+    white-space: nowrap;
+    line-height: 3vw;
+    font-size: 5vw;
+    text-align: center;
+
     @include tablet {
       display: block;
-      color: $title-color;
-      font-weight: 800;
-      letter-spacing: -0.01vw;
-      white-space: nowrap;
-      line-height: 3vw;
-      font-size: 5vw;
-      text-align: center;
+    }
+
+    @include mobile {
+      display: block;
+      line-height: 5.3vw;
+      font-size: 5.3vw;
     }
   }
   .blob-img {
@@ -476,26 +574,45 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   .section-img {
     margin-right: 2vw;
     width: 43vw;
+
     @include tablet {
       margin: 0;
       width: 75vw;
+    }
+
+    @include mobile {
+      margin: 0;
+      width: 90vw;
     }
   }
   .mainpage-mesic-subtitle {
     line-height: 1.7vw;
     font-size: 1.5vw;
+
     @include tablet {
       font-size: 2.5vw;
       line-height: 4vw;
+      margin-bottom: 2vw;
+    }
+
+    @include mobile {
+      font-size: 3.5vw;
+      line-height: 5.5vw;
       margin-bottom: 2vw;
     }
   }
   .mainpage-mesic-title {
     line-height: 2.7vw;
     font-size: 2.4vw;
+
     @include tablet {
       font-size: 5vw;
       line-height: 2vw;
+    }
+
+    @include mobile {
+      font-size: 5.3vw;
+      line-height: 3.5vw;
     }
   }
   .blob-img {
@@ -663,8 +780,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   }
   @include mobile {
     bottom: 15vh;
-    font-size: 3vw;
-    left: 38.7vw;
+    font-size: 3.5vw;
+    left: 36.7vw;
   }
 }
 
@@ -682,27 +799,29 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   border-left: transparent;
   animation: scroll-down 1.5s ease-in-out infinite;
   animation-delay: 0.1s;
+
   @include tablet {
     bottom: 10.5vh;
     width: 1vw;
     height: 1vw;
   }
-  @include mobile {
-    bottom: 12vh;
-  }
 
   @include mobile {
-    bottom: 12vh;
+    bottom: 11.2vh;
+    width: 1.5vw;
+    height: 1.5vw;
   }
 }
 .scroll-down::after {
   bottom: 3vh;
   animation-delay: 0.2s;
+
   @include tablet {
     bottom: 9.5vh;
   }
+
   @include mobile {
-    bottom: 11vh;
+    bottom: 10.2vh;
   }
 }
 
@@ -724,9 +843,6 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 .display-none {
   display: none;
 }
-// .opacity-0 {
-//   opacity: 0;
-// }
 
 .scroll-up {
   position: fixed;
@@ -740,10 +856,17 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   bottom: 2.5vh;
   white-space: nowrap;
   animation: scroll-up 1.5s ease-in-out infinite;
+
   @include tablet {
     bottom: 9.5vh;
     right: 5vw;
     font-size: 2.5vw;
+  }
+
+  @include mobile {
+    bottom: 10vh;
+    right: 6vw;
+    font-size: 3.5vw;
   }
 }
 
@@ -761,18 +884,31 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   border-left: transparent;
   animation: scroll-up 1.5s ease-in-out infinite;
   animation-delay: 0.1s;
+
   @include tablet {
     bottom: 12.5vh;
     right: 5vw;
     width: 1vw;
     height: 1vw;
   }
+
+  @include mobile {
+    bottom: 13.5vh;
+    right: 5.6vw;
+    width: 1.5vw;
+    height: 1.5vw;
+  }
 }
 .scroll-up::after {
   bottom: 6.5vh;
   animation-delay: 0.2s;
+
   @include tablet {
     bottom: 13.5vh;
+  }
+
+  @include mobile {
+    bottom: 14.5vh;
   }
 }
 
