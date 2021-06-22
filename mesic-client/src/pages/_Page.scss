@@ -51,6 +51,14 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     margin: 0 0 5vw 0;
     width: 85vw;
   }
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 0 0 5vw 0;
+    width: 90vw;
+  }
 }
 
 .browser {
@@ -84,7 +92,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   width: 28vw;
   margin: 0;
   @include tablet {
-    width: 50vw;
+    width: 53vw;
+  }
+
+  @include mobile {
+    width: 69vw;
   }
 }
 
@@ -95,6 +107,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   color: #a1a1a1;
   @include tablet {
     font-size: 2.5vw;
+  }
+
+  @include mobile {
+    font-size: 3.5vw;
   }
 }
 
@@ -112,11 +128,17 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     @include tablet {
       font-size: 7vw;
     }
+    @include mobile {
+      font-size: 10vw;
+    }
   }
   span:last-child {
     font-size: 2vw;
     @include tablet {
       font-size: 4vw;
+    }
+    @include mobile {
+      font-size: 5vw;
     }
   }
   @include tablet {
@@ -130,6 +152,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   margin-bottom: 10px;
   @include tablet {
     animation: typing_resp 5s steps(22) infinite;
+  }
+  @include mobile {
+    line-height: 7vw;
+    margin-bottom: 0;
+    animation: typing_resp_mobile 5s steps(22) infinite;
   }
 }
 @keyframes typing {
@@ -174,6 +201,27 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     width: 53vw;
   }
 }
+@keyframes typing_resp_mobile {
+  0% {
+    width: 0px;
+  }
+  60% {
+    width: 69vw;
+    border-color: $title-color;
+  }
+  70% {
+    border-color: transparent;
+  }
+  80% {
+    border-color: $title-color;
+  }
+  90% {
+    border-color: transparent;
+  }
+  100% {
+    width: 69vw;
+  }
+}
 
 .mainpage-mesic-subtitle {
   font-size: 1.3vw;
@@ -186,6 +234,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     margin-top: 1.5rem;
     font-size: 3vw;
     line-height: 4vw;
+    text-align: center;
+  }
+  @include mobile {
+    margin-top: 0.8rem;
+    font-size: 4vw;
+    line-height: 5vw;
     text-align: center;
   }
 }
@@ -583,6 +637,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     font-size: 2.5vw;
     left: 40.75vw;
   }
+  @include mobile {
+    bottom: 15vh;
+    font-size: 3vw;
+    left: 38.7vw;
+  }
 }
 
 .scroll-down::before,
@@ -603,7 +662,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     bottom: 10.5vh;
     width: 1vw;
     height: 1vw;
-    //border: 0.1vw solid $subtitle-color;
+  }
+  @include mobile {
+    bottom: 12vh;
   }
 }
 .scroll-down::after {
@@ -611,6 +672,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   animation-delay: 0.2s;
   @include tablet {
     bottom: 9.5vh;
+  }
+  @include mobile {
+    bottom: 11vh;
   }
 }
 
