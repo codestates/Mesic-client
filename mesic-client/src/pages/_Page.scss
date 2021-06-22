@@ -292,10 +292,6 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       width: 55vw;
     }
   }
-  .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
-  }
   .mainpage-mesic-subtitle {
     line-height: 0.7vw;
     font-size: 1.4vw;
@@ -323,11 +319,6 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       margin: 0;
       width: 55vw;
     }
-  }
-  .in {
-    display: flex;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
@@ -383,10 +374,6 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
       width: 70vw;
     }
   }
-  .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
-  }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
     font-size: 1.4vw;
@@ -415,12 +402,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     width: 50vw;
     @include tablet {
       margin: 0;
-      width: 85vw;
+      width: 75vw;
     }
-  }
-  .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.9vw;
@@ -475,15 +458,11 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   }
   .section-img {
     margin-right: 2vw;
-    width: 55vw;
+    width: 43vw;
     @include tablet {
       margin: 0;
-      width: 90vw;
+      width: 75vw;
     }
-  }
-  .in {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
   }
   .mainpage-mesic-subtitle {
     line-height: 1.7vw;
@@ -573,6 +552,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     width: 8vw;
     @include tablet {
       margin-left: 1vw;
+      width: 10vw;
     }
   }
 }
@@ -661,8 +641,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   -ms-user-select: none;
   @include tablet {
     bottom: 13vh;
-    font-size: 2vw;
-    left: 42.6vw;
+    font-size: 2.5vw;
+    left: 40.75vw;
   }
 
   @include mobile {
@@ -687,7 +667,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   animation: scroll-down 1.5s ease-in-out infinite;
   animation-delay: 0.1s;
   @include tablet {
-    bottom: 11vh;
+    bottom: 10.5vh;
+    width: 1vw;
+    height: 1vw;
+    //border: 0.1vw solid $subtitle-color;
   }
 
   @include mobile {
@@ -698,7 +681,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   bottom: 3vh;
   animation-delay: 0.2s;
   @include tablet {
-    bottom: 10vh;
+    bottom: 9.5vh;
   }
 
   @include mobile {
@@ -741,9 +724,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   white-space: nowrap;
   animation: scroll-up 1.5s ease-in-out infinite;
   @include tablet {
-    bottom: 8vh;
-    right: 3vw;
-    font-size: 2vw;
+    bottom: 9.5vh;
+    right: 5vw;
+    font-size: 2.5vw;
   }
 }
 
@@ -762,15 +745,17 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   animation: scroll-up 1.5s ease-in-out infinite;
   animation-delay: 0.1s;
   @include tablet {
-    bottom: 11vh;
-    right: 3.5vw;
+    bottom: 12.5vh;
+    right: 5vw;
+    width: 1vw;
+    height: 1vw;
   }
 }
 .scroll-up::after {
   bottom: 6.5vh;
   animation-delay: 0.2s;
   @include tablet {
-    bottom: 12vh;
+    bottom: 13.5vh;
   }
 }
 
@@ -778,6 +763,34 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.in {
+  animation: fadein 2s;
+  -webkit-animation: fadein 2s;
+}
+
+.in-subtitle {
+  animation: fadeInLeft 2s;
+  -webkit-animation: fadeInLeft 2s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.in-title {
+  animation: fadeInLeft 2s;
+  -webkit-animation: fadeInLeft 2s;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+.in-blob {
+  animation: fadein-blob 2s;
+  -webkit-animation: fadein-blob 2s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
 }
 
 @keyframes scroll-up {
@@ -794,10 +807,31 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     opacity: 0;
   }
 }
+
 @keyframes fadein {
   from {
     opacity: 0;
-    transform: scale(0.8, 0.8);
+    transform: scale(0.7, 0.7);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadein-blob {
+  from {
+    opacity: 0;
   }
   to {
     opacity: 1;
