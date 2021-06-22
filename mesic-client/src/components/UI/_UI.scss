@@ -317,6 +317,7 @@ $default-black-color: #525252;
 
     @include mobile {
       margin: 0;
+      width: 80px;
     }
   }
 
@@ -325,6 +326,11 @@ $default-black-color: #525252;
     justify-content: center;
     align-items: center;
     margin: 0 20px;
+
+    @include mobile {
+      margin: 0 11px;
+    }
+
     .loginBtn {
       position: relative;
       padding: 10px 20px;
@@ -338,6 +344,7 @@ $default-black-color: #525252;
 
       @include mobile {
         margin: 0;
+        font-size: 15px;
       }
     }
 
@@ -356,6 +363,8 @@ $default-black-color: #525252;
 
       @include mobile {
         margin: 0;
+        font-size: 15px;
+        padding: 9px 15px;
       }
 
       &:hover {

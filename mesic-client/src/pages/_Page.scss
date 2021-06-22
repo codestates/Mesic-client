@@ -11,6 +11,12 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   position: absolute;
   height: 670vh;
   overflow-y: hidden;
+  @include tablet {
+    height: 650vh;
+  }
+  @include mobile {
+    height: 640vh;
+  }
 }
 
 .mainpage-mesic {
@@ -286,6 +292,10 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     @include tablet {
       width: 90vw;
       height: 6vh;
+      font-size: 3.8vw;
+    }
+
+    @include mobile {
       font-size: 4.8vw;
     }
   }
@@ -626,6 +636,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
+  @include tablet {
+    display: none;
+  }
   div {
     display: flex;
     justify-content: center;
@@ -648,14 +661,14 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     letter-spacing: -1px;
     border-radius: 0.8vw;
     cursor: pointer;
-    @include tablet {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 30vw;
-      height: 6vh;
-      font-size: 3vw;
-    }
+    // @include tablet {
+    //   display: none;
+    //   justify-content: center;
+    //   align-items: center;
+    //   width: 30vw;
+    //   height: 6vh;
+    //   font-size: 3vw;
+    // }
   }
 }
 
@@ -665,6 +678,9 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   padding: 12vh 12vh 6vh 12vh;
   @include tablet {
     padding: 10vh 0;
+  }
+  @include mobile {
+    padding: 6vh 0;
   }
 }
 
@@ -700,7 +716,7 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     font-weight: 800;
     margin: 6vh 0 1vh 0;
     @include tablet {
-      font-size: 3vw;
+      font-size: 3.2vw;
       margin-top: 5vh;
       font-weight: 1000;
     }
@@ -712,7 +728,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     font-weight: 300;
     margin: 0.35vw;
     @include tablet {
-      font-size: 2vw;
+      font-size: 2.5vw;
+      margin: 0.65vw;
     }
   }
   @include tablet {
@@ -727,7 +744,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     width: 2vw;
     margin: 5vh 0 1vh 0;
     @include tablet {
-      width: 4vw;
+      width: 5vw;
+      margin: 4.3vh 0 1vh 0;
     }
   }
   div:not(:first-child) {
@@ -737,7 +755,8 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
     font-weight: 300;
     margin: 0.25vw;
     @include tablet {
-      font-size: 2vw;
+      font-size: 2.5vw;
+      margin: 0.4vw;
     }
   }
   @include tablet {
