@@ -300,6 +300,7 @@ $default-black-color: #525252;
   overflow-x: hidden;
   box-shadow: 0px 5px 5px 1px rgba(84, 84, 84, 0.2);
   z-index: 2;
+
   .logo-btn {
     cursor: pointer;
     width: 100px;
@@ -315,7 +316,7 @@ $default-black-color: #525252;
     }
 
     @include mobile {
-      margin : 0;
+      margin: 0;
     }
   }
 
