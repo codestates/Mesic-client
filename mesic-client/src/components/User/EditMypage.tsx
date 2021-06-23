@@ -3,6 +3,7 @@ import React, { useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import AWS from "aws-sdk";
+import defaultImage from "../../images/avatar.png";
 
 function EditMypage({
   setOpenMypage,
@@ -99,6 +100,55 @@ function EditMypage({
     setEditNicknameInput(nickname);
   };
 
+  const deleteProfile = () => {
+    const bucket = "mesic-photo-bucket";
+    AWS.config.region = "ap-northeast-2";
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca",
+    });
+
+    const s3 = new AWS.S3();
+
+    const file = profileImg.split("/");
+    console.log("delete target : ", file[file.length - 1]);
+    const fileName = file[file.length - 1];
+    const param = {
+      Bucket: bucket,
+      Key: `image/${fileName}`,
+    }; //s3 업로드에 필요한 옵션 설정
+
+    s3.deleteObject(param, function (err: any, data: any) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      const updateData = {
+        nickname: nickname,
+        profile: "",
+      };
+
+      axios
+        .patch(
+          `${process.env.REACT_APP_SERVER_URL}/users/${user_id}`,
+          updateData,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          getUserInfo(user_id);
+          setOpenEditMypage(false);
+          setOpenMypage(true);
+          editProfileInput.current.value = "";
+          setEditProfileImg("");
+          setEditPreviewProfileImg("");
+        })
+        .catch((err) => console.log(err));
+    });
+  };
+
   return (
     <>
       <div
@@ -133,7 +183,6 @@ function EditMypage({
                 <img className="profileImg-content" src={profileImg}></img>
               )}
             </figure>
-
             <label htmlFor="profile-img-input">
               <i className="fas fa-pencil-alt edit-profile-img-btn" />
             </label>
@@ -144,6 +193,11 @@ function EditMypage({
               accept="image/*"
               onChange={handleEditProfile}
             />
+            <i
+              className="fa fa-trash"
+              aria-hidden="true"
+              onClick={deleteProfile}
+            ></i>
           </div>
           <div className="mypage-info">
             <div className="edit-email">
