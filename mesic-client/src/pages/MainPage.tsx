@@ -346,9 +346,12 @@ function MainPage() {
       });
 
       window.kakao.maps.event.addListener(marker, "mouseover", () => {
+        console.log("mouseover");
         infowindow.setMap(map);
       });
+
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
+        console.log("mouseout");
         infowindow.setMap(null);
       });
 
