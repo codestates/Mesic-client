@@ -29,9 +29,9 @@ function ConfirmModal({
     //s3에서 삭제 후 받은 응답을 서버로 patch, get 요청
 
     const bucket = "mesic-photo-bucket";
-    AWS.config.region = "ap-northeast-2";
+    AWS.config.region = process.env.REACT_APP_AWS_S3_REGION;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca",
+      IdentityPoolId: `${process.env.REACT_APP_AWS_S3_REGION}:${process.env.REACT_APP_AWS_S3_IDENTITY_POOL_ID}`,
     });
 
     const s3 = new AWS.S3();

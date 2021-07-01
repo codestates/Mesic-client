@@ -3,7 +3,8 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import IntroPage from "./pages/IntroPage";
 import MainPage from "./pages/MainPage";
-import Nav from "./components/UI/Nav";
+require("dotenv").config();
+
 function App() {
   return (
     <Router>

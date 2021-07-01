@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducers";
 import { switchMode } from "../../actions/index";
@@ -39,9 +39,9 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
     }
     setErrMessage("");
 
-    const accessKeyId = "AKIA2XC7TYWAUO3P7L2I";
-    const secretAccessKey = "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";
-    const region = "ap-northeast-2";
+    const accessKeyId = process.env.REACT_APP_AWS_S3_ACCESS_KEY_ID;
+    const secretAccessKey = process.env.REACT_APP_AWS_S3_SECRET_ACCESS_KEY_ID;
+    const region = process.env.REACT_APP_AWS_S3_REGION;
 
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 

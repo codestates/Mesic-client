@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { createNoSubstitutionTemplateLiteral } from "typescript";
 import { RootState } from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
 import axios from "axios";
@@ -30,9 +29,9 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
   const updateReadImg = () => {
     //s3에 업데이트 후 서버로 patch요청, 다시 get요청
 
-    const accessKeyId = "AKIA2XC7TYWAUO3P7L2I";
-    const secretAccessKey = "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";
-    const region = "ap-northeast-2";
+    const accessKeyId = process.env.REACT_APP_AWS_S3_ACCESS_KEY_ID;
+    const secretAccessKey = process.env.REACT_APP_AWS_S3_SECRET_ACCESS_KEY_ID;
+    const region = process.env.REACT_APP_AWS_S3_REGION;
 
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
