@@ -10,7 +10,6 @@ import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
-import jwtDecode, { JwtPayload } from "jwt-decode";
 
 declare global {
   interface Window {
@@ -88,12 +87,6 @@ function MainPage() {
     window.kakao.maps.load(() => {
       loadKakaoMap();
     });
-  }, [isLogin]);
-
-  useEffect(() => {
-    if (token.length > 0) {
-      console.log(jwtDecode<JwtPayload>(token));
-    }
   }, [isLogin]);
 
   // 로그인 후 유저의 핀 가져오기
@@ -206,9 +199,9 @@ function MainPage() {
   const deleteMyMarker = (pinId: any) => {
     const bucket = "mesic-photo-bucket";
 
-    AWS.config.region = "ap-northeast-2";
+    AWS.config.region = process.env.REACT_APP_AWS_S3_REGION;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca",
+      IdentityPoolId: `${process.env.REACT_APP_AWS_S3_REGION}:${process.env.REACT_APP_AWS_S3_IDENTITY_POOL_ID}`,
     });
 
     const s3 = new AWS.S3();
@@ -346,12 +339,10 @@ function MainPage() {
       });
 
       window.kakao.maps.event.addListener(marker, "mouseover", () => {
-        console.log("mouseover");
         infowindow.setMap(map);
       });
 
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
-        console.log("mouseout");
         infowindow.setMap(null);
       });
 
