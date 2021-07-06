@@ -32,7 +32,7 @@ function EditMypage({
 
     const param = {
       Bucket: `${process.env.REACT_APP_AWS_S3_BUCKET}`,
-      Key: `/image/${editProfileImg.name}`,
+      Key: `image/${editProfileImg.name}`,
       ACL: "public-read",
       Body: editProfileImg,
       ContentType: "image/jpg",
@@ -193,7 +193,7 @@ function EditMypage({
               onChange={handleEditProfile}
             />
             <i
-              className="fa fa-trash"
+              className="fa fa-trash del-profile"
               aria-hidden="true"
               onClick={deleteProfile}
             ></i>
