@@ -45,7 +45,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: "mesic",
+      Bucket: `${process.env.REACT_APP_AWS_S3_BUCKET}`,
       Key: `image/${postImg.name}`,
       ACL: "public-read",
       Body: postImg,
