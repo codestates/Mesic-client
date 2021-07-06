@@ -36,7 +36,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: "mesic-photo-bucket",
+      Bucket: `${process.env.REACT_APP_AWS_S3_BUCKET}`,
       Key: `image/${editedImg.name}`,
       ACL: "public-read",
       Body: editedImg,
@@ -191,9 +191,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
                   <div className="edit-del-btn">
                     <i className="fa fa-camera fa-lg"></i>
                   </div>
-                  <div className="no-contents">
-                    사진이 없습니다.
-                  </div>
+                  <div className="no-contents">사진이 없습니다.</div>
                 </div>
               </>
             )}

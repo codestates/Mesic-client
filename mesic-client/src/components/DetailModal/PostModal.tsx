@@ -18,8 +18,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
     title: "",
     thumbnail: "",
   });
-  const location =
-    "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
+  const location = `https://${process.env.REACT_APP_AWS_S3_BUCKET}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/image/undefined`;
   const [postImg, setPostImg] = useState<any>(location);
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
@@ -46,7 +45,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: "mesic-photo-bucket",
+      Bucket: "mesic",
       Key: `image/${postImg.name}`,
       ACL: "public-read",
       Body: postImg,

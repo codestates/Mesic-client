@@ -197,7 +197,7 @@ function MainPage() {
 
   // 마커 삭제
   const deleteMyMarker = (pinId: any) => {
-    const bucket = "mesic-photo-bucket";
+    const bucket = `${process.env.REACT_APP_AWS_S3_BUCKET}`;
 
     AWS.config.region = process.env.REACT_APP_AWS_S3_REGION;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
