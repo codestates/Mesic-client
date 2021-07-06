@@ -28,7 +28,7 @@ function ConfirmModal({
   const deleteReadImg = () => {
     //s3에서 삭제 후 받은 응답을 서버로 patch, get 요청
 
-    const bucket = "mesic-photo-bucket";
+    const bucket = `${process.env.REACT_APP_AWS_S3_BUCKET}`;
     AWS.config.region = process.env.REACT_APP_AWS_S3_REGION;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: `${process.env.REACT_APP_AWS_S3_REGION}:${process.env.REACT_APP_AWS_S3_IDENTITY_POOL_ID}`,
@@ -50,8 +50,7 @@ function ConfirmModal({
         return;
       }
 
-      const location =
-        "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
+      const location = `https://${process.env.REACT_APP_AWS_S3_BUCKET}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/image/undefined`;
       const updateData = {
         photo: location,
       };
@@ -84,12 +83,12 @@ function ConfirmModal({
   };
 
   const deletePostImg = () => {
-    const location =
-      "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
+    const location = `https://${process.env.REACT_APP_AWS_S3_BUCKET}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/image/undefined`;
     setPostImg(location);
     imageInput.current.value = "";
     setOpenConfirm(false);
   };
+
   const deletePostMusic = () => {
     setPostMusic({
       video_Id: "",
