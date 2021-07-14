@@ -37,7 +37,6 @@ function ConfirmModal({
     const s3 = new AWS.S3();
 
     const file = readImg.split("/");
-    console.log(file[file.length - 1]);
     const fileName = file[file.length - 1];
     const param = {
       Bucket: bucket,

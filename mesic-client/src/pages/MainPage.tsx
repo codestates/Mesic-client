@@ -79,9 +79,6 @@ function MainPage() {
   const [myPinData, setMypinData] = useState<any[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
 
-  // 미리보기 모두 저장
-  // const [saveInfowindows, setSaveinfowindows] = useState<any[]>([]);
-
   // 지도 동적 렌더링
   useEffect(() => {
     window.kakao.maps.load(() => {
@@ -89,7 +86,7 @@ function MainPage() {
     });
   }, [isLogin]);
 
-  // 로그인 후 유저의 핀 가져오기
+  // 로그인 / 핀 생성 후 유저의 핀 가져오기
   useEffect(() => {
     if (isLogin || pinUpdate) {
       if (mode !== "POST") {
@@ -97,7 +94,7 @@ function MainPage() {
       }
     }
     return;
-  }, [map, mode, isLogin, pinUpdate]);
+  }, [mode, pinUpdate]);
 
   // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
@@ -149,12 +146,7 @@ function MainPage() {
         viewMyMarkers();
       }
     }
-  }, [map, myPinData]);
-
-  // 미리보기 사라지게 하기
-  // useEffect(() => {
-  //   deleteInfowindows();
-  // });
+  }, [myPinData, map]);
 
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
@@ -227,7 +219,6 @@ function MainPage() {
           },
         })
         .then((res) => {
-          console.log(res);
           setOpenReadModal(false);
           dispatch(switchMode("NONE"));
         })
@@ -348,7 +339,6 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
-      // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setMyMarkers(markers);
   };
@@ -413,7 +403,6 @@ function MainPage() {
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
         infowindow.setMap(null);
       });
-
       marker.setMap(map);
       markers.push(marker);
     }
@@ -516,7 +505,6 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
-      // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setFollowMarkers([...followMarkers, markers]);
   };
@@ -614,12 +602,6 @@ function MainPage() {
       searchMarkers[i].setMap(null);
     }
   };
-
-  // const deleteInfowindows = () => {
-  //   for (let i = 0; i < saveInfowindows.length; i++) {
-  //     saveInfowindows[i].setMap(null);
-  //   }
-  // };
 
   // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: string | number) => {

@@ -74,7 +74,6 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
           headers: { authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          console.log(res);
           dispatch(switchMode("CREATED"));
         })
         .catch((err) => console.log(err));
