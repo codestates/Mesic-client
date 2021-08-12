@@ -3,7 +3,7 @@ export type keywordSearchData = {
   x: number;
 }[];
 
-export type readMarkerData = {
+export type markerData = {
   location: {
     latitude: string;
     longitude: string;
@@ -16,4 +16,6 @@ export type readMarkerData = {
   };
   photo: string;
   user_id: string;
+  _id: string;
+  __v?: number;
 } | null;
