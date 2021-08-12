@@ -10,6 +10,7 @@ import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
+import { keywordSearchData, readMarkerData } from "../types";
 
 declare global {
   interface Window {
@@ -30,7 +31,6 @@ function MainPage() {
     currentMarker,
   }: any = state.modeReducer;
 
-  // const [openModal, setOpenModal] = useState<boolean>(false);
   //로그인 컨트롤러
   const [loginController, setLoginController] = useState<boolean>(false);
 
@@ -40,7 +40,9 @@ function MainPage() {
 
   // 키워드 검색
   const [keywordInput, setKeywordInput] = useState<string>("");
-  const [keywordSearchData, setKeywordSearchData] = useState<any>([]);
+  const [keywordSearchData, setKeywordSearchData] = useState<keywordSearchData>(
+    []
+  );
   const [searchMode, setSearchMode] = useState<boolean>(false);
 
   // 지도 생성
@@ -63,7 +65,7 @@ function MainPage() {
   const [postMarkers, setPostMarkers] = useState<any[]>([]);
 
   // 선택한 READ 마커의 데이터
-  const [readMarkerData, setReadMarkerData] = useState<any>(null);
+  const [readMarkerData, setReadMarkerData] = useState<readMarkerData>(null);
 
   // 로그인 유저 마커
   const [myMarkers, setMyMarkers] = useState<any[]>([]);
@@ -198,33 +200,36 @@ function MainPage() {
 
     const s3 = new AWS.S3();
 
-    const photoURL = readMarkerData.photo;
-    const file = photoURL.split("/");
-    const fileName = file[file.length - 1];
-    const param = {
-      Bucket: bucket,
-      Key: `image/${fileName}`,
-    }; //s3 업로드에 필요한 옵션 설정
+    if (readMarkerData) {
+      const photoURL = readMarkerData.photo;
+      const file = photoURL.split("/");
+      const fileName = file[file.length - 1];
+      const param = {
+        Bucket: bucket,
+        Key: `image/${fileName}`,
+      }; //s3 업로드에 필요한 옵션 설정
 
-    s3.deleteObject(param, function (err: any, data: any) {
-      if (err) {
-        console.log(err);
-        return;
-      }
+      s3.deleteObject(param, function (err: any, data: any) {
+        if (err) {
+          console.log(err);
+          return;
+        }
 
-      axios
-        .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          setOpenReadModal(false);
-          dispatch(switchMode("NONE"));
-        })
-        .catch((err) => console.log(err));
-    });
+        axios
+          .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setOpenReadModal(false);
+            dispatch(switchMode("NONE"));
+          })
+          .catch((err) => console.log(err));
+      });
+    }
   };
+
   // (POST MODE) 지도 클릭 마커
 
   const postMarkerControl = () => {
