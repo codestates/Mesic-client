@@ -7,6 +7,9 @@ import EditMusic from "../DetailModal/EditMusic";
 import pauseImg from "../../images/pause.png";
 import playImg from "../../images/play.png";
 import { readMusic } from "../../types";
+import UpdateMusic from "./Music/UpdateMusic";
+import Music from "./Music/Music";
+import NoMusic from "./Music/NoMusic";
 
 function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
@@ -113,157 +116,27 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
       />
       <div className="music">
         {updateMode && (
-          <>
-            <div className="update-mode-post-icon">
-              <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
-            </div>
-            <div className="widget-outsider">
-              <img className="thumbnail-cd" src={updateMusic.thumbnail}></img>
-              <div className="title-cd-hidden">
-                <div className="title-cd">{updateMusic.title}</div>
-              </div>
-              <iframe
-                src={`https://www.youtube.com/embed/ ${
-                  updateMusic.video_Id &&
-                  updateMusic.video_Id +
-                    "?modestbranding=1&enablejsapi=1&autoplay=0&loop=1&playlist=" +
-                    updateMusic.video_Id
-                }`}
-                id="ytplayer"
-                frameBorder="0"
-                allow="autoplay"
-              ></iframe>
-              <div onClick={() => setIsPlay(isPlay ? false : true)}>
-                <img className="play-pause" src={isPlay ? pauseImg : playImg} />
-              </div>
-            </div>
-            <div className="save-cancel-btn">
-              <button onClick={updateReadMusic}>저장</button>
-              <button
-                onClick={() => {
-                  setUpdateMode(false);
-                  setUpdateMusic({
-                    video_Id: "",
-                    title: "",
-                    thumbnail: "",
-                  });
-                }}
-              >
-                취소
-              </button>
-            </div>
-          </>
+          <UpdateMusic
+            updateMusic={updateMusic}
+            isPlay={isPlay}
+            setIsPlay={setIsPlay}
+            setUpdateMode={setUpdateMode}
+            setUpdateMusic={setUpdateMusic}
+            updateReadMusic={updateReadMusic}
+          />
         )}
         {updateMode || (
           <div>
-            {isLogin && mode !== "WATCH" ? ( //내 핀 읽기모드 + 음악이 있을 때
-              readMusic.video_Id.length > 0 ? (
-                <>
-                  <div className="edit-del-btn">
-                    <i
-                      className="fa fa-headphones fa-lg"
-                      aria-hidden="true"
-                    ></i>
-                    <div>
-                      <i
-                        className="fas fa-pencil-alt"
-                        aria-hidden="true"
-                        onClick={() => setOpenEditMusic(true)}
-                      ></i>
-                      <i
-                        className="fa fa-trash"
-                        aria-hidden="true"
-                        onClick={() => setOpenConfirm(true)}
-                      ></i>
-                    </div>
-                  </div>
-                  <div className="widget-outsider">
-                    <img
-                      className="thumbnail-cd"
-                      src={readMusic.thumbnail}
-                    ></img>
-                    <div className="title-cd-hidden">
-                      <div className="title-cd">{readMusic.title}</div>
-                    </div>
-                    <iframe
-                      src={`https://www.youtube.com/embed/ ${
-                        readMusic.video_Id &&
-                        readMusic.video_Id +
-                          "?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=" +
-                          readMusic.video_Id
-                      }`}
-                      id="ytplayer"
-                      frameBorder="0"
-                      allow="autoplay"
-                    ></iframe>
-                    <div>
-                      <img
-                        className="play-pause"
-                        src={isPlay ? pauseImg : playImg}
-                        onClick={() => setIsPlay(isPlay ? false : true)}
-                      />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                // 내 핀 읽기모드 + 음악이 없을 때
-                <>
-                  <div className="post-icon">
-                    <i
-                      className="fa fa-headphones fa-lg"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-                  <div className="add-btn-container">
-                    <button
-                      className="add-btn-music"
-                      onClick={() => setOpenEditMusic(true)}
-                    >
-                      +
-                    </button>
-                  </div>
-                </>
-              )
-            ) : readMusic.video_Id.length > 0 ? ( // 팔로우 핀 읽기모드 + 음악이 있을 때
-              <>
-                <div className="post-icon">
-                  <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
-                </div>
-                <div className="widget-outsider">
-                  <img className="thumbnail-cd" src={readMusic.thumbnail}></img>
-                  <div className="title-cd-hidden">
-                    <div className="title-cd">{readMusic.title}</div>
-                  </div>
-                  <iframe
-                    src={`https://www.youtube.com/embed/ ${
-                      readMusic.video_Id &&
-                      readMusic.video_Id +
-                        "?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=" +
-                        readMusic.video_Id
-                    }`}
-                    id="ytplayer"
-                    frameBorder="0"
-                    allow="autoplay"
-                  ></iframe>
-                  <div onClick={() => setIsPlay(isPlay ? false : true)}>
-                    <img
-                      className="play-pause"
-                      src={isPlay ? pauseImg : playImg}
-                      onClick={() => setIsPlay(isPlay ? false : true)}
-                    />
-                  </div>
-                </div>
-              </>
+            {readMusic.video_Id.length > 0 ? (
+              <Music
+                setOpenEditMusic={setOpenEditMusic}
+                setOpenConfirm={setOpenConfirm}
+                musicData={readMusic}
+                isPlay={isPlay}
+                setIsPlay={setIsPlay}
+              />
             ) : (
-              //팔로우 핀 읽기모드 + 음악이 없을 때
-              <>
-                <div className="edit-del-btn">
-                  <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
-                </div>
-                <div className="follow-widget-outsider">
-                  <div className="no-music">음악이 없습니다.</div>
-                </div>
-              </>
+              <NoMusic setOpenEditMusic={setOpenEditMusic} />
             )}
           </div>
         )}
