@@ -785,7 +785,7 @@ function MainPage() {
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}
       />
-      {openPostModal || openReadModal ? (
+      {(openPostModal || openReadModal) && (
         <>
           {showDetailModal ? (
             <button
@@ -794,9 +794,7 @@ function MainPage() {
                 showHideDetailModal();
                 setShowDetailModal(false);
               }}
-            >
-              {"<"}
-            </button>
+            ></button>
           ) : (
             <button
               className="detail-modal-hide"
@@ -804,13 +802,9 @@ function MainPage() {
                 showHideDetailModal();
                 setShowDetailModal(true);
               }}
-            >
-              {"<"}
-            </button>
-          )}{" "}
+            ></button>
+          )}
         </>
-      ) : (
-        <> </>
       )}
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
@@ -821,21 +815,20 @@ function MainPage() {
       />
       <FollowList setLoginController={setLoginController} />
       <div ref={detailModal}>
-        {openReadModal ? (
+        {openReadModal && (
           <ReadModal
             readMarkerData={readMarkerData}
             setPinUpdate={setPinUpdate}
             deleteMyMarker={deleteMyMarker}
             setOpenReadModal={setOpenReadModal}
           />
-        ) : openPostModal ? (
+        )}
+        {openPostModal && (
           <PostModal
             postLatLng={postLatLng}
             setOpenPostModal={setOpenPostModal}
             deletePostMarkers={deletePostMarkers}
           />
-        ) : (
-          <></>
         )}
       </div>
       <div id="kakao-map" />
