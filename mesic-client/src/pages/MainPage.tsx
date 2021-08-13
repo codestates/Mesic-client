@@ -10,7 +10,7 @@ import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
-import { keywordSearchData, readMarkerData } from "../types";
+import { keywordSearchData, markerData } from "../types";
 
 declare global {
   interface Window {
@@ -65,7 +65,7 @@ function MainPage() {
   const [postMarkers, setPostMarkers] = useState<any[]>([]);
 
   // 선택한 READ 마커의 데이터
-  const [readMarkerData, setReadMarkerData] = useState<readMarkerData>(null);
+  const [readMarkerData, setReadMarkerData] = useState<markerData>(null);
 
   // 로그인 유저 마커
   const [myMarkers, setMyMarkers] = useState<any[]>([]);
@@ -75,10 +75,10 @@ function MainPage() {
 
   // 모달 숨기기
   const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
-  const detailModal = useRef<any>();
+  const detailModal = useRef<HTMLDivElement>(null);
 
   // 로그인 유저의 핀 데이터
-  const [myPinData, setMypinData] = useState<any[]>([]);
+  const [myPinData, setMypinData] = useState<markerData[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
 
   // 지도 동적 렌더링
@@ -231,7 +231,6 @@ function MainPage() {
   };
 
   // (POST MODE) 지도 클릭 마커
-
   const postMarkerControl = () => {
     if (postMarkers.length > 0) {
       deletePostMarkers();
@@ -259,14 +258,14 @@ function MainPage() {
     deleteMyMarkers();
     // CREATED 모드일 때 방금 만들어진 데이터를 띄움
     if (mode === "CREATED") {
-      handleMyMarkerClick(myPinData[myPinData.length - 1]._id);
+      handleMyMarkerClick(myPinData[myPinData.length - 1]!._id);
     }
 
     const markers = [];
     for (let i = 0; i < myPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        parseFloat(myPinData[i].location.longitude),
-        parseFloat(myPinData[i].location.latitude)
+        parseFloat(myPinData[i]!.location.longitude),
+        parseFloat(myPinData[i]!.location.latitude)
       );
 
       const image = new window.kakao.maps.MarkerImage(
@@ -279,9 +278,8 @@ function MainPage() {
         map,
         position,
       });
-      marker.id = myPinData[i]._id;
+      marker.id = myPinData[i]!._id;
       marker.pos = position;
-
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         infowindow.setMap(null);
@@ -295,8 +293,8 @@ function MainPage() {
       const thumbnail = document.createElement("img");
       thumbnail.className = "preview-img";
 
-      if (myPinData[i].music.thumbnail.length > 0) {
-        thumbnail.src = myPinData[i].music.thumbnail;
+      if (myPinData[i]!.music.thumbnail.length > 0) {
+        thumbnail.src = myPinData[i]!.music.thumbnail;
       } else {
         thumbnail.src =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/CD_icon_test.svg/1200px-CD_icon_test.svg.png";
@@ -308,16 +306,16 @@ function MainPage() {
       const title = document.createElement("div");
       title.className = "preview-title";
 
-      if (myPinData[i].music.title.length > 0) {
-        title.textContent = myPinData[i].music.title;
+      if (myPinData[i]!.music.title.length > 0) {
+        title.textContent = myPinData[i]!.music.title;
       } else {
         title.textContent = "저장한 음악이 없습니다.";
       }
 
       const memo = document.createElement("div");
       memo.className = "preview-memo";
-      if (myPinData[i].memo.length > 0) {
-        memo.textContent = myPinData[i].memo;
+      if (myPinData[i]!.memo.length > 0) {
+        memo.textContent = myPinData[i]!.memo;
       } else {
         memo.textContent = "저장한 메모가 없습니다.";
       }
@@ -623,7 +621,7 @@ function MainPage() {
       }
     }
     for (let i = 0; i < myPinData.length; i += 1) {
-      if (myPinData[i]._id === id) {
+      if (myPinData[i]!._id === id) {
         setReadMarkerData(myPinData[i]);
         break;
       }
@@ -762,10 +760,12 @@ function MainPage() {
   };
 
   const showHideDetailModal = () => {
-    if (detailModal.current.style.display === "none") {
-      detailModal.current.style.display = "block";
-    } else {
-      detailModal.current.style.display = "none";
+    if (detailModal?.current?.style?.display) {
+      if (detailModal.current.style.display === "none") {
+        detailModal.current.style.display = "block";
+      } else {
+        detailModal.current.style.display = "none";
+      }
     }
   };
 
@@ -785,18 +785,8 @@ function MainPage() {
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}
       />
-      {openPostModal || openReadModal ? (
+      {(openPostModal || openReadModal) && (
         <>
-          {/* <div
-            className="detail-modal-close"
-            onClick={() => {
-              setOpenPostModal(false);
-              setOpenReadModal(false);
-              deletePostMarkers();
-            }}
-          >
-            X
-          </div> */}
           {showDetailModal ? (
             <button
               className="detail-modal-hide"
@@ -804,10 +794,7 @@ function MainPage() {
                 showHideDetailModal();
                 setShowDetailModal(false);
               }}
-            >
-              {"<"}
-              {/*show*/}
-            </button>
+            ></button>
           ) : (
             <button
               className="detail-modal-hide"
@@ -815,14 +802,9 @@ function MainPage() {
                 showHideDetailModal();
                 setShowDetailModal(true);
               }}
-            >
-              {"<"}
-              {/*hide*/}
-            </button>
-          )}{" "}
+            ></button>
+          )}
         </>
-      ) : (
-        <> </>
       )}
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
@@ -833,21 +815,20 @@ function MainPage() {
       />
       <FollowList setLoginController={setLoginController} />
       <div ref={detailModal}>
-        {openReadModal ? (
+        {openReadModal && (
           <ReadModal
             readMarkerData={readMarkerData}
             setPinUpdate={setPinUpdate}
             deleteMyMarker={deleteMyMarker}
             setOpenReadModal={setOpenReadModal}
           />
-        ) : openPostModal ? (
+        )}
+        {openPostModal && (
           <PostModal
             postLatLng={postLatLng}
             setOpenPostModal={setOpenPostModal}
             deletePostMarkers={deletePostMarkers}
           />
-        ) : (
-          <></>
         )}
       </div>
       <div id="kakao-map" />

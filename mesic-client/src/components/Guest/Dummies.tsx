@@ -1,6 +1,6 @@
 export const Dummies = [
   {
-    _id: 1,
+    _id: "1",
     location: {
       longitude: "37.5139795454969",
       latitude: "127.048963363388",
@@ -17,7 +17,7 @@ export const Dummies = [
     user_id: "1",
   },
   {
-    _id: 2,
+    _id: "2",
     location: {
       longitude: "37.51042505155147",
       latitude: "127.0420299463025",
@@ -33,7 +33,7 @@ export const Dummies = [
     user_id: "1",
   },
   {
-    _id: 3,
+    _id: "3",
     location: {
       longitude: "37.51669558042181",
       latitude: "127.0433003486247",
@@ -49,7 +49,7 @@ export const Dummies = [
     user_id: "1",
   },
   {
-    _id: 4,
+    _id: "4",
     location: {
       longitude: "37.50458387560611",
       latitude: "127.04894817892941",
