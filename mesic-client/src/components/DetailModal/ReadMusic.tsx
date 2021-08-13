@@ -1,24 +1,19 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
 import EditMusic from "../DetailModal/EditMusic";
-import cdImg from "../../images/cdcd.png";
 import pauseImg from "../../images/pause.png";
 import playImg from "../../images/play.png";
-import { idText } from "typescript";
+import { readMusic } from "../../types";
 
 function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
-  const [updateMusic, setUpdateMusic] = useState<{
-    video_Id: string;
-    title: string;
-    thumbnail: string;
-  }>({
+  const [updateMusic, setUpdateMusic] = useState<readMusic>({
     video_Id: "",
     title: "",
     thumbnail: "",
@@ -117,7 +112,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         setReadMusic={setReadMusic}
       />
       <div className="music">
-        {updateMode ? (
+        {updateMode && (
           <>
             <div className="update-mode-post-icon">
               <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
@@ -128,30 +123,18 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                 <div className="title-cd">{updateMusic.title}</div>
               </div>
               <iframe
-                src={
-                  updateMusic.video_Id
-                    ? `https://www.youtube.com/embed/${updateMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=0&loop=1&playlist=${updateMusic.video_Id}
-                      `
-                    : "https://www.youtube.com/embed/"
-                }
+                src={`https://www.youtube.com/embed/ ${
+                  updateMusic.video_Id &&
+                  updateMusic.video_Id +
+                    "?modestbranding=1&enablejsapi=1&autoplay=0&loop=1&playlist=" +
+                    updateMusic.video_Id
+                }`}
                 id="ytplayer"
                 frameBorder="0"
                 allow="autoplay"
               ></iframe>
-              <div
-                onClick={() => {
-                  if (!isPlay) {
-                    setIsPlay(true);
-                  } else {
-                    setIsPlay(false);
-                  }
-                }}
-              >
-                {isPlay ? (
-                  <img className="play-pause" src={pauseImg} />
-                ) : (
-                  <img className="play-pause" src={playImg} />
-                )}
+              <div onClick={() => setIsPlay(isPlay ? false : true)}>
+                <img className="play-pause" src={isPlay ? pauseImg : playImg} />
               </div>
             </div>
             <div className="save-cancel-btn">
@@ -170,9 +153,10 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
               </button>
             </div>
           </>
-        ) : (
+        )}
+        {updateMode || (
           <div>
-            {isLogin && mode !== "WATCH" ? (
+            {isLogin && mode !== "WATCH" ? ( //내 핀 읽기모드 + 음악이 있을 때
               readMusic.video_Id.length > 0 ? (
                 <>
                   <div className="edit-del-btn">
@@ -202,34 +186,27 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                       <div className="title-cd">{readMusic.title}</div>
                     </div>
                     <iframe
-                      src={
-                        readMusic.video_Id
-                          ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=${readMusic.video_Id}
-                          `
-                          : "https://www.youtube.com/embed/"
-                      }
+                      src={`https://www.youtube.com/embed/ ${
+                        readMusic.video_Id &&
+                        readMusic.video_Id +
+                          "?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=" +
+                          readMusic.video_Id
+                      }`}
                       id="ytplayer"
                       frameBorder="0"
                       allow="autoplay"
                     ></iframe>
                     <div>
-                      {isPlay ? (
-                        <img
-                          className="play-pause"
-                          src={pauseImg}
-                          onClick={() => setIsPlay(false)}
-                        />
-                      ) : (
-                        <img
-                          className="play-pause"
-                          src={playImg}
-                          onClick={() => setIsPlay(true)}
-                        />
-                      )}
+                      <img
+                        className="play-pause"
+                        src={isPlay ? pauseImg : playImg}
+                        onClick={() => setIsPlay(isPlay ? false : true)}
+                      />
                     </div>
                   </div>
                 </>
               ) : (
+                // 내 핀 읽기모드 + 음악이 없을 때
                 <>
                   <div className="post-icon">
                     <i
@@ -247,7 +224,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                   </div>
                 </>
               )
-            ) : readMusic.video_Id.length > 0 ? (
+            ) : readMusic.video_Id.length > 0 ? ( // 팔로우 핀 읽기모드 + 음악이 있을 때
               <>
                 <div className="post-icon">
                   <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>
@@ -258,34 +235,27 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
                     <div className="title-cd">{readMusic.title}</div>
                   </div>
                   <iframe
-                    src={
-                      readMusic.video_Id
-                        ? `https://www.youtube.com/embed/${readMusic.video_Id}?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=${readMusic.video_Id}
-                        `
-                        : "https://www.youtube.com/embed/"
-                    }
+                    src={`https://www.youtube.com/embed/ ${
+                      readMusic.video_Id &&
+                      readMusic.video_Id +
+                        "?modestbranding=1&enablejsapi=1&autoplay=1&loop=1&playlist=" +
+                        readMusic.video_Id
+                    }`}
                     id="ytplayer"
                     frameBorder="0"
                     allow="autoplay"
                   ></iframe>
-                  <div
-                    onClick={() => {
-                      if (!isPlay) {
-                        setIsPlay(true);
-                      } else {
-                        setIsPlay(false);
-                      }
-                    }}
-                  >
-                    {isPlay ? (
-                      <img className="play-pause" src={pauseImg} />
-                    ) : (
-                      <img className="play-pause" src={playImg} />
-                    )}
+                  <div onClick={() => setIsPlay(isPlay ? false : true)}>
+                    <img
+                      className="play-pause"
+                      src={isPlay ? pauseImg : playImg}
+                      onClick={() => setIsPlay(isPlay ? false : true)}
+                    />
                   </div>
                 </div>
               </>
             ) : (
+              //팔로우 핀 읽기모드 + 음악이 없을 때
               <>
                 <div className="edit-del-btn">
                   <i className="fa fa-headphones fa-lg" aria-hidden="true"></i>

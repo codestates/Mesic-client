@@ -1,11 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ReadMusic from "./ReadMusic";
 import ReadPhoto from "./ReadPhoto";
 import ReadMemo from "./ReadMemo";
 import ConfirmModal from "../UI/ConfirmModal";
+import { readMusic } from "../../types";
 
 function ReadModal({
   readMarkerData,
@@ -18,12 +18,12 @@ function ReadModal({
   const { mode } = state.modeReducer.user;
   const { video_Id, title, thumbnail } = readMarkerData.music;
   const { photo, memo, _id } = readMarkerData;
-  const [readMusic, setReadMusic] = useState<any>({
-    video_Id: video_Id,
-    title: title,
-    thumbnail: thumbnail,
+  const [readMusic, setReadMusic] = useState<readMusic>({
+    video_Id,
+    title,
+    thumbnail,
   });
-  const [readImg, setReadImg] = useState<any>(photo);
+  const [readImg, setReadImg] = useState<string>(photo);
   const [readMemo, setReadMemo] = useState<string>(memo);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
 
@@ -31,7 +31,7 @@ function ReadModal({
     <div className="modal-outsider show1">
       <div className="modal">
         <div
-        className="modal-close-btn"
+          className="modal-close-btn"
           onClick={() => {
             setOpenReadModal(false);
           }}
@@ -64,16 +64,10 @@ function ReadModal({
           readMarkerData={readMarkerData}
         />
       </div>
-      {isLogin && mode === "READ" ? (
-        <button
-          className="delete-pin-btn"
-          // onClick={() => deleteMyMarker(readMarkerData._id)}
-          onClick={() => setOpenConfirm(true)}
-        >
+      {isLogin && mode === "READ" && (
+        <button className="delete-pin-btn" onClick={() => setOpenConfirm(true)}>
           삭제
         </button>
-      ) : (
-        <></>
       )}
     </div>
   );
