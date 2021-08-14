@@ -4,15 +4,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ConfirmModal from "../UI/ConfirmModal";
 import EditMusic from "../DetailModal/EditMusic";
-import pauseImg from "../../images/pause.png";
-import playImg from "../../images/play.png";
 import { readMusic } from "../../types";
 import UpdateMusic from "./Music/UpdateMusic";
 import Music from "./Music/Music";
 import NoMusic from "./Music/NoMusic";
 
 function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
-  const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
@@ -23,7 +20,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
   });
 
   const state = useSelector((state: RootState) => state.userReducer);
-  const { isLogin, token } = state.user;
+  const { token } = state.user;
 
   const updateReadMusic = () => {
     const data = { music: updateMusic };
