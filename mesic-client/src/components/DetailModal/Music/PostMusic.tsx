@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import EditMusic from "./EditMusic";
-import ConfirmModal from "../UI/ConfirmModal";
-import Music from "./Music/Music";
-import NoMusic from "./Music/NoMusic";
+import ConfirmModal from "../../UI/ConfirmModal";
+import Music from "./modules/Music";
+import NoMusic from "./modules/NoMusic";
 
 function PostMusic({ postMusic, setPostMusic }: any) {
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);

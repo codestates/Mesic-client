@@ -1,7 +1,7 @@
 import pauseImg from "../../../images/pause.png";
 import playImg from "../../../images/play.png";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
+import { RootState } from "../../../../reducers";
 
 function Music({
   setOpenEditMusic,

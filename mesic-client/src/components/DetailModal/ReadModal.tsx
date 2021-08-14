@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-import ReadMusic from "./ReadMusic";
-import ReadPhoto from "./ReadPhoto";
-import ReadMemo from "./ReadMemo";
+import ReadMusic from "./Music/ReadMusic";
+import ReadPhoto from "./Photo/ReadPhoto";
+import ReadMemo from "./Memo/ReadMemo";
 import ConfirmModal from "../UI/ConfirmModal";
 import { readMusic } from "../../types";
 

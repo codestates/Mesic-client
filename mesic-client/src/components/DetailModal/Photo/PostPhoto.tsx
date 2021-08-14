@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import ConfirmModal from "../UI/ConfirmModal";
-import Photo from "./Photo/Photo";
-import NoPhoto from "./Photo/NoPhoto";
+import ConfirmModal from "../../UI/ConfirmModal";
+import Photo from "./modules/Photo";
+import NoPhoto from "./modules/NoPhoto";
 
 function PostPhoto({ postImg, setPostImg }: any) {
   const imageInput = useRef<HTMLInputElement>();

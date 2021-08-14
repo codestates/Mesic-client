@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../reducers";
+import { RootState } from "../../../reducers";
 
 function EditMusic({
   openEditMusic,
