@@ -9,6 +9,7 @@ function EditMusic({
   setUpdateMode,
   setUpdateMusic,
   setPostMusic,
+  setIsPlay,
 }: any) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
@@ -40,6 +41,7 @@ function EditMusic({
     const res = await youtube.get("/search", {
       params: {
         q: `${searchMusicInput} audio`,
+        type: "video",
       },
     });
     setSearchedMusic(res.data.items);
@@ -107,13 +109,14 @@ function EditMusic({
             <li
               className="edit-music-searched"
               style={{ listStyleType: "none" }}
-              onClick={() =>
+              onClick={() => {
                 handleSelect(
                   each.id.videoId,
                   each.snippet.title,
                   each.snippet.thumbnails.medium.url
-                )
-              }
+                );
+                setIsPlay(true);
+              }}
             >
               <img
                 style={{ width: "100px" }}

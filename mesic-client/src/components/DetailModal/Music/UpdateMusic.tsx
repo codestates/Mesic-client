@@ -44,6 +44,7 @@ function UpdateMusic({
               title: "",
               thumbnail: "",
             });
+            setIsPlay(true);
           }}
         >
           취소
