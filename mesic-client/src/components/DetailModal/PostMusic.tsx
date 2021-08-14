@@ -47,6 +47,7 @@ function PostMusic({ postMusic, setPostMusic }: any) {
         updateMode={updateMode}
         setUpdateMode={setUpdateMode}
         setPostMusic={setPostMusic}
+        setIsPlay={setIsPlay}
       />
       <div className="music">
         {updateMode ? (

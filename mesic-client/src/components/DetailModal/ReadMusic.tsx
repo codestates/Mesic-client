@@ -10,6 +10,8 @@ import Music from "./Music/Music";
 import NoMusic from "./Music/NoMusic";
 
 function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
+  const state = useSelector((state: RootState) => state.userReducer);
+  const { token } = state.user;
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
@@ -18,9 +20,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
     title: "",
     thumbnail: "",
   });
-
-  const state = useSelector((state: RootState) => state.userReducer);
-  const { token } = state.user;
+  const [isPlay, setIsPlay] = useState<boolean>(true);
 
   const updateReadMusic = () => {
     const data = { music: updateMusic };
@@ -61,8 +61,6 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         setIsPlay(true);
       });
   };
-
-  const [isPlay, setIsPlay] = useState<boolean>(true);
 
   const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
     input !== null && input.tagName === "IFRAME";
@@ -110,6 +108,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         setUpdateMode={setUpdateMode}
         setUpdateMusic={setUpdateMusic}
         setReadMusic={setReadMusic}
+        setIsPlay={setIsPlay}
       />
       <div className="music">
         {updateMode && (
