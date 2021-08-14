@@ -1,18 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
 function EditMusic({
   openEditMusic,
-  updateMode,
   setOpenEditMusic,
   setUpdateMode,
   setUpdateMusic,
   setPostMusic,
 }: any) {
-  // 서버로 PATCH 요청을 보내주는 함수 필요
-  // AIzaSyC77gm8pbkNvv_BYkvD45foo9m19j9jOKs
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
@@ -70,7 +67,6 @@ function EditMusic({
 
   const searchMusicEvent = (e: any) => {
     if (searchMusicInput.length === 0) {
-      // 업데이트 모드??
       return;
     } else if (e.keyCode === 13 || e.type === "click") {
       handleSearch();
