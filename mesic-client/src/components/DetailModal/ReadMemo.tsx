@@ -1,33 +1,31 @@
 import axios from "axios";
-import { read } from "fs";
-import React, { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { setSourceMapRange } from "typescript";
 import { RootState } from "../../reducers";
 import ConfirmModal from "..//UI/ConfirmModal";
+import UpdateMemo from "./Memo/UpdateMemo";
+import Memo from "./Memo/Memo";
+import NoMemo from "./Memo/NoMemo";
 
 function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
   const state = useSelector((state: RootState) => state);
-  const { isLogin, token } = state.userReducer.user;
-  const { mode } = state.modeReducer.user;
+  const { token } = state.userReducer.user;
 
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [updatedMemo, setUpdatedMemo] = useState<string>("");
   const [savebtn, setSavebtn] = useState<boolean>(false);
   const [addedMemo, setAddedMemo] = useState<string>("");
+  const addMemoInput = useRef<HTMLInputElement>();
 
-  const addMemoInput = useRef<any>();
-
-  const handleUpdateMemo = (e: any) => {
+  const handleUpdateMemo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedMemo(e.target.value);
   };
-  const handleAddMemo = (e: any) => {
+  const handleAddMemo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSavebtn(true);
     setAddedMemo(e.target.value);
   };
   const updateReadMemo = () => {
-    //서버요청 updatedMemo 전달
     const data = { memo: updatedMemo };
     axios
       .patch(`${process.env.REACT_APP_SERVER_URL}/memos/${markerId}`, data, {
@@ -40,7 +38,6 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
       .catch((err) => console.log(err));
   };
   const addReadMemo = () => {
-    //서버요청 updatedMemo 전달
     const data = { memo: addedMemo };
     axios
       .patch(`${process.env.REACT_APP_SERVER_URL}/memos/${markerId}`, data, {
@@ -49,6 +46,7 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
       .then((res) => {
         getUpdatedPin();
         setSavebtn(false);
+        setAddedMemo("");
       })
       .catch((err) => console.log(err));
   };
@@ -59,9 +57,12 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
       .then((res) => {
         setReadMemo(res.data.memo);
         setPinUpdate(true);
-        setUpdateMode(false);
       });
   };
+
+  useEffect(() => {
+    setUpdatedMemo(readMemo);
+  }, [readMemo]);
 
   return (
     <>
@@ -72,120 +73,30 @@ function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
         setReadMemo={setReadMemo}
       />
       <div className="memo">
-        {updateMode ? (
-          <>
-            <div className="edit-del-btn">
-              <i
-                className="fa fa-sticky-note read fa-lg"
-                aria-hidden="true"
-              ></i>
-            </div>
-            <div className="textarea-outsider">
-              <textarea className="input-memo" onChange={handleUpdateMemo}>
-                {readMemo}
-              </textarea>
-            </div>
-            <>
-              {isLogin ? (
-                <div className="save-cancel-btn">
-                  <button onClick={updateReadMemo}>저장</button>
-                  <button
-                    onClick={() => {
-                      setUpdateMode(false);
-                      setUpdatedMemo("");
-                    }}
-                  >
-                    취소
-                  </button>
-                </div>
-              ) : (
-                <></>
-              )}
-            </>
-          </>
-        ) : (
-          <>
-            {isLogin && mode !== "WATCH" ? (
-              readMemo.length > 0 ? (
-                <>
-                  <div className="edit-del-btn">
-                    <i
-                      className="fa fa-sticky-note read fa-lg"
-                      aria-hidden="true"
-                    ></i>
-                    <i
-                      className="fas fa-pencil-alt"
-                      aria-hidden="true"
-                      onClick={() => setUpdateMode(true)}
-                    ></i>
-                  </div>
-                  <div className="read-memo-container">
-                    <div className="read-memo">{readMemo}</div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="edit-del-btn">
-                    <i
-                      className="fa fa-sticky-note read fa-lg"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-                  <div className="textarea-outsider">
-                    <textarea
-                      ref={addMemoInput}
-                      className="input-memo"
-                      placeholder={"메모를 입력해주세요."}
-                      onChange={handleAddMemo}
-                    />
-                  </div>
-                  {savebtn ? (
-                    <div className="save-cancel-btn">
-                      <button onClick={addReadMemo}>저장</button>
-                      <button
-                        onClick={() => {
-                          setSavebtn(false);
-                          setAddedMemo("");
-                          addMemoInput.current.value = "";
-                        }}
-                      >
-                        취소
-                      </button>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </>
-              )
-            ) : readMemo.length > 0 ? (
-              <>
-                <div className="edit-del-btn">
-                  <i
-                    className="fa fa-sticky-note read fa-lg"
-                    aria-hidden="true"
-                  ></i>
-                </div>
-                <div className="read-memo" style={{ alignSelf: "center" }}>
-                  {readMemo}
-                </div>
-              </>
+        {updateMode && (
+          <UpdateMemo
+            handleUpdateMemo={handleUpdateMemo}
+            readMemo={readMemo}
+            updateReadMemo={updateReadMemo}
+            setUpdateMode={setUpdateMode}
+            setUpdatedMemo={setUpdatedMemo}
+          />
+        )}
+        {updateMode || (
+          <div>
+            {readMemo.length > 0 ? (
+              <Memo readMemo={readMemo} setUpdateMode={setUpdateMode} />
             ) : (
-              <>
-                <div className="edit-del-btn">
-                  <i
-                    className="fa fa-sticky-note read fa-lg"
-                    aria-hidden="true"
-                  ></i>
-                </div>
-                <div
-                  className="read-memo no-contents"
-                  style={{ alignSelf: "center" }}
-                >
-                  메모가 없습니다.
-                </div>
-              </>
+              <NoMemo
+                addMemoInput={addMemoInput}
+                handleAddMemo={handleAddMemo}
+                addReadMemo={addReadMemo}
+                savebtn={savebtn}
+                setSavebtn={setSavebtn}
+                setAddedMemo={setAddedMemo}
+              />
             )}
-          </>
+          </div>
         )}
       </div>
     </>
