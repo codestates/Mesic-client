@@ -45,10 +45,6 @@ body {
   display: none;
 }
 
-// .img {
-//   height: 250px;
-// }
-
 .profileImg-outsider {
   border: none #c0c0c0 solid;
   padding: 5px;
@@ -163,7 +159,7 @@ body {
   cursor: pointer;
 }
 .detail-modal-hide {
-  display: none;
+  display: block;
   z-index: 3;
   position: fixed;
   height: 70px;

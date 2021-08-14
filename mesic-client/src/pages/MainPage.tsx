@@ -74,7 +74,6 @@ function MainPage() {
   const [followMarkers, setFollowMarkers] = useState<any[]>([]);
 
   // 모달 숨기기
-  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const detailModal = useRef<HTMLDivElement>(null);
 
   // 로그인 유저의 핀 데이터
@@ -514,9 +513,7 @@ function MainPage() {
 
   // 체크된 마커 데이터 가져와서 저장
   const handleFollowMarkerClick = (pinId: string) => {
-    if (openPostModal) {
-      setOpenPostModal(false);
-    }
+    setOpenPostModal(false);
     setOpenReadModal(false);
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${pinId}`)
@@ -608,9 +605,7 @@ function MainPage() {
 
   // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: string | number) => {
-    if (openPostModal) {
-      setOpenPostModal(false);
-    }
+    setOpenPostModal(false);
     setOpenReadModal(false);
     if (!isLogin) {
       for (let i = 0; i < Dummies.length; i += 1) {
@@ -759,16 +754,6 @@ function MainPage() {
     setSearchLatlng([y, x]);
   };
 
-  const showHideDetailModal = () => {
-    if (detailModal?.current?.style?.display) {
-      if (detailModal.current.style.display === "none") {
-        detailModal.current.style.display = "block";
-      } else {
-        detailModal.current.style.display = "none";
-      }
-    }
-  };
-
   useEffect(() => {
     setOpenReadModal(false);
     setOpenPostModal(false);
@@ -785,27 +770,6 @@ function MainPage() {
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}
       />
-      {(openPostModal || openReadModal) && (
-        <>
-          {showDetailModal ? (
-            <button
-              className="detail-modal-hide"
-              onClick={() => {
-                showHideDetailModal();
-                setShowDetailModal(false);
-              }}
-            ></button>
-          ) : (
-            <button
-              className="detail-modal-hide"
-              onClick={() => {
-                showHideDetailModal();
-                setShowDetailModal(true);
-              }}
-            ></button>
-          )}
-        </>
-      )}
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
         keywordSearchEvent={keywordSearchEvent}
