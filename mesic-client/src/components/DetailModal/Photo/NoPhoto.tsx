@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 
-function NoPhoto({ editedImageInput, handleEditedImg }: any) {
+function NoPhoto({ imageInput, handleImage }: any) {
   const state = useSelector((state: RootState) => state);
   const { mode } = state.modeReducer.user;
   const { isLogin } = state.userReducer.user;
@@ -21,11 +21,11 @@ function NoPhoto({ editedImageInput, handleEditedImg }: any) {
             </label>
             <input
               className="input-photo"
-              ref={editedImageInput}
+              ref={imageInput}
               type="file"
               id="photo-file"
               accept="image/*"
-              onChange={handleEditedImg}
+              onChange={handleImage}
             />
           </div>
         ) : (
