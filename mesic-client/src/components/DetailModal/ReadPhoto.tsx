@@ -105,15 +105,15 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
           <>
             {fileName !== "undefined" ? (
               <Photo
-                editedImageInput={editedImageInput}
-                handleEditedImg={handleEditedImg}
+                imageInput={editedImageInput}
+                handleImage={handleEditedImg}
                 setOpenConfirm={setOpenConfirm}
                 readImg={readImg}
               />
             ) : (
               <NoPhoto
-                editedImageInput={editedImageInput}
-                handleEditedImg={handleEditedImg}
+                imageInput={editedImageInput}
+                handleImage={handleEditedImg}
               />
             )}
           </>
