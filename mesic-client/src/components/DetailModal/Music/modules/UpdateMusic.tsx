@@ -1,5 +1,5 @@
-import pauseImg from "../../../images/pause.png";
-import playImg from "../../../images/play.png";
+import pauseImg from "../../../../images/pause.png";
+import playImg from "../../../../images/play.png";
 
 function UpdateMusic({
   updateMusic,
