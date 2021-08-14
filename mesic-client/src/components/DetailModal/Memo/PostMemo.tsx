@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import NoMemo from "./Memo/NoMemo";
+import NoMemo from "./modules/NoMemo";
 
 function Memo({ setPostMemo }: any) {
   const memoInput = useRef<HTMLInputElement>();

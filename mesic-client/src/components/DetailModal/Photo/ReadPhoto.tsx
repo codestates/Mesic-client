@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../reducers";
-import ConfirmModal from "..//UI/ConfirmModal";
+import { RootState } from "../../../reducers";
+import ConfirmModal from "../../UI/ConfirmModal";
 import axios from "axios";
 import AWS from "aws-sdk";
-import UpdatePhoto from "./Photo/UpdatePhoto";
-import Photo from "./Photo/Photo";
-import NoPhoto from "./Photo/NoPhoto";
+import UpdatePhoto from "./modules/UpdatePhoto";
+import Photo from "./modules/Photo";
+import NoPhoto from "./modules/NoPhoto";
 
 function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
   const state = useSelector((state: RootState) => state);

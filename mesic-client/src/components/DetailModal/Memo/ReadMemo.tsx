@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../reducers";
-import ConfirmModal from "..//UI/ConfirmModal";
-import UpdateMemo from "./Memo/UpdateMemo";
-import Memo from "./Memo/Memo";
-import NoMemo from "./Memo/NoMemo";
+import { RootState } from "../../../reducers";
+import ConfirmModal from "../../UI/ConfirmModal";
+import UpdateMemo from "./modules/UpdateMemo";
+import Memo from "./PostMemo";
+import NoMemo from "./modules/NoMemo";
 
 function ReadMemo({ readMemo, setReadMemo, markerId, setPinUpdate }: any) {
   const state = useSelector((state: RootState) => state);

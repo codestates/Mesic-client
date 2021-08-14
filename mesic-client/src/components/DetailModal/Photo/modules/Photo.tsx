@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
+import { RootState } from "../../../../reducers";
 
 function Photo({ imageInput, handleImage, setOpenConfirm, readImg }: any) {
   const state = useSelector((state: RootState) => state);

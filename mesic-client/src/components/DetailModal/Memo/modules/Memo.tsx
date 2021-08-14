@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
+import { RootState } from "../../../../reducers";
 
 function Memo({ readMemo, setUpdateMode }: any) {
   const state = useSelector((state: RootState) => state);

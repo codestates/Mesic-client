@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../reducers";
-import ConfirmModal from "../UI/ConfirmModal";
-import EditMusic from "../DetailModal/EditMusic";
-import { readMusic } from "../../types";
-import UpdateMusic from "./Music/UpdateMusic";
-import Music from "./Music/Music";
-import NoMusic from "./Music/NoMusic";
+import { RootState } from "../../../reducers";
+import ConfirmModal from "../../UI/ConfirmModal";
+import EditMusic from "./EditMusic";
+import { readMusic } from "../../../types";
+import UpdateMusic from "./modules/UpdateMusic";
+import Music from "./modules/Music";
+import NoMusic from "./modules/NoMusic";
 
 function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
   const state = useSelector((state: RootState) => state.userReducer);

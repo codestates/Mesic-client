@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducers";
 import { switchMode } from "../../actions/index";
-import PostMusic from "./PostMusic";
-import PostPhoto from "./PostPhoto";
-import PostMemo from "./PostMemo";
+import PostMusic from "./Music/PostMusic";
+import PostPhoto from "./Photo/PostPhoto";
+import PostMemo from "./Memo/PostMemo";
 import axios from "axios";
 import AWS from "aws-sdk";
 
