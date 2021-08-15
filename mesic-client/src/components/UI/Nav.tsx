@@ -105,7 +105,6 @@ function Nav({
       <Mypage
         openMypage={openMypage}
         closeMypage={closeMypage}
-        openEditMypage={openEditMapage}
         setOpenEditMypage={setOpenEditMypage}
       />
       <EditMypage

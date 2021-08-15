@@ -154,6 +154,18 @@ export type SearchUserProps = {
   setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export type MypageProps = {
+  openMypage: boolean;
+  closeMypage: () => void;
+  setOpenEditMypage: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type EditMypageProps = {
+  setOpenMypage: React.Dispatch<React.SetStateAction<boolean>>;
+  openEditMypage: boolean;
+  setOpenEditMypage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export type SignUpProps = {
   openSignup: boolean;
   setOpenSignup: React.Dispatch<React.SetStateAction<boolean>>;
