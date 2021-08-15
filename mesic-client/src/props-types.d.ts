@@ -145,3 +145,11 @@ export type EachFollowProps = {
   eachFollow: followerData;
   updateFollow: () => void;
 };
+
+export type SearchUserProps = {
+  openSearchUser: boolean;
+  setOpenSearchUser: React.Dispatch<React.SetStateAction<boolean>>;
+  followList: followerData[];
+  updateFollow: () => void;
+  setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
+};
