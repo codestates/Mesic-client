@@ -1,5 +1,6 @@
 import { markerData } from "./state-types";
 import { musicData } from "./state-types";
+import { followerData } from "./state-types";
 
 export type MemoProps = {
   readMemo: string;
@@ -117,4 +118,38 @@ export type ReadPhotoProps = {
 export type PostPhotoProps = {
   postImg: any;
   setPostImg: React.Dispatch<any>;
+};
+
+export type ConfirmModalProps = {
+  confirmType: string;
+  openConfirm: boolean;
+  setOpenConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+  setPostImg?: React.Dispatch<any>;
+  readImg?: string;
+  setReadImg?: React.Dispatch<React.SetStateAction<string>>;
+  setPostMusic?: React.Dispatch<React.SetStateAction<musicData>>;
+  setUpdateMode?: React.Dispatch<React.SetStateAction<boolean>>;
+  imageInput?: React.RefObject<HTMLInputElement>;
+  deleteReadMusic?: () => void;
+  markerId?: string;
+  setPinUpdate?: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteMyMarker?: (pinId: string) => void;
+  readMarkerData?: markerData;
+};
+
+export type FollowListProps = {
+  setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type EachFollowProps = {
+  eachFollow: followerData;
+  updateFollow: () => void;
+};
+
+export type SearchUserProps = {
+  openSearchUser: boolean;
+  setOpenSearchUser: React.Dispatch<React.SetStateAction<boolean>>;
+  followList: followerData[];
+  updateFollow: () => void;
+  setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
 };

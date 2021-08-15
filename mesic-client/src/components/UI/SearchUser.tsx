@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import EachUser from "./EachUser";
+import { SearchUserProps } from "../../props-types";
+import { followerData } from "../../state-types";
 
 function SearchUser({
   openSearchUser,
@@ -10,14 +12,14 @@ function SearchUser({
   followList,
   updateFollow,
   setLoginController,
-}: any) {
+}: SearchUserProps) {
   const state = useSelector((state: RootState) => state.userReducer);
   const myId = state.user.user_id;
 
-  const inputSearchUser = useRef<any>();
+  const inputSearchUser = useRef<HTMLInputElement>(null);
   const [searchUserInput, setSearchUserInput] = useState<string>("");
-  const [searchedUsers, setsearchedUsers] = useState<any[]>([]);
-  const [nonFollowList, setNonFollowList] = useState<any[]>([]);
+  const [searchedUsers, setsearchedUsers] = useState<followerData[]>([]);
+  const [nonFollowList, setNonFollowList] = useState<followerData[]>([]);
 
   // 팔로우 하지 않은 유저만 필터링
   useEffect(() => {
@@ -27,11 +29,11 @@ function SearchUser({
         .then((res) => res.data)
         .then((allUser) => {
           return allUser
-            .filter((eachUser: any) => eachUser._id !== myId)
+            .filter((eachUser: followerData) => eachUser._id !== myId)
             .filter(
-              (meExcluded: any) =>
+              (meExcluded: followerData) =>
                 !followList
-                  .map((follow: any) => follow._id)
+                  .map((follow: followerData) => follow._id)
                   .includes(meExcluded._id)
             );
         })
@@ -48,7 +50,7 @@ function SearchUser({
   }, [searchUserInput, nonFollowList]);
 
   const handleSearchUser = () => {
-    const filteredUser = nonFollowList.filter((nonFollow: any) => {
+    const filteredUser = nonFollowList.filter((nonFollow: followerData) => {
       if (nonFollow.name) {
         return nonFollow.name.toLowerCase().includes(searchUserInput);
       }
@@ -64,15 +66,15 @@ function SearchUser({
   );
 
   return (
-    <div
-      className={`search-user-modal background ${openSearchUser ? "show" : ""}`}
-    >
+    <div className={`search-user-modal background ${openSearchUser && "show"}`}>
       <span
         className="search-user-close"
         onClick={() => {
           setOpenSearchUser(false);
-          inputSearchUser.current.value = "";
-          setSearchUserInput("");
+          if (inputSearchUser.current?.value) {
+            inputSearchUser.current.value = "";
+            setSearchUserInput("");
+          }
         }}
       >
         X
@@ -84,7 +86,7 @@ function SearchUser({
           onChange={handleSearchUserInput}
           placeholder="이름을 검색해주세요"
           ref={inputSearchUser}
-        ></input>
+        />
       </div>
       <div className="follow">
         {searchUserInput.length === 0 ? (

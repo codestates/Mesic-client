@@ -25,3 +25,16 @@ export type musicData = {
   title: string;
   thumbnail: string;
 };
+
+export type followerData = {
+  email: string;
+  follow: string[];
+  marker: string;
+  name: string;
+  nickname: string;
+  password: string;
+  profile: string;
+  refreshToken: string;
+  __v?: number;
+  _id: string;
+};

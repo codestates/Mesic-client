@@ -1,8 +1,8 @@
-import React from "react";
 import axios from "axios";
 import AWS from "aws-sdk";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { ConfirmModalProps } from "../../props-types";
 
 function ConfirmModal({
   confirmType,
@@ -11,9 +11,7 @@ function ConfirmModal({
   setPostImg,
   readImg,
   setReadImg,
-  setReadMemo,
   setPostMusic,
-  setReadMusic,
   setUpdateMode,
   imageInput,
   deleteReadMusic,
@@ -21,13 +19,11 @@ function ConfirmModal({
   setPinUpdate,
   deleteMyMarker,
   readMarkerData,
-}: any) {
-  const state = useSelector((state: RootState) => state);
-  const { token } = state.userReducer.user;
+}: ConfirmModalProps) {
+  const { token } = useSelector((state: RootState) => state.userReducer.user);
 
   const deleteReadImg = () => {
     //s3에서 삭제 후 받은 응답을 서버로 patch, get 요청
-
     const bucket = `${process.env.REACT_APP_AWS_S3_BUCKET}`;
     AWS.config.region = process.env.REACT_APP_AWS_S3_REGION;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -35,15 +31,14 @@ function ConfirmModal({
     });
 
     const s3 = new AWS.S3();
-
-    const file = readImg.split("/");
+    const file = readImg!.split("/");
     const fileName = file[file.length - 1];
     const param = {
       Bucket: bucket,
       Key: `image/${fileName}`,
     }; //s3 업로드에 필요한 옵션 설정
 
-    s3.deleteObject(param, function (err: any, data: any) {
+    s3.deleteObject(param, function (err: Error) {
       if (err) {
         console.log(err);
         return;
@@ -64,7 +59,7 @@ function ConfirmModal({
             },
           }
         )
-        .then((res) => {
+        .then(() => {
           getUpdatedPin();
         })
         .catch((err) => console.log(err));
@@ -75,27 +70,33 @@ function ConfirmModal({
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${markerId}`)
       .then((res) => {
-        setReadImg(res.data.photo);
-        setPinUpdate(true);
-        setOpenConfirm(false);
+        if (setReadImg && setPinUpdate) {
+          setReadImg(res.data.photo);
+          setPinUpdate(true);
+          setOpenConfirm(false);
+        }
       });
   };
 
   const deletePostImg = () => {
     const location = `https://${process.env.REACT_APP_AWS_S3_BUCKET}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/image/undefined`;
-    setPostImg(location);
-    imageInput.current.value = "";
-    setOpenConfirm(false);
+    if (setPostImg && imageInput?.current) {
+      setPostImg(location);
+      imageInput.current.value = "";
+      setOpenConfirm(false);
+    }
   };
 
   const deletePostMusic = () => {
-    setPostMusic({
-      video_Id: "",
-      title: "",
-      thumbnail: "",
-    });
-    setUpdateMode(false); // PostMusic 위젯을 비활성화
-    setOpenConfirm(false);
+    if (setPostMusic && setUpdateMode) {
+      setPostMusic({
+        video_Id: "",
+        title: "",
+        thumbnail: "",
+      });
+      setUpdateMode(false);
+      setOpenConfirm(false);
+    }
   };
 
   return (
@@ -112,20 +113,22 @@ function ConfirmModal({
             ) : confirmType === "postMusic" ? (
               <button onClick={deletePostMusic}>예</button>
             ) : confirmType === "readMusic" ? (
-              <button onClick={() => deleteReadMusic()}>예</button>
-            ) : confirmType === "readModal" ? (
-              <button
-                onClick={async function () {
-                  let result = await deleteMyMarker(readMarkerData._id);
-                  if (result) {
-                    setOpenConfirm(false);
-                  }
-                }}
-              >
+              <button onClick={() => deleteReadMusic && deleteReadMusic()}>
                 예
               </button>
             ) : (
-              <></>
+              confirmType === "readModal" && (
+                <button
+                  onClick={async () => {
+                    if (deleteMyMarker && readMarkerData) {
+                      await deleteMyMarker(readMarkerData._id);
+                      setOpenConfirm(false);
+                    }
+                  }}
+                >
+                  예
+                </button>
+              )
             )}
           </div>
           <div>

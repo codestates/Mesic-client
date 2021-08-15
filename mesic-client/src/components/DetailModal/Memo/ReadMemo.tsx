@@ -79,7 +79,6 @@ function ReadMemo({
         confirmType="readMemo"
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
-        setReadMemo={setReadMemo}
       />
       <div className="memo">
         {updateMode && (
