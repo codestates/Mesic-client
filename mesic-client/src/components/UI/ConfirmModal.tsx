@@ -121,10 +121,8 @@ function ConfirmModal({
                 <button
                   onClick={async () => {
                     if (deleteMyMarker && readMarkerData) {
-                      let result = await deleteMyMarker(readMarkerData._id);
-                      if (result!) {
-                        setOpenConfirm(false);
-                      }
+                      await deleteMyMarker(readMarkerData._id);
+                      setOpenConfirm(false);
                     }
                   }}
                 >

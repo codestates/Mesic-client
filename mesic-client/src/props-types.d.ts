@@ -135,3 +135,7 @@ export type ConfirmModalProps = {
   deleteMyMarker?: (pinId: string) => void;
   readMarkerData?: markerData;
 };
+
+export type FollowListProps = {
+  setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
+};
