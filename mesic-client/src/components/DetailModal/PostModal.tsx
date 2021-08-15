@@ -15,7 +15,6 @@ function PostModal({
   setOpenPostModal,
   deletePostMarkers,
 }: PostModalProps) {
-
   const [postMusic, setPostMusic] = useState<musicData>({
     video_Id: "",
     title: "",

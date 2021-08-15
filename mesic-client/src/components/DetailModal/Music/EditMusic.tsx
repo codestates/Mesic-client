@@ -3,15 +3,15 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { musicData } from "../../../state-types";
+import { EditMusicProps } from "../../../props-types";
 
 function EditMusic({
   openEditMusic,
   setOpenEditMusic,
   setUpdateMode,
-  setUpdateMusic,
-  setPostMusic,
+  setPostUpdateMusic,
   setIsPlay,
-}: any) {
+}: EditMusicProps) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
@@ -78,14 +78,14 @@ function EditMusic({
     }
   };
 
-  const selectUpdateMusic = (refinedData: any) => {
-    setUpdateMusic(refinedData);
+  const selectUpdateMusic = (refinedData: readMusic) => {
+    setPostUpdateMusic(refinedData);
     setUpdateMode(true);
     setOpenEditMusic(false);
   };
 
-  const selectPostMusic = (refinedData: any) => {
-    setPostMusic(refinedData);
+  const selectPostMusic = (refinedData: readMusic) => {
+    setPostUpdateMusic(refinedData);
     setUpdateMode(true); // PostMusic 위젯을 활성화
     setOpenEditMusic(false);
   };
