@@ -153,3 +153,16 @@ export type SearchUserProps = {
   updateFollow: () => void;
   setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type MypageProps = {
+  openMypage: boolean;
+  closeMypage: () => void;
+  setOpenEditMypage: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type EditMypageProps = {
+  setOpenMypage: React.Dispatch<React.SetStateAction<boolean>>;
+  openEditMypage: boolean;
+  setOpenEditMypage: React.Dispatch<React.SetStateAction<boolean>>;
+  getUserInfo: (user_id: string) => void;
+};
