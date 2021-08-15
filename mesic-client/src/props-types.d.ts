@@ -118,3 +118,20 @@ export type PostPhotoProps = {
   postImg: any;
   setPostImg: React.Dispatch<any>;
 };
+
+export type ConfirmModalProps = {
+  confirmType: string;
+  openConfirm: boolean;
+  setOpenConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+  setPostImg?: React.Dispatch<any>;
+  readImg?: string;
+  setReadImg?: React.Dispatch<React.SetStateAction<string>>;
+  setPostMusic?: React.Dispatch<React.SetStateAction<musicData>>;
+  setUpdateMode?: React.Dispatch<React.SetStateAction<boolean>>;
+  imageInput?: React.RefObject<HTMLInputElement>;
+  deleteReadMusic?: () => void;
+  markerId?: string;
+  setPinUpdate?: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteMyMarker?: (pinId: string) => void;
+  readMarkerData?: markerData;
+};

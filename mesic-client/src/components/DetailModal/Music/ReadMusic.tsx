@@ -103,9 +103,6 @@ function ReadMusic({
         confirmType="readMusic"
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
-        setReadMusic={setReadMusic}
-        updateMode={updateMode}
-        setUpdateMusic={setUpdateMusic}
         deleteReadMusic={deleteReadMusic}
       />
       <EditMusic
