@@ -1,5 +1,6 @@
 import pauseImg from "../../../../images/pause.png";
 import playImg from "../../../../images/play.png";
+import { UpdateMusicProps } from "../../../../props-types";
 
 function UpdateMusic({
   updateMusic,
@@ -8,7 +9,7 @@ function UpdateMusic({
   setUpdateMode,
   setUpdateMusic,
   updateReadMusic,
-}: any) {
+}: UpdateMusicProps) {
   return (
     <>
       <div className="update-mode-post-icon">

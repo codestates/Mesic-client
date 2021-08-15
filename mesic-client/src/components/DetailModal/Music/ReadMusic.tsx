@@ -8,8 +8,14 @@ import { readMusic } from "../../../state-types";
 import UpdateMusic from "./modules/UpdateMusic";
 import Music from "./modules/Music";
 import NoMusic from "./modules/NoMusic";
+import { ReadMusicProps } from "../../../props-types";
 
-function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
+function ReadMusic({
+  readMusic,
+  setReadMusic,
+  markerId,
+  setPinUpdate,
+}: ReadMusicProps) {
   const state = useSelector((state: RootState) => state.userReducer);
   const { token } = state.user;
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
@@ -106,8 +112,7 @@ function ReadMusic({ readMusic, setReadMusic, markerId, setPinUpdate }: any) {
         openEditMusic={openEditMusic}
         setOpenEditMusic={setOpenEditMusic}
         setUpdateMode={setUpdateMode}
-        setUpdateMusic={setUpdateMusic}
-        setReadMusic={setReadMusic}
+        setPostUpdateMusic={setUpdateMusic}
         setIsPlay={setIsPlay}
       />
       <div className="music">

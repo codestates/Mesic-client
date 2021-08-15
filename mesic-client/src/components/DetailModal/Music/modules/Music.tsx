@@ -2,6 +2,7 @@ import pauseImg from "../../../../images/pause.png";
 import playImg from "../../../../images/play.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducers";
+import { MusicProps } from "../../../../props-types";
 
 function Music({
   setOpenEditMusic,
@@ -9,7 +10,7 @@ function Music({
   musicData,
   isPlay,
   setIsPlay,
-}: any) {
+}: MusicProps) {
   const state = useSelector((state: RootState) => state);
   const { mode } = state.modeReducer.user;
   const { isLogin } = state.userReducer.user;

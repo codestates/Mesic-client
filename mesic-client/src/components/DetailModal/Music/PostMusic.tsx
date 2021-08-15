@@ -3,8 +3,9 @@ import EditMusic from "./EditMusic";
 import ConfirmModal from "../../UI/ConfirmModal";
 import Music from "./modules/Music";
 import NoMusic from "./modules/NoMusic";
+import { PostMusicProps } from "../../../props-types";
 
-function PostMusic({ postMusic, setPostMusic }: any) {
+function PostMusic({ postMusic, setPostMusic }: PostMusicProps) {
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
@@ -44,9 +45,8 @@ function PostMusic({ postMusic, setPostMusic }: any) {
       <EditMusic
         openEditMusic={openEditMusic}
         setOpenEditMusic={setOpenEditMusic}
-        updateMode={updateMode}
         setUpdateMode={setUpdateMode}
-        setPostMusic={setPostMusic}
+        setPostUpdateMusic={setPostMusic}
         setIsPlay={setIsPlay}
       />
       <div className="music">
