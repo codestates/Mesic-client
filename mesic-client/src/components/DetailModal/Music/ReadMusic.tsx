@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import ConfirmModal from "../../UI/ConfirmModal";
 import EditMusic from "./EditMusic";
-import { readMusic } from "../../../state-types";
+import { musicData } from "../../../state-types";
 import UpdateMusic from "./modules/UpdateMusic";
 import Music from "./modules/Music";
 import NoMusic from "./modules/NoMusic";
@@ -16,12 +16,12 @@ function ReadMusic({
   markerId,
   setPinUpdate,
 }: ReadMusicProps) {
-  const state = useSelector((state: RootState) => state.userReducer);
-  const { token } = state.user;
+  const { token } = useSelector((state: RootState) => state.userReducer.user);
+
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [openEditMusic, setOpenEditMusic] = useState<boolean>(false);
   const [updateMode, setUpdateMode] = useState<boolean>(false);
-  const [updateMusic, setUpdateMusic] = useState<readMusic>({
+  const [updateMusic, setUpdateMusic] = useState<musicData>({
     video_Id: "",
     title: "",
     thumbnail: "",
@@ -34,7 +34,7 @@ function ReadMusic({
       .patch(`${process.env.REACT_APP_SERVER_URL}/music/${markerId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
+      .then(() => {
         getUpdatedPin();
       });
   };
@@ -51,7 +51,7 @@ function ReadMusic({
       .patch(`${process.env.REACT_APP_SERVER_URL}/music/${markerId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
+      .then(() => {
         getUpdatedPin();
       });
   };

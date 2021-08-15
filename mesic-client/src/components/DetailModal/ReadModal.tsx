@@ -1,31 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import ReadMusic from "./Music/ReadMusic";
 import ReadPhoto from "./Photo/ReadPhoto";
 import ReadMemo from "./Memo/ReadMemo";
 import ConfirmModal from "../UI/ConfirmModal";
-import { readMusic } from "../../state-types";
+import { musicData } from "../../state-types";
+import { ReadModalProps } from "../../props-types";
 
 function ReadModal({
   readMarkerData,
   setPinUpdate,
   deleteMyMarker,
   setOpenReadModal,
-}: any) {
+}: ReadModalProps) {
   const state = useSelector((state: RootState) => state);
   const { isLogin } = state.userReducer.user;
   const { mode } = state.modeReducer.user;
-  const { video_Id, title, thumbnail } = readMarkerData.music;
-  const { photo, memo, _id } = readMarkerData;
-  const [readMusic, setReadMusic] = useState<readMusic>({
+  
+  const { video_Id, title, thumbnail } = readMarkerData!.music;
+  const { photo, memo, _id } = readMarkerData!;
+  const [readMusic, setReadMusic] = useState<musicData>({
     video_Id,
     title,
     thumbnail,
   });
-  const [readImg, setReadImg] = useState<string>(photo);
-  const [readMemo, setReadMemo] = useState<string>(memo);
+  const [readImg, setReadImg] = useState<string>("");
+  const [readMemo, setReadMemo] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+
+  useEffect(() => {
+    setReadImg(photo);
+  }, [photo]);
+
+  useEffect(() => {
+    setReadMemo(memo);
+  }, [memo]);
 
   return (
     <div className="modal-outsider show1">

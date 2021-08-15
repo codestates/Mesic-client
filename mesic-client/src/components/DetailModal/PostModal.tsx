@@ -5,12 +5,17 @@ import { switchMode } from "../../actions/index";
 import PostMusic from "./Music/PostMusic";
 import PostPhoto from "./Photo/PostPhoto";
 import PostMemo from "./Memo/PostMemo";
-import { readMusic } from "../../state-types";
 import axios from "axios";
 import AWS from "aws-sdk";
+import { PostModalProps } from "../../props-types";
+import { musicData } from "../../state-types";
 
-function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
-  const [postMusic, setPostMusic] = useState<readMusic>({
+function PostModal({
+  postLatLng,
+  setOpenPostModal,
+  deletePostMarkers,
+}: PostModalProps) {
+  const [postMusic, setPostMusic] = useState<musicData>({
     video_Id: "",
     title: "",
     thumbnail: "",
@@ -19,7 +24,6 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
   const [postImg, setPostImg] = useState<any>(location);
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
-
   const state = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
   const { user_id, token } = state.user;
@@ -70,7 +74,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
         .post(`${process.env.REACT_APP_SERVER_URL}/pins`, postData, {
           headers: { authorization: `Bearer ${token}` },
         })
-        .then((res) => {
+        .then(() => {
           dispatch(switchMode("CREATED"));
         })
         .catch((err) => console.log(err));
@@ -91,7 +95,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
         </div>
         <PostMusic postMusic={postMusic} setPostMusic={setPostMusic} />
         <PostPhoto postImg={postImg} setPostImg={setPostImg} />
-        <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
+        <PostMemo setPostMemo={setPostMemo} />
         <div className="err-massage">
           <div>{errMessage}</div>
         </div>

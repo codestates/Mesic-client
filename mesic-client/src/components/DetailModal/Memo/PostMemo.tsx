@@ -1,10 +1,11 @@
 import { useRef } from "react";
+import { PostMemoProps } from "../../../props-types";
 import NoMemo from "./modules/NoMemo";
 
-function Memo({ setPostMemo }: any) {
-  const memoInput = useRef<HTMLInputElement>();
+function PostMemo({ setPostMemo }: PostMemoProps) {
+  const memoInput = useRef<HTMLTextAreaElement>(null);
 
-  const handlePostMemo = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePostMemo = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostMemo(e.target.value);
   };
 
@@ -17,4 +18,4 @@ function Memo({ setPostMemo }: any) {
   );
 }
 
-export default Memo;
+export default PostMemo;

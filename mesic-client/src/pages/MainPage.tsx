@@ -189,9 +189,8 @@ function MainPage() {
   };
 
   // 마커 삭제
-  const deleteMyMarker = (pinId: any) => {
+  const deleteMyMarker = (pinId: string) => {
     const bucket = `${process.env.REACT_APP_AWS_S3_BUCKET}`;
-
     AWS.config.region = process.env.REACT_APP_AWS_S3_REGION;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: `${process.env.REACT_APP_AWS_S3_REGION}:${process.env.REACT_APP_AWS_S3_IDENTITY_POOL_ID}`,

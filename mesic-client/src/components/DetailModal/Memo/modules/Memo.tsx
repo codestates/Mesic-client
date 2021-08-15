@@ -6,6 +6,7 @@ function Memo({ readMemo, setUpdateMode }: MemoProps) {
   const state = useSelector((state: RootState) => state);
   const { isLogin } = state.userReducer.user;
   const { mode } = state.modeReducer.user;
+
   return (
     <>
       {isLogin && mode !== "WATCH" ? (
