@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
@@ -11,9 +11,9 @@ import {
   clearUserInfo,
   clearModeState,
   editUserinfo,
-  getAccessToken,
 } from "../../actions/index";
 import logo from "../../images/mesic-logo.png";
+import { NavProps } from "../../state-types";
 
 function Nav({
   loginController,
@@ -23,10 +23,10 @@ function Nav({
   setOpenPostModal,
   openPostModal,
   openReadModal,
-}: any) {
+}: NavProps) {
   const state = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-  const { isLogin, user_id }: any = state.userReducer.user;
+  const { isLogin, user_id } = state.userReducer.user;
 
   const history = useHistory();
   const [openLogin, setOpenLogin] = useState<boolean>(false);
@@ -58,9 +58,9 @@ function Nav({
     setOpenSignup(true);
   };
   const clickMypage = () => {
-    if (openReadModal) {
+    if (openReadModal && setOpenReadModal) {
       setOpenReadModal(false);
-    } else if (openPostModal) {
+    } else if (openPostModal && setOpenPostModal) {
       setOpenPostModal(false);
     }
     setOpenMypage(true);
@@ -80,7 +80,7 @@ function Nav({
   };
 
   useEffect(() => {
-    if (loginController) {
+    if (loginController && setLoginController && deletePostMarkers) {
       setOpenLogin(true);
       setLoginController(false);
       deletePostMarkers();

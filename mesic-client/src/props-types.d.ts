@@ -164,5 +164,10 @@ export type EditMypageProps = {
   setOpenMypage: React.Dispatch<React.SetStateAction<boolean>>;
   openEditMypage: boolean;
   setOpenEditMypage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export type SignUpProps = {
+  openSignup: boolean;
+  setOpenSignup: React.Dispatch<React.SetStateAction<boolean>>;
   getUserInfo: (user_id: string) => void;
 };

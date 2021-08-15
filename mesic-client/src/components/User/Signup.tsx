@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useCallback, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { getAccessToken } from "../../actions/index";
+import { SignUpProps } from "../../props-types";
 
-function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
+function Signup({ openSignup, setOpenSignup, getUserInfo }: SignUpProps) {
   const SIGNUP_URL = `${process.env.REACT_APP_SERVER_URL}/users/signup`;
   const LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/login`;
   const dispatch = useDispatch();
@@ -22,18 +23,15 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
   };
 
   const validatePassword = (pwInput: string, pwCheckInput: string) => {
-    // 확인 비밀번호와 같은지 비교
     if (pwInput !== pwCheckInput) {
       setPwError("비밀번호를 다시 확인해주세요");
       return false;
     }
     const minNumberofChars = 6;
     const maxNumberofChars = 16;
-    // 정규표현식
     const regularExpression =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
-    // 글자수가 6자 이상 16자 이하인지 확인
     if (
       pwInput.length < minNumberofChars ||
       pwInput.length > maxNumberofChars
@@ -42,7 +40,6 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
       return false;
     }
 
-    // 정규표현식에 들어가는지 확인
     if (!regularExpression.test(pwInput)) {
       setPwError("하나 이상의 숫자와 특수문자가 포함되어야 합니다");
       return false;
@@ -53,10 +50,6 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
   };
 
   const responseSignup = () => {
-    // const email = validateEmail(idInput) ? idInput : emailError;
-    // const password = validatePassword(pwInput, pwCheckInput)
-    //   ? pwInput
-    //   : pwError;
     const signupData = {
       email: idInput,
       password: pwInput,
@@ -74,7 +67,6 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
         .post(SIGNUP_URL, signupData)
         .then((res) => {
           if (res.status === 201) {
-            //closeSignup();
             axios
               .post(LOGIN_URL, {
                 email: res.data.email,
@@ -95,17 +87,25 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
           setEmailError("이미 존재하는 이메일입니다.");
         });
     } else {
-      console.log("signup요청 실패");
+      console.log("회원가입 요청 실패");
     }
   };
 
   const closeSignup = () => {
     setOpenSignup(false);
-    inputEmail.current.value = "";
-    inputName.current.value = "";
-    inputNickname.current.value = "";
-    inputPw.current.value = "";
-    inputPwCheck.current.value = "";
+    if (
+      inputEmail.current &&
+      inputName.current &&
+      inputNickname.current &&
+      inputPw.current &&
+      inputPwCheck.current
+    ) {
+      inputEmail.current.value = "";
+      inputName.current.value = "";
+      inputNickname.current.value = "";
+      inputPw.current.value = "";
+      inputPwCheck.current.value = "";
+    }
     setIdInput("");
     setPwInput("");
     setPwCheckInput("");
@@ -123,11 +123,11 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
   const [emailError, setEmailError] = useState<string>("");
   const [pwError, setPwError] = useState<string>("");
 
-  const inputEmail = useRef<any>();
-  const inputName = useRef<any>();
-  const inputNickname = useRef<any>();
-  const inputPw = useRef<any>();
-  const inputPwCheck = useRef<any>();
+  const inputEmail = useRef<HTMLInputElement>(null);
+  const inputName = useRef<HTMLInputElement>(null);
+  const inputNickname = useRef<HTMLInputElement>(null);
+  const inputPw = useRef<HTMLInputElement>(null);
+  const inputPwCheck = useRef<HTMLInputElement>(null);
 
   const handleIdInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -165,7 +165,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
   );
 
   return (
-    <div className={`background ${openSignup ? "show" : ""}`}>
+    <div className={`background ${openSignup && "show"}`}>
       <div className="login-signup-modal-outsider" onClick={closeSignup} />
       <div className="login-signup-modal">
         <span className="login-close" onClick={closeSignup}>
@@ -181,7 +181,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 type="text"
                 name="email"
                 ref={inputEmail}
-              ></input>
+              />
             </div>
             <div>
               <div>Name</div>
@@ -190,7 +190,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 type="text"
                 name="name"
                 ref={inputName}
-              ></input>
+              />
             </div>
             <div>
               <div>Nickname</div>
@@ -199,7 +199,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 type="text"
                 name="nickname"
                 ref={inputNickname}
-              ></input>
+              />
             </div>
             <div>
               <div>Password</div>
@@ -208,7 +208,7 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 type="password"
                 name="password"
                 ref={inputPw}
-              ></input>
+              />
             </div>
             <div>
               <div>Pw Check</div>
@@ -217,12 +217,12 @@ function Signup({ openSignup, setOpenSignup, getUserInfo }: any) {
                 type="password"
                 name="check_password"
                 ref={inputPwCheck}
-              ></input>
+              />
             </div>
           </div>
         </div>
         <div className="error-message">
-          {emailError.length === 0 ? <>{pwError}</> : <>{emailError}</>}
+          {emailError.length === 0 ? `${pwError}` : `${emailError}`}
         </div>
         <div>
           <button className="loginBtn-2" onClick={responseSignup}>
