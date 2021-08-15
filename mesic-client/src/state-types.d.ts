@@ -20,7 +20,7 @@ export type markerData = {
   __v?: number;
 } | null;
 
-export type readMusic = {
+export type musicData = {
   video_Id: string;
   title: string;
   thumbnail: string;

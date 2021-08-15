@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { readMusic } from "../../../state-types";
+import { musicData } from "../../../state-types";
 
 function EditMusic({
   openEditMusic,
@@ -15,7 +15,7 @@ function EditMusic({
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
-  const [selectedMusic, setSelectedMusic] = useState<readMusic>({
+  const [selectedMusic, setSelectedMusic] = useState<musicData>({
     video_Id: "",
     title: "",
     thumbnail: "",

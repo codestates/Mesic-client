@@ -1,10 +1,12 @@
+import { UpdateMemoProps } from "../../../../props-types";
+
 function UpdateMemo({
   handleUpdateMemo,
   readMemo,
   updateReadMemo,
   setUpdateMode,
   setUpdatedMemo,
-}: any) {
+}: UpdateMemoProps) {
   return (
     <>
       <div className="edit-del-btn">

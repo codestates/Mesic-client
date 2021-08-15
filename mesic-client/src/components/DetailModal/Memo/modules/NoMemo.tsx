@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducers";
+import { NoMemoProps } from "../../../../props-types";
 
 function NoMemo({
-  addMemoInput,
   handleAddMemo,
   savebtn,
   setSavebtn,
   addReadMemo,
   setAddedMemo,
-}: any) {
+  addMemoInput,
+}: NoMemoProps) {
   const state = useSelector((state: RootState) => state);
   const { mode } = state.modeReducer.user;
   const { isLogin } = state.userReducer.user;
@@ -33,9 +34,15 @@ function NoMemo({
               <button onClick={addReadMemo}>저장</button>
               <button
                 onClick={() => {
-                  setSavebtn(false);
-                  setAddedMemo("");
-                  addMemoInput.current.value = "";
+                  if (
+                    setSavebtn &&
+                    setAddedMemo &&
+                    addMemoInput.current?.value
+                  ) {
+                    setSavebtn(false);
+                    setAddedMemo("");
+                    addMemoInput.current.value = "";
+                  }
                 }}
               >
                 취소
