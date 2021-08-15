@@ -153,3 +153,9 @@ export type SearchUserProps = {
   updateFollow: () => void;
   setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type SignUpProps = {
+  openSignup: boolean;
+  setOpenSignup: React.Dispatch<React.SetStateAction<boolean>>;
+  getUserInfo: (user_id: string) => void;
+};
