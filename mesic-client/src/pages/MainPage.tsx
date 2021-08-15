@@ -10,7 +10,7 @@ import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
-import { keywordSearchData, markerData } from "../types";
+import { keywordSearchData, markerData } from "../state-types";
 
 declare global {
   interface Window {
