@@ -38,3 +38,29 @@ export type followerData = {
   __v?: number;
   _id: string;
 };
+
+export type EachUserProps = {
+  searchedUsers: followerData;
+  updateFollow: () => void;
+  setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type NavProps = {
+  openReadModal?: boolean;
+  openPostModal?: boolean;
+  setOpenPostModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenReadModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  loginController?: boolean;
+  setLoginController?: React.Dispatch<React.SetStateAction<boolean>>;
+  deletePostMarkers?: () => void;
+};
+
+export type SearchLocationProps = {
+  handleChangeKeywordInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  keywordSearchEvent: (
+    e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLElement>
+  ) => void;
+  keywordSearchData: keywordSearchData;
+  searchMode: boolean;
+  keywordSearchSelect: (y: number, x: number) => void;
+};

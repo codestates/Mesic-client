@@ -734,10 +734,15 @@ function MainPage() {
   };
 
   // 키워드 검색 버튼 + 엔터키 검색
-  const keywordSearchEvent = (e: any) => {
+  const keywordSearchEvent = (
+    e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLElement>
+  ) => {
+    const { key } = e as React.KeyboardEvent<HTMLInputElement>;
+    const { type } = e as React.MouseEvent<HTMLElement>;
+    
     if (keywordInput.length === 0 || keywordSearchData.length === 0) {
       return;
-    } else if (e.keyCode === 13 || e.type === "click") {
+    } else if (key === "Enter" || type === "click") {
       const y = keywordSearchData[0].y;
       const x = keywordSearchData[0].x;
       moveKakaoMap(y, x);
