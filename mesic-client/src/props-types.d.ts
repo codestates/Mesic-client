@@ -1,5 +1,6 @@
 import { markerData } from "./state-types";
 import { musicData } from "./state-types";
+import { followerData } from "./state-types";
 
 export type MemoProps = {
   readMemo: string;
@@ -138,4 +139,9 @@ export type ConfirmModalProps = {
 
 export type FollowListProps = {
   setLoginController: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type EachFollowProps = {
+  eachFollow: followerData;
+  updateFollow: () => void;
 };

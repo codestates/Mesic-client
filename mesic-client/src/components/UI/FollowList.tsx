@@ -99,7 +99,7 @@ function FollowList({ setLoginController }: FollowListProps) {
       <div className="follow">
         {followInput.length === 0 &&
           (follow.length > 0 ? (
-            followList.map((follow: any) => {
+            followList.map((follow: followerData) => {
               return (
                 <EachFollow
                   eachFollow={follow}
@@ -115,7 +115,7 @@ function FollowList({ setLoginController }: FollowListProps) {
           ))}
         {followInput.length === 0 ||
           (searchedFollow.length > 0 ? (
-            searchedFollow.map((searched: any) => (
+            searchedFollow.map((searched: followerData) => (
               <EachFollow
                 eachFollow={searched}
                 updateFollow={updateFollow}
