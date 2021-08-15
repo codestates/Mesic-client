@@ -5,7 +5,7 @@ import ReadMusic from "./Music/ReadMusic";
 import ReadPhoto from "./Photo/ReadPhoto";
 import ReadMemo from "./Memo/ReadMemo";
 import ConfirmModal from "../UI/ConfirmModal";
-import { readMusic } from "../../types";
+import { readMusic } from "../../state-types";
 
 function ReadModal({
   readMarkerData,

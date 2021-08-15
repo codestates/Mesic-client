@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import ConfirmModal from "../../UI/ConfirmModal";
 import EditMusic from "./EditMusic";
-import { readMusic } from "../../../types";
+import { readMusic } from "../../../state-types";
 import UpdateMusic from "./modules/UpdateMusic";
 import Music from "./modules/Music";
 import NoMusic from "./modules/NoMusic";

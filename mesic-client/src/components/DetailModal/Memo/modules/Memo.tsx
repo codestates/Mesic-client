@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducers";
+import { MemoProps } from "../../../../props-types";
 
-function Memo({ readMemo, setUpdateMode }: any) {
+function Memo({ readMemo, setUpdateMode }: MemoProps) {
   const state = useSelector((state: RootState) => state);
   const { isLogin } = state.userReducer.user;
   const { mode } = state.modeReducer.user;

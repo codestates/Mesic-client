@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
+import { readMusic } from "../../../state-types";
 
 function EditMusic({
   openEditMusic,
@@ -14,12 +15,12 @@ function EditMusic({
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
-  const [selectedMusic, setSelectedMusic] = useState<{
-    video_Id: string;
-    title: string;
-    thumbnail: string;
-  }>({ video_Id: "", title: "", thumbnail: "" });
-  const searchInput = useRef<any>();
+  const [selectedMusic, setSelectedMusic] = useState<readMusic>({
+    video_Id: "",
+    title: "",
+    thumbnail: "",
+  });
+  const searchInput = useRef<HTMLInputElement>(null);
 
   const handleSearchMusicInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +65,9 @@ function EditMusic({
       thumbnail,
     });
     setSearchedMusic([]);
-    searchInput.current.value = "";
+    if (searchInput.current?.value) {
+      searchInput.current.value = "";
+    }
   };
 
   const searchMusicEvent = (e: any) => {
@@ -135,7 +138,9 @@ function EditMusic({
         className="edit-music-close-btn"
         onClick={() => {
           setSearchedMusic([]);
-          searchInput.current.value = "";
+          if (searchInput.current?.value) {
+            searchInput.current.value = "";
+          }
           setOpenEditMusic(false);
         }}
       >
