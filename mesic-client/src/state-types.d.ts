@@ -64,3 +64,11 @@ export type SearchLocationProps = {
   searchMode: boolean;
   keywordSearchSelect: (y: number, x: number) => void;
 };
+
+export type LoginProps = {
+  openLogin: boolean;
+  setOpenLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  getUserInfo: (user_id: string) => void;
+  setLoginController: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  deletePostMarkers: (() => void) | undefined;
+};

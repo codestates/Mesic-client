@@ -1,19 +1,12 @@
 import axios from "axios";
 import React, { useCallback, useState, useRef, useEffect } from "react";
-import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { editUserinfo, getAccessToken } from "../../actions/index";
 import googleLogo from "../../images/google-login.png";
-//axios.defaults.withCredentials = true;
+import { LoginProps } from "../../state-types";
 
-function Login({
-  openLogin,
-  setOpenLogin,
-  getUserInfo,
-  setLoginController,
-  deletePostMarkers,
-}: any) {
+function Login({ openLogin, setOpenLogin, getUserInfo }: LoginProps) {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.userReducer);
   const { isLogin } = state.user;
@@ -22,6 +15,14 @@ function Login({
   const LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/login`;
   const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&
 redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=350695188416-sc4m6nro89c4sii03qm9qaeltqivnie3.apps.googleusercontent.com`;
+
+  const [idInput, setIdInput] = useState<string>("");
+  const [pwInput, setPwInput] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [pwError, setPwError] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const inputEmail = useRef<HTMLInputElement>(null);
+  const inputPw = useRef<HTMLInputElement>(null);
 
   const responseLogin = () => {
     const loginData = { email: idInput, password: pwInput };
@@ -53,11 +54,6 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
     window.location.assign(GOOGLE_LOGIN_URL);
   };
 
-  /*
-  const { accessToken } = res.data
-  const { name, profile, _id } = res.data._doc
-  const data = {accessToken, name, profile, _id}
-  */
   const getAuth = (authorizationCode: string) => {
     axios
       .post(GOOGLE_LOGIN_API_URL, { authorizationCode })
@@ -105,21 +101,13 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
 
   const closeLogin = () => {
     setOpenLogin(false);
-    inputEmail.current.value = "";
-    inputPw.current.value = "";
+    if (inputEmail.current && inputPw.current) {
+      inputEmail.current.value = "";
+      inputPw.current.value = "";
+    }
     setIdInput("");
     setPwInput("");
-    // setLoginController(false);
-    // deletePostMarkers();
   };
-
-  const [idInput, setIdInput] = useState<string>("");
-  const [pwInput, setPwInput] = useState<string>("");
-  const [emailError, setEmailError] = useState<string>("");
-  const [pwError, setPwError] = useState<string>("");
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const inputEmail = useRef<any>();
-  const inputPw = useRef<any>();
 
   const handleIdInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,7 +130,7 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
   );
 
   return (
-    <div className={`background ${openLogin ? "show" : ""}`}>
+    <div className={`background ${openLogin && "show"}`}>
       <div className="login-signup-modal-outsider" onClick={closeLogin} />
       <div className="login-signup-modal">
         <span className="login-close" onClick={closeLogin}>
@@ -158,7 +146,7 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
                 type="text"
                 name="email"
                 ref={inputEmail}
-              ></input>
+              />
             </div>
             <div className="password-input-section">
               <div>Password</div>
@@ -167,19 +155,13 @@ redirect_uri=http://localhost:3000/mainpage&response_type=code&client_id=3506951
                 type="password"
                 name="password"
                 ref={inputPw}
-              ></input>
+              />
             </div>
           </div>
         </div>
         <div className="error-message">
-          {emailError.length === 0 ? <>{pwError}</> : <>{emailError}</>}
+          {emailError.length === 0 ? `${pwError}` : `${emailError}`}
         </div>
-        {/* <div className="error-message">{emailError}</div> */}
-        {/* {emailError.length === 0 && pwError.length === 0 ? (
-              <>{errorMsg}</>
-            ) : (
-              <></>
-            )} */}
         <button className="loginBtn-2" onClick={responseLogin}>
           Login
         </button>
