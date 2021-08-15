@@ -78,21 +78,21 @@ function EditMusic({
     }
   };
 
-  const selectUpdateMusic = (refinedData: readMusic) => {
+  const selectUpdateMusic = (refinedData: musicData) => {
     setPostUpdateMusic(refinedData);
     setUpdateMode(true);
     setOpenEditMusic(false);
   };
 
-  const selectPostMusic = (refinedData: readMusic) => {
+  const selectPostMusic = (refinedData: musicData) => {
     setPostUpdateMusic(refinedData);
-    setUpdateMode(true); // PostMusic 위젯을 활성화
+    setUpdateMode(true);
     setOpenEditMusic(false);
   };
 
   return (
     <div
-      className={`edit-music-modal background ${openEditMusic ? "show" : ""}`}
+      className={`edit-music-modal background ${openEditMusic && "show"}`}
     >
       <div className="edit-music-title">노래 검색</div>
       <div className="edit-music">

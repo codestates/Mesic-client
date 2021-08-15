@@ -48,13 +48,13 @@ export type PostModalProps = {
 };
 
 export type PostMusicProps = {
-  postMusic: readMusic;
-  setPostMusic: React.Dispatch<React.SetStateAction<readMusic>>;
+  postMusic: musicData;
+  setPostMusic: React.Dispatch<React.SetStateAction<musicData>>;
 };
 
 export type ReadMusicProps = {
-  readMusic: readMusic;
-  setReadMusic: React.Dispatch<React.SetStateAction<readMusic>>;
+  readMusic: musicData;
+  setReadMusic: React.Dispatch<React.SetStateAction<musicData>>;
   markerId: string;
   setPinUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -63,14 +63,14 @@ export type EditMusicProps = {
   openEditMusic: boolean;
   setOpenEditMusic: React.Dispatch<React.SetStateAction<boolean>>;
   setUpdateMode: React.Dispatch<React.SetStateAction<boolean>>;
-  setPostUpdateMusic: React.Dispatch<React.SetStateAction<readMusic>>;
+  setPostUpdateMusic: React.Dispatch<React.SetStateAction<musicData>>;
   setIsPlay: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type MusicProps = {
   setOpenEditMusic: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenConfirm: React.Dispatch<React.SetStateAction<boolean>>;
-  musicData: readMusic;
+  musicData: musicData;
   isPlay: boolean;
   setIsPlay: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -80,10 +80,10 @@ export type NoMusicProps = {
 };
 
 export type UpdateMusicProps = {
-  updateMusic: readMusic;
+  updateMusic: musicData;
   isPlay: boolean;
   setIsPlay: React.Dispatch<React.SetStateAction<boolean>>;
   setUpdateMode: React.Dispatch<React.SetStateAction<boolean>>;
-  setUpdateMusic: React.Dispatch<React.SetStateAction<readMusic>>;
+  setUpdateMusic: React.Dispatch<React.SetStateAction<musicData>>;
   updateReadMusic: () => void;
 };
