@@ -15,6 +15,10 @@ function PostModal({
   setOpenPostModal,
   deletePostMarkers,
 }: PostModalProps) {
+  const state = useSelector((state: RootState) => state.userReducer);
+  const { user_id, token } = state.user;
+  const dispatch = useDispatch();
+
   const [postMusic, setPostMusic] = useState<musicData>({
     video_Id: "",
     title: "",
@@ -24,9 +28,6 @@ function PostModal({
   const [postImg, setPostImg] = useState<any>(location);
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
-  const state = useSelector((state: RootState) => state.userReducer);
-  const dispatch = useDispatch();
-  const { user_id, token } = state.user;
 
   const postPinData = async () => {
     if (

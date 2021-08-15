@@ -87,3 +87,34 @@ export type UpdateMusicProps = {
   setUpdateMusic: React.Dispatch<React.SetStateAction<musicData>>;
   updateReadMusic: () => void;
 };
+
+export type NoPhotoProps = {
+  imageInput: React.RefObject<HTMLInputElement>;
+  handleImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type PhotoProps = {
+  imageInput: React.RefObject<HTMLInputElement>;
+  handleImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setOpenConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+  readImg: string;
+};
+
+export type UpdatePhotoProps = {
+  editedPreviewImg: string;
+  updateReadImg: () => void;
+  setUpdateMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditedImg: React.Dispatch<any>;
+};
+
+export type ReadPhotoProps = {
+  readImg: string;
+  setReadImg: React.Dispatch<React.SetStateAction<string>>;
+  markerId: string;
+  setPinUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type PostPhotoProps = {
+  postImg: any;
+  setPostImg: React.Dispatch<any>;
+};

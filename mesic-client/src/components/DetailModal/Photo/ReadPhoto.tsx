@@ -7,8 +7,14 @@ import AWS from "aws-sdk";
 import UpdatePhoto from "./modules/UpdatePhoto";
 import Photo from "./modules/Photo";
 import NoPhoto from "./modules/NoPhoto";
+import { ReadPhotoProps } from "../../../props-types";
 
-function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
+function ReadPhoto({
+  readImg,
+  setReadImg,
+  markerId,
+  setPinUpdate,
+}: ReadPhotoProps) {
   const state = useSelector((state: RootState) => state);
   const { token } = state.userReducer.user;
 
@@ -21,7 +27,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
   const splitArr = readImg.split("/");
   const fileName = splitArr[splitArr.length - 1];
 
-  const handleEditedImg = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleEditedImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files && editedImageInput.current?.value) {
       setUpdateMode(true);
       setEditedImg(e.currentTarget.files[0]);
@@ -63,7 +69,7 @@ function ReadPhoto({ readImg, setReadImg, markerId, setPinUpdate }: any) {
             headers: { authorization: `Bearer ${token}` },
           }
         )
-        .then((res) => {
+        .then(() => {
           setEditedImg(null);
           getUpdatedPin();
         })

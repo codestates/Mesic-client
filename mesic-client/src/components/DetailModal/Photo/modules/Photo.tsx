@@ -1,7 +1,13 @@
 import { useSelector } from "react-redux";
+import { PhotoProps } from "../../../../props-types";
 import { RootState } from "../../../../reducers";
 
-function Photo({ imageInput, handleImage, setOpenConfirm, readImg }: any) {
+function Photo({
+  imageInput,
+  handleImage,
+  setOpenConfirm,
+  readImg,
+}: PhotoProps) {
   const state = useSelector((state: RootState) => state);
   const { mode } = state.modeReducer.user;
   const { isLogin } = state.userReducer.user;

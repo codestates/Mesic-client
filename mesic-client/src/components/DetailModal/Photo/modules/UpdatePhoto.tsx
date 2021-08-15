@@ -1,9 +1,11 @@
+import { UpdatePhotoProps } from "../../../../props-types";
+
 function UpdatePhoto({
   editedPreviewImg,
   updateReadImg,
   setUpdateMode,
   setEditedImg,
-}: any) {
+}: UpdatePhotoProps) {
   return (
     <>
       <div className="update-mode-post-icon">

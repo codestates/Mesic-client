@@ -2,9 +2,10 @@ import { useRef, useState, useEffect } from "react";
 import ConfirmModal from "../../UI/ConfirmModal";
 import Photo from "./modules/Photo";
 import NoPhoto from "./modules/NoPhoto";
+import { PostPhotoProps } from "../../../props-types";
 
-function PostPhoto({ postImg, setPostImg }: any) {
-  const imageInput = useRef<HTMLInputElement>();
+function PostPhoto({ postImg, setPostImg }: PostPhotoProps) {
+  const imageInput = useRef<HTMLInputElement>(null);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [previewImg, setPreviewImg] = useState<any>(null);
   const [fileName, setFileName] = useState<string>("");
