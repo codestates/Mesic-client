@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducers";
+import { NoMusicProps } from "../../../../props-types";
 
-function NoMusic({ setOpenEditMusic }: any) {
+function NoMusic({ setOpenEditMusic }: NoMusicProps) {
   const state = useSelector((state: RootState) => state);
   const { mode } = state.modeReducer.user;
   const { isLogin } = state.userReducer.user;

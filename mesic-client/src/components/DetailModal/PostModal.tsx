@@ -5,15 +5,12 @@ import { switchMode } from "../../actions/index";
 import PostMusic from "./Music/PostMusic";
 import PostPhoto from "./Photo/PostPhoto";
 import PostMemo from "./Memo/PostMemo";
+import { readMusic } from "../../state-types";
 import axios from "axios";
 import AWS from "aws-sdk";
 
 function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
-  const [postMusic, setPostMusic] = useState<{
-    video_Id: string;
-    title: string;
-    thumbnail: string;
-  }>({
+  const [postMusic, setPostMusic] = useState<readMusic>({
     video_Id: "",
     title: "",
     thumbnail: "",
