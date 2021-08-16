@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-import { EachUserProps } from "../../state-types";
+import { EachUserProps } from "../../props-types";
 
 function EachUser({
   searchedUsers,

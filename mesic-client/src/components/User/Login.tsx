@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { editUserinfo, getAccessToken } from "../../actions/index";
 import googleLogo from "../../images/google-login.png";
-import { LoginProps } from "../../state-types";
+import { LoginProps } from "../../props-types";
 
 function Login({ openLogin, setOpenLogin, getUserInfo }: LoginProps) {
   const dispatch = useDispatch();

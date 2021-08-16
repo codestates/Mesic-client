@@ -10,7 +10,7 @@ import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
-import { keywordSearchData, markerData } from "../state-types";
+import { keywordSearchData, markerData, markerPos } from "../state-types";
 
 declare global {
   interface Window {
@@ -23,13 +23,8 @@ function MainPage() {
   const state = useSelector((state: RootState) => state);
   const { isLogin, user_id, token } = state.userReducer.user;
   const { mode } = state.modeReducer.user;
-  const {
-    checkAdded,
-    checkRemoved,
-    checkedFollow,
-    markerSet,
-    currentMarker,
-  }: any = state.modeReducer;
+  const { checkAdded, checkRemoved, checkedFollow, markerSet, currentMarker } =
+    state.modeReducer;
 
   //로그인 컨트롤러
   const [loginController, setLoginController] = useState<boolean>(false);
@@ -95,7 +90,7 @@ function MainPage() {
       }
     }
     return;
-  }, [mode, pinUpdate]);
+  }, [mode, pinUpdate, isLogin]);
 
   // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
@@ -207,7 +202,7 @@ function MainPage() {
         Key: `image/${fileName}`,
       }; //s3 업로드에 필요한 옵션 설정
 
-      s3.deleteObject(param, function (err: any, data: any) {
+      s3.deleteObject(param, function (err: Error) {
         if (err) {
           console.log(err);
           return;
@@ -411,7 +406,7 @@ function MainPage() {
   };
 
   // 체크 된 팔로우 핀 가져오기 (마커 만들기 위한 데이터)
-  const [followPinData, setFollowPinData] = useState<any[]>([]);
+  const [followPinData, setFollowPinData] = useState<markerData[]>([]);
   const getFollowMarker = () => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${checkAdded}`)
@@ -428,8 +423,8 @@ function MainPage() {
 
     for (let i = 0; i < followPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        parseFloat(followPinData[i].location.longitude),
-        parseFloat(followPinData[i].location.latitude)
+        parseFloat(followPinData[i]!.location.longitude),
+        parseFloat(followPinData[i]!.location.latitude)
       );
 
       const image = new window.kakao.maps.MarkerImage(
@@ -442,7 +437,7 @@ function MainPage() {
         map,
         position,
       });
-      marker.id = [followPinData[i]._id, followPinData[i].user_id];
+      marker.id = [followPinData[i]!._id, followPinData[i]!.user_id];
       marker.pos = position;
 
       window.kakao.maps.event.addListener(marker, "click", () => {
@@ -458,8 +453,8 @@ function MainPage() {
       musicContainer.className = "music-flex-box";
       const thumbnail = document.createElement("img");
       thumbnail.className = "preview-img";
-      if (followPinData[i].music.thumbnail.length > 0) {
-        thumbnail.src = followPinData[i].music.thumbnail;
+      if (followPinData[i]!.music.thumbnail.length > 0) {
+        thumbnail.src = followPinData[i]!.music.thumbnail;
       } else {
         thumbnail.src =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/CD_icon_test.svg/1200px-CD_icon_test.svg.png";
@@ -471,16 +466,16 @@ function MainPage() {
       const title = document.createElement("div");
       title.className = "preview-title";
 
-      if (followPinData[i].music.title.length > 0) {
-        title.textContent = followPinData[i].music.title;
+      if (followPinData[i]!.music.title.length > 0) {
+        title.textContent = followPinData[i]!.music.title;
       } else {
         title.textContent = "저장한 음악이 없습니다.";
       }
 
       const memo = document.createElement("div");
       memo.className = "preview-memo";
-      if (followPinData[i].memo.length > 0) {
-        memo.textContent = followPinData[i].memo;
+      if (followPinData[i]!.memo.length > 0) {
+        memo.textContent = followPinData[i]!.memo;
       } else {
         memo.textContent = "저장한 메모가 없습니다.";
       }
@@ -658,9 +653,8 @@ function MainPage() {
   }, [myMarkers, followMarkers]);
 
   const setMapBounds = () => {
-    let myMarkersPos: any[] = [];
-    let followMarkersPos: any[] = [];
-
+    let myMarkersPos: markerPos[] = [];
+    let followMarkersPos: markerPos[] = [];
     if (myMarkers.length > 0) {
       myMarkersPos = myMarkers.map((each: any) => each.pos);
     }
@@ -739,7 +733,7 @@ function MainPage() {
   ) => {
     const { key } = e as React.KeyboardEvent<HTMLInputElement>;
     const { type } = e as React.MouseEvent<HTMLElement>;
-    
+
     if (keywordInput.length === 0 || keywordSearchData.length === 0) {
       return;
     } else if (key === "Enter" || type === "click") {
