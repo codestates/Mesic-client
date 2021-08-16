@@ -527,7 +527,7 @@ $border-color: #e1e1e1;
     opacity: 0.4;
     cursor: pointer;
   }
-  ::placeholder {
+  input::placeholder {
     opacity: 60%;
   }
 }
