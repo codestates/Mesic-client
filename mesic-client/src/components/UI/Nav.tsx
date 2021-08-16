@@ -34,6 +34,14 @@ function Nav({
   const [openMypage, setOpenMypage] = useState<boolean>(false);
   const [openEditMapage, setOpenEditMypage] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (openMypage || openLogin || openSignup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [openMypage, openLogin, openSignup]);
+
   const clickLogin = () => {
     setOpenLogin(true);
   };

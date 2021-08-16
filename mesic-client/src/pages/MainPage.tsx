@@ -75,6 +75,11 @@ function MainPage() {
   const [myPinData, setMypinData] = useState<markerData[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
 
+  // 스크롤 비활성화
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+  }, []);
+
   // 지도 동적 렌더링
   useEffect(() => {
     window.kakao.maps.load(() => {
