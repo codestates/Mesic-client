@@ -13,7 +13,7 @@ import {
   editUserinfo,
 } from "../../actions/index";
 import logo from "../../images/mesic-logo.png";
-import { NavProps } from "../../state-types";
+import { NavProps } from "../../props-types";
 
 function Nav({
   loginController,

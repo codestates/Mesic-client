@@ -1,4 +1,4 @@
-import { SearchLocationProps } from "../../state-types";
+import { SearchLocationProps } from "../../props-types";
 
 function SearchLocation({
   handleChangeKeywordInput,
