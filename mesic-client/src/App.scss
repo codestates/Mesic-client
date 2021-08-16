@@ -13,6 +13,7 @@
 html,
 body {
   width: 100vw;
+  min-width: 320px;
 }
 
 /* MainPage & IntroPage 여기서 하세요 */
@@ -43,10 +44,6 @@ body {
 .hide {
   display: none;
 }
-
-// .img {
-//   height: 250px;
-// }
 
 .profileImg-outsider {
   border: none #c0c0c0 solid;
@@ -162,7 +159,7 @@ body {
   cursor: pointer;
 }
 .detail-modal-hide {
-  display: none;
+  display: block;
   z-index: 3;
   position: fixed;
   height: 70px;

@@ -1,8 +1,13 @@
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { EachUserProps } from "../../props-types";
 
-function EachUser({ searchedUsers, updateFollow, setLoginController }: any) {
+function EachUser({
+  searchedUsers,
+  updateFollow,
+  setLoginController,
+}: EachUserProps) {
   const state = useSelector((state: RootState) => state.userReducer);
   const { user_id, token, isLogin } = state.user;
 
@@ -24,7 +29,7 @@ function EachUser({ searchedUsers, updateFollow, setLoginController }: any) {
           },
         }
       )
-      .then((res) => {
+      .then(() => {
         updateFollow();
       })
       .catch((err) => console.log(err));

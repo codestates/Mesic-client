@@ -10,6 +10,7 @@ import ReadModal from "../components/DetailModal/ReadModal";
 import FollowList from "../components/UI/FollowList";
 import { Dummies } from "../components/Guest/Dummies";
 import AWS from "aws-sdk";
+import { keywordSearchData, markerData, markerPos } from "../state-types";
 
 declare global {
   interface Window {
@@ -22,15 +23,9 @@ function MainPage() {
   const state = useSelector((state: RootState) => state);
   const { isLogin, user_id, token } = state.userReducer.user;
   const { mode } = state.modeReducer.user;
-  const {
-    checkAdded,
-    checkRemoved,
-    checkedFollow,
-    markerSet,
-    currentMarker,
-  }: any = state.modeReducer;
+  const { checkAdded, checkRemoved, checkedFollow, markerSet, currentMarker } =
+    state.modeReducer;
 
-  // const [openModal, setOpenModal] = useState<boolean>(false);
   //로그인 컨트롤러
   const [loginController, setLoginController] = useState<boolean>(false);
 
@@ -40,7 +35,9 @@ function MainPage() {
 
   // 키워드 검색
   const [keywordInput, setKeywordInput] = useState<string>("");
-  const [keywordSearchData, setKeywordSearchData] = useState<any>([]);
+  const [keywordSearchData, setKeywordSearchData] = useState<keywordSearchData>(
+    []
+  );
   const [searchMode, setSearchMode] = useState<boolean>(false);
 
   // 지도 생성
@@ -63,18 +60,20 @@ function MainPage() {
   const [postMarkers, setPostMarkers] = useState<any[]>([]);
 
   // 선택한 READ 마커의 데이터
-  const [readMarkerData, setReadMarkerData] = useState<any>(null);
+  const [readMarkerData, setReadMarkerData] = useState<markerData>(null);
+
+  // 로그인 유저 마커
+  const [myMarkers, setMyMarkers] = useState<any[]>([]);
+
+  // 체크한 팔로우 마커
+  const [followMarkers, setFollowMarkers] = useState<any[]>([]);
 
   // 모달 숨기기
-  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
-  const detailModal = useRef<any>();
+  const detailModal = useRef<HTMLDivElement>(null);
 
   // 로그인 유저의 핀 데이터
-  const [myPinData, setMypinData] = useState<any[]>([]);
+  const [myPinData, setMypinData] = useState<markerData[]>([]);
   const [pinUpdate, setPinUpdate] = useState<boolean>(false);
-
-  // 미리보기 모두 저장
-  // const [saveInfowindows, setSaveinfowindows] = useState<any[]>([]);
 
   // 지도 동적 렌더링
   useEffect(() => {
@@ -83,13 +82,15 @@ function MainPage() {
     });
   }, [isLogin]);
 
-  // 로그인 후 유저의 핀 가져오기
+  // 로그인 / 핀 생성 후 유저의 핀 가져오기
   useEffect(() => {
     if (isLogin || pinUpdate) {
-      getMyPins();
+      if (mode !== "POST") {
+        getMyPins();
+      }
     }
     return;
-  }, [map, mode, isLogin, pinUpdate]);
+  }, [mode, pinUpdate, isLogin]);
 
   // 검색어가 바뀌면, 검색 요청
   useEffect(() => {
@@ -143,11 +144,6 @@ function MainPage() {
     }
   }, [myPinData, map]);
 
-  // 미리보기 사라지게 하기
-  // useEffect(() => {
-  //   deleteInfowindows();
-  // });
-
   // 로그인 유저 핀 가져오기
   const getMyPins = () => {
     axios
@@ -188,46 +184,46 @@ function MainPage() {
   };
 
   // 마커 삭제
-  const deleteMyMarker = (pinId: any) => {
-    const bucket = "mesic-photo-bucket";
-
-    AWS.config.region = "ap-northeast-2";
+  const deleteMyMarker = (pinId: string) => {
+    const bucket = `${process.env.REACT_APP_AWS_S3_BUCKET}`;
+    AWS.config.region = process.env.REACT_APP_AWS_S3_REGION;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: "ap-northeast-2:2c7d94b9-746d-4871-abdd-69aa237048ca",
+      IdentityPoolId: `${process.env.REACT_APP_AWS_S3_REGION}:${process.env.REACT_APP_AWS_S3_IDENTITY_POOL_ID}`,
     });
 
     const s3 = new AWS.S3();
 
-    const photoURL = readMarkerData.photo;
-    const file = photoURL.split("/");
-    const fileName = file[file.length - 1];
-    const param = {
-      Bucket: bucket,
-      Key: `image/${fileName}`,
-    }; //s3 업로드에 필요한 옵션 설정
+    if (readMarkerData) {
+      const photoURL = readMarkerData.photo;
+      const file = photoURL.split("/");
+      const fileName = file[file.length - 1];
+      const param = {
+        Bucket: bucket,
+        Key: `image/${fileName}`,
+      }; //s3 업로드에 필요한 옵션 설정
 
-    s3.deleteObject(param, function (err: any, data: any) {
-      if (err) {
-        console.log(err);
-        return;
-      }
+      s3.deleteObject(param, function (err: Error) {
+        if (err) {
+          console.log(err);
+          return;
+        }
 
-      axios
-        .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          setOpenReadModal(false);
-          dispatch(switchMode("NONE"));
-        })
-        .catch((err) => console.log(err));
-    });
+        axios
+          .delete(`${process.env.REACT_APP_SERVER_URL}/pins/${pinId}`, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setOpenReadModal(false);
+            dispatch(switchMode("NONE"));
+          })
+          .catch((err) => console.log(err));
+      });
+    }
   };
-  // (POST MODE) 지도 클릭 마커
 
+  // (POST MODE) 지도 클릭 마커
   const postMarkerControl = () => {
     if (postMarkers.length > 0) {
       deletePostMarkers();
@@ -235,7 +231,6 @@ function MainPage() {
     deleteSearchMarkers();
     const markers = [];
     const position = new window.kakao.maps.LatLng(postLatLng[0], postLatLng[1]);
-
     const image = new window.kakao.maps.MarkerImage(
       `/images/marker/post-marker.png`,
       new window.kakao.maps.Size(45, 45),
@@ -252,20 +247,18 @@ function MainPage() {
   };
 
   // (READ MODE) 유저의 마커 생성
-
-  const [myMarkers, setMyMarkers] = useState<any[]>([]);
   const viewMyMarkers = () => {
     deleteMyMarkers();
     // CREATED 모드일 때 방금 만들어진 데이터를 띄움
     if (mode === "CREATED") {
-      handleMyMarkerClick(myPinData[myPinData.length - 1]._id);
+      handleMyMarkerClick(myPinData[myPinData.length - 1]!._id);
     }
 
     const markers = [];
     for (let i = 0; i < myPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        parseFloat(myPinData[i].location.longitude),
-        parseFloat(myPinData[i].location.latitude)
+        parseFloat(myPinData[i]!.location.longitude),
+        parseFloat(myPinData[i]!.location.latitude)
       );
 
       const image = new window.kakao.maps.MarkerImage(
@@ -278,8 +271,8 @@ function MainPage() {
         map,
         position,
       });
-      marker.id = myPinData[i]._id;
-
+      marker.id = myPinData[i]!._id;
+      marker.pos = position;
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         infowindow.setMap(null);
@@ -293,8 +286,8 @@ function MainPage() {
       const thumbnail = document.createElement("img");
       thumbnail.className = "preview-img";
 
-      if (myPinData[i].music.thumbnail.length > 0) {
-        thumbnail.src = myPinData[i].music.thumbnail;
+      if (myPinData[i]!.music.thumbnail.length > 0) {
+        thumbnail.src = myPinData[i]!.music.thumbnail;
       } else {
         thumbnail.src =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/CD_icon_test.svg/1200px-CD_icon_test.svg.png";
@@ -306,16 +299,16 @@ function MainPage() {
       const title = document.createElement("div");
       title.className = "preview-title";
 
-      if (myPinData[i].music.title.length > 0) {
-        title.textContent = myPinData[i].music.title;
+      if (myPinData[i]!.music.title.length > 0) {
+        title.textContent = myPinData[i]!.music.title;
       } else {
         title.textContent = "저장한 음악이 없습니다.";
       }
 
       const memo = document.createElement("div");
       memo.className = "preview-memo";
-      if (myPinData[i].memo.length > 0) {
-        memo.textContent = myPinData[i].memo;
+      if (myPinData[i]!.memo.length > 0) {
+        memo.textContent = myPinData[i]!.memo;
       } else {
         memo.textContent = "저장한 메모가 없습니다.";
       }
@@ -335,13 +328,13 @@ function MainPage() {
       window.kakao.maps.event.addListener(marker, "mouseover", () => {
         infowindow.setMap(map);
       });
+
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
         infowindow.setMap(null);
       });
 
       marker.setMap(map);
       markers.push(marker);
-      // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setMyMarkers(markers);
   };
@@ -364,6 +357,8 @@ function MainPage() {
         image,
       });
       marker.id = Dummies[i]._id;
+      marker.pos = position;
+
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
         infowindow.setMap(null);
@@ -404,7 +399,6 @@ function MainPage() {
       window.kakao.maps.event.addListener(marker, "mouseout", () => {
         infowindow.setMap(null);
       });
-
       marker.setMap(map);
       markers.push(marker);
     }
@@ -412,7 +406,7 @@ function MainPage() {
   };
 
   // 체크 된 팔로우 핀 가져오기 (마커 만들기 위한 데이터)
-  const [followPinData, setFollowPinData] = useState<any[]>([]);
+  const [followPinData, setFollowPinData] = useState<markerData[]>([]);
   const getFollowMarker = () => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/users/${checkAdded}`)
@@ -424,14 +418,13 @@ function MainPage() {
   };
 
   // 체크 된 팔로우 마커 생성
-  const [followMarkers, setFollowMarkers] = useState<any[]>([]);
   const viewFollowMarkers = () => {
     const markers = [];
 
     for (let i = 0; i < followPinData.length; i += 1) {
       const position = new window.kakao.maps.LatLng(
-        parseFloat(followPinData[i].location.longitude),
-        parseFloat(followPinData[i].location.latitude)
+        parseFloat(followPinData[i]!.location.longitude),
+        parseFloat(followPinData[i]!.location.latitude)
       );
 
       const image = new window.kakao.maps.MarkerImage(
@@ -444,7 +437,8 @@ function MainPage() {
         map,
         position,
       });
-      marker.id = [followPinData[i]._id, followPinData[i].user_id];
+      marker.id = [followPinData[i]!._id, followPinData[i]!.user_id];
+      marker.pos = position;
 
       window.kakao.maps.event.addListener(marker, "click", () => {
         // 마커 클릭 시
@@ -459,8 +453,8 @@ function MainPage() {
       musicContainer.className = "music-flex-box";
       const thumbnail = document.createElement("img");
       thumbnail.className = "preview-img";
-      if (followPinData[i].music.thumbnail.length > 0) {
-        thumbnail.src = followPinData[i].music.thumbnail;
+      if (followPinData[i]!.music.thumbnail.length > 0) {
+        thumbnail.src = followPinData[i]!.music.thumbnail;
       } else {
         thumbnail.src =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/CD_icon_test.svg/1200px-CD_icon_test.svg.png";
@@ -472,16 +466,16 @@ function MainPage() {
       const title = document.createElement("div");
       title.className = "preview-title";
 
-      if (followPinData[i].music.title.length > 0) {
-        title.textContent = followPinData[i].music.title;
+      if (followPinData[i]!.music.title.length > 0) {
+        title.textContent = followPinData[i]!.music.title;
       } else {
         title.textContent = "저장한 음악이 없습니다.";
       }
 
       const memo = document.createElement("div");
       memo.className = "preview-memo";
-      if (followPinData[i].memo.length > 0) {
-        memo.textContent = followPinData[i].memo;
+      if (followPinData[i]!.memo.length > 0) {
+        memo.textContent = followPinData[i]!.memo;
       } else {
         memo.textContent = "저장한 메모가 없습니다.";
       }
@@ -507,16 +501,13 @@ function MainPage() {
 
       marker.setMap(map);
       markers.push(marker);
-      // setSaveinfowindows([...saveInfowindows, infowindow]);
     }
     setFollowMarkers([...followMarkers, markers]);
   };
 
   // 체크된 마커 데이터 가져와서 저장
   const handleFollowMarkerClick = (pinId: string) => {
-    if (openPostModal) {
-      setOpenPostModal(false);
-    }
+    setOpenPostModal(false);
     setOpenReadModal(false);
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/pins/pins/${pinId}`)
@@ -546,13 +537,27 @@ function MainPage() {
 
   // 체크박스 해제 시 마커 제거
   const deleteFollowMarkers = () => {
+    let target;
     for (let i = 0; i < followMarkers.length; i += 1) {
       for (let j = 0; j < followMarkers[i].length; j += 1) {
         if (followMarkers[i][j].id[1] === checkRemoved) {
           followMarkers[i][j].setMap(null);
+          target = i;
         }
       }
     }
+
+    if (target !== undefined) {
+      if (followMarkers.length > 1) {
+        setFollowMarkers([
+          ...followMarkers.slice(0, target),
+          ...followMarkers.slice(target + 1),
+        ]);
+      } else {
+        setFollowMarkers([]);
+      }
+    }
+
     dispatch(clearCheckedRemove());
   };
 
@@ -562,8 +567,21 @@ function MainPage() {
 
   // 마커 제거 함수들
   const deleteMyMarkers = () => {
+    let target;
     for (let i = 0; i < myMarkers.length; i++) {
       myMarkers[i].setMap(null);
+      target = i;
+    }
+
+    if (target !== undefined) {
+      if (myMarkers.length > 1) {
+        setMyMarkers([
+          ...myMarkers.slice(0, target),
+          ...myMarkers.slice(target + 1),
+        ]);
+      } else {
+        setMyMarkers([]);
+      }
     }
   };
 
@@ -579,17 +597,9 @@ function MainPage() {
     }
   };
 
-  // const deleteInfowindows = () => {
-  //   for (let i = 0; i < saveInfowindows.length; i++) {
-  //     saveInfowindows[i].setMap(null);
-  //   }
-  // };
-
   // READ 마커 클릭 핸들러
   const handleMyMarkerClick = (id: string | number) => {
-    if (openPostModal) {
-      setOpenPostModal(false);
-    }
+    setOpenPostModal(false);
     setOpenReadModal(false);
     if (!isLogin) {
       for (let i = 0; i < Dummies.length; i += 1) {
@@ -600,7 +610,7 @@ function MainPage() {
       }
     }
     for (let i = 0; i < myPinData.length; i += 1) {
-      if (myPinData[i]._id === id) {
+      if (myPinData[i]!._id === id) {
         setReadMarkerData(myPinData[i]);
         break;
       }
@@ -633,6 +643,47 @@ function MainPage() {
         setOpenPostModal(true);
       }
     });
+  };
+
+  //체크된 마커에 따라 지도 범위 재설정
+  useEffect(() => {
+    if (myMarkers.length > 0 || followMarkers.length > 0) {
+      setMapBounds();
+    }
+  }, [myMarkers, followMarkers]);
+
+  const setMapBounds = () => {
+    let myMarkersPos: markerPos[] = [];
+    let followMarkersPos: markerPos[] = [];
+    if (myMarkers.length > 0) {
+      myMarkersPos = myMarkers.map((each: any) => each.pos);
+    }
+
+    if (followMarkers.length > 0) {
+      for (let i = 0; i < followMarkers.length; i += 1) {
+        followMarkersPos = [...followMarkersPos, ...followMarkers[i]];
+      }
+      followMarkersPos = followMarkersPos.map((each: any) => each.pos);
+    }
+
+    const position = [...myMarkersPos, ...followMarkersPos];
+    const points = position.map(
+      (each) => new window.kakao.maps.LatLng(each.Ma, each.La)
+    );
+
+    const bounds = new window.kakao.maps.LatLngBounds();
+
+    let i, marker;
+    for (let i = 0; i < points.length; i += 1) {
+      marker = new window.kakao.maps.Marker({ position: points[i] });
+      bounds.extend(points[i]);
+    }
+
+    setBounds();
+
+    function setBounds() {
+      map.setBounds(bounds, 200);
+    }
   };
 
   // 맵 이동
@@ -677,10 +728,15 @@ function MainPage() {
   };
 
   // 키워드 검색 버튼 + 엔터키 검색
-  const keywordSearchEvent = (e: any) => {
+  const keywordSearchEvent = (
+    e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLElement>
+  ) => {
+    const { key } = e as React.KeyboardEvent<HTMLInputElement>;
+    const { type } = e as React.MouseEvent<HTMLElement>;
+
     if (keywordInput.length === 0 || keywordSearchData.length === 0) {
       return;
-    } else if (e.keyCode === 13 || e.type === "click") {
+    } else if (key === "Enter" || type === "click") {
       const y = keywordSearchData[0].y;
       const x = keywordSearchData[0].x;
       moveKakaoMap(y, x);
@@ -694,14 +750,6 @@ function MainPage() {
     moveKakaoMap(y, x);
     setSearchMode(false);
     setSearchLatlng([y, x]);
-  };
-
-  const showHideDetailModal = () => {
-    if (detailModal.current.style.display === "none") {
-      detailModal.current.style.display = "block";
-    } else {
-      detailModal.current.style.display = "none";
-    }
   };
 
   useEffect(() => {
@@ -720,45 +768,6 @@ function MainPage() {
         setLoginController={setLoginController}
         deletePostMarkers={deletePostMarkers}
       />
-      {openPostModal || openReadModal ? (
-        <>
-          {/* <div
-            className="detail-modal-close"
-            onClick={() => {
-              setOpenPostModal(false);
-              setOpenReadModal(false);
-              deletePostMarkers();
-            }}
-          >
-            X
-          </div> */}
-          {showDetailModal ? (
-            <button
-              className="detail-modal-hide"
-              onClick={() => {
-                showHideDetailModal();
-                setShowDetailModal(false);
-              }}
-            >
-              {"<"}
-              {/*show*/}
-            </button>
-          ) : (
-            <button
-              className="detail-modal-hide"
-              onClick={() => {
-                showHideDetailModal();
-                setShowDetailModal(true);
-              }}
-            >
-              {"<"}
-              {/*hide*/}
-            </button>
-          )}{" "}
-        </>
-      ) : (
-        <> </>
-      )}
       <SearchLocation
         handleChangeKeywordInput={handleChangeKeywordInput}
         keywordSearchEvent={keywordSearchEvent}
@@ -768,21 +777,20 @@ function MainPage() {
       />
       <FollowList setLoginController={setLoginController} />
       <div ref={detailModal}>
-        {openReadModal ? (
+        {openReadModal && (
           <ReadModal
             readMarkerData={readMarkerData}
             setPinUpdate={setPinUpdate}
             deleteMyMarker={deleteMyMarker}
             setOpenReadModal={setOpenReadModal}
           />
-        ) : openPostModal ? (
+        )}
+        {openPostModal && (
           <PostModal
             postLatLng={postLatLng}
             setOpenPostModal={setOpenPostModal}
             deletePostMarkers={deletePostMarkers}
           />
-        ) : (
-          <></>
         )}
       </div>
       <div id="kakao-map" />

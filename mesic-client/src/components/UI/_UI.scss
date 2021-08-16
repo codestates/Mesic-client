@@ -1,3 +1,5 @@
+@import "../../media-queries";
+
 $main-color: #19c9d4;
 $font-color: rgb(80, 80, 80);
 $sub-font-color: rgb(158, 158, 158);
@@ -298,23 +300,39 @@ $default-black-color: #525252;
   overflow-x: hidden;
   box-shadow: 0px 5px 5px 1px rgba(84, 84, 84, 0.2);
   z-index: 2;
+
   .logo-btn {
     cursor: pointer;
-    width: 5%;
+    width: 100px;
     border-radius: 7px;
     color: $mesic-color;
     background-image: none;
     border: none;
     outline: none;
     margin: 0 20px;
+
+    @include tablet {
+      margin-left: 5px;
+    }
+
+    @include mobile {
+      margin: 0;
+      width: 80px;
+    }
   }
 
-  .nav-btn {
+  &-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 20px;
+
+    @include mobile {
+      margin: 0 11px;
+    }
+
     .loginBtn {
+      position: relative;
       padding: 10px 20px;
       border-radius: 15px;
       font-weight: 600;
@@ -323,9 +341,15 @@ $default-black-color: #525252;
       color: $mesic-color;
       border: none;
       outline: none;
+
+      @include mobile {
+        margin: 0;
+        font-size: 15px;
+      }
     }
 
     .mypageBtn {
+      position: relative;
       margin: 15px;
       padding: 10px 20px;
       border-radius: 15px;
@@ -336,6 +360,12 @@ $default-black-color: #525252;
       border: none;
       outline: none;
       box-shadow: $btn-shadow;
+
+      @include mobile {
+        margin: 0;
+        font-size: 15px;
+        padding: 9px 15px;
+      }
 
       &:hover {
         opacity: 0.8;

@@ -242,15 +242,22 @@ $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
   }
 }
 
-// ediymypage modal part
+// editmypage modal part
 #profile-img-input {
   display: none;
 }
 
 .edit-profile-img-btn {
-  opacity: 0.4;
+  opacity: 0.3;
   position: absolute;
   bottom: 15px;
+  cursor: pointer;
+}
+.del-profile{
+  opacity: 0.3;
+  position: absolute;
+  bottom: 15px;
+  right: 45px;
   cursor: pointer;
 }
 

@@ -1,19 +1,11 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { MypageProps } from "../../props-types";
 
-type MypageProps = {
-  openMypage: boolean;
-  closeMypage: () => void;
-  openEditMypage: boolean;
-  setOpenEditMypage: (state: boolean) => void;
-};
-
-function Mypage(props: MypageProps) {
-  const { email, name, nickname, profileImg }: any = useSelector(
+function Mypage({ openMypage, closeMypage, setOpenEditMypage }: MypageProps) {
+  const { email, name, nickname, profileImg } = useSelector(
     (state: RootState) => state.userReducer.user
   );
-  const { openMypage, closeMypage, setOpenEditMypage } = props;
-
   const clickCloseMypage = () => {
     closeMypage();
   };
@@ -27,7 +19,7 @@ function Mypage(props: MypageProps) {
       <div
         onClick={clickCloseMypage}
         className={`mypage-edit-background ${openMypage ? "show" : ""}`}
-      ></div>
+      />
       <div className={`mypage-edit-modal ${openMypage ? "show" : ""}`}>
         <div className="mypage-close" onClick={clickCloseMypage}>
           X
@@ -53,15 +45,13 @@ function Mypage(props: MypageProps) {
               <div>{nickname}</div>
             </div>
           </div>
-          {email !== "guest@codestates.com" ? (
+          {email !== "guest@codestates.com" && (
             <button
               className="mypage-modify-btn"
               onClick={handleOpenEditMypage}
             >
               수정
             </button>
-          ) : (
-            <></>
           )}
         </div>
       </div>

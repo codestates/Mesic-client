@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { SearchLocationProps } from "../../props-types";
 
 function SearchLocation({
   handleChangeKeywordInput,
@@ -6,7 +6,7 @@ function SearchLocation({
   keywordSearchData,
   searchMode,
   keywordSearchSelect,
-}: any) {
+}: SearchLocationProps) {
   return (
     <>
       <div className="search-location">
@@ -16,11 +16,11 @@ function SearchLocation({
             placeholder="장소를 검색해주세요"
             onChange={handleChangeKeywordInput}
             onKeyUp={keywordSearchEvent}
-          ></input>
-          <i onClick={keywordSearchEvent} className="fas fa-search"></i>
+          />
+          <i onClick={keywordSearchEvent} className="fas fa-search" />
         </div>
         <div className="search-location-result">
-          {searchMode ? (
+          {searchMode && (
             <ul style={{ backgroundColor: "white" }}>
               {keywordSearchData.map((data: any) => (
                 <li onClick={() => keywordSearchSelect(data.y, data.x)}>
@@ -29,8 +29,6 @@ function SearchLocation({
                 </li>
               ))}
             </ul>
-          ) : (
-            <></>
           )}
         </div>
       </div>

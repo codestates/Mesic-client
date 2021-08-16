@@ -1,37 +1,47 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-import ReadMusic from "./ReadMusic";
-import ReadPhoto from "./ReadPhoto";
-import ReadMemo from "./ReadMemo";
+import ReadMusic from "./Music/ReadMusic";
+import ReadPhoto from "./Photo/ReadPhoto";
+import ReadMemo from "./Memo/ReadMemo";
 import ConfirmModal from "../UI/ConfirmModal";
+import { musicData } from "../../state-types";
+import { ReadModalProps } from "../../props-types";
 
 function ReadModal({
   readMarkerData,
   setPinUpdate,
   deleteMyMarker,
   setOpenReadModal,
-}: any) {
+}: ReadModalProps) {
   const state = useSelector((state: RootState) => state);
   const { isLogin } = state.userReducer.user;
   const { mode } = state.modeReducer.user;
-  const { video_Id, title, thumbnail } = readMarkerData.music;
-  const { photo, memo, _id } = readMarkerData;
-  const [readMusic, setReadMusic] = useState<any>({
-    video_Id: video_Id,
-    title: title,
-    thumbnail: thumbnail,
+  
+  const { video_Id, title, thumbnail } = readMarkerData!.music;
+  const { photo, memo, _id } = readMarkerData!;
+  const [readMusic, setReadMusic] = useState<musicData>({
+    video_Id,
+    title,
+    thumbnail,
   });
-  const [readImg, setReadImg] = useState<any>(photo);
-  const [readMemo, setReadMemo] = useState<string>(memo);
+  const [readImg, setReadImg] = useState<string>("");
+  const [readMemo, setReadMemo] = useState<string>("");
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
+
+  useEffect(() => {
+    setReadImg(photo);
+  }, [photo]);
+
+  useEffect(() => {
+    setReadMemo(memo);
+  }, [memo]);
 
   return (
     <div className="modal-outsider show1">
       <div className="modal">
         <div
-        className="modal-close-btn"
+          className="modal-close-btn"
           onClick={() => {
             setOpenReadModal(false);
           }}
@@ -64,16 +74,10 @@ function ReadModal({
           readMarkerData={readMarkerData}
         />
       </div>
-      {isLogin && mode === "READ" ? (
-        <button
-          className="delete-pin-btn"
-          // onClick={() => deleteMyMarker(readMarkerData._id)}
-          onClick={() => setOpenConfirm(true)}
-        >
+      {isLogin && mode === "READ" && (
+        <button className="delete-pin-btn" onClick={() => setOpenConfirm(true)}>
           삭제
         </button>
-      ) : (
-        <></>
       )}
     </div>
   );

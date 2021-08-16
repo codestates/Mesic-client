@@ -1,5 +1,3 @@
-import { Dispatch } from "redux";
-
 export const SWITCH_MODE = "SWITCH_MODE" as const;
 export const EDIT_USERINFO = "EDIT_USERINFO" as const;
 export const GET_ACCESSTOKEN = "GET_ACCESSTOKEN" as const;

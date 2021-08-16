@@ -1,27 +1,26 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../reducers";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import { musicData } from "../../../state-types";
+import { EditMusicProps } from "../../../props-types";
 
 function EditMusic({
   openEditMusic,
-  updateMode,
   setOpenEditMusic,
   setUpdateMode,
-  setUpdateMusic,
-  setPostMusic,
-}: any) {
-  // 서버로 PATCH 요청을 보내주는 함수 필요
-  // AIzaSyC77gm8pbkNvv_BYkvD45foo9m19j9jOKs
+  setPostUpdateMusic,
+  setIsPlay,
+}: EditMusicProps) {
   const { mode } = useSelector((state: RootState) => state.modeReducer).user;
   const [searchMusicInput, setSearchMusicInput] = useState<string>("");
   const [searchedMusic, setSearchedMusic] = useState<any[]>([]);
-  const [selectedMusic, setSelectedMusic] = useState<{
-    video_Id: string;
-    title: string;
-    thumbnail: string;
-  }>({ video_Id: "", title: "", thumbnail: "" });
-  const searchInput = useRef<any>();
+  const [selectedMusic, setSelectedMusic] = useState<musicData>({
+    video_Id: "",
+    title: "",
+    thumbnail: "",
+  });
+  const searchInput = useRef<HTMLInputElement>(null);
 
   const handleSearchMusicInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +42,7 @@ function EditMusic({
     const res = await youtube.get("/search", {
       params: {
         q: `${searchMusicInput} audio`,
+        type: "video",
       },
     });
     setSearchedMusic(res.data.items);
@@ -65,33 +65,34 @@ function EditMusic({
       thumbnail,
     });
     setSearchedMusic([]);
-    searchInput.current.value = "";
+    if (searchInput.current?.value) {
+      searchInput.current.value = "";
+    }
   };
 
   const searchMusicEvent = (e: any) => {
     if (searchMusicInput.length === 0) {
-      // 업데이트 모드??
       return;
     } else if (e.keyCode === 13 || e.type === "click") {
       handleSearch();
     }
   };
 
-  const selectUpdateMusic = (refinedData: any) => {
-    setUpdateMusic(refinedData);
+  const selectUpdateMusic = (refinedData: musicData) => {
+    setPostUpdateMusic(refinedData);
     setUpdateMode(true);
     setOpenEditMusic(false);
   };
 
-  const selectPostMusic = (refinedData: any) => {
-    setPostMusic(refinedData);
-    setUpdateMode(true); // PostMusic 위젯을 활성화
+  const selectPostMusic = (refinedData: musicData) => {
+    setPostUpdateMusic(refinedData);
+    setUpdateMode(true);
     setOpenEditMusic(false);
   };
 
   return (
     <div
-      className={`edit-music-modal background ${openEditMusic ? "show" : ""}`}
+      className={`edit-music-modal background ${openEditMusic && "show"}`}
     >
       <div className="edit-music-title">노래 검색</div>
       <div className="edit-music">
@@ -111,13 +112,14 @@ function EditMusic({
             <li
               className="edit-music-searched"
               style={{ listStyleType: "none" }}
-              onClick={() =>
+              onClick={() => {
                 handleSelect(
                   each.id.videoId,
                   each.snippet.title,
                   each.snippet.thumbnails.medium.url
-                )
-              }
+                );
+                setIsPlay(true);
+              }}
             >
               <img
                 style={{ width: "100px" }}
@@ -136,7 +138,9 @@ function EditMusic({
         className="edit-music-close-btn"
         onClick={() => {
           setSearchedMusic([]);
-          searchInput.current.value = "";
+          if (searchInput.current?.value) {
+            searchInput.current.value = "";
+          }
           setOpenEditMusic(false);
         }}
       >

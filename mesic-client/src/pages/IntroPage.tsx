@@ -48,6 +48,33 @@ function IntroPage() {
         illus[i].classList.remove("in");
       }
     }
+    const subtitle = document.querySelectorAll(".subtitle-animation");
+    for (let i = 0; i < subtitle.length; i++) {
+      const bounding = subtitle[i].getBoundingClientRect().top;
+      if (window.innerHeight > bounding) {
+        subtitle[i].classList.add("in-subtitle");
+      } else {
+        subtitle[i].classList.remove("in-subtitle");
+      }
+    }
+    const title = document.querySelectorAll(".title-animation");
+    for (let i = 0; i < title.length; i++) {
+      const bounding = title[i].getBoundingClientRect().top;
+      if (window.innerHeight > bounding) {
+        title[i].classList.add("in-title");
+      } else {
+        title[i].classList.remove("in-title");
+      }
+    }
+    const blob = document.querySelectorAll(".blob-img");
+    for (let i = 0; i < blob.length; i++) {
+      const bounding = blob[i].getBoundingClientRect().top;
+      if (window.innerHeight > bounding) {
+        blob[i].classList.add("in-blob");
+      } else {
+        blob[i].classList.remove("in-blob");
+      }
+    }
   };
   const addEventListener = () => {
     window.addEventListener("scroll", addAnimation);
@@ -86,8 +113,10 @@ function IntroPage() {
             </div>
             <div className="mainpage-mesic-text">
               <div className="mainpage-mesic-about-us">ABOUT US</div>
-              <div className="mainpage-mesic-title">
-                Mesic <span>[Memory + Music]</span>
+              <div className="title-container">
+                <div className="mainpage-mesic-title typing">
+                  <span>Mesic</span> <span>[Memory + Music]</span>
+                </div>
               </div>
               <div className="mainpage-mesic-subtitle">
                 <p>
@@ -109,13 +138,13 @@ function IntroPage() {
             <img src={section1_Img} className="section-img" />
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-1" src={blob_1} />
-              <div className="mainpage-mesic-subtitle ">
+              <div className="mainpage-mesic-subtitle subtitle-animation">
                 <p>
                   "<strong>그 노래</strong>만 들으면{" "}
                   <strong>그 때 그 일</strong>이 생각나.."
                 </p>
               </div>
-              <div className="mainpage-mesic-title">
+              <div className="mainpage-mesic-title title-animation">
                 이런 노래 누구든 하나쯤 있지 않나요?
               </div>
             </div>
@@ -125,19 +154,30 @@ function IntroPage() {
           <div className="mainpage-mesic-body">
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-2" src={blob_2} />
-              <div className="mainpage-mesic-subtitle ">
+              <div className="mainpage-mesic-subtitle subtitle-animation">
                 <p>
                   <strong>학교 가는 길</strong>에 들었던 신나는 힙합,
                   <br />
                   <strong>연인과 헤어지고 들었던</strong> 슬픈 발라드 같이
                 </p>
               </div>
-              <div className="mainpage-mesic-title">
+              <div className="mainpage-mesic-title title-animation">
                 우리에겐 노래에 대한 <br />
                 다양한 추억들이 있습니다.
               </div>
             </div>
             <img src={section2_Img} className="section-img" />
+            <div className="mainpage-mesic-subtitle-resp subtitle-animation">
+              <p>
+                <strong>학교 가는 길</strong>에 들었던 신나는 힙합,
+                <br />
+                <strong>연인과 헤어지고 들었던</strong> 슬픈 발라드 같이
+              </p>
+            </div>
+            <div className="mainpage-mesic-title-resp title-animation">
+              우리에겐 노래에 대한 <br />
+              다양한 추억들이 있습니다.
+            </div>
           </div>
         </section>
         <section className="mainpage-mesic third-section">
@@ -145,13 +185,13 @@ function IntroPage() {
             <img src={section3_Img} className="section-img" />
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-3" src={blob_3} />
-              <div className="mainpage-mesic-subtitle ">
+              <div className="mainpage-mesic-subtitle subtitle-animation">
                 <p>
                   3분동안 잠깐 그 당시로 <br />
                   <strong>추억여행</strong>을 떠나보시는 건 어떠신가요?
                 </p>
               </div>
-              <div className="mainpage-mesic-title">
+              <div className="mainpage-mesic-title title-animation">
                 Mesic과 함께 당신의 추억을 <br /> 가장 생생하게 기록해보세요!
               </div>
             </div>
@@ -161,17 +201,26 @@ function IntroPage() {
           <div className="mainpage-mesic-body">
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-4" src={blob_4} />
-              <div className="mainpage-mesic-subtitle ">
+              <div className="mainpage-mesic-subtitle subtitle-animation">
                 <p>
                   내가 있는 <strong>장소</strong>에서
                   <br /> 지금의 순간을 <strong>음악, 사진, 메모</strong> 등
                 </p>
               </div>
-              <div className="mainpage-mesic-title">
+              <div className="mainpage-mesic-title title-animation">
                 추억을 다양한 기록으로 남겨보세요.
               </div>
             </div>
             <img src={section4_Img} className="section-img" />
+            <div className="mainpage-mesic-subtitle-resp subtitle-animation">
+              <p>
+                내가 있는 <strong>장소</strong>에서
+                <br /> 지금의 순간을 <strong>음악, 사진, 메모</strong> 등
+              </p>
+            </div>
+            <div className="mainpage-mesic-title-resp title-animation">
+              추억을 다양한 기록으로 남겨보세요.
+            </div>
           </div>
         </section>
         <section className="mainpage-mesic fifth-section">
@@ -179,13 +228,13 @@ function IntroPage() {
             <img src={section5_Img} className="section-img" />
             <div className="mainpage-mesic-text">
               <img className="blob-img blob-5" src={blob_5} />
-              <div className="mainpage-mesic-subtitle ">
+              <div className="mainpage-mesic-subtitle subtitle-animation">
                 <p>
                   그 <strong>당시</strong>의 <strong>풍경</strong>이 눈 앞에
                   펼쳐지는
                 </p>
               </div>
-              <div className="mainpage-mesic-title">
+              <div className="mainpage-mesic-title title-animation">
                 마법같은 경험을 하실 수 있습니다!
               </div>
             </div>

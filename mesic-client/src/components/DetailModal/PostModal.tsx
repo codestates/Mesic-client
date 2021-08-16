@@ -1,32 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducers";
 import { switchMode } from "../../actions/index";
-import PostMusic from "./PostMusic";
-import PostPhoto from "./PostPhoto";
-import PostMemo from "./PostMemo";
+import PostMusic from "./Music/PostMusic";
+import PostPhoto from "./Photo/PostPhoto";
+import PostMemo from "./Memo/PostMemo";
 import axios from "axios";
 import AWS from "aws-sdk";
+import { PostModalProps } from "../../props-types";
+import { musicData } from "../../state-types";
 
-function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
-  const [postMusic, setPostMusic] = useState<{
-    video_Id: string;
-    title: string;
-    thumbnail: string;
-  }>({
+function PostModal({
+  postLatLng,
+  setOpenPostModal,
+  deletePostMarkers,
+}: PostModalProps) {
+  const state = useSelector((state: RootState) => state.userReducer);
+  const { user_id, token } = state.user;
+  const dispatch = useDispatch();
+
+  const [postMusic, setPostMusic] = useState<musicData>({
     video_Id: "",
     title: "",
     thumbnail: "",
   });
-  const location =
-    "https://mesic-photo-bucket.s3.ap-northeast-2.amazonaws.com/image/undefined";
+  const location = `https://${process.env.REACT_APP_AWS_S3_BUCKET}.s3.${process.env.REACT_APP_AWS_S3_REGION}.amazonaws.com/image/undefined`;
   const [postImg, setPostImg] = useState<any>(location);
   const [postMemo, setPostMemo] = useState<string>("");
   const [errMessage, setErrMessage] = useState<string>("");
-
-  const state = useSelector((state: RootState) => state.userReducer);
-  const dispatch = useDispatch();
-  const { user_id, token } = state.user;
 
   const postPinData = async () => {
     if (
@@ -39,14 +40,14 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
     }
     setErrMessage("");
 
-    const accessKeyId = "AKIA2XC7TYWAUO3P7L2I";
-    const secretAccessKey = "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";
-    const region = "ap-northeast-2";
+    const accessKeyId = process.env.REACT_APP_AWS_S3_ACCESS_KEY_ID;
+    const secretAccessKey = process.env.REACT_APP_AWS_S3_SECRET_ACCESS_KEY_ID;
+    const region = process.env.REACT_APP_AWS_S3_REGION;
 
     const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region }); //s3 configuration
 
     const param = {
-      Bucket: "mesic-photo-bucket",
+      Bucket: `${process.env.REACT_APP_AWS_S3_BUCKET}`,
       Key: `image/${postImg.name}`,
       ACL: "public-read",
       Body: postImg,
@@ -74,8 +75,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
         .post(`${process.env.REACT_APP_SERVER_URL}/pins`, postData, {
           headers: { authorization: `Bearer ${token}` },
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           dispatch(switchMode("CREATED"));
         })
         .catch((err) => console.log(err));
@@ -96,7 +96,7 @@ function PostModal({ postLatLng, setOpenPostModal, deletePostMarkers }: any) {
         </div>
         <PostMusic postMusic={postMusic} setPostMusic={setPostMusic} />
         <PostPhoto postImg={postImg} setPostImg={setPostImg} />
-        <PostMemo postMemo={postMemo} setPostMemo={setPostMemo} />
+        <PostMemo setPostMemo={setPostMemo} />
         <div className="err-massage">
           <div>{errMessage}</div>
         </div>
