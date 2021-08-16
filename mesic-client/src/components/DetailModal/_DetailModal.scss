@@ -571,8 +571,6 @@ $border-color: #e1e1e1;
     color: $font-color2;
   }
   & > div:last-child {
-    // position: relative;
-    width: 450vw;
     display: flex;
     flex-direction: row;
     justify-content: center;

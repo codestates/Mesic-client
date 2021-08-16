@@ -29,6 +29,7 @@ function IntroPage() {
       behavior: "smooth",
     });
   };
+
   const onScroll = () => {
     setScrollY(window.scrollY);
   };
@@ -48,6 +49,7 @@ function IntroPage() {
         illus[i].classList.remove("in");
       }
     }
+
     const subtitle = document.querySelectorAll(".subtitle-animation");
     for (let i = 0; i < subtitle.length; i++) {
       const bounding = subtitle[i].getBoundingClientRect().top;
@@ -57,6 +59,7 @@ function IntroPage() {
         subtitle[i].classList.remove("in-subtitle");
       }
     }
+
     const title = document.querySelectorAll(".title-animation");
     for (let i = 0; i < title.length; i++) {
       const bounding = title[i].getBoundingClientRect().top;
@@ -66,6 +69,7 @@ function IntroPage() {
         title[i].classList.remove("in-title");
       }
     }
+
     const blob = document.querySelectorAll(".blob-img");
     for (let i = 0; i < blob.length; i++) {
       const bounding = blob[i].getBoundingClientRect().top;
@@ -76,15 +80,18 @@ function IntroPage() {
       }
     }
   };
+
   const addEventListener = () => {
     window.addEventListener("scroll", addAnimation);
     window.addEventListener("load", addAnimation);
   };
 
   useEffect(() => {
+    document.body.style.overflow = "visible";
     addEventListener();
     addAnimation();
   }, []);
+
   return (
     <>
       <Nav />

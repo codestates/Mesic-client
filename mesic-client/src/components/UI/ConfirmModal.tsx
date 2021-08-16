@@ -3,6 +3,7 @@ import AWS from "aws-sdk";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { ConfirmModalProps } from "../../props-types";
+import { useEffect } from "react";
 
 function ConfirmModal({
   confirmType,
@@ -21,6 +22,14 @@ function ConfirmModal({
   readMarkerData,
 }: ConfirmModalProps) {
   const { token } = useSelector((state: RootState) => state.userReducer.user);
+
+  useEffect(() => {
+    if (openConfirm) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [openConfirm]);
 
   const deleteReadImg = () => {
     //s3에서 삭제 후 받은 응답을 서버로 patch, get 요청
