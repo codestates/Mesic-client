@@ -2,6 +2,7 @@
 
 $main-color: #19c9d4;
 $font-color: rgb(80, 80, 80);
+$placeholder-color: rgb(150, 150, 150);
 $sub-font-color: rgb(158, 158, 158);
 $box-shadow: 0px 5px 5px 4px rgba(84, 84, 84, 0.4);
 $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
@@ -19,20 +20,22 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   box-shadow: $box-shadow;
   -webkit-transform: translate(10%, 10%);
   transform: translate(10%, 10%);
-  input[type="text"] {
-    outline: 0;
-    border-width: 0 0 2px;
-    border-color: rgb(222, 222, 222);
-    display: block;
-    position: relative;
-    margin: 20px auto;
-    width: 80%;
-    color: $font-color;
-    font-size: 1rem;
-    padding: 4px;
-  }
-  input::placeholder {
-    opacity: 60%;
+  div {
+    input[type="text"] {
+      outline: 0;
+      border-width: 0 0 2px;
+      border-color: rgb(222, 222, 222);
+      display: block;
+      position: relative;
+      margin: 20px auto;
+      width: 80%;
+      color: $font-color;
+      font-size: 1rem;
+      padding: 4px;
+      &::placeholder {
+        color: $placeholder-color;
+      }
+    }
   }
 }
 
@@ -218,23 +221,7 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   height: 60px;
   -webkit-transform: translate(15%, 130%);
   transform: translate(14%, 250%);
-  input::placeholder {
-    opacity: 60%;
-    font-size: 0.9rem;
-  }
   box-shadow: $box-shadow;
-  input[type="text"] {
-    outline: 0;
-    border-width: 0 0 2px;
-    border-color: rgb(222, 222, 222);
-    display: block;
-    position: relative;
-    margin-left: 15px;
-    width: 80%;
-    color: $font-color;
-    font-size: 1rem;
-    padding: 4px;
-  }
   ul {
     width: 80%;
     border-radius: 10px;
@@ -269,6 +256,22 @@ $btn-shadow: 0px 3px 3px 0px rgba(84, 84, 84, 0.4);
   width: 100%;
   height: 100%;
   position: relative;
+  input[type="text"] {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgb(222, 222, 222);
+    display: block;
+    position: relative;
+    margin-left: 15px;
+    width: 80%;
+    color: $font-color;
+    font-size: 1rem;
+    padding: 4px;
+    &::placeholder {
+      color: $placeholder-color;
+      font-size: 0.9rem;
+    }
+  }
   .fa-search {
     @include search-btn;
     margin: 0 15px 5px 0;
