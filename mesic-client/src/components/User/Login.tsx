@@ -10,7 +10,6 @@ function Login({ openLogin, setOpenLogin, getUserInfo }: LoginProps) {
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.userReducer);
   const { isLogin } = state.user;
-  // const GOOGLE_LOGIN_API_URL = `${process.env.REACT_APP_SERVER_URL}/google/login`;
   const GOOGLE_LOGIN_API_URL = "http://localhost:4000/google/login";
   const LOGIN_URL = `${process.env.REACT_APP_SERVER_URL}/login`;
   const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&
